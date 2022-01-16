@@ -1,0 +1,99 @@
+:doctype: article
+// :media: prepress
+:pdf-style: mystyle-theme.yml
+:pdf-fontsdir: /Users/kuboaki/Library/Fonts
+
+
+// 部、章、節のタイトル前のラベルの書式を与えて変更できるようにする
+// sptintf フォーマットを使えるようにする
+// usage:
+//   asciidoctor(-pdf) -r ,/rouge_custom_color.rb -r ./lib/gentext-treeprocessor.rb test.adoc
+
+:chapter-label: 第%s章
+:section-label: %s節
+:part-label: 第%s部
+:appendix-caption: 付 録
+
+:sectnums!:
+:partnums:
+
+:sectnumlevels: 5
+
+= Title_タイトル
+
+[preface]
+== この文書のはじめに
+
+:sectnums:
+
+== SectionName_1節の名前
+
+contentcontentcontentcontentcontentcontentcontent
+
+contentcontentcontentcontentcontentcontentcontent
+
+=== SectionName_1-1節の名前
+
+contentcontentcontentcontentcontentcontentcontent
+contentcontentcontentcontentcontentcontentcontent
+
+
+==== SubSectionName_1-1-1項の名前
+
+contentcontentcontentcontentcontentcontentcontent
+contentcontentcontentcontentcontentcontentcontent
+
+===== SubSectionName_1-1-1-1項の名前
+
+contentcontentcontentcontentcontentcontentcontent
+contentcontentcontentcontentcontentcontentcontent
+
+==== SubSectionName_1-1-2項の名前
+
+contentcontentcontentcontentcontentcontentcontent
+contentcontentcontentcontentcontentcontentcontent
+
+=== SectionName_1-2節の名前
+
+contentcontentcontentcontentcontentcontentcontent
+contentcontentcontentcontentcontentcontentcontent
+
+==== SubSectionName_2-1-1項の名前
+
+contentcontentcontentcontentcontentcontentcontent
+contentcontentcontentcontentcontentcontentcontent
+
+== SectionName_2節の名前
+
+contentcontentcontentcontentcontentcontentcontent
+
+contentcontentcontentcontentcontentcontentcontent
+
+=== SectionName_2-1節の名前
+
+contentcontentcontentcontentcontentcontentcontent
+contentcontentcontentcontentcontentcontentcontent
+
+== SectionName_3節の名前
+
+contentcontentcontentcontentcontentcontentcontent
+
+contentcontentcontentcontentcontentcontentcontent
+
+=== SectionName_3-1節の名前
+
+contentcontentcontentcontentcontentcontentcontent
+contentcontentcontentcontentcontentcontentcontent
+
+==== SubSectionName_3-1-1項の名前
+
+contentcontentcontentcontentcontentcontentcontent
+contentcontentcontentcontentcontentcontentcontent
+
+=== SectionName_3-2節の名前
+
+contentcontentcontentcontentcontentcontentcontent
+contentcontentcontentcontentcontentcontentcontent
+
+[appendix]
+== なにかの付録

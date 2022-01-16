@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.16">
+<meta name="description" content="この文書は、モデリングツールにastah*を使って、ソフトウェアの開発にUMLを使う方法について学ぶチュートリアルです。">
+<meta name="author" content="株式会社チェンジビジョン">
+<title>モデルを使って ソフトウェアを開発しよう: astah* を使った UMLチュートリアル</title>
+<link rel="stylesheet" href="css/mystyle.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
+                       font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
+             .nav-footer{text-align: center; margin-top: auto;}
+             .nav-footer > p > a {white-space: nowrap;}</style>
+</head>
+<body id="_preparation" class="book toc2 toc-left">
+<div id="header">
+<h1>モデルを使って ソフトウェアを開発しよう: astah* を使った UMLチュートリアル</h1>
+<div class="details">
+<span id="author" class="author">株式会社チェンジビジョン</span><br>
+<span id="revnumber">バージョン html_0120,</span>
+<span id="revdate">2022-01-17</span>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">目次</div>
+<p><span class="toc-root"><a href="uml_tutorial.html">モデルを使って ソフトウェアを開発しよう: astah* を使った UMLチュートリアル</a></span></p><ul class="sectlevel1">
+<li><a href="_preface.html">はじめに</a>
+</li>
+<li><a href="_copyright.html">注意事項</a>
+</li>
+<li><a href="_preparation.html"><span class="toc-current">1 準備</span></a>
+<ul class="sectlevel2">
+<li><a href="_preparation.html#_モデリングツール_astah_を用意する">1.1 モデリングツール（ astah* ）を用意する</a>
+</li>
+<li><a href="_preparation.html#_実装環境を用意する">1.2 実装環境を用意する</a>
+</li>
+<li><a href="_preparation.html#_演習用のプロジェクトを用意する">1.3 演習用のプロジェクトを用意する</a>
+</li>
+<li><a href="_preparation.html#_ボウリングのスコアのつけ方">1.4 ボウリングのスコアのつけ方</a>
+</li>
+</ul>
+</li>
+<li><a href="_requirement_anaylysis.html">2 解決したい課題はなにか</a>
+</li>
+<li><a href="_structure_design.html">3 スコアの構造を図にする</a>
+</li>
+<li><a href="_behavier_design.html">4 スコア記録の振る舞いを図にする</a>
+</li>
+<li><a href="_summary.html">5 まとめ</a>
+</li>
+<li><a href="_other_diagrams.html">6 他の図、他の機能など</a>
+</li>
+<li><a href="_appendix-01.html">付録 A: 関連資料、ワークシート等</a>
+</li>
+<li><a href="_glossary.html">用語集</a>
+</li>
+<li><a href="_bibliography.html">参考文献</a>
+</li>
+<li><a href="_colophon.html">奥付</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_preparation"><a class="anchor" href="#_preparation"></a>1 準備</h2>
+<div class="sectionbody">
+<div class="paragraph lead">
+<p>このチュートリアルでは、モデリングツールとして astah* を、実装にはRubyを使います。
+最初に、演習に必要な環境を用意しましょう。</p>
+</div>
+<div class="sect2">
+<h3 id="_モデリングツール_astah_を用意する"><a class="anchor" href="#_モデリングツール_astah_を用意する"></a>1.1 モデリングツール（ astah* ）を用意する</h3>
+<div class="paragraph">
+<p>このチュートリアルで使用するモデリングツールを用意しましょう。</p>
+</div>
+<div class="paragraph">
+<p>astah* の入手や評価版を含むライセンスの取得方法などについては、
+次のページを参照してください。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="注記"></i>
+</td>
+<td class="content">
+<div class="title">astah* の入手や取得方法に関するページを用意する。</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">astah*  の取得方法</dt>
+<dd>
+<p><code>URL</code></p>
+</dd>
+<dt class="hdlist1">astah*  のライセンスの入手方法</dt>
+<dd>
+<p><code>URL</code></p>
+</dd>
+<dt class="hdlist1">astah*  のインストール</dt>
+<dd>
+<p><code>URL</code></p>
+</dd>
+<dt class="hdlist1">astah*  のライセンスの追加方法</dt>
+<dd>
+<p><code>URL</code></p>
+</dd>
+</dl>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_実装環境を用意する"><a class="anchor" href="#_実装環境を用意する"></a>1.2 実装環境を用意する</h3>
+<div class="paragraph">
+<p>このチュートリアルでは、実装に Ruby を使います。執筆時点では 2.7.2 を使いました。</p>
+</div>
+<div class="paragraph">
+<p>Ruby は、Windows、Mac、Linuxで動作するオープンソースの言語プログラミング言語です。
+インストール方法は利用環境によって異なりますので、詳しくは、Rubyの公式サイトの説明やWebの記事を参考にしてください。</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Rubyのインストール</dt>
+<dd>
+<p><code><a href="https://www.ruby-lang.org/ja/documentation/installation/" class="bare">https://www.ruby-lang.org/ja/documentation/installation/</a></code></p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_演習用のプロジェクトを用意する"><a class="anchor" href="#_演習用のプロジェクトを用意する"></a>1.3 演習用のプロジェクトを用意する</h3>
+<div class="paragraph">
+<p>業務やシステムを分析（あるいは設計）するときは、たいてい複数種類のモデル図を使って表します。
+astah* では、複数のモデル図をまとめてたモデルファイルを「プロジェクト」と呼んでいます。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="注記"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>astah* のプロジェクトの作り方についての詳しい説明は、次のページを参考にしてください。</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">astah*  機能ガイド プロジェクトの作成と利用</dt>
+<dd>
+<p><code><a href="https://astah.change-vision.com/ja/manual/278-project-file.html" class="bare">https://astah.change-vision.com/ja/manual/278-project-file.html</a></code></p>
+</dd>
+</dl>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>この演習で使うプロジェクトを用意しましょう。
+新規プロジェクトを作成したら、先に名前をつけて保存しておくとよいでしょう。</p>
+</div>
+<div class="openblock">
+<div class="title">演習で使うプロジェクトを作成する</div>
+<div class="content">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>astah* を起動する。</p>
+</li>
+<li>
+<p>「ファイル」メニューから「プロジェクトの新規作成」を選択する（ <a href="_preparation.html#create_project01">図 1.1</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="create_project01" class="imageblock">
+<div class="content">
+<img src="images/create_project01.png" alt="create project01" width="50%">
+</div>
+<div class="title">図 1.1 新しいプロジェクトを作成する</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="3">
+<li>
+<p>「no_title」という名前で新しいプロジェクトが作成される（ <a href="_preparation.html#create_project02">図 1.2</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="create_project02" class="imageblock">
+<div class="content">
+<img src="images/create_project02.png" alt="create project02" width="50%">
+</div>
+<div class="title">図 1.2 新しいプロジェクトが作成された</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="4">
+<li>
+<p>「ファイル」メニューから「プロジェクトを保存」を選択する（ <a href="_preparation.html#create_project03">図 1.3</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="create_project03" class="imageblock">
+<div class="content">
+<img src="images/create_project03.png" alt="create project03" width="50%">
+</div>
+<div class="title">図 1.3 新しいプロジェクトを保存する</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="5">
+<li>
+<p>「保存」ダイアログが開くので、プロジェクトの保存場所と保存するファイル名を指定して、「保存」ボタンをクリックする。ここでは保存場所として「デスクトップ」に「BowlingScore」フォルダを作成し、「bowling_score」を指定した（ <a href="_preparation.html#create_project04">図 1.4</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="create_project04" class="imageblock">
+<div class="content">
+<img src="images/create_project04.png" alt="create project04" width="75%">
+</div>
+<div class="title">図 1.4 ダイアログを操作してプロジェクトを保存する場所とプロジェクトファイル名を指定する</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="6">
+<li>
+<p>保存すると、プロジェクトファイルにつけた名前が「構造ツリー」に反映される（ <a href="_preparation.html#create_project05">図 1.5</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="create_project05" class="imageblock">
+<div class="content">
+<img src="images/create_project05.png" alt="create project05" width="75%">
+</div>
+<div class="title">図 1.5 ダイアログを操作してプロジェクトを保存する場所とプロジェクトファイル名を指定する</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ボウリングのスコアのつけ方"><a class="anchor" href="#_ボウリングのスコアのつけ方"></a>1.4 ボウリングのスコアのつけ方</h3>
+<div class="paragraph">
+<p>ボウリング場では、だいぶ前から自動でスコアが表示されるようになっています。
+自動化される前は、受付でスコアシートをもらって、自分たちでスコアを計算し、手でスコアをつけていました（ <a href="_preparation.html#hand_scoring">図 1.6</a> ）。</p>
+</div>
+<div id="hand_scoring" class="imageblock">
+<div class="content">
+<img src="images/hand_scoring.jpg" alt="hand scoring" width="50%">
+</div>
+<div class="title">図 1.6 手でスコアを記入している様子</div>
+</div>
+<div class="paragraph">
+<p>ボウリングの規則とスコアのつけ方について、公益財団法人「全日本ボウリング協会」の「ボウリング競技規則」を参考に、まとめてみました。</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">公益財団法人「全日本ボウリング協会」のボウリング競技規則</dt>
+<dd>
+<p><code><a href="https://jbc-iwate.com/service/message/201012101.pdf" class="bare">https://jbc-iwate.com/service/message/201012101.pdf</a></code></p>
+</dd>
+</dl>
+</div>
+<div class="sect3">
+<h4 id="_クラッシックスコアリング"><a class="anchor" href="#_クラッシックスコアリング"></a>1.4.1 クラッシックスコアリング</h4>
+<div class="paragraph">
+<p>従来から使われていて、広く普及しているスコア計算方式です。</p>
+</div>
+<div class="ulist">
+<div class="title">ゲームの構成</div>
+<ul>
+<li>
+<p>ボウリングの1ゲームは、10 個のフレームをもって構成する。</p>
+</li>
+<li>
+<p>競技者は、ストライクの場合を除き、それぞれのフレームで 2 回ずつ投球する。ただし、第 10 フレームがストライク又はスペアの場合には、サービスフレームとして、ストライクの場合は、さらに 2 回投球でき、スペアの場合には 1 回投球できる。</p>
+</li>
+<li>
+<p>ゲームの成績は、適正な投球によって、倒されたピンの数をもって計算し、10 個のフレームの合計点によって、これを表す。</p>
+</li>
+<li>
+<p>適正に投球されたボールとは、競技者の持っているボールが、手から放れファールラインを越えたものをいう。</p>
+</li>
+</ul>
+</div>
+<table id="scoring_rule01" class="tableblock frame-all grid-all stretch">
+<caption class="title">表 1.1 ボウリングスコアに使う記号と意味</caption>
+<colgroup>
+<col style="width: 8.8495%;">
+<col style="width: 11.5044%;">
+<col style="width: 79.6461%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-center valign-top">記号</th>
+<th class="tableblock halign-left valign-top">名称</th>
+<th class="tableblock halign-left valign-top">意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top"><div class="content"><div class="imageblock">
+<div class="content">
+<img src="images/strike.png" alt="strike" width="60">
+</div>
+</div>
+<div class="ulist">
+<ul>
+</ul>
+</div>
+<div class="paragraph nav-footer">
+<p></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ストライク</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1投目で10本全てを倒した場合。ストライクをだしたフレームの得点は、次の2投分を加算する。2回続いたら3フレーム目の1投目までを加算する。スコア欄は、それまでは空欄にしておく。ストライクが続くことを「ダブル」「トリプル（ターキー）」と呼ぶ。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><div class="content"><div class="imageblock">
+<div class="content">
+<img src="images/spare.png" alt="spare" width="60">
+</div>
+</div>
+<div class="ulist">
+<ul>
+</ul>
+</div>
+<div class="paragraph nav-footer">
+<p></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">スペア</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1投目で残ったピンを、2投目で全部倒した場合。次の1投分を加算する。スコア欄は、それまでは空欄にしておく。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><div class="content"><div class="imageblock">
+<div class="content">
+<img src="images/miss.png" alt="miss" width="60">
+</div>
+</div>
+<div class="ulist">
+<ul>
+</ul>
+</div>
+<div class="paragraph nav-footer">
+<p></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ミス</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">フレームの2投目でピンを1本も倒せなかった場合。2投目でガターに落ちても「G」の記号は使わずにこの記号を使う。そのフレームの得点は、1投目で倒したピン数になる。なお、1つのフレームで 2 回投球し、10本のピンを全部倒すことができなかった場合をエラーという。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><div class="content"><div class="imageblock">
+<div class="content">
+<img src="images/gutter.png" alt="gutter" width="60">
+</div>
+</div>
+<div class="ulist">
+<ul>
+</ul>
+</div>
+<div class="paragraph nav-footer">
+<p></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ガター</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1投目でレーンの両脇にある溝（ガター）にボールが落ちた場合。2投目はガターに落ちた場合も「ミス」として扱う。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><div class="content"><div class="imageblock">
+<div class="content">
+<img src="images/split.png" alt="split" width="60">
+</div>
+</div>
+<div class="ulist">
+<ul>
+</ul>
+</div>
+<div class="paragraph nav-footer">
+<p></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>スプリット</p>
+</div>
+<div class="ulist">
+<ul>
+</ul>
+</div>
+<div class="paragraph nav-footer">
+<p></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1投目で1番ピン（ヘッドピンともいう）と他のいくつかのピンが倒れ、2 本以上のピンが次のような状態に残った場合。スプリットの場合は、1投目のピン数を○で囲む。</p>
+<p class="tableblock">* 残っているピンの中間のピンが少なくとも1本倒れたとき。例えば7と9あるいは3と10。
+* 残っているピンのすぐ前のピンが少なくとも1本倒れたとき。例えば5と6。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><div class="content"><div class="imageblock">
+<div class="content">
+<img src="images/foul.png" alt="foul" width="60">
+</div>
+</div>
+<div class="ulist">
+<ul>
+</ul>
+</div>
+<div class="paragraph nav-footer">
+<p></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ファール</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ファールラインを越えて投球されたという記号。1投目でファールした場合、ピンを倒しても1投目のピン数は0になる。2投目は全ピンを立て直す。2投目でファールした場合、ピンを倒しても2投目のピン数は0になる。第10フレームの3投目がファールの場合も、ピンを倒しても3投目のピン数は0になる。</p></td>
+</tr>
+</tbody>
+</table>
+<div class="imageblock">
+<div class="content">
+<img src="images/classic_score_sample.jpg" alt="classic score sample" width="100%">
+</div>
+<div class="title">図 1.7 スコアの例</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_カレントフレームスコアリング"><a class="anchor" href="#_カレントフレームスコアリング"></a>1.4.2 カレントフレームスコアリング</h4>
+<div class="paragraph">
+<p>2018年アジア競技大会で採用された新しいスコア計算方式です。</p>
+</div>
+<div class="ulist">
+<div class="title">クラッシックスコアリングと異なる点</div>
+<ul>
+<li>
+<p>1投目によって10ピンすべてを倒した場合はストライクとなる。ストライクのとき、そのフレームの得点は30となる。</p>
+</li>
+<li>
+<p>続けて2回ストライクの場合は、それぞれのストライクの得点は30となる。</p>
+</li>
+<li>
+<p>1投目の後、残ったピンを2投目によって全部倒した場合は、スペアとなる。スペアのとき、そのフレームの得点は、1投目のピン数に10を加えた数となる。</p>
+</li>
+<li>
+<p>第10フレームでストライクあるいはスペアをとった場合も、3投目はない。</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/current_frame_score_sample.jpg" alt="current frame score sample" width="100%">
+</div>
+<div class="title">図 1.8 スコアの例（カレントフレームスコアリングの場合）</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">【豆知識】ボウリングの名前の由来</div>
+<div class="verseblock">
+<pre class="content">「ボウリングをすること」などを意味する「bowl」という英語は、ラテン語で「泡」や「瘤」を意味する「bulla」に由来する。一方、同じ綴りで食器や容器（ボウル）を意味する「bowl」や「球」を意味する「ball」は、ゲルマン語に由来し、本質的に異なる。</pre>
+<div class="attribution">
+&#8212; Wikipedia
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph nav-footer">
+<p>← Previous: <a href="_copyright.html">注意事項</a> | ↑ Up: <a href="uml_tutorial.html">モデルを使って ソフトウェアを開発しよう: astah* を使った UMLチュートリアル</a> | Next: <a href="_requirement_anaylysis.html">2</a> →</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+バージョン html_0120<br>
+最終更新 2022-01-17 06:53:14 +0900
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>
