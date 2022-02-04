@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.16">
+<meta name="generator" content="Asciidoctor 2.0.17">
 <meta name="description" content="この文書は、モデリングツールにastah*を使って、ソフトウェアの開発にUMLを使う方法について学ぶチュートリアルです。">
 <meta name="author" content="株式会社チェンジビジョン">
-<title>モデルを使って ソフトウェアを開発しよう: astah* を使った UMLチュートリアル</title>
+<title>モデルを使ってソフトウェアを開発しよう</title>
 <link rel="stylesheet" href="css/mystyle.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
@@ -17,36 +17,38 @@
 </head>
 <body id="_structure_design" class="book toc2 toc-left">
 <div id="header">
-<h1>モデルを使って ソフトウェアを開発しよう: astah* を使った UMLチュートリアル</h1>
+<h1>モデルを使ってソフトウェアを開発しよう</h1>
 <div class="details">
 <span id="author" class="author">株式会社チェンジビジョン</span><br>
-<span id="revnumber">バージョン html_0120,</span>
-<span id="revdate">2022-01-17</span>
+<span id="revnumber">バージョン html_0166,</span>
+<span id="revdate">2022-01-28</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">目次</div>
-<p><span class="toc-root"><a href="uml_tutorial.html">モデルを使って ソフトウェアを開発しよう: astah* を使った UMLチュートリアル</a></span></p><ul class="sectlevel1">
+<p><span class="toc-root"><a href="uml_tutorial.html">モデルを使ってソフトウェアを開発しよう</a></span></p><ul class="sectlevel1">
 <li><a href="_preface.html">はじめに</a>
 </li>
 <li><a href="_copyright.html">注意事項</a>
 </li>
 <li><a href="_preparation.html">1 準備</a>
 </li>
-<li><a href="_requirement_anaylysis.html">2 解決したい課題はなにか</a>
+<li><a href="_requirement_anaylysis.html">2 スコアのデータ構造を調べる</a>
 </li>
-<li><a href="_structure_design.html"><span class="toc-current">3 スコアの構造を図にする</span></a>
+<li><a href="_スコアの状態を調べる.html">3 スコアの状態を調べる</a>
+</li>
+<li><a href="_structure_design.html"><span class="toc-current">4 スコアの構造を図にする</span></a>
 <ul class="sectlevel2">
-<li><a href="_structure_design.html#_ゲームスコアのオブジェクト図を描く">3.1 ゲームスコアのオブジェクト図を描く</a>
+<li><a href="_structure_design.html#_ゲームスコアのオブジェクト図を描く">4.1 ゲームスコアのオブジェクト図を描く</a>
 </li>
-<li><a href="_structure_design.html#_ゲームスコアのクラス図を描く">3.2 ゲームスコアのクラス図を描く</a>
+<li><a href="_structure_design.html#_ゲームスコアのクラス図を描く">4.2 ゲームスコアのクラス図を描く</a>
 </li>
 </ul>
 </li>
-<li><a href="_behavier_design.html">4 スコア記録の振る舞いを図にする</a>
+<li><a href="_behavier_design.html">5 スコア記録の振る舞いを図にする</a>
 </li>
-<li><a href="_summary.html">5 まとめ</a>
+<li><a href="_summary.html">6 まとめ</a>
 </li>
-<li><a href="_other_diagrams.html">6 他の図、他の機能など</a>
+<li><a href="_other_diagrams.html">7 他の図、他の機能など</a>
 </li>
 <li><a href="_appendix-01.html">付録 A: 関連資料、ワークシート等</a>
 </li>
@@ -61,13 +63,13 @@
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_structure_design"><a class="anchor" href="#_structure_design"></a>3 スコアの構造を図にする</h2>
+<h2 id="_structure_design"><a class="anchor" href="#_structure_design"></a>4 スコアの構造を図にする</h2>
 <div class="sectionbody">
 <div class="paragraph lead">
 <p>ここからは、スコアを計算するのに使う要素と、要素同士の関連、ゲームを進める動作をモデル図を使って整理してみましょう。</p>
 </div>
 <div class="sect2">
-<h3 id="_ゲームスコアのオブジェクト図を描く"><a class="anchor" href="#_ゲームスコアのオブジェクト図を描く"></a>3.1 ゲームスコアのオブジェクト図を描く</h3>
+<h3 id="_ゲームスコアのオブジェクト図を描く"><a class="anchor" href="#_ゲームスコアのオブジェクト図を描く"></a>4.1 ゲームスコアのオブジェクト図を描く</h3>
 <div class="paragraph">
 <p>吟味したユースケース記述を参照しながら、実際のゲームの様子を具体的な要素を使って図に表してみることで、スコアの計算にはどんな要素があればよいか考えてみましょう。</p>
 </div>
@@ -76,7 +78,7 @@
 このようなことを図で表すには「オブジェクト図（インスタンス図と呼ぶこともあります）」が向いています。</p>
 </div>
 <div class="sect3">
-<h4 id="_プロジェクトに設計モデルを追加する"><a class="anchor" href="#_プロジェクトに設計モデルを追加する"></a>3.1.1 プロジェクトに設計モデルを追加する</h4>
+<h4 id="_プロジェクトに設計モデルを追加する_2"><a class="anchor" href="#_プロジェクトに設計モデルを追加する_2"></a>4.1.1 プロジェクトに設計モデルを追加する</h4>
 <div class="paragraph">
 <p>まず、プロジェクトに設計モデルを追加しましょう。
 ここで言う設計モデルは、設計用に作成するモデル図を格納する場所だと思ってください。</p>
@@ -106,7 +108,7 @@
 <p>構造ツリー上で、プロジェクトを選択する。</p>
 </li>
 <li>
-<p>右クリックしてポップアップメニューを開き、「モデルの追加＞モデル」を選択する（ <a href="_structure_design.html#add_design_model01">図 3.1</a> ）。</p>
+<p>右クリックしてポップアップメニューを開き、「モデルの追加＞モデル」を選択する（ <a href="_requirement_anaylysis.html#add_design_model01">図 4.1</a> ）。</p>
 </li>
 </ul>
 </div>
@@ -117,7 +119,7 @@
 <div class="content">
 <img src="images/add_design_model01.png" alt="add design model01" width="50%">
 </div>
-<div class="title">図 3.1 プロジェクトにモデルを追加した</div>
+<div class="title">図 4.1 プロジェクトにモデルを追加した</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="2">
@@ -129,7 +131,7 @@
 <p>構造ツリー上で、追加したモデルを選択した状態で、プロパティの「ベース」タブを選択する。</p>
 </li>
 <li>
-<p>「名前」を編集して「02_設計モデル」とする（ <a href="_structure_design.html#add_design_model02">図 3.2</a> ）。</p>
+<p>「名前」を編集して「02_設計モデル」とする（ <a href="_requirement_anaylysis.html#add_design_model02">図 4.2</a> ）。</p>
 </li>
 </ul>
 </div>
@@ -140,11 +142,11 @@
 <div class="content">
 <img src="images/add_design_model02.png" alt="add design model02" width="50%">
 </div>
-<div class="title">図 3.2 モデルに設計用のモデルとして名前をつけた</div>
+<div class="title">図 4.2 モデルに設計用のモデルとして名前をつけた</div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_設計モデルにオブジェクト図を追加する"><a class="anchor" href="#_設計モデルにオブジェクト図を追加する"></a>3.1.2 設計モデルにオブジェクト図を追加する</h4>
+<h4 id="_設計モデルにオブジェクト図を追加する_2"><a class="anchor" href="#_設計モデルにオブジェクト図を追加する_2"></a>4.1.2 設計モデルにオブジェクト図を追加する</h4>
 <div class="paragraph">
 <p>ゲームスコアのオブジェクトが作られていく様子をオブジェクト図で表してみましょう。
 astah* で「オブジェクト図」を作成するときは「クラス図」を使います。</p>
@@ -155,7 +157,7 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>モデルにクラス図を追加する（ <a href="_structure_design.html#object00">図 3.3</a> ）。</p>
+<p>モデルにクラス図を追加する（ <a href="_requirement_anaylysis.html#object00">図 4.3</a> ）。</p>
 </li>
 </ol>
 </div>
@@ -163,12 +165,12 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="content">
 <img src="images/object00.png" alt="object00" width="75%">
 </div>
-<div class="title">図 3.3 モデルにクラス図を追加する</div>
+<div class="title">図 4.3 モデルにクラス図を追加する</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="2">
 <li>
-<p>追加した図を「ゲームスコアのオブジェクト図」とする（  <a href="_structure_design.html#object01">図 3.4</a> ）。</p>
+<p>追加した図を「ゲームスコアのオブジェクト図」とする（  <a href="_requirement_anaylysis.html#object01">図 4.4</a> ）。</p>
 </li>
 </ol>
 </div>
@@ -176,13 +178,13 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="content">
 <img src="images/object01.png" alt="object01" width="50%">
 </div>
-<div class="title">図 3.4 「ゲームスコアのオブジェクト図」を追加する</div>
+<div class="title">図 4.4 「ゲームスコアのオブジェクト図」を追加する</div>
 </div>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_ゲームのオブジェクトを作成する"><a class="anchor" href="#_ゲームのオブジェクトを作成する"></a>3.1.3 ゲームのオブジェクトを作成する</h4>
+<h4 id="_ゲームのオブジェクトを作成する"><a class="anchor" href="#_ゲームのオブジェクトを作成する"></a>4.1.3 ゲームのオブジェクトを作成する</h4>
 <div class="paragraph">
 <p>ユースケース記述を読むと、「ゲーム」と「フレーム」のオブジェクトが必要そうです。
 まず、ゲームを表すオブジェクトを追加しましょう。</p>
@@ -193,7 +195,7 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>パレットから「インスタンス仕様」を選択して、図に配置する（ <a href="_structure_design.html#instance01">図 3.5</a> ）。</p>
+<p>パレットから「インスタンス仕様」を選択して、図に配置する（ <a href="_structure_design.html#instance01">図 4.5</a> ）。</p>
 </li>
 </ol>
 </div>
@@ -201,12 +203,12 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="content">
 <img src="images/GSW-20210827-113704.png" alt="GSW 20210827 113704" width="75%">
 </div>
-<div class="title">図 3.5 「インスタンス仕様」を追加する</div>
+<div class="title">図 4.5 「インスタンス仕様」を追加する</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="2">
 <li>
-<p>名前が「インスタンス仕様0」（数字は作るたびにつけられる）となっている。これを、具体的なゲームを表す名前に変える。ここでは「game1」とする（ <a href="_structure_design.html#instance02">図 3.6</a> ）。</p>
+<p>名前が「インスタンス仕様0」（数字は作るたびにつけられる）となっている。これを、具体的なゲームを表す名前に変える。ここでは「game1」とする（ <a href="_structure_design.html#instance02">図 4.6</a> ）。</p>
 <div class="ulist">
 <ul>
 <li>
@@ -224,7 +226,7 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="content">
 <img src="images/GSW-20210827-114800.png" alt="GSW 20210827 114800" width="75%">
 </div>
-<div class="title">図 3.6 名前を「game1」に変更する</div>
+<div class="title">図 4.6 名前を「game1」に変更する</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="3">
@@ -233,10 +235,10 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="ulist">
 <ul>
 <li>
-<p>「game1」を選択した状態で、プロパティから「新規作成」ボタンをクリックする（ <a href="_structure_design.html#class_def_dialog00">図 3.7</a> ）。</p>
+<p>「game1」を選択した状態で、プロパティから「新規作成」ボタンをクリックする（ <a href="_requirement_anaylysis.html#class_def_dialog00">図 4.7</a> ）。</p>
 </li>
 <li>
-<p>クラスを定義するダイアログが表示されるので、クラスの名前を「GameScore」にする（ <a href="_structure_design.html#class_def_dialog01">図 3.8</a> ）。</p>
+<p>クラスを定義するダイアログが表示されるので、クラスの名前を「GameScore」にする（ <a href="_requirement_anaylysis.html#class_def_dialog01">図 4.8</a> ）。</p>
 </li>
 </ul>
 </div>
@@ -247,18 +249,18 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="content">
 <img src="images/GSW-20210827-115726.png" alt="GSW 20210827 115726" width="75%">
 </div>
-<div class="title">図 3.7 オブジェクトを選択してクラスを追加する</div>
+<div class="title">図 4.7 オブジェクトを選択してクラスを追加する</div>
 </div>
 <div id="class_def_dialog01" class="imageblock">
 <div class="content">
 <img src="images/class_def_dialog01.png" alt="class def dialog01" width="50%">
 </div>
-<div class="title">図 3.8 クラス「GameScore」を定義する</div>
+<div class="title">図 4.8 クラス「GameScore」を定義する</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="4">
 <li>
-<p>オブジェクトの表示も「game1 : GameScore」のように変わる（ <a href="_structure_design.html#instance03">図 3.9</a> ）。</p>
+<p>オブジェクトの表示も「game1 : GameScore」のように変わる（ <a href="_requirement_anaylysis.html#instance03">図 4.9</a> ）。</p>
 </li>
 </ol>
 </div>
@@ -266,13 +268,13 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="content">
 <img src="images/instance03.jpg" alt="instance03" width="25%">
 </div>
-<div class="title">図 3.9 クラスを追加した結果「game1」が「game1:GameScore」に変わった</div>
+<div class="title">図 4.9 クラスを追加した結果「game1」が「game1:GameScore」に変わった</div>
 </div>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_フレームのオブジェクトを作成する"><a class="anchor" href="#_フレームのオブジェクトを作成する"></a>3.1.4 フレームのオブジェクトを作成する</h4>
+<h4 id="_フレームのオブジェクトを作成する"><a class="anchor" href="#_フレームのオブジェクトを作成する"></a>4.1.4 フレームのオブジェクトを作成する</h4>
 <div class="paragraph">
 <p>ゲームと同じように、フレームについてもインスタンス仕様を追加して、クラス名として「Frame」をつけます。
 また、ユースケース記述から、1投目と2投目のピン数、スペアボーナスとストライクボーナスを保持する必要がありそうだとわかっています。
@@ -287,7 +289,7 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <p>パレットから「インスタンス仕様」を図に追加する。</p>
 </li>
 <li>
-<p>フレーム名として「01」、クラス名として「Frame」をつける（ <a href="_structure_design.html#instance04">図 3.10</a> ）。</p>
+<p>フレーム名として「01」、クラス名として「Frame」をつける（ <a href="_structure_design.html#instance04">図 4.10</a> ）。</p>
 </li>
 </ol>
 </div>
@@ -295,12 +297,12 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="content">
 <img src="images/instance04.png" alt="instance04" width="75%">
 </div>
-<div class="title">図 3.10 フレームオブジェクトと「Frame」クラスを追加する</div>
+<div class="title">図 4.10 フレームオブジェクトと「Frame」クラスを追加する</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="2">
 <li>
-<p>フレームオブジェクトを選択した状態で、プロパティボタンをクリックする（ <a href="_structure_design.html#instance06">図 3.11</a> ）。</p>
+<p>フレームオブジェクトを選択した状態で、プロパティボタンをクリックする（ <a href="_structure_design.html#instance06">図 4.11</a> ）。</p>
 </li>
 </ol>
 </div>
@@ -308,12 +310,12 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="content">
 <img src="images/instance06.png" alt="instance06" width="75%">
 </div>
-<div class="title">図 3.11 「Frame」クラスのプロパティダイアログを開く</div>
+<div class="title">図 4.11 「Frame」クラスのプロパティダイアログを開く</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="3">
 <li>
-<p>「Frame」クラスに従属する情報をクラスの属性に追加する（ <a href="_structure_design.html#instance07">図 3.12</a> ）。</p>
+<p>「Frame」クラスに従属する情報をクラスの属性に追加する（ <a href="_structure_design.html#instance07">図 4.12</a> ）。</p>
 <div class="ulist">
 <ul>
 <li>
@@ -334,12 +336,12 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="content">
 <img src="images/instance07.png" alt="instance07" width="50%">
 </div>
-<div class="title">図 3.12 「Frame」クラスに従属する情報を属性に追加した</div>
+<div class="title">図 4.12 「Frame」クラスに従属する情報を属性に追加した</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="4">
 <li>
-<p>追加したオブジェクトは <a href="_structure_design.html#instance08">図 3.13</a> のように変わる。</p>
+<p>追加したオブジェクトは <a href="_structure_design.html#instance08">図 4.13</a> のように変わる。</p>
 <div class="ulist">
 <ul>
 <li>
@@ -354,12 +356,12 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="content">
 <img src="images/GSW-20210827-124621.png" alt="GSW 20210827 124621" width="25%">
 </div>
-<div class="title">図 3.13 属性が追加された後の「Frame」クラスのオブジェクト</div>
+<div class="title">図 4.13 属性が追加された後の「Frame」クラスのオブジェクト</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="5">
 <li>
-<p>作成したフレームオブジェクトを選択すると、属性のインスタンス（スロットと呼ぶ）を編集するプロパティが表示される（ <a href="_structure_design.html#object_attribute_01">図 3.14</a> ）。</p>
+<p>作成したフレームオブジェクトを選択すると、属性のインスタンス（スロットと呼ぶ）を編集するプロパティが表示される（ <a href="_structure_design.html#object_attribute_01">図 4.14</a> ）。</p>
 <div class="ulist">
 <ul>
 <li>
@@ -390,31 +392,31 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="content">
 <img src="images/object_attribute_01.png" alt="object attribute 01" width="75%">
 </div>
-<div class="title">図 3.14 オブジェクトの属性値のプロパティを開く</div>
+<div class="title">図 4.14 オブジェクトの属性値のプロパティを開く</div>
 </div>
 <div id="object_attribute_02" class="imageblock">
 <div class="content">
 <img src="images/object_attribute_02.png" alt="object attribute 02" width="25%">
 </div>
-<div class="title">図 3.15 オブジェクトに属性値が設定された</div>
+<div class="title">図 4.15 オブジェクトに属性値が設定された</div>
 </div>
 </div>
 </div>
 <div class="paragraph">
 <p>もちろん、別の捉え方をしているのであれば、オブジェクトや保持する属性などが異なってきます。
-この演習では、 <a href="_structure_design.html#object_attribute_02">図 3.15</a>  のように捉えて、以降の設計を進めます。</p>
+この演習では、 <a href="_structure_design.html#object_attribute_02">図 4.15</a>  のように捉えて、以降の設計を進めます。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_ゲームの進行に合わせてオブジェクトを追加する"><a class="anchor" href="#_ゲームの進行に合わせてオブジェクトを追加する"></a>3.1.5 ゲームの進行に合わせてオブジェクトを追加する</h4>
+<h4 id="_ゲームの進行に合わせてオブジェクトを追加する"><a class="anchor" href="#_ゲームの進行に合わせてオブジェクトを追加する"></a>4.1.5 ゲームの進行に合わせてオブジェクトを追加する</h4>
 <div class="paragraph">
-<p>続いて、進行中のゲームのスコア（ <a href="_structure_design.html#classic_score_sample02">図 3.16</a> ）を例として、オブジェクト図にインスタンスを追加してみます。</p>
+<p>続いて、進行中のゲームのスコア（ <a href="_structure_design.html#classic_score_sample02">図 4.16</a> ）を例として、オブジェクト図にインスタンスを追加してみます。</p>
 </div>
 <div id="classic_score_sample02" class="imageblock">
 <div class="content">
 <img src="images/classic_score_sample02.jpg" alt="classic score sample02" width="100%">
 </div>
-<div class="title">図 3.16 第6フレーム投球後のスコアの例</div>
+<div class="title">図 4.16 第6フレーム投球後のスコアの例</div>
 </div>
 <div class="paragraph">
 <p>各フレームの情報を格納するデータ領域は、1ゲーム分を先に用意しておく方法や、ゲームの進行に応じて1フレームずつ増やす方法もあります。
@@ -437,10 +439,10 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="ulist">
 <ul>
 <li>
-<p>パレットからリンクを選択し「game1:GameScore」にカーソルを移動して青い枠を出す（ <a href="_structure_design.html#object_link_01">図 3.17</a> ）。</p>
+<p>パレットからリンクを選択し「game1:GameScore」にカーソルを移動して青い枠を出す（ <a href="_structure_design.html#object_link_01">図 4.17</a> ）。</p>
 </li>
 <li>
-<p>マウスをドラッグして「01:Frame」へリンクを伸ばし、青い枠が出たらマウスのボタンを離すとリンクが引ける（ <a href="_structure_design.html#object_link_02">図 3.18</a> ）。</p>
+<p>マウスをドラッグして「01:Frame」へリンクを伸ばし、青い枠が出たらマウスのボタンを離すとリンクが引ける（ <a href="_structure_design.html#object_link_02">図 4.18</a> ）。</p>
 </li>
 </ul>
 </div>
@@ -451,13 +453,13 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="content">
 <img src="images/object_link_43.png" alt="object link 43" width="50%">
 </div>
-<div class="title">図 3.17 ゲームからフレームへリンクを引く</div>
+<div class="title">図 4.17 ゲームからフレームへリンクを引く</div>
 </div>
 <div id="object_link_02" class="imageblock">
 <div class="content">
 <img src="images/object_link_76.png" alt="object link 76" width="50%">
 </div>
-<div class="title">図 3.18 ゲームからフレームへリンクを引いた</div>
+<div class="title">図 4.18 ゲームからフレームへリンクを引いた</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="2">
@@ -466,10 +468,10 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="ulist">
 <ul>
 <li>
-<p>リンクのフレーム寄りでマウスの右クリックして、「誘導可能性＞誘導可能」を選択する（ <a href="_structure_design.html#object_link_03">図 3.19</a> ）。</p>
+<p>リンクのフレーム寄りでマウスの右クリックして、「誘導可能性＞誘導可能」を選択する（ <a href="_structure_design.html#object_link_03">図 4.19</a> ）。</p>
 </li>
 <li>
-<p>リンクに誘導可能を示す矢印が引かれる（ <a href="_structure_design.html#object_link_04">図 3.20</a> ）。</p>
+<p>リンクに誘導可能を示す矢印が引かれる（ <a href="_structure_design.html#object_link_04">図 4.20</a> ）。</p>
 </li>
 </ul>
 </div>
@@ -480,13 +482,13 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="content">
 <img src="images/object_link_291.png" alt="object link 291" width="50%">
 </div>
-<div class="title">図 3.19 ゲームからフレームへのリンクを誘導可能にする</div>
+<div class="title">図 4.19 ゲームからフレームへのリンクを誘導可能にする</div>
 </div>
 <div id="object_link_04" class="imageblock">
 <div class="content">
 <img src="images/object_link_296.png" alt="object link 296" width="25%">
 </div>
-<div class="title">図 3.20 ゲームからフレームへのリンクを誘導可能にした</div>
+<div class="title">図 4.20 ゲームからフレームへのリンクを誘導可能にした</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="3">
@@ -495,10 +497,10 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="ulist">
 <ul>
 <li>
-<p>リンクのフレーム寄りでマウスの右クリックして、「リンク端の設定」を選択する（ <a href="_structure_design.html#link_end_01">図 3.21</a> ）。</p>
+<p>リンクのフレーム寄りでマウスの右クリックして、「リンク端の設定」を選択する（ <a href="_structure_design.html#link_end_01">図 4.21</a> ）。</p>
 </li>
 <li>
-<p>リンク端に、現在つながっているインスタンスの名前「01」割り当てられる。これを「head」に変更する（ <a href="_structure_design.html#link_end_02">図 3.22</a> ）。</p>
+<p>リンク端に、現在つながっているインスタンスの名前「01」割り当てられる。これを「head」に変更する（ <a href="_structure_design.html#link_end_02">図 4.22</a> ）。</p>
 </li>
 </ul>
 </div>
@@ -509,18 +511,18 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="content">
 <img src="images/link_end_354.png" alt="link end 354" width="50%">
 </div>
-<div class="title">図 3.21 フレーム側のリンク端に名前をつける</div>
+<div class="title">図 4.21 フレーム側のリンク端に名前をつける</div>
 </div>
 <div id="link_end_02" class="imageblock">
 <div class="content">
 <img src="images/link_end_378.png" alt="link end 378" width="25%">
 </div>
-<div class="title">図 3.22 フレーム側のリンク端に名前をつけた</div>
+<div class="title">図 4.22 フレーム側のリンク端に名前をつけた</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="4">
 <li>
-<p>同様にして、現在のフレームを指すリンクを追加し、リンク端名「current」をつける（ <a href="_structure_design.html#link_end_03">図 3.23</a> ）。</p>
+<p>同様にして、現在のフレームを指すリンクを追加し、リンク端名「current」をつける（ <a href="_structure_design.html#link_end_03">図 4.23</a> ）。</p>
 </li>
 </ol>
 </div>
@@ -528,13 +530,13 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="content">
 <img src="images/link_end_400.png" alt="link end 400" width="25%">
 </div>
-<div class="title">図 3.23 別のリンク「current」を追加した</div>
+<div class="title">図 4.23 別のリンク「current」を追加した</div>
 </div>
 </div>
 </div>
 <div class="paragraph">
 <p>第2フレームを追加しましょう。
-追加するフレームのピン数は、 <a href="_structure_design.html#classic_score_sample02">図 3.16</a>  を参照してください。</p>
+追加するフレームのピン数は、 <a href="_structure_design.html#classic_score_sample02">図 4.16</a>  を参照してください。</p>
 </div>
 <div class="olist arabic">
 <div class="title">第2フレームを追加し、ピン数を設定する</div>
@@ -543,7 +545,7 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <p>パレットから「インスタンス仕様」を図に追加する。</p>
 </li>
 <li>
-<p>追加したインスタンス仕様の名前を「02」を入力すると、図に反映される（ <a href="_structure_design.html#add_2nd_frame01">図 3.24</a> ）。</p>
+<p>追加したインスタンス仕様の名前を「02」を入力すると、図に反映される（ <a href="_structure_design.html#add_2nd_frame01">図 4.24</a> ）。</p>
 </li>
 <li>
 <p>ベースクラスのプルダウンメニューから「Frame」を選択する。</p>
@@ -554,7 +556,7 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="content">
 <img src="images/add_2nd_frame01.png" alt="add 2nd frame01" width="75%">
 </div>
-<div class="title">図 3.24 インスタンス仕様を追加して名前とクラスを設定した</div>
+<div class="title">図 4.24 インスタンス仕様を追加して名前とクラスを設定した</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="3">
@@ -562,7 +564,7 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <p>Frameクラスに設定後は、プロパティにピン数などのスロットが表示される。</p>
 </li>
 <li>
-<p><a href="_structure_design.html#classic_score_sample02">図 3.16</a>  を参照して、1投目、2投目のピン数を設定する（ <a href="_structure_design.html#add_2nd_frame02">図 3.25</a> ）</p>
+<p><a href="_structure_design.html#classic_score_sample02">図 4.16</a>  を参照して、1投目、2投目のピン数を設定する（ <a href="_structure_design.html#add_2nd_frame02">図 4.25</a> ）</p>
 </li>
 </ol>
 </div>
@@ -570,7 +572,7 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="content">
 <img src="images/add_2nd_frame02.png" alt="add 2nd frame02" width="75%">
 </div>
-<div class="title">図 3.25 追加したフレームにピン数を設定した</div>
+<div class="title">図 4.25 追加したフレームにピン数を設定した</div>
 </div>
 <div class="paragraph">
 <p>前後のフレームとのつながりには連結リスト（Linked List）を使ってみることにしました。
@@ -580,7 +582,7 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="title">フレームの間にリンクを追加する</div>
 <ol class="arabic">
 <li>
-<p>パレットからリンクを選択し、「01:Frame」から「02:Frame」へリンクを引き、誘導可能にする（ <a href="_structure_design.html#add_2nd_frame03">図 3.26</a> ）。</p>
+<p>パレットからリンクを選択し、「01:Frame」から「02:Frame」へリンクを引き、誘導可能にする（ <a href="_structure_design.html#add_2nd_frame03">図 4.26</a> ）。</p>
 </li>
 </ol>
 </div>
@@ -588,12 +590,12 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="content">
 <img src="images/add_2nd_frame03.png" alt="add 2nd frame03" width="50%">
 </div>
-<div class="title">図 3.26 フレームの間にリンクを追加し、誘導可能にした</div>
+<div class="title">図 4.26 フレームの間にリンクを追加し、誘導可能にした</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="2">
 <li>
-<p>追加したリンクを選択した状態でプロパティを編集する（ <a href="_structure_design.html#add_2nd_frame04">図 3.27</a> ）。</p>
+<p>追加したリンクを選択した状態でプロパティを編集する（ <a href="_structure_design.html#add_2nd_frame04">図 4.27</a> ）。</p>
 <div class="ulist">
 <ul>
 <li>
@@ -611,12 +613,12 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="content">
 <img src="images/add_2nd_frame04.png" alt="add 2nd frame04" width="75%">
 </div>
-<div class="title">図 3.27 第2フレーム側のリンク端の名前を「next」とした</div>
+<div class="title">図 4.27 第2フレーム側のリンク端の名前を「next」とした</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="3">
 <li>
-<p>同様にして、previousを意味するリンク「prev」も追加する（ <a href="_structure_design.html#add_2nd_frame05">図 3.28</a> ）。</p>
+<p>同様にして、previousを意味するリンク「prev」も追加する（ <a href="_structure_design.html#add_2nd_frame05">図 4.28</a> ）。</p>
 </li>
 </ol>
 </div>
@@ -624,12 +626,12 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="content">
 <img src="images/add_2nd_frame05.png" alt="add 2nd frame05" width="50%">
 </div>
-<div class="title">図 3.28 第1フレームへ向かうリンクを追加して、リンク端の名前を「prev」とした</div>
+<div class="title">図 4.28 第1フレームへ向かうリンクを追加して、リンク端の名前を「prev」とした</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="4">
 <li>
-<p>第1フレームの「prev」、第2フレームの「next」のつながる先はないので、それぞれについてインスタンス仕様から「nil」を追加しリンクを追加しておく（<a href="_structure_design.html#add_2nd_frame06">図 3.29</a> ）。</p>
+<p>第1フレームの「prev」、第2フレームの「next」のつながる先はないので、それぞれについてインスタンス仕様から「nil」を追加しリンクを追加しておく（<a href="_structure_design.html#add_2nd_frame06">図 4.29</a> ）。</p>
 </li>
 </ol>
 </div>
@@ -637,12 +639,12 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="content">
 <img src="images/add_2nd_frame06.png" alt="add 2nd frame06" width="75%">
 </div>
-<div class="title">図 3.29 両端に「nil」へのリンクを追加した</div>
+<div class="title">図 4.29 両端に「nil」へのリンクを追加した</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="5">
 <li>
-<p>現在投球中のフレームを指すリンク「current」は、第2フレームを指すように変更する（ <a href="_structure_design.html#add_2nd_frame07">図 3.30</a> ）。</p>
+<p>現在投球中のフレームを指すリンク「current」は、第2フレームを指すように変更する（ <a href="_structure_design.html#add_2nd_frame07">図 4.30</a> ）。</p>
 <div class="ulist">
 <ul>
 <li>
@@ -660,16 +662,16 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="content">
 <img src="images/add_2nd_frame07.png" alt="add 2nd frame07" width="75%">
 </div>
-<div class="title">図 3.30 「current」が第2フレームを指すように変更した</div>
+<div class="title">図 4.30 「current」が第2フレームを指すように変更した</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="6">
 <li>
-<p>第1フレームはストライクだったので、第2フレームの2投分によってストライクボーナスを計算してスロットの値に反映する（ <a href="_structure_design.html#add_2nd_frame08">図 3.31</a> ）。</p>
+<p>第1フレームはストライクだったので、第2フレームの2投分によってストライクボーナスを計算してスロットの値に反映する（ <a href="_structure_design.html#add_2nd_frame08">図 4.31</a> ）。</p>
 <div class="ulist">
 <ul>
 <li>
-<p>スペアボーナスとストライクボーナスに設定する値は、ユースケース記述「 <a href="_requirement_anaylysis.html#use_case_desc08">リスト3</a> 」に記述した方法を使って求める。</p>
+<p>スペアボーナスとストライクボーナスに設定する値は、ユースケース記述「 <a href="#use_case_desc08">[use_case_desc08]</a> 」に記述した方法を使って求める。</p>
 </li>
 </ul>
 </div>
@@ -680,17 +682,17 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="content">
 <img src="images/add_2nd_frame08.png" alt="add 2nd frame08" width="75%">
 </div>
-<div class="title">図 3.31 第1フレームのストライクボーナスを計算して、スロット値を更新した</div>
+<div class="title">図 4.31 第1フレームのストライクボーナスを計算して、スロット値を更新した</div>
 </div>
 <div class="paragraph">
 <p>これで、第2フレームまで投球した場合のオブジェクト図ができました。
-同じようにして、 <a href="_structure_design.html#classic_score_sample02">図 3.16</a> を参照しながら、第6フレーム投球後のオブジェクト図を作成してみましょう（ <a href="_structure_design.html#score_sample02">図 3.32</a> ）。</p>
+同じようにして、 <a href="_structure_design.html#classic_score_sample02">図 4.16</a> を参照しながら、第6フレーム投球後のオブジェクト図を作成してみましょう（ <a href="_structure_design.html#score_sample02">図 4.32</a> ）。</p>
 </div>
 <div id="score_sample02" class="imageblock">
 <div class="content">
 <img src="images/score_sample02.png" alt="score sample02" width="100%">
 </div>
-<div class="title">図 3.32 第6フレーム投球後のオブジェクト図</div>
+<div class="title">図 4.32 第6フレーム投球後のオブジェクト図</div>
 </div>
 <div class="paragraph">
 <p>オブジェクト図を作成してみることで、スコアを記録するために必要なクラスや、クラスが持つ属性などを検討できましたね。</p>
@@ -708,7 +710,7 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <td class="content">
 <div class="paragraph">
 <p>構成要素のどの部分をインスタンス仕様とし、どの部分をインスタンス仕様の属性として扱うかによって、作成されるオブジェクト図は変わってきます。
-<a href="_structure_design.html#score_sample02">図 3.32</a> は、何通りも作成しうるオブジェクト図の作成例の1つです。</p>
+<a href="_structure_design.html#score_sample02">図 4.32</a> は、何通りも作成しうるオブジェクト図の作成例の1つです。</p>
 </div>
 <div class="paragraph">
 <p>より実務的な検討においては、複数の捉え方を考えた上でその考えに基くオブジェクト図を作成し、それらの中からより妥当と考えられるものを選ぶべきでしょう。</p>
@@ -720,12 +722,12 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ゲームスコアのクラス図を描く"><a class="anchor" href="#_ゲームスコアのクラス図を描く"></a>3.2 ゲームスコアのクラス図を描く</h3>
+<h3 id="_ゲームスコアのクラス図を描く"><a class="anchor" href="#_ゲームスコアのクラス図を描く"></a>4.2 ゲームスコアのクラス図を描く</h3>
 <div class="paragraph">
 <p>オブジェクト図が作成できたので、これを元にクラス図を作成してみましょう。</p>
 </div>
 <div class="sect3">
-<h4 id="_設計モデルにクラス図を追加する"><a class="anchor" href="#_設計モデルにクラス図を追加する"></a>3.2.1 設計モデルにクラス図を追加する</h4>
+<h4 id="_設計モデルにクラス図を追加する"><a class="anchor" href="#_設計モデルにクラス図を追加する"></a>4.2.1 設計モデルにクラス図を追加する</h4>
 <div class="paragraph">
 <p>まず、「ゲームスコアのクラス図」を追加しましょう。</p>
 </div>
@@ -735,7 +737,7 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>モデルにクラス図を追加する（ <a href="_structure_design.html#class00">図 3.33</a> ）。</p>
+<p>モデルにクラス図を追加する（ <a href="_requirement_anaylysis.html#class00">ゲームスコアのクラス図を追加する</a> ）。</p>
 </li>
 </ol>
 </div>
@@ -743,12 +745,12 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="content">
 <img src="images/class00.png" alt="class00" width="50%">
 </div>
-<div class="title">図 3.33 モデルにクラス図を追加する</div>
+<div class="title">図 4.33 モデルにクラス図を追加する</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="2">
 <li>
-<p>追加した図を「ゲームスコアのクラス図」とする（ <a href="_structure_design.html#class01">図 3.34</a> ）。</p>
+<p>追加した図を「ゲームスコアのクラス図」とする（ <a href="_requirement_anaylysis.html#class01">図 4.34</a> ）。</p>
 </li>
 </ol>
 </div>
@@ -756,35 +758,35 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="content">
 <img src="images/class01.png" alt="class01" width="50%">
 </div>
-<div class="title">図 3.34 追加した図を「ゲームスコアのクラス図」とした</div>
+<div class="title">図 4.34 追加した図を「ゲームスコアのクラス図」とした</div>
 </div>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_ゲームのクラスを追加する"><a class="anchor" href="#_ゲームのクラスを追加する"></a>3.2.2 ゲームのクラスを追加する</h4>
+<h4 id="_ゲームのクラスを追加する"><a class="anchor" href="#_ゲームのクラスを追加する"></a>4.2.2 ゲームのクラスを追加する</h4>
 <div class="paragraph">
 <p>「構造ツリー」をみると、オブジェクト図を作成したとき登録した「 GameScore 」クラスや「 Frame 」クラスが見つかります。
-これらを1つずつドラッグ＆ドロップして、クラス図に追加します（ <a href="_structure_design.html#class02">図 3.35</a> ）。</p>
+これらを1つずつドラッグ＆ドロップして、クラス図に追加します（ <a href="_requirement_anaylysis.html#class02">図 4.35</a> ）。</p>
 </div>
 <div id="class02" class="imageblock">
 <div class="content">
 <img src="images/class02.png" alt="class02" width="75%">
 </div>
-<div class="title">図 3.35 GameScore クラスと Frameクラスをクラス図に追加する</div>
+<div class="title">図 4.35 GameScore クラスと Frameクラスをクラス図に追加する</div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_クラス間の関連を追加する１"><a class="anchor" href="#_クラス間の関連を追加する１"></a>3.2.3 クラス間の関連を追加する（１）</h4>
+<h4 id="_クラス間の関連を追加する１_3"><a class="anchor" href="#_クラス間の関連を追加する１_3"></a>4.2.3 クラス間の関連を追加する（１）</h4>
 <div class="paragraph">
-<p>前に作成したオブジェクト図（  <a href="_structure_design.html#score_sample02">図 3.32</a>  ）を参照して、記載されているリンクを関連として追加します。
+<p>前に作成したオブジェクト図（  <a href="_structure_design.html#score_sample02">図 4.32</a>  ）を参照して、記載されているリンクを関連として追加します。
 まず、「 GameScore 」クラスから「 Frame 」クラスへ向かって連を引きましょう。</p>
 </div>
 <div class="olist arabic">
 <div class="title">クラス間の関連を追加する</div>
 <ol class="arabic">
 <li>
-<p>パレットから、矢印付きの関連を選択し、「 GameScore 」クラスから「 Frame 」クラスへ向かって関連を引く（ <a href="_structure_design.html#class03">図 3.36</a> ）。</p>
+<p>パレットから、矢印付きの関連を選択し、「 GameScore 」クラスから「 Frame 」クラスへ向かって関連を引く（ <a href="_requirement_anaylysis.html#class03">図 4.36</a> ）。</p>
 </li>
 </ol>
 </div>
@@ -792,12 +794,12 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="content">
 <img src="images/class03.png" alt="class03" width="50%">
 </div>
-<div class="title">図 3.36 先頭フレームを指す関連「head」を引いた</div>
+<div class="title">図 4.36 先頭フレームを指す関連「head」を引いた</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="2">
 <li>
-<p>関連を選択した状態で、プロパティからターゲットが Frame の関連端のタブを開き、名前を「head」とする（ <a href="_structure_design.html#class04">図 3.37</a> ）。</p>
+<p>関連を選択した状態で、プロパティからターゲットが Frame の関連端のタブを開き、名前を「head」とする（ <a href="_requirement_anaylysis.html#class04">図 4.37</a> ）。</p>
 </li>
 </ol>
 </div>
@@ -805,7 +807,7 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="content">
 <img src="images/class04.png" alt="class04" width="75%">
 </div>
-<div class="title">図 3.37 関連端名を「head」とした</div>
+<div class="title">図 4.37 関連端名を「head」とした</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="3">
@@ -817,7 +819,7 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <p>まだ1投もしていないときはフレームがなく、1投して以降はフレームが複数ある。すなわち、先頭のフレームを指すリンク（関連のインスタンス）は、「つながっていない」か「1つある」かのいずれかになる。</p>
 </li>
 <li>
-<p>この事情に見合うよう、 関連を選択した状態で、プロパティからターゲットが Frame の関連端のタブを開き、「多重度」を「 <code>0..1</code> 」に設定する（ <a href="_structure_design.html#class05">図 3.38</a> ）。
+<p>この事情に見合うよう、 関連を選択した状態で、プロパティからターゲットが Frame の関連端のタブを開き、「多重度」を「 <code>0..1</code> 」に設定する（ <a href="_requirement_anaylysis.html#class05">図 4.38</a> ）。
 .</p>
 </li>
 </ul>
@@ -829,12 +831,12 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="content">
 <img src="images/class05.png" alt="class05" width="75%">
 </div>
-<div class="title">図 3.38 関連の多重度を「 <code>0..1</code> 」に設定した</div>
+<div class="title">図 4.38 関連の多重度を「 <code>0..1</code> 」に設定した</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="4">
 <li>
-<p>「head」と同様、「current」についても関連を引く（ <a href="_structure_design.html#class06">図 3.39</a> ）。</p>
+<p>「head」と同様、「current」についても関連を引く（ <a href="_requirement_anaylysis.html#class06">図 4.39</a> ）。</p>
 <div class="ulist">
 <ul>
 <li>
@@ -852,11 +854,11 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="content">
 <img src="images/class06.png" alt="class06" width="25%">
 </div>
-<div class="title">図 3.39 現在のフレームを指す関連「current」を引き、関連端名と多重度を設定した</div>
+<div class="title">図 4.39 現在のフレームを指す関連「current」を引き、関連端名と多重度を設定した</div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_クラス間の関連を追加する２"><a class="anchor" href="#_クラス間の関連を追加する２"></a>3.2.4 クラス間の関連を追加する（２）</h4>
+<h4 id="_クラス間の関連を追加する２"><a class="anchor" href="#_クラス間の関連を追加する２"></a>4.2.4 クラス間の関連を追加する（２）</h4>
 <div class="paragraph">
 <p>次に、フレーム同士の間に引かれていた「next」「prev」というリンクを関連として引きましょう。
 もとのリンクは「 Frame 」クラスのインスタンスから、同じ「 Frame 」クラスのインスタンスへと引かれていました。
@@ -875,10 +877,10 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <p>パレットから矢印付きの関連を選択する。</p>
 </li>
 <li>
-<p>「Frame 」クラス上でマウスをクリックして、一度カーソルをクラスから外へ出してクリックし、再び「Frame 」クラス上にカーソルを戻してクリックする（ <a href="_structure_design.html#class08">図 3.40</a> ）。</p>
+<p>「Frame 」クラス上でマウスをクリックして、一度カーソルをクラスから外へ出してクリックし、再び「Frame 」クラス上にカーソルを戻してクリックする（ <a href="_structure_design.html#class08">図 4.40</a> ）。</p>
 </li>
 <li>
-<p>自分自身へ向かう関連が引けるので、関連の線を整える（ <a href="_structure_design.html#class10">図 3.41</a> ）。</p>
+<p>自分自身へ向かう関連が引けるので、関連の線を整える（ <a href="_structure_design.html#class10">図 4.41</a> ）。</p>
 </li>
 </ul>
 </div>
@@ -889,13 +891,13 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="content">
 <img src="images/class08.png" alt="class08" width="25%">
 </div>
-<div class="title">図 3.40 マウスをクラスの上でクリックし、クラスの外でクリックし、再びクラスの上でクリックする</div>
+<div class="title">図 4.40 マウスをクラスの上でクリックし、クラスの外でクリックし、再びクラスの上でクリックする</div>
 </div>
 <div id="class10" class="imageblock">
 <div class="content">
 <img src="images/class10.png" alt="class10" width="25%">
 </div>
-<div class="title">図 3.41 自分自身へ向かう関連が引けたら、関連の線を調整する</div>
+<div class="title">図 4.41 自分自身へ向かう関連が引けたら、関連の線を調整する</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="2">
@@ -904,7 +906,7 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="ulist">
 <ul>
 <li>
-<p>関連端名に「prev」、多重度に「 <code>0..1</code> 」設定する（ <a href="_structure_design.html#class11">図 3.42</a> ）。</p>
+<p>関連端名に「prev」、多重度に「 <code>0..1</code> 」設定する（ <a href="_structure_design.html#class11">図 4.42</a> ）。</p>
 </li>
 </ul>
 </div>
@@ -915,12 +917,12 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="content">
 <img src="images/class11.png" alt="class11" width="50%">
 </div>
-<div class="title">図 3.42 関連端名と多重度を設定した</div>
+<div class="title">図 4.42 関連端名と多重度を設定した</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="3">
 <li>
-<p>「next」についても関連端名と多重度を設定する（ <a href="_structure_design.html#class12">図 3.43</a>）。</p>
+<p>「next」についても関連端名と多重度を設定する（ <a href="_structure_design.html#class12">図 4.43</a>）。</p>
 <div class="ulist">
 <ul>
 <li>
@@ -938,7 +940,7 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="content">
 <img src="images/class12.png" alt="class12" width="50%">
 </div>
-<div class="title">図 3.43 「next」についての関連を追加した</div>
+<div class="title">図 4.43 「next」についての関連を追加した</div>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -948,13 +950,13 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 </td>
 <td class="content">
 <div class="paragraph">
-<p>関連「next」と「prev」は、ひとつの双方向の関連として描くこともできます。このときは、ひとつの双方向関連の両端の関連端名を「next」と「prev」とします（ <a href="_structure_design.html#class13">図 3.44</a> ）。</p>
+<p>関連「next」と「prev」は、ひとつの双方向の関連として描くこともできます。このときは、ひとつの双方向関連の両端の関連端名を「next」と「prev」とします（ <a href="_structure_design.html#class13">図 4.44</a> ）。</p>
 </div>
 <div id="class13" class="imageblock">
 <div class="content">
 <img src="images/class13.png" alt="class13" width="25%">
 </div>
-<div class="title">図 3.44 関連「next」と「prev」をひとつの双方向関連で表した場合</div>
+<div class="title">図 4.44 関連「next」と「prev」をひとつの双方向関連で表した場合</div>
 </div>
 </td>
 </tr>
@@ -962,17 +964,17 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 </div>
 </div>
 <div class="sect3">
-<h4 id="_クラスに操作を追加する"><a class="anchor" href="#_クラスに操作を追加する"></a>3.2.5 クラスに操作を追加する</h4>
+<h4 id="_クラスに操作を追加する"><a class="anchor" href="#_クラスに操作を追加する"></a>4.2.5 クラスに操作を追加する</h4>
 <div class="paragraph">
 <p>「GameScore」クラスは、ゲームの進行とともに「Frame」クラスのオブジェクトを作成し、スコアを記録していきます。
 このとき、外部からゲームの進行に応じてピン数を受け取る必要がありますね。
-そこで、ゲームを進めつつ、ピン数を「GameScore」クラスへ渡す「Game」クラスを追加しましょう（ <a href="_structure_design.html#class14">図 3.45</a> ）。</p>
+そこで、ゲームを進めつつ、ピン数を「GameScore」クラスへ渡す「Game」クラスを追加しましょう（ <a href="_structure_design.html#class14">図 4.45</a> ）。</p>
 </div>
 <div id="class14" class="imageblock">
 <div class="content">
 <img src="images/class14.png" alt="class14" width="25%">
 </div>
-<div class="title">図 3.45 Gameクラスを追加した</div>
+<div class="title">図 4.45 Gameクラスを追加した</div>
 </div>
 <div class="paragraph">
 <p>また、「Game」クラスには、スコアラーの入力を受けつけてゲームを進めるための働きが必要になります。
@@ -984,7 +986,7 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 ここでは操作が必要ということまで決めておけばよいでしょう。</p>
 </div>
 <div class="olist arabic">
-<div class="title">「Game」クラスに操作「play」を追加する（ <a href="_structure_design.html#class15">図 3.46</a> ）</div>
+<div class="title">「Game」クラスに操作「play」を追加する（ <a href="_structure_design.html#class15">図 4.46</a> ）</div>
 <ol class="arabic">
 <li>
 <p>「Game」クラスを選択した状態で、プロパティから「操作」タブを選択する。</p>
@@ -1004,11 +1006,11 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="content">
 <img src="images/class15.png" alt="class15" width="75%">
 </div>
-<div class="title">図 3.46 Gameクラスに操作「play」を追加した</div>
+<div class="title">図 4.46 Gameクラスに操作「play」を追加した</div>
 </div>
 <div class="paragraph">
 <p>また、「GameScore」クラスにも、ゲームの進行とともにピン数を受け取ってスコアを記録する働きが必要になりますね。
-そこで、「scoring」という操作を用意します（ <a href="_structure_design.html#class16">図 3.47</a> ）。
+そこで、「scoring」という操作を用意します（ <a href="_structure_design.html#class16">図 4.47</a> ）。
 この操作の処理内容も、振舞いのモデルで検討しましょう。
 「Game」クラスから関連を引きます。関連端名は「game_score」としました。ゲームがあればスコアは必ず用意するので、多重度は「 <code>1</code> 」に設定しています。</p>
 </div>
@@ -1016,7 +1018,7 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="content">
 <img src="images/class16.png" alt="class16" width="75%">
 </div>
-<div class="title">図 3.47 GameScoreクラスに操作「scoring」を追加した</div>
+<div class="title">図 4.47 GameScoreクラスに操作「scoring」を追加した</div>
 </div>
 <div class="paragraph">
 <p>これでクラス図の最初の版はできました。
@@ -1028,12 +1030,12 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_requirement_anaylysis.html">2</a> | ↑ Up: <a href="uml_tutorial.html">モデルを使って ソフトウェアを開発しよう: astah* を使った UMLチュートリアル</a> | Next: <a href="_behavier_design.html">4</a> →</p>
+<p>← Previous: <a href="_スコアの状態を調べる.html">3</a> | ↑ Up: <a href="uml_tutorial.html">モデルを使ってソフトウェアを開発しよう</a> | Next: <a href="_behavier_design.html">5</a> →</p>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-バージョン html_0120<br>
+バージョン html_0166<br>
 最終更新 2022-01-17 06:53:14 +0900
 </div>
 </div>

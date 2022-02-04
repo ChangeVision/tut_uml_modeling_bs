@@ -4,20 +4,20 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.16">
+<meta name="generator" content="Asciidoctor 2.0.17">
 <meta name="description" content="この文書は、モデリングツールにastah*を使って、ソフトウェアの開発にUMLを使う方法について学ぶチュートリアルです。">
 <meta name="author" content="株式会社チェンジビジョン">
-<title>モデルを使って ソフトウェアを開発しよう: astah* を使った UMLチュートリアル</title>
+<title>モデルを使ってソフトウェアを開発しよう</title>
 <link rel="stylesheet" href="css/mystyle.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
-<h1>モデルを使って ソフトウェアを開発しよう: astah* を使った UMLチュートリアル</h1>
+<h1>モデルを使ってソフトウェアを開発しよう</h1>
 <div class="details">
 <span id="author" class="author">株式会社チェンジビジョン</span><br>
-<span id="revnumber">バージョン html_0119,</span>
-<span id="revdate">2022-01-17</span>
+<span id="revnumber">バージョン html_0131,</span>
+<span id="revdate">2022-01-27</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">目次</div>
@@ -37,18 +37,16 @@
 </li>
 <li><a href="#_preparation">1 準備</a>
 <ul class="sectlevel2">
-<li><a href="#_モデリングツール_astah_を用意する">1.1 モデリングツール（ astah* ）を用意する</a></li>
+<li><a href="#_モデリングツールを用意する">1.1 モデリングツールを用意する</a></li>
 <li><a href="#_実装環境を用意する">1.2 実装環境を用意する</a></li>
 <li><a href="#_演習用のプロジェクトを用意する">1.3 演習用のプロジェクトを用意する</a></li>
 <li><a href="#_ボウリングのスコアのつけ方">1.4 ボウリングのスコアのつけ方</a></li>
 </ul>
 </li>
-<li><a href="#_requirement_anaylysis">2 解決したい課題はなにか</a>
+<li><a href="#_requirement_anaylysis">2 スコアのデータ構造や状態を調べる</a>
 <ul class="sectlevel2">
-<li><a href="#_手動のときの手順を整理する">2.1 手動のときの手順を整理する</a></li>
-<li><a href="#_自動化されてからの手順を整理する">2.2 自動化されてからの手順を整理する</a></li>
-<li><a href="#_ユースケースを吟味する">2.3 ユースケースを吟味する</a></li>
-<li><a href="#_解決したいのはゲームの進行とスコアの計算">2.4 解決したいのはゲームの進行とスコアの計算</a></li>
+<li><a href="#_スコアシートの構造">2.1 スコアシートの構造</a></li>
+<li><a href="#_解決したいのはゲームの進行とスコアの計算">2.2 解決したいのはゲームの進行とスコアの計算</a></li>
 </ul>
 </li>
 <li><a href="#_structure_design">3 スコアの構造を図にする</a>
@@ -271,49 +269,46 @@
 <h2 id="_preparation"><a class="anchor" href="#_preparation"></a>1 準備</h2>
 <div class="sectionbody">
 <div class="paragraph lead">
-<p>このチュートリアルでは、モデリングツールとして astah* を、実装にはRubyを使います。
+<p>このチュートリアルでは、モデリングツールとして astah* Professional を、実装にはRubyを使います。
 最初に、演習に必要な環境を用意しましょう。</p>
 </div>
 <div class="sect2">
-<h3 id="_モデリングツール_astah_を用意する"><a class="anchor" href="#_モデリングツール_astah_を用意する"></a>1.1 モデリングツール（ astah* ）を用意する</h3>
+<h3 id="_モデリングツールを用意する"><a class="anchor" href="#_モデリングツールを用意する"></a>1.1 モデリングツールを用意する</h3>
 <div class="paragraph">
-<p>このチュートリアルで使用するモデリングツールを用意しましょう。</p>
+<p>このチュートリアルで使用するモデリングツール astah* Professional を用意しましょう。</p>
 </div>
 <div class="paragraph">
-<p>astah* の入手や評価版を含むライセンスの取得方法などについては、
-次のページを参照してください。</p>
+<p>購入前に試用したい場合は、次のページを参照してください。</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="注記"></i>
-</td>
-<td class="content">
-<div class="title">astah* の入手や取得方法に関するページを用意する。</div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">astah*  の取得方法</dt>
+<dt class="hdlist1">astah*製品の評価手順</dt>
 <dd>
-<p><code>URL</code></p>
-</dd>
-<dt class="hdlist1">astah*  のライセンスの入手方法</dt>
-<dd>
-<p><code>URL</code></p>
-</dd>
-<dt class="hdlist1">astah*  のインストール</dt>
-<dd>
-<p><code>URL</code></p>
-</dd>
-<dt class="hdlist1">astah*  のライセンスの追加方法</dt>
-<dd>
-<p><code>URL</code></p>
+<p><code><a href="https://astah.change-vision.com/ja/shopping/evaluate.html" class="bare">https://astah.change-vision.com/ja/shopping/evaluate.html</a></code></p>
 </dd>
 </dl>
 </div>
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>購入する場合は、次のページを参照して、自分に合ったライセンスを選択してください。</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">最適なライセンスを見つける</dt>
+<dd>
+<p><code><a href="https://astah.change-vision.com/ja/shopping/price.html" class="bare">https://astah.change-vision.com/ja/shopping/price.html</a></code></p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>いずれかの方法で、 astah* Professional を入手できたら、次のページを参照して、自分に合ったライセンスを登録してください。</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">ライセンス登録方法</dt>
+<dd>
+<p><code><a href="https://astah.change-vision.com/ja/registry.html" class="bare">https://astah.change-vision.com/ja/registry.html</a></code></p>
+</dd>
+</dl>
 </div>
 </div>
 <div class="sect2">
@@ -338,7 +333,8 @@
 <h3 id="_演習用のプロジェクトを用意する"><a class="anchor" href="#_演習用のプロジェクトを用意する"></a>1.3 演習用のプロジェクトを用意する</h3>
 <div class="paragraph">
 <p>業務やシステムを分析（あるいは設計）するときは、たいてい複数種類のモデル図を使って表します。
-astah* では、複数のモデル図をまとめてたモデルファイルを「プロジェクト」と呼んでいます。</p>
+astah* では、複数のモデル図をまとめてたモデルファイルを「プロジェクト」と呼んでいます。
+「 <a href="#create_proj01">演習で使うプロジェクトを作成する</a> 」に従って、演習用のプロジェクトを用意しましょう。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -362,11 +358,21 @@ astah* では、複数のモデル図をまとめてたモデルファイルを�
 </tr>
 </table>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="ヒント"></i>
+</td>
+<td class="content">
 <div class="paragraph">
-<p>この演習で使うプロジェクトを用意しましょう。
-新規プロジェクトを作成したら、先に名前をつけて保存しておくとよいでしょう。</p>
+<p>新規プロジェクトを作成したら、先に名前をつけて保存しておくとよいでしょう。</p>
 </div>
-<div class="openblock">
+</td>
+</tr>
+</table>
+</div>
+<div id="create_proj01" class="openblock">
 <div class="title">演習で使うプロジェクトを作成する</div>
 <div class="content">
 <div class="olist arabic">
@@ -443,8 +449,8 @@ astah* では、複数のモデル図をまとめてたモデルファイルを�
 <div class="sect2">
 <h3 id="_ボウリングのスコアのつけ方"><a class="anchor" href="#_ボウリングのスコアのつけ方"></a>1.4 ボウリングのスコアのつけ方</h3>
 <div class="paragraph">
-<p>ボウリング場では、だいぶ前から自動でスコアが表示されるようになっています。
-自動化される前は、受付でスコアシートをもらって、自分たちでスコアを計算し、手でスコアをつけていました（ <a href="#hand_scoring">図 1.6</a> ）。</p>
+<p>ボウリング場では、だいぶ前（1980年代の終りくらい）から、スコアを自動計算してディスプレイに表示するシステムが使われるようになっています。
+自動化される前は、受付でスコアシートをもらって、自分たちでスコアを計算し、手書きでスコアをつけていました（ <a href="#hand_scoring">図 1.6</a> ）。</p>
 </div>
 <div id="hand_scoring" class="imageblock">
 <div class="content">
@@ -464,28 +470,11 @@ astah* では、複数のモデル図をまとめてたモデルファイルを�
 </dl>
 </div>
 <div class="sect3">
-<h4 id="_クラッシックスコアリング"><a class="anchor" href="#_クラッシックスコアリング"></a>1.4.1 クラッシックスコアリング</h4>
+<h4 id="_ボウリングスコアに使う記号"><a class="anchor" href="#_ボウリングスコアに使う記号"></a>1.4.1 ボウリングスコアに使う記号</h4>
 <div class="paragraph">
-<p>従来から使われていて、広く普及しているスコア計算方式です。</p>
+<p>ボウリングスコアに使う記号と意味を <a href="#scoring_symbols">表 1.1</a> に示します。</p>
 </div>
-<div class="ulist">
-<div class="title">ゲームの構成</div>
-<ul>
-<li>
-<p>ボウリングの1ゲームは、10 個のフレームをもって構成する。</p>
-</li>
-<li>
-<p>競技者は、ストライクの場合を除き、それぞれのフレームで 2 回ずつ投球する。ただし、第 10 フレームがストライク又はスペアの場合には、サービスフレームとして、ストライクの場合は、さらに 2 回投球でき、スペアの場合には 1 回投球できる。</p>
-</li>
-<li>
-<p>ゲームの成績は、適正な投球によって、倒されたピンの数をもって計算し、10 個のフレームの合計点によって、これを表す。</p>
-</li>
-<li>
-<p>適正に投球されたボールとは、競技者の持っているボールが、手から放れファールラインを越えたものをいう。</p>
-</li>
-</ul>
-</div>
-<table id="scoring_rule01" class="tableblock frame-all grid-all stretch">
+<table id="scoring_symbols" class="tableblock frame-all grid-all stretch">
 <caption class="title">表 1.1 ボウリングスコアに使う記号と意味</caption>
 <colgroup>
 <col style="width: 8.8495%;">
@@ -560,6 +549,29 @@ astah* では、複数のモデル図をまとめてたモデルファイルを�
 </tr>
 </tbody>
 </table>
+</div>
+<div class="sect3">
+<h4 id="classic"><a class="anchor" href="#classic"></a>1.4.2 クラッシックスコアリング</h4>
+<div class="paragraph">
+<p>従来から使われていて、広く普及しているスコア計算方式です。</p>
+</div>
+<div class="ulist">
+<div class="title">ゲームの構成</div>
+<ul>
+<li>
+<p>ボウリングの1ゲームは、10 個のフレームをもって構成する。</p>
+</li>
+<li>
+<p>競技者は、ストライクの場合を除き、それぞれのフレームで 2 回ずつ投球する。ただし、第 10 フレームがストライク又はスペアの場合には、サービスフレームとして、ストライクの場合は、さらに 2 回投球でき、スペアの場合には 1 回投球できる。</p>
+</li>
+<li>
+<p>ゲームの成績は、適正な投球によって、倒されたピンの数をもって計算し、10 個のフレームの合計点によって、これを表す。</p>
+</li>
+<li>
+<p>適正に投球されたボールとは、競技者の持っているボールが、手から放れファールラインを越えたものをいう。</p>
+</li>
+</ul>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/classic_score_sample.jpg" alt="classic score sample" width="100%">
@@ -568,7 +580,7 @@ astah* では、複数のモデル図をまとめてたモデルファイルを�
 </div>
 </div>
 <div class="sect3">
-<h4 id="_カレントフレームスコアリング"><a class="anchor" href="#_カレントフレームスコアリング"></a>1.4.2 カレントフレームスコアリング</h4>
+<h4 id="_カレントフレームスコアリング"><a class="anchor" href="#_カレントフレームスコアリング"></a>1.4.3 カレントフレームスコアリング</h4>
 <div class="paragraph">
 <p>2018年アジア競技大会で採用された新しいスコア計算方式です。</p>
 </div>
@@ -606,267 +618,31 @@ astah* では、複数のモデル図をまとめてたモデルファイルを�
 </div>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="注記"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>ボーリングのハンディキャップは、参加者が普段プレイしているときのアベレージ（平均スコア）を基に、力量に応じて設定するそうです。
+このチュートリアルでは、ハンディキャップは取り扱わないでおきます。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_requirement_anaylysis"><a class="anchor" href="#_requirement_anaylysis"></a>2 解決したい課題はなにか</h2>
+<h2 id="_requirement_anaylysis"><a class="anchor" href="#_requirement_anaylysis"></a>2 スコアのデータ構造や状態を調べる</h2>
 <div class="sectionbody">
 <div class="paragraph lead">
-<p>スコアをつけるときの解決したい課題はなんでしょうか。
-スコアをつけるときの手順を整理しながら、考えてみましょう。</p>
-</div>
-<div class="sect2">
-<h3 id="_手動のときの手順を整理する"><a class="anchor" href="#_手動のときの手順を整理する"></a>2.1 手動のときの手順を整理する</h3>
-<div class="paragraph">
-<p>スコアを手でつけていたときは、スコアを計算してスコアシートに記録するのは、スコアラーの仕事です。
-スコアラーになった人は、ゲームの様子を観察して倒れたピン数を確認し、スコアをつけるルールに従ってスコアをつけます。
-仲間うちでやるときは、投球する順番がきているプレーヤーがボールを投げている間、手の空いている他のプレーヤーが交代でスコアラーになってスコアをつけます。</p>
-</div>
-<div class="paragraph">
-<p>このときのプレーヤーとスコアラーの関係を「ユースケース図」で表してみましょう。
-ユースケース図は、関心の対象となっている業務やシステムが提供したい機能やサービスと、それらを利用する人や外部のサービス等の関係を表すために使います。</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="ヒント"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>機能やサービスを提供する主体のことを、ユースケース図では「システム」と呼ぶことが多いです。
-そのサービスが人によって実施される作業を含んでいても、それらのサービスを提供する範囲をシステムと呼びます。</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="sect3">
-<h4 id="_プロジェクトに分析モデルを追加する"><a class="anchor" href="#_プロジェクトに分析モデルを追加する"></a>2.1.1 プロジェクトに分析モデルを追加する</h4>
-<div class="paragraph">
-<p>まず、プロジェクトに分析モデルを追加しましょう。
-ここで言う分析モデルは、分析用に作成するモデル図を格納する場所だと思ってください。</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="ヒント"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>ここでの分析とは、対象とする業務やサービスを詳しく調べて、役割を持つ複数の要素に分けることだと考えておけばよいでしょう。</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div id="add_analysis_model" class="olist arabic">
-<div class="title">プロジェクトに分析モデルを追加する</div>
-<ol class="arabic">
-<li>
-<p>プロジェクトにモデルを追加する。</p>
-<div class="ulist">
-<ul>
-<li>
-<p>構造ツリー上で、プロジェクトを選択する。</p>
-</li>
-<li>
-<p>右クリックしてポップアップメニューを開き、「モデルの追加＞モデル」を選択する（ <a href="#add_analysis_model01">図 2.1</a> ）。</p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
-<div id="add_analysis_model01" class="imageblock">
-<div class="content">
-<img src="images/add_analysis_model01.png" alt="add analysis model01" width="50%">
-</div>
-<div class="title">図 2.1 プロジェクトにモデルを追加した</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic" start="2">
-<li>
-<p>追加したモデルに名前をつける</p>
-<div class="ulist">
-<ul>
-<li>
-<p>構造ツリー上で、追加したモデルを選択した状態で、プロパティの「ベース」タブを選択する。</p>
-</li>
-<li>
-<p>「名前」を編集して「01_分析モデル」とする（ <a href="#add_analysis_model02">図 2.2</a> ）。</p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
-<div id="add_analysis_model02" class="imageblock">
-<div class="content">
-<img src="images/add_analysis_model02.png" alt="add analysis model02" width="50%">
-</div>
-<div class="title">図 2.2 モデルに分析用のモデルとして名前をつけた</div>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="ヒント"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>モデル名の前に「 <code>01_</code> 」とつけたのは、今後作成するモデルを自分の考える順に並ばせるための工夫です。</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_分析モデルにユースケース図を追加する"><a class="anchor" href="#_分析モデルにユースケース図を追加する"></a>2.1.2 分析モデルにユースケース図を追加する</h4>
-<div class="paragraph">
-<p>次に、分析モデルにユースケース図を追加して、手動でスコアをつけているときのユースケース図を描いてみましょう。</p>
-</div>
-<div id="add_use_case_chart" class="olist arabic">
-<div class="title">モデルにユースケース図を追加する</div>
-<ol class="arabic">
-<li>
-<p>構造ツリー上で、「01_分析モデル」を選択する。</p>
-</li>
-<li>
-<p>右クリックしてポップアップメニューを開き、「図の追加＞ユースケース図」を選択する（ <a href="#create_use_case03">図 2.3</a> ）。</p>
-</li>
-</ol>
-</div>
-<div id="create_use_case03" class="imageblock">
-<div class="content">
-<img src="images/create_use_case03.png" alt="create use case03" width="50%">
-</div>
-<div class="title">図 2.3 モデルにユースケース図を追加する</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic" start="3">
-<li>
-<p>追加した図に名前をつける。</p>
-<div class="ulist">
-<ul>
-<li>
-<p>構造ツリー上で、追加したユースケース図を選択した状態で、プロパティの「ベース」タブを選択する。</p>
-</li>
-<li>
-<p>「名前」を編集して「手動でスコアをつけているときのユースケース図」とする（ <a href="#create_use_case04">図 2.4</a> ）。</p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
-<div id="create_use_case04" class="imageblock">
-<div class="content">
-<img src="images/create_use_case04.png" alt="create use case04" width="75%">
-</div>
-<div class="title">図 2.4 プロジェクトにユースケース図が追加できた</div>
-</div>
-<div class="paragraph">
-<p>これで、プロジェクトにユースケース図が追加できました。</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_ユースケース図にアクターを追加する"><a class="anchor" href="#_ユースケース図にアクターを追加する"></a>2.1.3 ユースケース図にアクターを追加する</h4>
-<div class="paragraph">
-<p>ユースケース図が追加できましたので、こんどはユースケース図にアクターとユースケースを追加しましょう。</p>
-</div>
-<div class="paragraph">
-<p>ユースケース図では、システムが提供する機能やサービスを「ユースケース」を呼びます。
-そのユースケースを利用する、外部の人や外部のサービスのことを「アクター」と呼びます。</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="ヒント"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>アクターは人とは限りません。外部の機器や、サービスを提供する別のシステムの場合もあります。</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>まず、アクターについて考えてみましょう。
-スコアラーにスコアを計算して記録してもらっているのはプレーヤーですね。
-つまり、このシステムからサービスを享受しているアクターはプレーヤーだとみなせそうです。</p>
-</div>
-<div class="paragraph">
-<p>追加したユースケース図にアクター「プレーヤー」を追加しましょう。</p>
-</div>
-<div class="openblock">
-<div class="title">アクター「プレーヤー」を追加する</div>
-<div class="content">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>パレットからアクターのシンボル（人型のアイコン）を選択する（ <a href="#add_actor01">図 2.5</a> ）。</p>
-</li>
-</ol>
-</div>
-<div id="add_actor01" class="imageblock">
-<div class="content">
-<img src="images/add_actor01.png" alt="add actor01" width="50%">
-</div>
-<div class="title">図 2.5 パレットからアクターを選択する</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic" start="2">
-<li>
-<p>図の中でマウスをクリックすると、アクターが追加される（ <a href="#add_actor02">図 2.6</a> ）。</p>
-</li>
-</ol>
-</div>
-<div id="add_actor02" class="imageblock">
-<div class="content">
-<img src="images/add_actor02.png" alt="add actor02" width="50%">
-</div>
-<div class="title">図 2.6 アクターが追加された</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic" start="3">
-<li>
-<p>アクターの名前を編集する。</p>
-<div class="ulist">
-<ul>
-<li>
-<p>アクターの名前が選択されている状態（ <a href="#add_actor03">図 2.7</a> ）で「プレーヤー」に変更する。</p>
-</li>
-<li>
-<p>または、アクターが選択されている状態で、プロパティの「名前」欄を編集する（ <a href="#add_actor04">図 2.8</a> ）。</p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
-<div id="add_actor03" class="imageblock">
-<div class="content">
-<img src="images/add_actor03.png" alt="add actor03" width="50%">
-</div>
-<div class="title">図 2.7 アクターの名前を編集する（直接編集）</div>
-</div>
-<div id="add_actor04" class="imageblock">
-<div class="content">
-<img src="images/add_actor04.png" alt="add actor04" width="50%">
-</div>
-<div class="title">図 2.8 アクターの名前を編集する（プロパティから編集）</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>これで、ユースケース図にアクター「プレーヤー」が追加できました。</p>
+<p>ボウリングスコアはどのような構造になっているでしょうか。
+また、スコアをつける手順に従うとき、スコアにはどのような状態があるのでしょうか。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -876,1229 +652,28 @@ astah* では、複数のモデル図をまとめてたモデルファイルを�
 </td>
 <td class="content">
 <div class="paragraph">
-<p>あるシステムに対して、アクターはひとつとは限らず、複数見つかる場合もあります。
-また、同じ利用者であっても、いくつかの役割や立場からシステムを利用する場合もあります。
-アクターは、役割ごとに用意し、役割が分かる名前をつけるようにしましょう。</p>
+<p>このチュートリアルでは、クラッシックスコアリング <a href="#classic_scoring">[classic_scoring]</a> の場合について考えることにします。</p>
 </div>
 </td>
 </tr>
 </table>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_ユースケース図にユースケースを追加する"><a class="anchor" href="#_ユースケース図にユースケースを追加する"></a>2.1.4 ユースケース図にユースケースを追加する</h4>
-<div class="paragraph">
-<p>次に、ユースケースについて考えてみましょう。
-いま分析しているのは、手動でスコアをつけているスコアラーの仕事でしたね。
-つまり、システムとして捉えようとしているのは、スコアラーが担当する仕事というわけです。
-これは、このユースケース図そのものが表そうとしていることでもあります。</p>
-</div>
-<div class="paragraph">
-<p>このような捉え方をした上で、スコアラー（システム）がプレーヤー（アクター）に提供しているサービスにあたるものを考えます。
-すると、「プレーヤーが倒したピン数を取得して、スコアを計算し、スコアシートに記録する」という一連の処理がこれにあたりますね。
-この一連の処理に「スコアをつける」という名前をつけましょう。これを「ユースケース」と呼びます。</p>
-</div>
-<div class="paragraph">
-<p>追加したユースケース図にユースケース「スコアをつける」を追加しましょう。</p>
-</div>
-<div class="openblock">
-<div class="title">ユースケース「スコアをつける」を追加する</div>
-<div class="content">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>パレットからユースケースのシンボル（楕円のアイコン）を選択する（ <a href="#add_use_case01">図 2.9</a> ）。</p>
-</li>
-</ol>
-</div>
-<div id="add_use_case01" class="imageblock">
-<div class="content">
-<img src="images/add_use_case01.png" alt="add use case01" width="50%">
-</div>
-<div class="title">図 2.9 パレットからユースケースを選択する</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic" start="2">
-<li>
-<p>図の中でマスをクリックすると、ユースケースが追加される（ <a href="#add_use_case02">図 2.10</a> ）。</p>
-</li>
-</ol>
-</div>
-<div id="add_use_case02" class="imageblock">
-<div class="content">
-<img src="images/add_use_case02.png" alt="add use case02" width="50%">
-</div>
-<div class="title">図 2.10 ユースケースが追加された</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic" start="3">
-<li>
-<p>ユースケースの名前を編集する。</p>
-<div class="ulist">
-<ul>
-<li>
-<p>ユースケースの名前が選択されている状態（ <a href="#add_use_case03">図 2.11</a> ）で「スコアをつける」に変更する。</p>
-</li>
-<li>
-<p>または、ユースケースが選択されている状態で、プロパティの「名前」欄を編集する（ <a href="#add_use_case04">図 2.12</a> ）。</p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
-<div id="add_use_case03" class="imageblock">
-<div class="content">
-<img src="images/add_use_case03.png" alt="add use case03" width="50%">
-</div>
-<div class="title">図 2.11 ユースケースの名前を編集する（直接編集）</div>
-</div>
-<div id="add_use_case04" class="imageblock">
-<div class="content">
-<img src="images/add_use_case04.png" alt="add use case04" width="100%">
-</div>
-<div class="title">図 2.12 ユースケースの名前を編集する（プロパティから編集）</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>これで、ユースケース図にユースケース「スコアをつける」が追加できました。</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_アクターとユースケースを関連づける"><a class="anchor" href="#_アクターとユースケースを関連づける"></a>2.1.5 アクターとユースケースを関連づける</h4>
-<div class="paragraph">
-<p>これまでのところ、アクターとユースケースがひとつずつですので、これらが互いに関連しているとみなすのは容易です。
-しかし、複数のアクターや複数のユースケースがあると、どのアクターがどのユースケースを利用するのかわなくなってしまうでしょう。
-そこで、アクターと、そのアクターが利用するユースケースの間に関連の線を引いて、ユースケースとアクターを関連づけます。</p>
-</div>
-<div class="paragraph">
-<p>アクター「プレーヤー」とユースケース「スコアをつける」の間に関連を引いてみましょう。</p>
-</div>
-<div class="openblock">
-<div class="title">アクター「プレーヤー」とユースケース「スコアをつける」を関連づける</div>
-<div class="content">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>パレットから関連のシンボル（横線のアイコン）を選択する（ <a href="#add_use_case_rel01">図 2.13</a> ）。</p>
-</li>
-</ol>
-</div>
-<div id="add_use_case_rel01" class="imageblock">
-<div class="content">
-<img src="images/add_use_case_rel01.png" alt="add use case rel01" width="50%">
-</div>
-<div class="title">図 2.13 パレットから関連を選択する</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic" start="2">
-<li>
-<p>アクター「プレーヤー」の内部（周辺ではなくシンボル上）でへマウスをクリックする。</p>
-<div class="ulist">
-<ul>
-<li>
-<p>青い枠線が現れるのを待つ。</p>
-</li>
-<li>
-<p>枠線が現れたら、マウスをドラックすると赤い線が現れる（ <a href="#add_use_case_rel02">図 2.14</a> ）。</p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
-<div id="add_use_case_rel02" class="imageblock">
-<div class="content">
-<img src="images/add_use_case_rel02.jpg" alt="add use case rel02" width="50%">
-</div>
-<div class="title">図 2.14 関連を引き始める</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic" start="3">
-<li>
-<p>赤い線を引いたまま、マウスをユースケース「スコアをつける」の内部まで移動する。</p>
-<div class="ulist">
-<ul>
-<li>
-<p>青い枠線が現れるのを待つ（ <a href="#add_use_case_rel03">図 2.15</a> ）。</p>
-</li>
-<li>
-<p>マウスをクリックすると関連が引かれる。</p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
-<div id="add_use_case_rel03" class="imageblock">
-<div class="content">
-<img src="images/add_use_case_rel03.png" alt="add use case rel03" width="50%">
-</div>
-<div class="title">図 2.15 関連が引かれた</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>これで、アクター「プレーヤー」とユースケース「スコアをつける」の間に関連が引けました。</p>
-</div>
-<div class="paragraph">
-<p>このユースケース図は、システムとして表しているのはスコアラーの仕事で、プレーヤーに対してひとつのサービス「スコアをつける」を提供していると読めます。</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_ユースケース記述を追加する"><a class="anchor" href="#_ユースケース記述を追加する"></a>2.1.6 ユースケース記述を追加する</h4>
-<div class="paragraph">
-<p>ユースケース図の上では、ユースケースやアクターはそれらの名前しか記載しません。
-そのため、ユースケースの詳しい内容（どのような仕事をするのか）はよくわかりません。
-そこで、ひとつのユースケースに対して、そのユースケースの一連の処理の流れを説明した記述をひとつ書きます。
-これを「ユースケース記述」と呼びます。</p>
-</div>
-<div class="paragraph">
-<p>ユースケース「スコアをつける」のユースケース記述を考えてみました。
-スコアの計算はスコアラーの頭の中でやります。スコアを記録する作業もスコアラーの手作業です。
-そうすると、プレーヤーとスコアラーの間でのやりとりは、ピン数のやりとりだけですので、ユースケース記述は「 <a href="#use_case_desc00">リスト1</a> 」のようになるでしょう。</p>
-</div>
-<div id="use_case_desc00" class="exampleblock">
-<div class="title">リスト 1. ユースケース「スコアをつける」のユースケース記述</div>
-<div class="content">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>プレーヤーは、投球する。</p>
-</li>
-<li>
-<p>プレーヤーは、スコアラーに倒したピン数を申告する。</p>
-</li>
-<li>
-<p>スコアラーは、スコアを計算して、スコアシートに記録する。</p>
-</li>
-<li>
-<p>ゲームの終了まで、1から3を繰り返す。</p>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>astah* には、ユースケース記述を記述するエディタが用意してあります。</p>
-</div>
-<div class="paragraph">
-<p>ユースケース記述エディタを使って「 <a href="#use_case_desc00">リスト1</a> 」のユースケース記述を書いてみましょう。</p>
-</div>
-<div class="openblock">
-<div class="title">ユースケース記述エディタを使ってユースケース記述を書く</div>
-<div class="content">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>ユースケース記述エディタを開く。</p>
-<div class="ulist">
-<ul>
-<li>
-<p>ユースケース「スコアをつける」をマウスを右クリックして、ポップアップメニューを表示する。</p>
-</li>
-<li>
-<p>「ユースケース記述を開く」を選択する。</p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
-<div id="use_case_desc01" class="imageblock">
-<div class="content">
-<img src="images/use_case_desc01.png" alt="use case desc01" width="75%">
-</div>
-<div class="title">図 2.16 ユースケース記述エディタを開く</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>ユースケース記述を書く。</p>
-<div class="ulist">
-<ul>
-<li>
-<p>「基本系列」に「 <a href="#use_case_desc00">リスト1</a> 」に記載した内容を書き込む</p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
-<div id="use_case_desc02" class="imageblock">
-<div class="content">
-<img src="images/use_case_desc02.png" alt="use case desc02" width="50%">
-</div>
-<div class="title">図 2.17 ユースケース「スコアをつける」のユースケース記述</div>
-</div>
-</div>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="ヒント"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>「ユースケース記述エディタ」の記述項目には、基本系列のほかに、代替系列、事前条件などの記述項目があります。
-これらの項目のうち、この演習では基本系列だけ使っています。
-他の項目の使い方を学ぶのは、もう少し慣れてからでよいでしょう。</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>簡便に記述する方法として、「ユースケース記述エディタ」を使う代わりに、「ノート」を使って書く方法を紹介しておきます。</p>
-</div>
-<div class="paragraph">
-<p>ノートは、UMLの図を作成するときに、補助的な説明をつけるために用意されている要素で、耳を折った矩形で表します。</p>
-</div>
-<div class="paragraph">
-<p>ノートは、モデルの要素に対して、捕捉する説明をつけたいときに使います。
-ここでは、ユースケース「スコアをつける」は、どのような手順なのかを説明しています。</p>
-</div>
-<div class="paragraph">
-<p>ノートを追加して、「 <a href="#use_case_desc00">リスト1</a> 」のユースケース記述を書いてみましょう。</p>
-</div>
-<div class="openblock">
-<div class="title">ノートを使ってユースケース記述を書く</div>
-<div class="content">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>パレットからノートのシンボル（耳が折れた矩形のアイコン）を選択する（ <a href="#use_case_desc03">図 2.18</a> ）。</p>
-</li>
-</ol>
-</div>
-<div id="use_case_desc03" class="imageblock">
-<div class="content">
-<img src="images/use_case_desc03.png" alt="use case desc03" width="50%">
-</div>
-<div class="title">図 2.18 パレットからノートを選択する</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic" start="2">
-<li>
-<p>図の中でマスをクリックすると、ノートが追加される（ <a href="#use_case_desc04">図 2.19</a> ）。</p>
-</li>
-</ol>
-</div>
-<div id="use_case_desc04" class="imageblock">
-<div class="content">
-<img src="images/use_case_desc04.png" alt="use case desc04" width="50%">
-</div>
-<div class="title">図 2.19 ノートが追加された</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic" start="3">
-<li>
-<p>ユースケース記述を編集する。</p>
-<div class="ulist">
-<ul>
-<li>
-<p>ノートが選択されている状態（ <a href="#use_case_desc04">図 2.19</a> ）で、プロパティを編集して、ユースケース記述を書く（ <a href="#use_case_desc05">図 2.20</a> ）。</p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
-<div id="use_case_desc05" class="imageblock">
-<div class="content">
-<img src="images/use_case_desc05.png" alt="use case desc05" width="100%">
-</div>
-<div class="title">図 2.20 ノートにユースケース記述を書く</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic" start="4">
-<li>
-<p>ノートからユースケースへアンカーを引く（ <a href="#use_case_desc06">図 2.21</a> ）。</p>
-<div class="ulist">
-<ul>
-<li>
-<p>パレットから、ノートからユースケースへのアンカーを選択する。</p>
-</li>
-<li>
-<p>ノートの内部へマウスを移動すると、ノートに青枠が現れる。</p>
-</li>
-<li>
-<p>マウスのボタンをクリックし、マウスをユースケースの内部へ移動する。</p>
-</li>
-<li>
-<p>ユースケースに青枠が現れたら、マウスクリックすると、アンカーが引かれる。</p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
-<div id="use_case_desc06" class="imageblock">
-<div class="content">
-<img src="images/use_case_desc06.jpg" alt="use case desc06" width="50%">
-</div>
-<div class="title">図 2.21 ノートからユースケースへアンカーを引く</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>できあがったユースケースは「 <a href="#use_case01">図 2.22</a> 」のようになるでしょう。</p>
-</div>
-<div id="use_case01" class="imageblock">
-<div class="content">
-<img src="images/use_case01.svg" alt="use case01" width="50%">
-</div>
-<div class="title">図 2.22 手動でスコアをつけているときの（スコアラーの働きを表している）ユースケース図</div>
-</div>
-<div class="paragraph">
-<p>この図は、「スコアラー（システム）は、プレーヤー（アクター）にスコアをつけるというサービスを提供する」と読めます。そして、「スコアをつける」の詳細はノートを使ったユースケース記述に記載しています。</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="注記"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>一般に、ユースケースやアクターはひとつだけとは限らないことに注意しましょう。
-これまでの分析結果において、アクター「スコアラー」とユースケースは「スコアをつける」だけが見つかっているので、「 <a href="#use_case01">図 2.22</a> 」のような図になっているのです。</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-</div>
 </div>
 <div class="sect2">
-<h3 id="_自動化されてからの手順を整理する"><a class="anchor" href="#_自動化されてからの手順を整理する"></a>2.2 自動化されてからの手順を整理する</h3>
+<h3 id="_スコアシートの構造"><a class="anchor" href="#_スコアシートの構造"></a>2.1 スコアシートの構造</h3>
+<div class="sect3">
+<h4 id="_スコアシートの例"><a class="anchor" href="#_スコアシートの例"></a>2.1.1 スコアシートの例</h4>
 <div class="paragraph">
-<p>「<a href="#use_case01">図 2.22</a> 」は、手でスコアをつけている場合を表していました。
-このままでは、人がやっている仕事をそのまま表しているだけですね。
-こんどは、スコアラーがスコアをつける手順に着目して、スコアをつける作業の一部を自動化して助けてくれるサービスを想定してみましょう。つまり、こんどは、スコアラーに提供するサービスを考えることになります。</p>
+<p>ゲーム中のスコアシートの例を <a href="#scoresheet01">図 2.1</a> に示します。</p>
 </div>
-<div class="paragraph">
-<p>そうすると、「 <a href="#use_case01">図 2.22</a> 」とはユースケース図の構成が変わってきます。
-スコアラーに提供するサービスを考えてみるわけですから、スコアラーがアクターになりますね。</p>
-</div>
-<div class="paragraph">
-<p>このように捉えた場合のユースケース図を描いてみましょう。</p>
-</div>
-<div class="paragraph">
-<p>「<a href="#add_use_case_chart">モデルにユースケース図を追加する</a>」と同じ手順で、「01_分析モデル」の中にユースケース図を追加します。
-図の名前は「スコアをつけるところを助けてくれるサービスを考えたユースケース図」としておきましょう（ <a href="#use_case02">図 2.23</a> ）。</p>
-</div>
-<div id="use_case02" class="imageblock">
+<div id="scoresheet01" class="imageblock">
 <div class="content">
-<img src="images/use_case02.png" alt="use case02" width="50%">
+<img src="images/scoresheet01.png" alt="scoresheet01" width="100%">
 </div>
-<div class="title">図 2.23 分析モデルにユースケース図を追加する</div>
-</div>
-<div class="paragraph">
-<p>まず、アクターが「スコアラー」なのは明らかですので、スコアラーを追加しましょう（これはもうできますね）。</p>
-</div>
-<div class="paragraph">
-<p>次に、スコアラーに提供するサービスを表すユースケースを考えてみましょう。
-顧客から依頼されている場合であれば、顧客から収集した現状の業務や改善の要求から導出するところです。
-ここでは、スコアラーがスコアをつけるときに、スコアを計算したり記録する部分を助けてもらいたいのでした。
-これをユースケースとするのがよさそうです。</p>
-</div>
-<div class="paragraph">
-<p>ユースケース名は「スコアを（スコアラーに代わって）記録する」にしましょう。</p>
-</div>
-<div class="paragraph">
-<p>ユースケース記述は、「 <a href="#use_case_desc07">リスト2</a> 」のようになるでしょう。</p>
-</div>
-<div id="use_case_desc07" class="exampleblock">
-<div class="title">リスト 2. ユースケース「スコアを記録する」のユースケース記述</div>
-<div class="content">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>スコアラーは、プレーヤーが投球するたびに、ピン数をシステムに入力する。</p>
-</li>
-<li>
-<p>システムは、スコアシートの状況に応じて、ピン数を記録する。</p>
-</li>
-<li>
-<p>前のフレームのストライクやスペアのボーナスを計算する。</p>
-</li>
-<li>
-<p>ゲームが終わるまで、1から3を繰り返す。</p>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>作成したユースケース図は「 <a href="#use_case03">図 2.24</a>  」のようになるでしょう。</p>
-</div>
-<div id="use_case03" class="imageblock">
-<div class="content">
-<img src="images/use_case03.svg" alt="use case03" width="75%">
-</div>
-<div class="title">図 2.24 スコアをつけるところを助けてくれるサービスを考えたユースケース図</div>
-</div>
-<div class="paragraph">
-<p>以上の分析の結果、このチュートリアルで作成するシステムは、「スコアラーが使う」「スコアを記録する」システムということがわかりました。</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_ユースケースを吟味する"><a class="anchor" href="#_ユースケースを吟味する"></a>2.3 ユースケースを吟味する</h3>
-<div class="paragraph">
-<p>こんどは、ユースケース「スコアを記録する」について、もう少し詳しく検討してみましょう。</p>
-</div>
-<div class="paragraph">
-<p>スコアを記録するときの、スコアラーとシステムの間のやり取りや、入力されたピン数をシステムがどのように扱うのかを検討するために「ロバストネス図」を使ってみましょう。</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="title">ロバストネス分析とロバストネス図</div>
-<div class="paragraph">
-<p>ロバストネス図は、システムの構成要素を分析する「ロバストネス分析」で使用する図です。
-ロバストネス分析では、システムを構成する要素は「バウンダリ」「エンティティ」「コントロール」の3種類に大別できると考え、該当する要素がないか想定して構成要素を探します。
-また、これらの要素間の繋がりには制約があると考えることで、構成要素を探しやすくします。</p>
-</div>
-<div class="paragraph">
-<p>ロバストネス図で抽出した要素は、クラスの候補になります。
-ただし、ひとつの要素がそのままひとつのクラスになるとは限りません。
-複数の要素を組み合わせてクラスに仕立てるといったこともあります。</p>
-</div>
-<div class="paragraph">
-<p>ロバストネス分析とロバストネス図の詳しい説明は、「ワークブック形式で学ぶUMLオブジェクトモデリング <a href="#robustness01">[robustness01]</a> 」や「ユースケース駆動開発実践ガイド <a href="#robustness02">[robustness02]</a> 」などを参照してください。</p>
-</div>
+<div class="title">図 2.1 スコアシートの例</div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_プロジェクトにロバストネス図を追加する"><a class="anchor" href="#_プロジェクトにロバストネス図を追加する"></a>2.3.1 プロジェクトにロバストネス図を追加する</h4>
-<div class="paragraph">
-<p>まず、アクター「スコアラー」とシステムの間のやりとりを検討するためのロバストネス図を作成しましょう。
-そこで、プロジェクトにロバストネス図を追加します。
-分析の続きですので、「01_分析モデル」に追加しましょう。
-ロバストネス図はクラス図の表記を応用した図なので、 astah* で作成するときはクラス図を使います。</p>
-</div>
-<div class="openblock">
-<div class="title">分析モデルにロバストネス図を追加する</div>
-<div class="content">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>モデルにクラス図を追加する。</p>
-<div class="ulist">
-<ul>
-<li>
-<p>構造ツリー上で、「01_分析モデル」を選択する。</p>
-</li>
-<li>
-<p>右クリックしてポップアップメニューを開き、「図の追加＞クラス図」を選択する。（ <a href="#add_robustness01">図 2.25</a> ）。</p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
-<div id="add_robustness01" class="imageblock">
-<div class="content">
-<img src="images/add_robustness01.png" alt="add robustness01" width="50%">
-</div>
-<div class="title">図 2.25 モデルにクラス図を追加する</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic" start="2">
-<li>
-<p>追加した図に名前をつける。</p>
-<div class="ulist">
-<ul>
-<li>
-<p>構造ツリー上で、追加したクラス図を選択した状態で、プロパティの「ベース」タブを選択する。</p>
-</li>
-<li>
-<p>「名前」を編集して「スコアラーとシステムの間のロバストネス図」とする（ <a href="#add_robustness02">図 2.26</a> ）。</p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
-<div id="add_robustness02" class="imageblock">
-<div class="content">
-<img src="images/add_robustness02.png" alt="add robustness02" width="50%">
-</div>
-<div class="title">図 2.26 モデルにロバストネス図が追加できた</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>これで、ロバストネス図が描けるようになりました。</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_新しいゲームを用意する"><a class="anchor" href="#_新しいゲームを用意する"></a>2.3.2 新しいゲームを用意する</h4>
-<div class="paragraph">
-<p>新しいゲームを始めるとき、スコアラーが手で書いていたときは、スコアシートを用意してゲームに参加する人の名前を書くといった準備をします。</p>
-</div>
-<div class="paragraph">
-<p>スコアを記録する部分を自動化した場合、新しいゲームを用意するためにはどのような要素が必要になるでしょうか。
-ロバストネス図を使って検討してみましょう。</p>
-</div>
-<div class="paragraph">
-<p>まず、アクター「スコアラー」を追加しましょう。</p>
-</div>
-<div class="openblock">
-<div class="title">ロバストネス図にアクターを追加する</div>
-<div class="content">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>構造ツリー上から追加したロバストネス図をダブルクリックして、編集できる状態にします（ <a href="#add_actor_on_robustness01">図 2.27</a> ）。</p>
-</li>
-</ol>
-</div>
-<div id="add_actor_on_robustness01" class="imageblock">
-<div class="content">
-<img src="images/add_actor_on_robustness01.png" alt="add actor on robustness01" width="50%">
-</div>
-<div class="title">図 2.27 追加したロバストネス図を編集可能にする</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic" start="2">
-<li>
-<p>スコアラーは、作成済みで構造ツリー上にありますので、これをドラッグ＆ドロップして追加します（ <a href="#add_actor_on_robustness02">図 2.28</a> ）。</p>
-</li>
-</ol>
-</div>
-<div id="add_actor_on_robustness02" class="imageblock">
-<div class="content">
-<img src="images/add_actor_on_robustness02.png" alt="add actor on robustness02" width="100%">
-</div>
-<div class="title">図 2.28 追加したロバストネス図を編集可能にする</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>次に、スコアラーが新しいゲームを用意するときにシステムとやりとりする場合に必要な要素を、ロバストネス図のシンボルを使って表してみます。</p>
-</div>
-<div class="paragraph">
-<p>新しいゲームを始めるときは、スコアラーがシステムに新しいゲームを用意する指示を出します。
-このことを実現するには、システムには、指示を受け取るためのインターフェースと新しいゲームを用意する処理が必要になります。</p>
-</div>
-<div class="paragraph">
-<p>これらをロバストネス図に追加してみましょう。</p>
-</div>
-<div class="openblock">
-<div class="title">新しいゲームを用意するための要素を追加する</div>
-<div class="content">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>バウンダリ「ゲーム開始指示入力」を追加する（ <a href="#add_boundary01">図 2.29</a> ）。</p>
-<div class="ulist">
-<ul>
-<li>
-<p>パレットからバウンダリのシンボルを選択し、ロバストネス図に追加する。</p>
-</li>
-<li>
-<p>追加したバウンダリの名前を「ゲーム開始指示入力」とする。</p>
-</li>
-<li>
-<p>アクター「スコアラー」とバウンダリ「ゲーム開始指示入力」の間に関連を引く。</p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
-<div id="add_boundary01" class="imageblock">
-<div class="content">
-<img src="images/add_boundary01.png" alt="add boundary01" width="50%">
-</div>
-<div class="title">図 2.29 バウンダリ「ゲーム開始指示入力」を追加する</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic" start="2">
-<li>
-<p>コントロール「新しいゲームを用意する」を追加する（ <a href="#add_control01">図 2.30</a> ）。</p>
-<div class="ulist">
-<ul>
-<li>
-<p>パレットからコントロールのシンボルを選択し、ロバストネス図に追加する。</p>
-</li>
-<li>
-<p>追加したコントロールの名前を「新しいゲームを用意する」とする。</p>
-</li>
-<li>
-<p>バウンダリ「ゲーム開始指示入力」とコントロール「新しいゲームを用意する」の間に関連を引く。</p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
-<div id="add_control01" class="imageblock">
-<div class="content">
-<img src="images/add_control01.png" alt="add control01" width="50%">
-</div>
-<div class="title">図 2.30 コントロール「新しいゲームを用意する」を追加する</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic" start="3">
-<li>
-<p>エンティティ「ゲームスコア」を追加する（ <a href="#add_entity01">図 2.31</a> ）。</p>
-<div class="ulist">
-<ul>
-<li>
-<p>パレットからエンティティのシンボルを選択し、ロバストネス図に追加する。</p>
-</li>
-<li>
-<p>追加したエンティティの名前を「ゲームスコア」とする。</p>
-</li>
-<li>
-<p>コントロール「新しいゲームを用意する」とエンティティ「ゲームスコア」の間に関連を引く。</p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
-<div id="add_entity01" class="imageblock">
-<div class="content">
-<img src="images/add_entity01.png" alt="add entity01" width="75%">
-</div>
-<div class="title">図 2.31 エンティティ「ゲームスコア」を追加する</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>これで、スコアラーが新しいゲームを始める指示を出したとき、システムが新しいゲームを用意するのに必要な要素が洗い出せました。</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_ゲームを進める"><a class="anchor" href="#_ゲームを進める"></a>2.3.3 ゲームを進める</h4>
-<div class="paragraph">
-<p>こんどは、ゲームを進めているときに必要な要素を検討してみましょう。</p>
-</div>
-<div class="paragraph">
-<p>スコアラーがスコアシートを手で書いていたときは、スコアラーはいまどのフレームの何投目であるかを意識して書いていたでしょう。
-一方、スコアの記録を自動化した場合は、どのフレームの何投目なのかはシステムに把握しておいてほしいでしょう。
-そうしておけば、スコアラーは単にピン数を入力すれば済むようになります。</p>
-</div>
-<div class="paragraph">
-<p>そして、システムは、ピン数を取得するたびにゲームを進めます。
-ピン数を取得するたびに、ゲームスコアを更新し、更新したスコアをスコアラーへ返せばよさそうです。</p>
-</div>
-<div class="paragraph">
-<p>これらをロバストネス図に追加してみましょう。</p>
-</div>
-<div class="openblock">
-<div class="title">ゲームを進めるための要素を追加する</div>
-<div class="content">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>バウンダリ「ピン数入力」を追加する（ <a href="#add_boundary02">図 2.32</a> ）。</p>
-<div class="ulist">
-<ul>
-<li>
-<p>パレットからバウンダリのシンボルを選択し、ロバストネス図に追加する。</p>
-</li>
-<li>
-<p>追加したバウンダリをの名前を「ピン数入力」とする。</p>
-</li>
-<li>
-<p>アクター「スコアラー」とバウンダリ「ピン数入力」の間に関連を引く。</p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
-<div id="add_boundary02" class="imageblock">
-<div class="content">
-<img src="images/add_boundary02.png" alt="add boundary02" width="75%">
-</div>
-<div class="title">図 2.32 バウンダリ「ピン数入力」を追加する</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic" start="2">
-<li>
-<p>コントロール「ゲームを進める」を追加する（ <a href="#add_control02">図 2.33</a> ）。</p>
-<div class="ulist">
-<ul>
-<li>
-<p>パレットからコントロールのシンボルを選択し、ロバストネス図に追加する。</p>
-</li>
-<li>
-<p>追加したコントロールの名前を「ゲームを進める」とする。</p>
-</li>
-<li>
-<p>バウンダリ「ピン数入力」とコントロール「ゲームを進める」の間に関連を引く。</p>
-</li>
-<li>
-<p>コントロール「ゲームを進める」とエンティティ「ゲームスコア」との間に関連を引く。</p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
-<div id="add_control02" class="imageblock">
-<div class="content">
-<img src="images/add_control02.png" alt="add control02" width="75%">
-</div>
-<div class="title">図 2.33 コントロール「ゲームを進める」を追加する</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic" start="3">
-<li>
-<p>バウンダリ「ゲームスコア出力」を追加する（ <a href="#add_boundary03">図 2.34</a> ）。</p>
-<div class="ulist">
-<ul>
-<li>
-<p>パレットからバウンダリのシンボルを選択し、ロバストネス図に追加する。</p>
-</li>
-<li>
-<p>追加したバウンダリの名前を「ゲームスコア出力」とする。</p>
-</li>
-<li>
-<p>アクター「スコアラー」とバウンダリ「ゲームスコア出力」の間に関連を引く。</p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
-<div id="add_boundary03" class="imageblock">
-<div class="content">
-<img src="images/add_boundary03.png" alt="add boundary03" width="75%">
-</div>
-<div class="title">図 2.34 バウンダリ「ゲームスコア出力」を追加する</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic" start="4">
-<li>
-<p>コントロール「ゲームスコアを出力する」を追加する（ <a href="#add_control03">図 2.35</a> ）。</p>
-<div class="ulist">
-<ul>
-<li>
-<p>パレットからコントロールのシンボルを選択し、ロバストネス図に追加する。</p>
-</li>
-<li>
-<p>追加したコントロールの名前を「ゲームスコアを出力する」とする。</p>
-</li>
-<li>
-<p>バウンダリ「ゲームスコア出力」とコントロール「ゲームスコアを出力する」の間に関連を引く。</p>
-</li>
-<li>
-<p>コントロール「ゲームスコアを出力する」とエンティティ「ゲームスコア」の間に関連を引く。</p>
-</li>
-<li>
-<p>コントロール「ゲームを進める」とコントロール「ゲームスコアを出力する」の間に関連を引く。</p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
-<div id="add_control03" class="imageblock">
-<div class="content">
-<img src="images/add_control03.png" alt="add control03" width="75%">
-</div>
-<div class="title">図 2.35 コントロール「ゲームスコアを出力する」を追加する</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>これで、スコアラーがピン数を入力したとき、ゲームを進め、ゲームスコアを更新するに必要な要素が洗い出せました。
-また、ゲームが進んだ際に、更新したゲームスコアを出力するのに必要な要素も洗い出せました。</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_スコアを計算する"><a class="anchor" href="#_スコアを計算する"></a>2.3.4 スコアを計算する</h4>
-<div class="paragraph">
-<p>スコアを記録したり、更新したスコアを出力できるようにはなりましたが、まだスコアの計算を自動化するために必要な要素が洗い出せていません。
-そこで、こんどはスコアを計算する処理について検討してみましょう。</p>
-</div>
-<div class="openblock">
-<div class="title">スコアの計算の検討に使うロバストネス図を追加する</div>
-<div class="content">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>モデルにクラス図を追加し、追加した図を「スコアの計算に関するロバストネス図」とする（ <a href="#add_robustness03">図 2.36</a> ）。</p>
-</li>
-</ol>
-</div>
-<div id="add_robustness03" class="imageblock">
-<div class="content">
-<img src="images/add_robustness03.png" alt="add robustness03" width="50%">
-</div>
-<div class="title">図 2.36 モデルにスコア計算に関するロバストネス図を追加する</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>スコアの計算に必要となりそうなエンティティとしては、「ゲームスコア」「現在のフレーム」「ゲームの状態」などがありそうです。
-ゲームの状態としては、1投目、2投目、サービスフレーム中、ゲームの終了といった状態が考えられます。</p>
-</div>
-<div class="paragraph">
-<p>スコアの計算をするコントロールと、これらのエンティティを追加します。</p>
-</div>
-<div class="openblock">
-<div class="title">スコアを計算するコントロールと関連するエンティティを追加する</div>
-<div class="content">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>コントロール「スコアを計算する」ならびに関連するエンティティを追加する（ <a href="#add_control04">図 2.37</a> ）。</p>
-<div class="ulist">
-<ul>
-<li>
-<p>パレットからコントロールのシンボルを選択して追加し、「スコアを計算する」とする。</p>
-</li>
-<li>
-<p>エンティティ「ゲームスコア」を構造ツリーからドラッグ＆ドロップして追加する。</p>
-</li>
-<li>
-<p>パレットからエンティティのシンボルを選択して追加し、「現在のフレーム」とする。</p>
-</li>
-<li>
-<p>パレットからエンティティのシンボルを選択して追加し、「ゲームの状態」とする。</p>
-</li>
-<li>
-<p>コントロール「スコアをを計算する」から、それぞれのエンティティへ関連を引く。</p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
-<div id="add_control04" class="imageblock">
-<div class="content">
-<img src="images/add_control04.png" alt="add control04" width="100%">
-</div>
-<div class="title">図 2.37 コントロール「スコアを計算する」を追加する</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>さらに、スコアを計算して記録するには、エンティティ「ゲームスコア」に対して計算の結果を記録するためのフレームを追加する処理が必要です。この処理をコントロールとして追加しましょう。
-スコアの計算では、ストライクボーナスとスペアボーナスの計算がありますが、これらも明示的に用意しておきましょう。</p>
-</div>
-<div class="openblock">
-<div class="title">スコアを計算するコントロールと関連するコントロールを追加する</div>
-<div class="content">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>コントロール「フレームを追加する」を追加する（ <a href="#add_control05">図 2.38</a> ）。</p>
-<div class="ulist">
-<ul>
-<li>
-<p>パレットからコントロールのシンボルを選択して追加し、「フレームを追加する」とする。</p>
-</li>
-<li>
-<p>コントロール「スコアをを計算する」からコントロール「フレームを追加する」へ関連を引く。</p>
-</li>
-<li>
-<p>コントロール「フレームを追加する」からエンティティ「ゲームスコア」へ関連を引く。</p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
-<div id="add_control05" class="imageblock">
-<div class="content">
-<img src="images/add_control05.png" alt="add control05" width="75%">
-</div>
-<div class="title">図 2.38 コントロール「フレームを追加する」を追加する</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic" start="2">
-<li>
-<p>ボーナスの計算を追加する（ <a href="#add_control06">図 2.39</a> ）。</p>
-<div class="ulist">
-<ul>
-<li>
-<p>パレットからコントロールのシンボルを選択して追加し、「ストライクボーナスを計算する」とする。</p>
-</li>
-<li>
-<p>パレットからコントロールのシンボルを選択して追加し、「スペアボーナスを計算する」とする。</p>
-</li>
-<li>
-<p>コントロール「スコアをを計算する」からコントロール「ストライクボーナスを計算する」へ関連を引く。</p>
-</li>
-<li>
-<p>コントロール「スコアをを計算する」からコントロール「スペアボーナスを計算する」へ関連を引く。</p>
-</li>
-<li>
-<p>コントロール「ストライクボーナスを計算する」からエンティティ「ゲームスコア」へ関連を引く。</p>
-</li>
-<li>
-<p>コントロール「スペアボーナスを計算する」からエンティティ「ゲームスコア」へ関連を引く。</p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
-<div id="add_control06" class="imageblock">
-<div class="content">
-<img src="images/add_control06.png" alt="add control06" width="75%">
-</div>
-<div class="title">図 2.39 コントロール「ストライクボーナスを計算する」と「スペアボーナスを計算する」を追加する</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>これで、スコアを計算するのに必要な要素が洗い出せました。</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_システム全体を整理する"><a class="anchor" href="#_システム全体を整理する"></a>2.3.5 システム全体を整理する</h4>
-<div class="paragraph">
-<p>これまでに作成した「スコアラーとシステムの間のロバストネス図（ <a href="#add_robustness02">図 2.26</a> ）」と「スコアの計算に関するロバストネス図（ <a href="#add_robustness03">図 2.36</a> ）」をまとめると、システムのロバストネス図が作成できます。</p>
-</div>
-<div class="paragraph">
-<p>エンティティ「ゲームスコア」は同じものですので、ひとつにまとめましょう。
-コントロール「スコアを計算する」はコントロール「ゲームを進める」の処理のなかで利用すると考えられますので、これらを関連づけます。</p>
-</div>
-<div class="openblock">
-<div class="title">作成したロバストネス図をひとつにまとめる</div>
-<div class="content">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>モデルにクラス図を追加し、追加した図を「システムのロバストネス図」とする（ <a href="#add_robustness04">図 2.40</a> ）。</p>
-</li>
-</ol>
-</div>
-<div id="add_robustness04" class="imageblock">
-<div class="content">
-<img src="images/add_robustness04.png" alt="add robustness04" width="50%">
-</div>
-<div class="title">図 2.40 モデルにシステムのロバストネス図を追加する</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic" start="2">
-<li>
-<p>ロバストネス図「スコアラーとシステムの間のロバストネス図」に記載した要素を取り込む。</p>
-<div class="ulist">
-<ul>
-<li>
-<p>ロバストネス図「スコアラーとシステムの間のロバストネス図」 を開き、作成した要素をすべてコピーする。</p>
-</li>
-<li>
-<p>ロバストネス図「システムのロバストネス図」を開き、ペーストする（ <a href="#add_robustness08">図 2.41</a> ）。</p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
-<div id="add_robustness08" class="imageblock">
-<div class="content">
-<img src="images/add_robustness08.png" alt="add robustness08" width="100%">
-</div>
-<div class="title">図 2.41 システムのロバストネス図に2つのロバストネス図をペーストする</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic" start="3">
-<li>
-<p>ロバストネス図「スコア計算に関するロバストネス図」に記載した要素を取り込む。</p>
-<div class="ulist">
-<ul>
-<li>
-<p>ロバストネス図「スコア計算に関するロバストネス図」を開き、、作成した要素をすべてコピーする。</p>
-</li>
-<li>
-<p>ロバストネス図「システムのロバストネス図」を開き、ペーストする。</p>
-</li>
-<li>
-<p>2つあるエンティティ「ゲームスコア」のうち一方を選択し、右クリックしてポップアップメニューを開く。</p>
-</li>
-<li>
-<p>メニューから「図から削除」を選択し、エンティティ「ゲームスコア」のうち一方を消す（ <a href="#add_robustness05">図 2.42</a> ）。</p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
-<div id="add_robustness05" class="imageblock">
-<div class="content">
-<img src="images/add_robustness05.png" alt="add robustness05" width="75%">
-</div>
-<div class="title">図 2.42 重複するエンティティ「ゲームスコア」の一方を消す</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic" start="4">
-<li>
-<p>残した方の「ゲームスコア」と他方につかがっていたコントロールの間に関連を引く（ <a href="#add_robustness06">図 2.43</a> ）。</p>
-</li>
-</ol>
-</div>
-<div id="add_robustness06" class="imageblock">
-<div class="content">
-<img src="images/add_robustness06.png" alt="add robustness06" width="100%">
-</div>
-<div class="title">図 2.43 残したエンティティ「ゲームスコア」とコントロールの間に関連を引く</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic" start="5">
-<li>
-<p>コントロール「ゲームを進める」とコントロール「スコアを計算する」の間に関連を引く。</p>
-</li>
-</ol>
-</div>
-<div id="add_robustness07" class="imageblock">
-<div class="content">
-<img src="images/add_robustness07.png" alt="add robustness07" width="100%">
-</div>
-<div class="title">図 2.44 コントロール「ゲームを進める」とコントロール「スコアを計算する」ントロールの間に関連を引く</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>最後にできあがったロバストネス図から、このシステムにはどのような要素が必要なのかわかってきました。</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_スコア計算を含むユースケース記述を書く"><a class="anchor" href="#_スコア計算を含むユースケース記述を書く"></a>2.3.6 スコア計算を含むユースケース記述を書く</h4>
-<div class="paragraph">
-<p>作成したロバストネス図に登場する要素を参考にして、ユースケース記述を見直してみましょう。</p>
-</div>
-<div class="paragraph">
-<p>ロバストネス図を作成した結果、ユースケース「スコアを記録する」には、次のような働きが含まれていることがわかりました。</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>スコアを計算する</p>
-</li>
-<li>
-<p>（ゲームスコアに）フレームを追加する</p>
-</li>
-<li>
-<p>ストライクボーナスを計算する</p>
-</li>
-<li>
-<p>スペアボーナスを計算する</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>このことを加味して、ユースケース「スコアを記録する」のユースケース記述（ <a href="#use_case_desc07">リスト2</a> ）を見直してみましょう（ <a href="#use_case_desc08">リスト3</a> ）。</p>
-</div>
-<div id="use_case_desc08" class="exampleblock">
-<div class="title">リスト 3. ユースケース「スコアを記録する」のユースケース記述（見直し後）</div>
-<div class="content">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>スコアラーがゲームの開始指示を出すと、システムは新しいゲームを用意する。</p>
-</li>
-<li>
-<p>スコアラーは、プレーヤーが投球した結果をみてピン数をシステムに入力する。</p>
-</li>
-<li>
-<p>システムは、ピン数を受け取ると、ゲームを進め、ユースケース「スコアを計算する」を実行する。</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>現在の状態が、1投目のピン数入力待ちのとき:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>ゲームスコアに新しいフレームを追加する。</p>
-</li>
-<li>
-<p>現在のフレームの1投目にピン数を記録する。</p>
-</li>
-<li>
-<p>1投目がストライクだったときは、現在の状態を次の1投目のピン数入力待ちに変更する。</p>
-</li>
-<li>
-<p>ストライクでなかったときは、現在の状態を2投目のピン数入力待ちに変更する。</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>現在の状態が、2投目のピン数入力待ちのとき:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>現在のフレームの2投目にピン数を記録する。</p>
-</li>
-<li>
-<p>現在の状態を次の1投目のピン数入力待ちに変更する。</p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>スペアボーナスを計算し、ゲームスコアに反映する。</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>前のフレームがスペアのとき:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>1投目のピン数を前のフレームのスペアボーナスに記録する。</p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>ストライクボーナスを計算し、ゲームスコアに反映する。</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>前のフレームがストライクのとき:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>1投目と2投目のピン数の合計を前のフレームのストライクボーナスに記録する。</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>前の前のフレームがストライクのとき:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>1投目のピン数と前のフレームの1投目のピン数を、前の前のフレームのストライクボーナスに記録する。</p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>10フレームになったときは、サービスフレームを追加する。</p>
-</li>
-<li>
-<p>上記2から6を、10フレームになるまで繰り返す。</p>
-</li>
-</ol>
-</div>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_10フレーム目の扱いについて検討する"><a class="anchor" href="#_10フレーム目の扱いについて検討する"></a>2.3.7 10フレーム目の扱いについて検討する</h4>
+<h4 id="_10フレーム目の扱いについて検討する"><a class="anchor" href="#_10フレーム目の扱いについて検討する"></a>2.1.2 10フレーム目の扱いについて検討する</h4>
 <div class="paragraph">
 <p>「クラッシックスコアリング」の場合、10フレーム目が他のフレームとは異なっています。
 サービスフレームという考え方があり、ストライクやスペアの場合に追加で投球できます。</p>
@@ -2109,14 +684,14 @@ astah* では、複数のモデル図をまとめてたモデルファイルを�
 <div class="sect4">
 <h5 id="_10フレーム目がストライクもスペアもない場合"><a class="anchor" href="#_10フレーム目がストライクもスペアもない場合"></a>10フレーム目がストライクもスペアもない場合</h5>
 <div class="paragraph">
-<p>10フレーム目がストライクでもスペアもない場合、9フレーム目までの通常のフレームと同様、1投目と2投目を記録するだけです（ <a href="#ten_no_service">図 2.45</a>  ）。
+<p>10フレーム目がストライクでもスペアもない場合、9フレーム目までの通常のフレームと同様、1投目と2投目を記録するだけです（ <a href="#ten_no_service">図 2.2</a>  ）。
 サービスフレームは追加されません。</p>
 </div>
 <div id="ten_no_service" class="imageblock">
 <div class="content">
 <img src="images/ten_no_service_combo.png" alt="ten no service combo" width="50%">
 </div>
-<div class="title">図 2.45 10フレーム目がストライクもスペアもない場合</div>
+<div class="title">図 2.2 10フレーム目がストライクもスペアもない場合</div>
 </div>
 </div>
 <div class="sect4">
@@ -2124,13 +699,13 @@ astah* では、複数のモデル図をまとめてたモデルファイルを�
 <div class="paragraph">
 <p>10フレーム目の2投目でスペアになった場合、1投目と2投目を通常のフレームと同様に記録したのち、もう1投追加されます。
 これを、10フレーム目に加えて、11フレーム目の1投目が追加されたとみなします。
-つまり、ゲームスコアのデータを「 <a href="#ten_spare_service">図 2.46</a> 」のように構成します。</p>
+つまり、ゲームスコアのデータを「 <a href="#ten_spare_service">図 2.3</a> 」のように構成します。</p>
 </div>
 <div id="ten_spare_service" class="imageblock">
 <div class="content">
 <img src="images/ten_spare_combo.png" alt="ten spare combo" width="50%">
 </div>
-<div class="title">図 2.46 10フレーム目がスペアの場合</div>
+<div class="title">図 2.3 10フレーム目がスペアの場合</div>
 </div>
 <div class="paragraph">
 <p>ゲームスコアをこのように構成しておくと、10フレーム目も、通常フレームの組み合わせによってボーナスも計算できます。
@@ -2142,14 +717,14 @@ astah* では、複数のモデル図をまとめてたモデルファイルを�
 <div class="paragraph">
 <p>10フレーム目の1投目がストライクの場合、10フレーム目をストライクとした上で、もう2投追加されます。
 これを、10フレーム目に加えて、11フレーム目の1投目と2投目が追加されたとみなします。
-つまり、ゲームスコアのデータを「 <a href="#ten_one_strike_service">図 2.47</a> 」のように構成します。
+つまり、ゲームスコアのデータを「 <a href="#ten_one_strike_service">図 2.4</a> 」のように構成します。
 だたし、11フレーム目の1投目がストライクの場合は、同じ2投追加でも次の「2投目もストライクの場合」の考え方を使います。</p>
 </div>
 <div id="ten_one_strike_service" class="imageblock">
 <div class="content">
 <img src="images/ten_one_strike_combo.png" alt="ten one strike combo" width="50%">
 </div>
-<div class="title">図 2.47 10フレーム目の1投目がストライクの場合</div>
+<div class="title">図 2.4 10フレーム目の1投目がストライクの場合</div>
 </div>
 <div class="paragraph">
 <p>ゲームスコアをこのように構成しておくと、10フレーム目も、通常フレームの組み合わせによってボーナスも計算できます。
@@ -2161,14 +736,14 @@ astah* では、複数のモデル図をまとめてたモデルファイルを�
 <div class="paragraph">
 <p>10フレーム目の2投目もストライクの場合、10フレーム目、11フレーム目をストライクとした上で、もう1投追加されます。
 これを、10フレーム目、11フレーム目に加えて、12フレーム目の1投目が追加されたとみなします。
-つまり、ゲームスコアのデータを「 <a href="#ten_two_strike_service">図 2.48</a> 」のように構成します。
+つまり、ゲームスコアのデータを「 <a href="#ten_two_strike_service">図 2.5</a> 」のように構成します。
 このように構成すれば、通常のフレームでダブルをとったときの計算方法（ストライクが続いたときはさらに次のフレームの1投目が2投目として加算される）のままで10フレーム目のボーナスが計算できます。</p>
 </div>
 <div id="ten_two_strike_service" class="imageblock">
 <div class="content">
 <img src="images/ten_two_strike_combo.png" alt="ten two strike combo" width="50%">
 </div>
-<div class="title">図 2.48 10フレーム目の2投目もストライクの場合</div>
+<div class="title">図 2.5 10フレーム目の2投目もストライクの場合</div>
 </div>
 <div class="paragraph">
 <p>ゲームスコアをこのように構成しておくと、10フレーム目も、通常フレームの組み合わせによってボーナスも計算できます。
@@ -2178,7 +753,7 @@ astah* では、複数のモデル図をまとめてたモデルファイルを�
 </div>
 </div>
 <div class="sect2">
-<h3 id="_解決したいのはゲームの進行とスコアの計算"><a class="anchor" href="#_解決したいのはゲームの進行とスコアの計算"></a>2.4 解決したいのはゲームの進行とスコアの計算</h3>
+<h3 id="_解決したいのはゲームの進行とスコアの計算"><a class="anchor" href="#_解決したいのはゲームの進行とスコアの計算"></a>2.2 解決したいのはゲームの進行とスコアの計算</h3>
 <div class="paragraph">
 <p>ユースケース吟味した結果、自動化によって解決したかったのは、ゲームの状態を把握することで「ゲームを進める」ときのスコアラーの入力を簡便にすることだとわかりました。
 また、「スコアを計算する」こと、とりわけ「ストライクボーナスやスペアボーナスのを計算すること」だとわかりました。</p>
@@ -2803,7 +1378,7 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="ulist">
 <ul>
 <li>
-<p>スペアボーナスとストライクボーナスに設定する値は、ユースケース記述「 <a href="#use_case_desc08">リスト3</a> 」に記述した方法を使って求める。</p>
+<p>スペアボーナスとストライクボーナスに設定する値は、ユースケース記述「 <a href="#use_case_desc08">[use_case_desc08]</a> 」に記述した方法を使って求める。</p>
 </li>
 </ul>
 </div>
@@ -3307,7 +1882,7 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 </div>
 <div class="paragraph">
 <p>ステートマシン図を使って振る舞いを考える時、最初に考えるのは「何が起きるのを待っているのか」です。
-ユースケース記述「 <a href="#use_case_desc08">リスト3</a> を読むと、ゲームを始めた段階では、「1投目のピン数を受け取るのを待っている」と考えればよさそうです。</p>
+ユースケース記述「 <a href="#use_case_desc08">[use_case_desc08]</a> を読むと、ゲームを始めた段階では、「1投目のピン数を受け取るのを待っている」と考えればよさそうです。</p>
 </div>
 <div class="paragraph">
 <p>まず、ステートマシン図に状態と状態遷移を追加しましょう。</p>
@@ -3407,7 +1982,7 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <h4 id="_アクションを追加する"><a class="anchor" href="#_アクションを追加する"></a>4.2.4 アクションを追加する</h4>
 <div class="paragraph">
 <p>次に考えるのは、イベントが起きたときに実行したい処理（アクション）です。
-1投目のピン数を受け取るのを待っているときにやりたい処理は、ユースケース記述「 <a href="#use_case_desc08">リスト3</a> 」の「現在の状態が、1投目のピン数入力待ちのとき」に書いてある処理です。
+1投目のピン数を受け取るのを待っているときにやりたい処理は、ユースケース記述「 <a href="#use_case_desc08">[use_case_desc08]</a> 」の「現在の状態が、1投目のピン数入力待ちのとき」に書いてある処理です。
 アクションに記載する処理と次の状態への遷移がわかるよう、抜粋した記述に説明を追加しておきました（ <a href="#use_case_desc08_sub01">「現在の状態が、1投目のピン数入力待ちのとき」の処理（ユースケース記述より抜粋）</a> ）。</p>
 </div>
 <div id="use_case_desc08_sub01" class="openblock">
@@ -3607,7 +2182,7 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="sect3">
 <h4 id="_イベントとアクションの追加を繰り返す"><a class="anchor" href="#_イベントとアクションの追加を繰り返す"></a>4.2.6 イベントとアクションの追加を繰り返す</h4>
 <div class="paragraph">
-<p>引き続き、ユースケース記述「 <a href="#use_case_desc08">リスト3</a> 」を参照して、イベントとアクションを追加します。</p>
+<p>引き続き、ユースケース記述「 <a href="#use_case_desc08">[use_case_desc08]</a> 」を参照して、イベントとアクションを追加します。</p>
 </div>
 <div class="paragraph">
 <p>1投目のピン数を受け取った状態では、起きるのを待っているできごとは「2投目のピン数を受け取る」ことです。
@@ -3681,7 +2256,7 @@ astah* で「オブジェクト図」を作成するときは「クラス図」�
 <div class="sect3">
 <h4 id="_ストライクの処理を追加する"><a class="anchor" href="#_ストライクの処理を追加する"></a>4.2.7 ストライクの処理を追加する</h4>
 <div class="paragraph">
-<p>「1投目のピン数を受け取った」あとの処理の詳細は、ユースケース記述「 <a href="#use_case_desc08">リスト3</a> 」の「1投目のスコアを計算する」に書いてあります。これを「 <a href="#act01">1投目のスコアを計算する処理の詳細</a> 」に抜粋しておきます。</p>
+<p>「1投目のピン数を受け取った」あとの処理の詳細は、ユースケース記述「 <a href="#use_case_desc08">[use_case_desc08]</a> 」の「1投目のスコアを計算する」に書いてあります。これを「 <a href="#act01">1投目のスコアを計算する処理の詳細</a> 」に抜粋しておきます。</p>
 </div>
 <div id="act01" class="olist arabic">
 <div class="title">1投目のスコアを計算する処理の詳細</div>
@@ -4141,11 +2716,11 @@ Frameクラスに、スペアかどうか判定する操作「 spare? 」を追�
 <h2 id="_colophon"><a class="anchor" href="#_colophon"></a>奥付</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>「モデルを使って ソフトウェアを開発しよう: astah* を使った UMLチュートリアル」</p>
+<p>「モデルを使ってソフトウェアを開発しよう」</p>
 </div>
 <div class="paragraph">
-<p>発行日 : 2022-01-17<br>
-バージョン : html_0119<br>
+<p>発行日 : 2022-01-27<br>
+バージョン : html_0131<br>
 作成者 : 株式会社チェンジビジョン<br>
 本書の内容に関する質問等がありましたら、作成者までお知らせください。</p>
 </div>
@@ -4154,7 +2729,7 @@ Frameクラスに、スペアかどうか判定する操作「 spare? 」を追�
 </div>
 <div id="footer">
 <div id="footer-text">
-バージョン html_0119<br>
+バージョン html_0131<br>
 最終更新 2022-01-17 06:53:14 +0900
 </div>
 </div>

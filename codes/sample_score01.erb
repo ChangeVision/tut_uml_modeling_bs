@@ -1,0 +1,114 @@
+<%# encoding: utf-8 %>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="scoresheet.css">
+  <title>ボウリングスコアサンプル</title>
+</head>
+<body>
+<h1>ボウリングスコアサンプル</h1>
+
+
+<%
+score1 = { name: "くぼあき",
+  pins: [ '6', '3', '9', '-', 'G', '3', '8', 'P', '7', 'P', 'S', ' ', '9', 'P', '8S', 'F', 'S', ' ', 'S', '6', 'P'  ],
+  score: [ 9, 18, 21, 38, 58, 78, 96, 104, 130, 150 ],
+  total:  '150/150'
+}
+
+  score2 = { name: "うえはら",
+  pins: [ 'S', ' ', 'S', ' ', 'S', ' ', '8S', 'P', 'F', '8', '9', 'F', 'S', ' ', '8', '-', 'G', '9', 'S', ' '  ],
+  score: [ 30, 60, 90, 108, 116, 125, 155, 163, 172, 202 ],
+  total:  '202/202'
+}
+
+def pins2symbol(pins)
+  case pins
+  when 'S'
+    return '<div class="strike"></div>'  
+    # return '<img class="img-size" src="../images/strike.png" alt="strike" title="ストライク">'
+#  when 'G'
+#    return '<img class="img-size" src="../images/gutter.png" alt="gutter" title="ガター">'
+   when 'P'
+     return '<div class="spare"></div>'
+    # return '<img class="img-size" src="../images/spare.png" alt="spare" title="スペア">'
+#  when 'F'
+#    return '<img class="img-size" src="../images/foul.png" alt="foul" title="ファール">'
+  when '-'
+    return '―'  # dash '<img class="img-size" src="../images/miss.png" alt="miss" title="ミス">'
+  else
+    if pins[1] == 'S'
+       return "<div class=\"split\"><span>#{pins[0]}</span></div>"
+    else
+      return pins
+    end
+  end
+end
+%>
+<h2>従来のボウリングスコアサンプル</h2>
+
+<table>
+  <tr>
+    <th class="username">名前</th>
+    <% 9.times do |i| %>
+      <th colspan="2"><%= i + 1 %></th>
+    <% end %>
+    <th colspan="3"><%= 10 %></th>
+    <th class="total">Total</th>
+  </tr>
+  <tr>
+    <td class="username" rowspan="2"><%= score1[:name]%></td>
+    <% 10.times do |i| %>
+      <%  n = 2 * i %>
+    <td class="first"><%= pins2symbol(score1[:pins][n]) %> </td>
+    <td class="second">
+        <%  n = n + 1 %>
+      <%= pins2symbol(score1[:pins][n]) %>
+    </td>
+    <%  end %>
+    <% n = 2 * 10 %>
+    <td class="second"><%= pins2symbol(score1[:pins][n]) %></td>
+    <td class="total" rowspan="2"><%= score1[:total] %></td>
+  </tr>
+  <tr>
+    <% 9.times do |i| %>
+      <td class="score" colspan="2"><%= score1[:score][i] %></td>
+    <% end %>
+    <td class="score" colspan="3"><%= score1[:score].last %></td>
+  </tr>
+</table>
+<hr>
+
+<h2>カレントフレームスコアリングのサンプル</h2>
+
+<table>
+  <tr>
+    <th class="username">名前</th>
+    <% 10.times do |i| %>
+      <th colspan="2"><%= i + 1 %></th>
+    <% end %>
+    <th class="total">Total</th>
+  </tr>
+  <tr>
+    <td class="username" rowspan="2"><%= score2[:name]%></td>
+    <% 10.times do |i| %>
+      <%  n = 2 * i %>
+    <td class="first"><%= pins2symbol(score2[:pins][n]) %> </td>
+    <td class="second">
+        <%  n = n + 1 %>
+      <%= pins2symbol(score2[:pins][n]) %>
+    </td>
+    <%  end %>
+    <td class="total" rowspan="2"><%= score2[:total] %></td>
+  </tr>
+  <tr>
+    <% 10.times do |i| %>
+      <td class="score" colspan="2"><%= score2[:score][i] %></td>
+    <% end %>
+  </tr>
+</table>
+
+<hr>
+</body>
+</html>

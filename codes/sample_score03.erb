@@ -1,0 +1,135 @@
+<%# encoding: utf-8 %>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="scoresheet.css">
+  <title>ボウリングスコアサンプル</title>
+</head>
+<body>
+<h1>スコアシートのサンプル（クラッシクスコアリング）</h1>
+
+<%
+# S:ストライク, P:スペア, G:ガター, F:ファウル, -:ミス, 2文字目のS:スプリット, 2文字目のC:現在のフレーム
+score_data = [
+  { name: "くぼあき",
+    pins: [ 7, '-', 5, 'P', 'S', ' ', 'S', ' ', 5, 4, 'S', ' ', 7, 'P', 5, 4, 7, 'P', 7, 'P', 4  ],
+    score: [ 7, 27, 52, 71, 80, 100, 115, 124, 141, 155  ],
+    total:  '155'
+  },
+  { name: "うえはら",
+    pins: [ 6, 3, 9, '-', 'G', 3, 8, 'P', 7, 'P', 'S', ' ', 9, 'P', '8S', '-', 'S', ' ', 6, 3, ' '  ],
+    score: [ 9, 18, 21, 38, 58, 78, 96, 104, 123, 132 ],
+    total:  '132' 
+  },
+  { name: "くぼあき",
+    pins: [ '6', '3', '9', '-', 'G', '3', '8', 'P', '7', 'P', '3C', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '  ],
+    score: [ 9, 18, 21, 38, 51, ' ', ' ', ' ', ' ', ' '  ],
+    total:  '51'
+  },
+  { name: "うえはら",
+    pins: [ 'S', ' ', '8', 'P', '7', '2', 'S', ' ', 'S', ' ', ' C', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '  ],
+    score: [ 20, 37, 46, ' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
+    total:  '46' 
+  }
+]
+
+def pins2symbol(pins)
+  case pins
+  when 'S'
+    return '<div class="strike"></div>'  
+    # return '<img class="img-size" src="../images/strike.png" alt="strike" title="ストライク">'
+#  when 'G'
+#    return '<img class="img-size" src="../images/gutter.png" alt="gutter" title="ガター">'
+   when 'P'
+     return '<div class="spare"></div>'
+    # return '<img class="img-size" src="../images/spare.png" alt="spare" title="スペア">'
+#  when 'F'
+#    return '<img class="img-size" src="../images/foul.png" alt="foul" title="ファウル">'
+  when '-'
+    return '―'  # dash '<img class="img-size" src="../images/miss.png" alt="miss" title="ミス">'
+  else
+    if pins[1] == 'S'
+       return "<div class=\"split\"><span>#{pins[0]}</span></div>"
+    elsif pins[1] == 'C'
+       return pins[0]
+    else
+      return pins
+    end
+  end
+end
+
+def current(pins_array)
+  n = pins_array.index {|v| v[-1] == 'C'}
+  return 0 if n.nil?
+
+  n / 2 + 1
+end
+%>
+<h2>プレイ開始：<%= Time.now.strftime('%Y年%m月%d日 %H時%M分') %></h2>
+<% score_data.each_slice(2)do |score1, score2| %>
+<table>
+  <tr>
+    <th class="username">名前</th>
+    <% c = current(score1[:pins]) %>
+    <% (1 .. 9).each do |i| %>
+      <% if i == c %>
+        <th class="current"colspan="2"><%= i %></th>
+      <% else %>
+        <th colspan="2"><%= i %></th>
+      <% end %>
+    <% end %>
+    <% if 10 == c %>
+      <th class="current-ten" colspan="3"><%= 10 %></th>
+    <% else %>
+      <th class="ten" colspan="3"><%= 10 %></th>
+    <% end %>
+    <th class="total">Total</th>
+  </tr>
+
+  <tr>
+    <td class="username" rowspan="2"><%= score1[:name]%></td>
+    <% 10.times do |i| %>
+      <%  n = 2 * i %>
+    <td class="first"><%= pins2symbol(score1[:pins][n]) %> </td>
+    <td class="second">
+        <%  n = n + 1 %>
+      <%= pins2symbol(score1[:pins][n]) %>
+    </td>
+    <%  end %>
+    <% n = 2 * 10 %>
+    <td class="second"><%= pins2symbol(score1[:pins][n]) %></td>
+    <td class="total" rowspan="2"><%= score1[:total] %></td>
+  </tr>
+  <tr>
+    <% 9.times do |i| %>
+      <td class="score" colspan="2"><%= score1[:score][i] %></td>
+    <% end %>
+    <td class="score" colspan="3"><%= score1[:score].last %></td>
+  </tr>
+
+  <tr>
+    <td class="username" rowspan="2"><%= score2[:name]%></td>
+    <% 10.times do |i| %>
+      <%  n = 2 * i %>
+    <td class="first"><%= pins2symbol(score2[:pins][n]) %> </td>
+    <td class="second">
+        <%  n = n + 1 %>
+      <%= pins2symbol(score2[:pins][n]) %>
+    </td>
+    <%  end %>
+    <% n = 2 * 10 %>
+    <td class="second"><%= pins2symbol(score2[:pins][n]) %></td>
+    <td class="total" rowspan="2"><%= score2[:total] %></td>
+  </tr>
+  <tr>
+    <% 9.times do |i| %>
+      <td class="score" colspan="2"><%= score2[:score][i] %></td>
+    <% end %>
+    <td class="score" colspan="3"><%= score2[:score].last %></td>
+  </tr>
+</table>
+
+<% end %>
+</body>
+</html>

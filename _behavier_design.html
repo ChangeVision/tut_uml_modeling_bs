@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.16">
+<meta name="generator" content="Asciidoctor 2.0.17">
 <meta name="description" content="この文書は、モデリングツールにastah*を使って、ソフトウェアの開発にUMLを使う方法について学ぶチュートリアルです。">
 <meta name="author" content="株式会社チェンジビジョン">
-<title>モデルを使って ソフトウェアを開発しよう: astah* を使った UMLチュートリアル</title>
+<title>モデルを使ってソフトウェアを開発しよう</title>
 <link rel="stylesheet" href="css/mystyle.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
@@ -17,36 +17,38 @@
 </head>
 <body id="_behavier_design" class="book toc2 toc-left">
 <div id="header">
-<h1>モデルを使って ソフトウェアを開発しよう: astah* を使った UMLチュートリアル</h1>
+<h1>モデルを使ってソフトウェアを開発しよう</h1>
 <div class="details">
 <span id="author" class="author">株式会社チェンジビジョン</span><br>
-<span id="revnumber">バージョン html_0120,</span>
-<span id="revdate">2022-01-17</span>
+<span id="revnumber">バージョン html_0166,</span>
+<span id="revdate">2022-01-28</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">目次</div>
-<p><span class="toc-root"><a href="uml_tutorial.html">モデルを使って ソフトウェアを開発しよう: astah* を使った UMLチュートリアル</a></span></p><ul class="sectlevel1">
+<p><span class="toc-root"><a href="uml_tutorial.html">モデルを使ってソフトウェアを開発しよう</a></span></p><ul class="sectlevel1">
 <li><a href="_preface.html">はじめに</a>
 </li>
 <li><a href="_copyright.html">注意事項</a>
 </li>
 <li><a href="_preparation.html">1 準備</a>
 </li>
-<li><a href="_requirement_anaylysis.html">2 解決したい課題はなにか</a>
+<li><a href="_requirement_anaylysis.html">2 スコアのデータ構造を調べる</a>
 </li>
-<li><a href="_structure_design.html">3 スコアの構造を図にする</a>
+<li><a href="_スコアの状態を調べる.html">3 スコアの状態を調べる</a>
 </li>
-<li><a href="_behavier_design.html"><span class="toc-current">4 スコア記録の振る舞いを図にする</span></a>
+<li><a href="_structure_design.html">4 スコアの構造を図にする</a>
+</li>
+<li><a href="_behavier_design.html"><span class="toc-current">5 スコア記録の振る舞いを図にする</span></a>
 <ul class="sectlevel2">
-<li><a href="_behavier_design.html#_振る舞いの図を選択する">4.1 振る舞いの図を選択する</a>
+<li><a href="_behavier_design.html#_振る舞いの図を選択する">5.1 振る舞いの図を選択する</a>
 </li>
-<li><a href="_behavier_design.html#_ステートマシン図を描く">4.2 ステートマシン図を描く</a>
+<li><a href="_behavier_design.html#_ステートマシン図を描く">5.2 ステートマシン図を描く</a>
 </li>
 </ul>
 </li>
-<li><a href="_summary.html">5 まとめ</a>
+<li><a href="_summary.html">6 まとめ</a>
 </li>
-<li><a href="_other_diagrams.html">6 他の図、他の機能など</a>
+<li><a href="_other_diagrams.html">7 他の図、他の機能など</a>
 </li>
 <li><a href="_appendix-01.html">付録 A: 関連資料、ワークシート等</a>
 </li>
@@ -61,18 +63,18 @@
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_behavier_design"><a class="anchor" href="#_behavier_design"></a>4 スコア記録の振る舞いを図にする</h2>
+<h2 id="_behavier_design"><a class="anchor" href="#_behavier_design"></a>5 スコア記録の振る舞いを図にする</h2>
 <div class="sectionbody">
 <div class="paragraph lead">
 <p>スコアの構造を検討できたので、こんどは、ゲームを進めるときの動作をモデル図を使って整理してみましょう。</p>
 </div>
 <div class="sect2">
-<h3 id="_振る舞いの図を選択する"><a class="anchor" href="#_振る舞いの図を選択する"></a>4.1 振る舞いの図を選択する</h3>
+<h3 id="_振る舞いの図を選択する"><a class="anchor" href="#_振る舞いの図を選択する"></a>5.1 振る舞いの図を選択する</h3>
 <div class="paragraph">
-<p>振る舞いを表す図には「 <a href="_behavier_design.html#behaiver_diagrams">表 4.1</a> 」に挙げたようなものがあります。</p>
+<p>振る舞いを表す図には「 <a href="_behavier_design.html#behaiver_diagrams">表 5.1</a> 」に挙げたようなものがあります。</p>
 </div>
 <table id="behaiver_diagrams" class="tableblock frame-all grid-all stretch">
-<caption class="title">表 4.1 よく使う振舞いのモデル図</caption>
+<caption class="title">表 5.1 よく使う振舞いのモデル図</caption>
 <colgroup>
 <col style="width: 20%;">
 <col style="width: 80%;">
@@ -139,7 +141,7 @@
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ステートマシン図を描く"><a class="anchor" href="#_ステートマシン図を描く"></a>4.2 ステートマシン図を描く</h3>
+<h3 id="_ステートマシン図を描く"><a class="anchor" href="#_ステートマシン図を描く"></a>5.2 ステートマシン図を描く</h3>
 <div class="paragraph">
 <p>では、「GameScore」クラスの操作「scoring」の動作を検討するために、ステートマシン図を作成しましょう。</p>
 </div>
@@ -148,7 +150,7 @@
 この演習では「ピンの入力を待っていてピン数が入力されたらスコアを計算する」という考え方に従って振る舞いを考えてみましょう。</p>
 </div>
 <div class="sect3">
-<h4 id="_設計モデルにステートマシン図を追加する"><a class="anchor" href="#_設計モデルにステートマシン図を追加する"></a>4.2.1 設計モデルにステートマシン図を追加する</h4>
+<h4 id="_設計モデルにステートマシン図を追加する"><a class="anchor" href="#_設計モデルにステートマシン図を追加する"></a>5.2.1 設計モデルにステートマシン図を追加する</h4>
 <div class="paragraph">
 <p>まず、「ゲームスコアのステートマシン図」を追加しましょう。
 追加したいのは「GameScore」クラスの振舞いを表すステートマシン図なので、それがわかるよう「GameScore」クラスに対して追加しましょう。</p>
@@ -159,7 +161,7 @@
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>「GameScore」クラスにステートマシン図を追加する（ <a href="_behavier_design.html#stm00">図 4.1</a> ）。</p>
+<p>「GameScore」クラスにステートマシン図を追加する（ <a href="_behavier_design.html#stm00">図 5.1</a> ）。</p>
 </li>
 </ol>
 </div>
@@ -167,12 +169,12 @@
 <div class="content">
 <img src="images/stm00.png" alt="stm00" width="50%">
 </div>
-<div class="title">図 4.1 「GameScore」クラスにステートマシン図を追加する</div>
+<div class="title">図 5.1 「GameScore」クラスにステートマシン図を追加する</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="2">
 <li>
-<p>追加した図を「GmaeScoreのscoringのステートマシン図」とする（ <a href="_behavier_design.html#stm01">図 4.2</a> ）。</p>
+<p>追加した図を「GmaeScoreのscoringのステートマシン図」とする（ <a href="_behavier_design.html#stm01">図 5.2</a> ）。</p>
 </li>
 </ol>
 </div>
@@ -180,13 +182,13 @@
 <div class="content">
 <img src="images/stm01.png" alt="stm01" width="75%">
 </div>
-<div class="title">図 4.2 追加した図を「GameScoreのscoringのステートマシン図」とした</div>
+<div class="title">図 5.2 追加した図を「GameScoreのscoringのステートマシン図」とした</div>
 </div>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_状態と状態遷移を追加する"><a class="anchor" href="#_状態と状態遷移を追加する"></a>4.2.2 状態と状態遷移を追加する</h4>
+<h4 id="_状態と状態遷移を追加する"><a class="anchor" href="#_状態と状態遷移を追加する"></a>5.2.2 状態と状態遷移を追加する</h4>
 <div class="admonitionblock important">
 <table>
 <tr>
@@ -206,7 +208,7 @@
 </div>
 <div class="paragraph">
 <p>ステートマシン図を使って振る舞いを考える時、最初に考えるのは「何が起きるのを待っているのか」です。
-ユースケース記述「 <a href="_requirement_anaylysis.html#use_case_desc08">リスト3</a> を読むと、ゲームを始めた段階では、「1投目のピン数を受け取るのを待っている」と考えればよさそうです。</p>
+ユースケース記述「 <a href="#use_case_desc08">[use_case_desc08]</a> を読むと、ゲームを始めた段階では、「1投目のピン数を受け取るのを待っている」と考えればよさそうです。</p>
 </div>
 <div class="paragraph">
 <p>まず、ステートマシン図に状態と状態遷移を追加しましょう。</p>
@@ -219,7 +221,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>パレットから「状態」のシンボルを選択して、図に配置する（ <a href="_behavier_design.html#stm02">図 4.3</a> ）。</p>
+<p>パレットから「状態」のシンボルを選択して、図に配置する（ <a href="_behavier_design.html#stm02">図 5.3</a> ）。</p>
 </li>
 <li>
 <p>一方の状態には、最初の状態だとわかるよう「開始疑似状態」をつける。</p>
@@ -233,7 +235,7 @@
 <div class="content">
 <img src="images/stm02.png" alt="stm02" width="50%">
 </div>
-<div class="title">図 4.3 状態と開始疑似状態を追加した</div>
+<div class="title">図 5.3 状態と開始疑似状態を追加した</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="2">
@@ -245,13 +247,13 @@
 <p>パレットから「遷移」のシンボルを選択して、一方の状態にマウスカーソルを移動する。</p>
 </li>
 <li>
-<p>青い枠が現れたら、マウスをクリックし、そのままドラッグする（ <a href="_behavier_design.html#stm03">図 4.4</a> ）。</p>
+<p>青い枠が現れたら、マウスをクリックし、そのままドラッグする（ <a href="_behavier_design.html#stm03">図 5.4</a> ）。</p>
 </li>
 <li>
 <p>折り曲げたいときは途中でもマウスをクリックする。</p>
 </li>
 <li>
-<p>もう一方の状態の中にマウスを移動して青い枠が現れたらマウスを離すと、「遷移」が引かれる（ <a href="_behavier_design.html#stm04">図 4.5</a> ）。</p>
+<p>もう一方の状態の中にマウスを移動して青い枠が現れたらマウスを離すと、「遷移」が引かれる（ <a href="_behavier_design.html#stm04">図 5.5</a> ）。</p>
 </li>
 </ul>
 </div>
@@ -262,17 +264,17 @@
 <div class="content">
 <img src="images/stm03.png" alt="stm03" width="50%">
 </div>
-<div class="title">図 4.4 状態と状態の間に遷移を追加する</div>
+<div class="title">図 5.4 状態と状態の間に遷移を追加する</div>
 </div>
 <div id="stm04" class="imageblock">
 <div class="content">
 <img src="images/stm04.png" alt="stm04" width="50%">
 </div>
-<div class="title">図 4.5 状態と状態の間に遷移を追加した</div>
+<div class="title">図 5.5 状態と状態の間に遷移を追加した</div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_イベントを追加する"><a class="anchor" href="#_イベントを追加する"></a>4.2.3 イベントを追加する</h4>
+<h4 id="_イベントを追加する"><a class="anchor" href="#_イベントを追加する"></a>5.2.3 イベントを追加する</h4>
 <div class="paragraph">
 <p>状態遷移が追加できたら、最初の状態で起きるのを待っているできごとを考えて、イベントとして追加しましょう。</p>
 </div>
@@ -288,7 +290,7 @@
 <div class="title">イベント「ピン数を受け取った」を追加する</div>
 <ol class="arabic">
 <li>
-<p>追加した遷移を選択した状態で、プロパティの「トリガー」を編集して「ピン数を受け取った」とする（ <a href="_behavier_design.html#stm05">図 4.6</a> ）。</p>
+<p>追加した遷移を選択した状態で、プロパティの「トリガー」を編集して「ピン数を受け取った」とする（ <a href="_behavier_design.html#stm05">図 5.6</a> ）。</p>
 </li>
 <li>
 <p>受け取るピン数がわかるよう、ピン数をパラメータとして追加しておいた。</p>
@@ -299,14 +301,14 @@
 <div class="content">
 <img src="images/stm05.png" alt="stm05" width="75%">
 </div>
-<div class="title">図 4.6 イベント「1投目のピン数を受け取った」を追加した</div>
+<div class="title">図 5.6 イベント「1投目のピン数を受け取った」を追加した</div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_アクションを追加する"><a class="anchor" href="#_アクションを追加する"></a>4.2.4 アクションを追加する</h4>
+<h4 id="_アクションを追加する"><a class="anchor" href="#_アクションを追加する"></a>5.2.4 アクションを追加する</h4>
 <div class="paragraph">
 <p>次に考えるのは、イベントが起きたときに実行したい処理（アクション）です。
-1投目のピン数を受け取るのを待っているときにやりたい処理は、ユースケース記述「 <a href="_requirement_anaylysis.html#use_case_desc08">リスト3</a> 」の「現在の状態が、1投目のピン数入力待ちのとき」に書いてある処理です。
+1投目のピン数を受け取るのを待っているときにやりたい処理は、ユースケース記述「 <a href="#use_case_desc08">[use_case_desc08]</a> 」の「現在の状態が、1投目のピン数入力待ちのとき」に書いてある処理です。
 アクションに記載する処理と次の状態への遷移がわかるよう、抜粋した記述に説明を追加しておきました（ <a href="_behavier_design.html#use_case_desc08_sub01">「現在の状態が、1投目のピン数入力待ちのとき」の処理（ユースケース記述より抜粋）</a> ）。</p>
 </div>
 <div id="use_case_desc08_sub01" class="openblock">
@@ -365,7 +367,7 @@
 <div class="title">「1投目のピン数入力待ちのとき」のアクションを追加する</div>
 <ol class="arabic">
 <li>
-<p>「Frame」クラスに、操作「first_action」を追加する（ <a href="_behavier_design.html#class20">図 4.7</a> ）。</p>
+<p>「Frame」クラスに、操作「first_action」を追加する（ <a href="_behavier_design.html#class20">図 5.7</a> ）。</p>
 <div class="ulist">
 <ul>
 <li>
@@ -380,12 +382,12 @@
 <div class="content">
 <img src="images/class20.png" alt="class20" width="50%">
 </div>
-<div class="title">図 4.7 Frameクラスに操作「first_action」を追加した</div>
+<div class="title">図 5.7 Frameクラスに操作「first_action」を追加した</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="2">
 <li>
-<p>追加した操作をアクションに追加する（ <a href="_behavier_design.html#stm06">図 4.8</a> ）。</p>
+<p>追加した操作をアクションに追加する（ <a href="_behavier_design.html#stm06">図 5.8</a> ）。</p>
 <div class="ulist">
 <ul>
 <li>
@@ -409,7 +411,7 @@
 <div class="content">
 <img src="images/stm06.png" alt="stm06" width="100%">
 </div>
-<div class="title">図 4.8 アクション「first_action」を状態に追加した</div>
+<div class="title">図 5.8 アクション「first_action」を状態に追加した</div>
 </div>
 <div class="paragraph">
 <p>そして、「 <a href="_behavier_design.html#use_case_desc08_sub01">「現在の状態が、1投目のピン数入力待ちのとき」の処理（ユースケース記述より抜粋）</a> 」の後半部分、次の状態への遷移を追加します。
@@ -418,7 +420,7 @@
 このときは、2投目のピン数を受け取るのを待つことになりますので、そのための状態遷移とイベントを追加します。</p>
 </div>
 <div class="olist arabic">
-<div class="title">2投目のピン数入力待ちに遷移する状態遷移を追加する（ <a href="_behavier_design.html#stm07">図 4.9</a> ）。</div>
+<div class="title">2投目のピン数入力待ちに遷移する状態遷移を追加する（ <a href="_behavier_design.html#stm07">図 5.9</a> ）。</div>
 <ol class="arabic">
 <li>
 <p>新しい状態を追加する。</p>
@@ -432,11 +434,11 @@
 <div class="content">
 <img src="images/stm07.png" alt="{three-quarters-width">
 </div>
-<div class="title">図 4.9 2投目のピン数入力待ちに遷移する状態遷移を追加した</div>
+<div class="title">図 5.9 2投目のピン数入力待ちに遷移する状態遷移を追加した</div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_ストライクのときの状態遷移を追加する"><a class="anchor" href="#_ストライクのときの状態遷移を追加する"></a>4.2.5 ストライクのときの状態遷移を追加する</h4>
+<h4 id="_ストライクのときの状態遷移を追加する"><a class="anchor" href="#_ストライクのときの状態遷移を追加する"></a>5.2.5 ストライクのときの状態遷移を追加する</h4>
 <div class="paragraph">
 <p>では、ストライクだったときはどうしたらよいでしょうか。
 このときは、「1投目のピン数入力待ちのとき」のアクションを実行した上で、次のフレームの1投目のピン数を受け取るのを待つことになります。
@@ -444,7 +446,7 @@
 この状態遷移を追加してみましょう。</p>
 </div>
 <div class="olist arabic">
-<div class="title">ストライクだったときの状態遷移を追加する（ <a href="_behavier_design.html#stm07-2">図 4.10</a> ）。</div>
+<div class="title">ストライクだったときの状態遷移を追加する（ <a href="_behavier_design.html#stm07-2">図 5.10</a> ）。</div>
 <ol class="arabic">
 <li>
 <p>最初の状態への状態遷移を新しい状態を追加する。</p>
@@ -458,7 +460,7 @@
 <div class="content">
 <img src="images/stm07-2.png" alt="{full-width]">
 </div>
-<div class="title">図 4.10 次の1投目のピン数入力待ちに遷移する状態遷移を追加した（期待通りに動作しない）</div>
+<div class="title">図 5.10 次の1投目のピン数入力待ちに遷移する状態遷移を追加した（期待通りに動作しない）</div>
 </div>
 <div class="paragraph">
 <p>この状態遷移には、待っているイベントがありません。
@@ -479,7 +481,7 @@
 <div class="title">ストライクかどうかで状態遷移を区別する</div>
 <ol class="arabic">
 <li>
-<p>ストライクのきの状態を追加する（ <a href="_behavier_design.html#stm08">図 4.11</a> ）。</p>
+<p>ストライクのきの状態を追加する（ <a href="_behavier_design.html#stm08">図 5.11</a> ）。</p>
 <div class="ulist">
 <ul>
 <li>
@@ -500,13 +502,13 @@
 <div class="content">
 <img src="images/stm08.png" alt="{full-width]">
 </div>
-<div class="title">図 4.11 ストライクのときのために状態を追加した</div>
+<div class="title">図 5.11 ストライクのときのために状態を追加した</div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_イベントとアクションの追加を繰り返す"><a class="anchor" href="#_イベントとアクションの追加を繰り返す"></a>4.2.6 イベントとアクションの追加を繰り返す</h4>
+<h4 id="_イベントとアクションの追加を繰り返す"><a class="anchor" href="#_イベントとアクションの追加を繰り返す"></a>5.2.6 イベントとアクションの追加を繰り返す</h4>
 <div class="paragraph">
-<p>引き続き、ユースケース記述「 <a href="_requirement_anaylysis.html#use_case_desc08">リスト3</a> 」を参照して、イベントとアクションを追加します。</p>
+<p>引き続き、ユースケース記述「 <a href="#use_case_desc08">[use_case_desc08]</a> 」を参照して、イベントとアクションを追加します。</p>
 </div>
 <div class="paragraph">
 <p>1投目のピン数を受け取った状態では、起きるのを待っているできごとは「2投目のピン数を受け取る」ことです。
@@ -528,12 +530,12 @@
 <div class="content">
 <img src="images/class21.png" alt="class21" width="50%">
 </div>
-<div class="title">図 4.12 Frameクラスに操作「roll_second」を追加した</div>
+<div class="title">図 5.12 Frameクラスに操作「roll_second」を追加した</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="2">
 <li>
-<p>イベントとアクションを追加する（ <a href="_behavier_design.html#stm07">図 4.9</a> ）。</p>
+<p>イベントとアクションを追加する（ <a href="_behavier_design.html#stm07">図 5.9</a> ）。</p>
 <div class="ulist">
 <ul>
 <li>
@@ -557,7 +559,7 @@
 <div class="content">
 <img src="images/stm07.png" alt="stm07" width="75%">
 </div>
-<div class="title">図 4.13 アクション「2投目のスコアを計算する」を追加した</div>
+<div class="title">図 5.13 アクション「2投目のスコアを計算する」を追加した</div>
 </div>
 <div class="paragraph">
 <p>そして、もし、ストライクやスペアの処理を勘案しないのであれば、この後は最初の状態に戻ればよいですね。
@@ -567,7 +569,7 @@
 <div class="content">
 <img src="images/stm08.png" alt="stm08" width="75%">
 </div>
-<div class="title">図 4.14 最初の状態に戻る自動遷移を追加した</div>
+<div class="title">図 5.14 最初の状態に戻る自動遷移を追加した</div>
 </div>
 <div class="paragraph">
 <p>この状態遷移にはイベントがありません。このような状態遷移を「自動遷移（ラムダ遷移）」といいます。
@@ -578,9 +580,9 @@
 </div>
 </div>
 <div class="sect3">
-<h4 id="_ストライクの処理を追加する"><a class="anchor" href="#_ストライクの処理を追加する"></a>4.2.7 ストライクの処理を追加する</h4>
+<h4 id="_ストライクの処理を追加する"><a class="anchor" href="#_ストライクの処理を追加する"></a>5.2.7 ストライクの処理を追加する</h4>
 <div class="paragraph">
-<p>「1投目のピン数を受け取った」あとの処理の詳細は、ユースケース記述「 <a href="_requirement_anaylysis.html#use_case_desc08">リスト3</a> 」の「1投目のスコアを計算する」に書いてあります。これを「 <a href="_behavier_design.html#act01">1投目のスコアを計算する処理の詳細</a> 」に抜粋しておきます。</p>
+<p>「1投目のピン数を受け取った」あとの処理の詳細は、ユースケース記述「 <a href="#use_case_desc08">[use_case_desc08]</a> 」の「1投目のスコアを計算する」に書いてあります。これを「 <a href="_behavier_design.html#act01">1投目のスコアを計算する処理の詳細</a> 」に抜粋しておきます。</p>
 </div>
 <div id="act01" class="olist arabic">
 <div class="title">1投目のスコアを計算する処理の詳細</div>
@@ -600,19 +602,19 @@
 </ol>
 </div>
 <div class="paragraph">
-<p>「 <a href="_behavier_design.html#stm08">図 4.11</a> 」には、1投目で10ピン倒してストライクになったときの処理が反映できていません。
+<p>「 <a href="_behavier_design.html#stm08">図 5.11</a> 」には、1投目で10ピン倒してストライクになったときの処理が反映できていません。
 反映するには、ステートマシン図をどのように修正すればよいでしょうか。</p>
 </div>
 <div class="paragraph">
 <p>まず、1投目のピン数を受け取ったら1投目のスコアを計算するのは変わりありません。
 そして、受け取ったピン数が10ピンであったときは、2投目のピン数を受け取るのを待たずに次のフレームへ進みます。
-そのために、たとえば「 <a href="_behavier_design.html#stm09">図 4.15</a> 」のような状態遷移を追加してみたらどうでしょうか。</p>
+そのために、たとえば「 <a href="_behavier_design.html#stm09">図 5.15</a> 」のような状態遷移を追加してみたらどうでしょうか。</p>
 </div>
 <div id="stm09" class="imageblock">
 <div class="content">
 <img src="images/stm09.png" alt="stm09" width="75%">
 </div>
-<div class="title">図 4.15 ストライクのときの状態遷移の検討（1）（期待通りに動作しない）</div>
+<div class="title">図 5.15 ストライクのときの状態遷移の検討（1）（期待通りに動作しない）</div>
 </div>
 <div class="paragraph">
 <p>一見、これでなんとかなりそうに思えます。
@@ -621,13 +623,13 @@
 つまり、ここに自動遷移を書いてしまうと、2投目のピン数を受け取るイベントが来るのを待たなくなってしまうのです。</p>
 </div>
 <div class="paragraph">
-<p>それでは、ストライクで次のフレームへ進むために、別の状態を追加してみます（ <a href="_behavier_design.html#stm10">図 4.16</a> ）。</p>
+<p>それでは、ストライクで次のフレームへ進むために、別の状態を追加してみます（ <a href="_behavier_design.html#stm10">図 5.16</a> ）。</p>
 </div>
 <div id="stm10" class="imageblock">
 <div class="content">
 <img src="images/stm10.png" alt="stm10" width="75%">
 </div>
-<div class="title">図 4.16 ストライクのときの状態遷移の検討（2）（あいまいさが生じる）</div>
+<div class="title">図 5.16 ストライクのときの状態遷移の検討（2）（あいまいさが生じる）</div>
 </div>
 <div class="paragraph">
 <p>これで、「2投目のピン数を受け取るのを待つ」ところには影響がなくなりました。
@@ -677,7 +679,7 @@
 <div class="title">ストライクのときの状態と状態遷移を追加する</div>
 <ol class="arabic">
 <li>
-<p>「Frame」クラスに、操作「strike?」を追加する（ <a href="_behavier_design.html#class22">図 4.17</a> ）。</p>
+<p>「Frame」クラスに、操作「strike?」を追加する（ <a href="_behavier_design.html#class22">図 5.17</a> ）。</p>
 <div class="ulist">
 <ul>
 <li>
@@ -692,12 +694,12 @@
 <div class="content">
 <img src="images/class22.png" alt="class22" width="100%">
 </div>
-<div class="title">図 4.17 Frameクラスに操作「strike?」を追加した</div>
+<div class="title">図 5.17 Frameクラスに操作「strike?」を追加した</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="2">
 <li>
-<p>イベントにガード条件を追加する（ <a href="_behavier_design.html#stm11">図 4.18</a> ）。</p>
+<p>イベントにガード条件を追加する（ <a href="_behavier_design.html#stm11">図 5.18</a> ）。</p>
 <div class="ulist">
 <ul>
 <li>
@@ -724,12 +726,12 @@
 <div class="content">
 <img src="images/stm11.png" alt="stm11" width="100%">
 </div>
-<div class="title">図 4.18 イベントにガード条件を追加した</div>
+<div class="title">図 5.18 イベントにガード条件を追加した</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="3">
 <li>
-<p>ストライクのときの状態を状態遷移を追加する（ <a href="_behavier_design.html#stm12">図 4.19</a> ）。</p>
+<p>ストライクのときの状態を状態遷移を追加する（ <a href="_behavier_design.html#stm12">図 5.19</a> ）。</p>
 <div class="ulist">
 <ul>
 <li>
@@ -750,21 +752,21 @@
 <div class="content">
 <img src="images/stm12.png" alt="stm12" width="75%">
 </div>
-<div class="title">図 4.19 ガード条件を使ってストライクのときの状態と状態遷移を追加した</div>
+<div class="title">図 5.19 ガード条件を使ってストライクのときの状態と状態遷移を追加した</div>
 </div>
 <div class="paragraph">
 <p>これで、同じイベントが起きても、ガード条件の評価結果が異なれば別の状態へ遷移できるようになりました。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_サービスフレームの処理を追加する"><a class="anchor" href="#_サービスフレームの処理を追加する"></a>4.2.8 サービスフレームの処理を追加する</h4>
+<h4 id="_サービスフレームの処理を追加する"><a class="anchor" href="#_サービスフレームの処理を追加する"></a>5.2.8 サービスフレームの処理を追加する</h4>
 <div class="paragraph">
 <p>最終の第10フレームは、3投目を投球できます（サービスフレームと呼ぶこともあるそうです）。
 この処理に対応するにはどうしたらよいでしょうか。</p>
 </div>
 <div class="paragraph">
 <p>まず、最終フレームの3投目のピン数を保持するために、3投できるような Frameクラスを用意しましょう。
-これは、 Frame クラスを継承すれば作成できそうです（ <a href="_behavier_design.html#class08_svg">図 4.20</a> ）。</p>
+これは、 Frame クラスを継承すれば作成できそうです（ <a href="_behavier_design.html#class08_svg">図 5.20</a> ）。</p>
 </div>
 <div class="paragraph">
 <p>そして、最終フレームを追加するのは、通常のフレームと同じように操作 add_frame に任せましょう。
@@ -774,24 +776,24 @@
 <div class="content">
 <img src="images/class08.svg" alt="class08" width="50%">
 </div>
-<div class="title">図 4.20 「ServiceFrame」クラスを追加し、GameScoreクラスに属性「size」を追加した</div>
+<div class="title">図 5.20 「ServiceFrame」クラスを追加し、GameScoreクラスに属性「size」を追加した</div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_スペアの判定を追加する"><a class="anchor" href="#_スペアの判定を追加する"></a>4.2.9 スペアの判定を追加する</h4>
+<h4 id="_スペアの判定を追加する"><a class="anchor" href="#_スペアの判定を追加する"></a>5.2.9 スペアの判定を追加する</h4>
 <div class="paragraph">
 <p>1投目が10ピンでない場合で、2投目で残りのピンをすべて倒した場合は「スペア」になります。
-Frameクラスに、スペアかどうか判定する操作「 spare? 」を追加しておきましょう（ <a href="_behavier_design.html#class09_svg">図 4.21</a> ）。</p>
+Frameクラスに、スペアかどうか判定する操作「 spare? 」を追加しておきましょう（ <a href="_behavier_design.html#class09_svg">図 5.21</a> ）。</p>
 </div>
 <div id="class09_svg" class="imageblock">
 <div class="content">
 <img src="images/class09.svg" alt="class09" width="50%">
 </div>
-<div class="title">図 4.21 Frameクラスに操作「spare?」を追加する</div>
+<div class="title">図 5.21 Frameクラスに操作「spare?」を追加する</div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_状態名をつける"><a class="anchor" href="#_状態名をつける"></a>4.2.10 状態名をつける</h4>
+<h4 id="_状態名をつける"><a class="anchor" href="#_状態名をつける"></a>5.2.10 状態名をつける</h4>
 <div class="paragraph">
 <p><a href="#stm06_svg">[stm06_svg]</a> について、イベントとアクションが決まったので、これらを元に状態名をつけます。
 状態名をつけるときは「 &lt;&lt;state_naming_rules&gt; 」のような原則を使ってつけます。</p>
@@ -842,25 +844,25 @@ Frameクラスに、スペアかどうか判定する操作「 spare? 」を追�
 </div>
 <div class="paragraph">
 <p>それでは、状態名をつけてみましょう。
-1投目については、同じイベントに対する別の状態遷移と状態を追加します（ <a href="_behavier_design.html#stm08_svg">図 4.22</a> ）。</p>
+1投目については、同じイベントに対する別の状態遷移と状態を追加します（ <a href="_behavier_design.html#stm08_svg">図 5.22</a> ）。</p>
 </div>
 <div id="stm08_svg" class="imageblock">
 <div class="content">
 <img src="images/stm08.svg" alt="stm08" width="100%">
 </div>
-<div class="title">図 4.22 状態名をつけた</div>
+<div class="title">図 5.22 状態名をつけた</div>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_structure_design.html">3</a> | ↑ Up: <a href="uml_tutorial.html">モデルを使って ソフトウェアを開発しよう: astah* を使った UMLチュートリアル</a> | Next: <a href="_summary.html">5</a> →</p>
+<p>← Previous: <a href="_structure_design.html">4</a> | ↑ Up: <a href="uml_tutorial.html">モデルを使ってソフトウェアを開発しよう</a> | Next: <a href="_summary.html">6</a> →</p>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-バージョン html_0120<br>
+バージョン html_0166<br>
 最終更新 2022-01-17 06:53:14 +0900
 </div>
 </div>

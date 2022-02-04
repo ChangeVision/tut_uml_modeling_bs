@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.16">
+<meta name="generator" content="Asciidoctor 2.0.17">
 <meta name="description" content="この文書は、モデリングツールにastah*を使って、ソフトウェアの開発にUMLを使う方法について学ぶチュートリアルです。">
 <meta name="author" content="株式会社チェンジビジョン">
-<title>モデルを使って ソフトウェアを開発しよう: astah* を使った UMLチュートリアル</title>
+<title>モデルを使ってソフトウェアを開発しよう</title>
 <link rel="stylesheet" href="css/mystyle.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
@@ -17,22 +17,22 @@
 </head>
 <body id="_preparation" class="book toc2 toc-left">
 <div id="header">
-<h1>モデルを使って ソフトウェアを開発しよう: astah* を使った UMLチュートリアル</h1>
+<h1>モデルを使ってソフトウェアを開発しよう</h1>
 <div class="details">
 <span id="author" class="author">株式会社チェンジビジョン</span><br>
-<span id="revnumber">バージョン html_0120,</span>
-<span id="revdate">2022-01-17</span>
+<span id="revnumber">バージョン html_0166,</span>
+<span id="revdate">2022-01-28</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">目次</div>
-<p><span class="toc-root"><a href="uml_tutorial.html">モデルを使って ソフトウェアを開発しよう: astah* を使った UMLチュートリアル</a></span></p><ul class="sectlevel1">
+<p><span class="toc-root"><a href="uml_tutorial.html">モデルを使ってソフトウェアを開発しよう</a></span></p><ul class="sectlevel1">
 <li><a href="_preface.html">はじめに</a>
 </li>
 <li><a href="_copyright.html">注意事項</a>
 </li>
 <li><a href="_preparation.html"><span class="toc-current">1 準備</span></a>
 <ul class="sectlevel2">
-<li><a href="_preparation.html#_モデリングツール_astah_を用意する">1.1 モデリングツール（ astah* ）を用意する</a>
+<li><a href="_preparation.html#_モデリングツールを用意する">1.1 モデリングツールを用意する</a>
 </li>
 <li><a href="_preparation.html#_実装環境を用意する">1.2 実装環境を用意する</a>
 </li>
@@ -42,15 +42,17 @@
 </li>
 </ul>
 </li>
-<li><a href="_requirement_anaylysis.html">2 解決したい課題はなにか</a>
+<li><a href="_requirement_anaylysis.html">2 スコアのデータ構造を調べる</a>
 </li>
-<li><a href="_structure_design.html">3 スコアの構造を図にする</a>
+<li><a href="_スコアの状態を調べる.html">3 スコアの状態を調べる</a>
 </li>
-<li><a href="_behavier_design.html">4 スコア記録の振る舞いを図にする</a>
+<li><a href="_structure_design.html">4 スコアの構造を図にする</a>
 </li>
-<li><a href="_summary.html">5 まとめ</a>
+<li><a href="_behavier_design.html">5 スコア記録の振る舞いを図にする</a>
 </li>
-<li><a href="_other_diagrams.html">6 他の図、他の機能など</a>
+<li><a href="_summary.html">6 まとめ</a>
+</li>
+<li><a href="_other_diagrams.html">7 他の図、他の機能など</a>
 </li>
 <li><a href="_appendix-01.html">付録 A: 関連資料、ワークシート等</a>
 </li>
@@ -68,49 +70,46 @@
 <h2 id="_preparation"><a class="anchor" href="#_preparation"></a>1 準備</h2>
 <div class="sectionbody">
 <div class="paragraph lead">
-<p>このチュートリアルでは、モデリングツールとして astah* を、実装にはRubyを使います。
+<p>このチュートリアルでは、モデリングツールとして astah* Professional を、実装にはRubyを使います。
 最初に、演習に必要な環境を用意しましょう。</p>
 </div>
 <div class="sect2">
-<h3 id="_モデリングツール_astah_を用意する"><a class="anchor" href="#_モデリングツール_astah_を用意する"></a>1.1 モデリングツール（ astah* ）を用意する</h3>
+<h3 id="_モデリングツールを用意する"><a class="anchor" href="#_モデリングツールを用意する"></a>1.1 モデリングツールを用意する</h3>
 <div class="paragraph">
-<p>このチュートリアルで使用するモデリングツールを用意しましょう。</p>
+<p>このチュートリアルで使用するモデリングツール astah* Professional を用意しましょう。</p>
 </div>
 <div class="paragraph">
-<p>astah* の入手や評価版を含むライセンスの取得方法などについては、
-次のページを参照してください。</p>
+<p>購入前に試用したい場合は、次のページを参照してください。</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="注記"></i>
-</td>
-<td class="content">
-<div class="title">astah* の入手や取得方法に関するページを用意する。</div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">astah*  の取得方法</dt>
+<dt class="hdlist1">astah*製品の評価手順</dt>
 <dd>
-<p><code>URL</code></p>
-</dd>
-<dt class="hdlist1">astah*  のライセンスの入手方法</dt>
-<dd>
-<p><code>URL</code></p>
-</dd>
-<dt class="hdlist1">astah*  のインストール</dt>
-<dd>
-<p><code>URL</code></p>
-</dd>
-<dt class="hdlist1">astah*  のライセンスの追加方法</dt>
-<dd>
-<p><code>URL</code></p>
+<p><code><a href="https://astah.change-vision.com/ja/shopping/evaluate.html" class="bare">https://astah.change-vision.com/ja/shopping/evaluate.html</a></code></p>
 </dd>
 </dl>
 </div>
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>購入する場合は、次のページを参照して、自分に合ったライセンスを選択してください。</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">最適なライセンスを見つける</dt>
+<dd>
+<p><code><a href="https://astah.change-vision.com/ja/shopping/price.html" class="bare">https://astah.change-vision.com/ja/shopping/price.html</a></code></p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>いずれかの方法で、 astah* Professional を入手できたら、次のページを参照して、自分に合ったライセンスを登録してください。</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">ライセンス登録方法</dt>
+<dd>
+<p><code><a href="https://astah.change-vision.com/ja/registry.html" class="bare">https://astah.change-vision.com/ja/registry.html</a></code></p>
+</dd>
+</dl>
 </div>
 </div>
 <div class="sect2">
@@ -135,7 +134,8 @@
 <h3 id="_演習用のプロジェクトを用意する"><a class="anchor" href="#_演習用のプロジェクトを用意する"></a>1.3 演習用のプロジェクトを用意する</h3>
 <div class="paragraph">
 <p>業務やシステムを分析（あるいは設計）するときは、たいてい複数種類のモデル図を使って表します。
-astah* では、複数のモデル図をまとめてたモデルファイルを「プロジェクト」と呼んでいます。</p>
+astah* では、複数のモデル図をまとめてたモデルファイルを「プロジェクト」と呼んでいます。
+「 <a href="_preparation.html#create_proj01">演習で使うプロジェクトを作成する</a> 」に従って、演習用のプロジェクトを用意しましょう。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -159,11 +159,21 @@ astah* では、複数のモデル図をまとめてたモデルファイルを�
 </tr>
 </table>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="ヒント"></i>
+</td>
+<td class="content">
 <div class="paragraph">
-<p>この演習で使うプロジェクトを用意しましょう。
-新規プロジェクトを作成したら、先に名前をつけて保存しておくとよいでしょう。</p>
+<p>新規プロジェクトを作成したら、先に名前をつけて保存しておくとよいでしょう。</p>
 </div>
-<div class="openblock">
+</td>
+</tr>
+</table>
+</div>
+<div id="create_proj01" class="openblock">
 <div class="title">演習で使うプロジェクトを作成する</div>
 <div class="content">
 <div class="olist arabic">
@@ -240,8 +250,8 @@ astah* では、複数のモデル図をまとめてたモデルファイルを�
 <div class="sect2">
 <h3 id="_ボウリングのスコアのつけ方"><a class="anchor" href="#_ボウリングのスコアのつけ方"></a>1.4 ボウリングのスコアのつけ方</h3>
 <div class="paragraph">
-<p>ボウリング場では、だいぶ前から自動でスコアが表示されるようになっています。
-自動化される前は、受付でスコアシートをもらって、自分たちでスコアを計算し、手でスコアをつけていました（ <a href="_preparation.html#hand_scoring">図 1.6</a> ）。</p>
+<p>ボウリング場では、だいぶ前（1980年代の終りくらい）から、スコアを自動計算してディスプレイに表示するシステムが使われるようになっています。
+自動化される前は、受付でスコアシートをもらって、自分たちでスコアを計算し、手書きでスコアをつけていました（ <a href="_preparation.html#hand_scoring">図 1.6</a> ）。</p>
 </div>
 <div id="hand_scoring" class="imageblock">
 <div class="content">
@@ -261,28 +271,11 @@ astah* では、複数のモデル図をまとめてたモデルファイルを�
 </dl>
 </div>
 <div class="sect3">
-<h4 id="_クラッシックスコアリング"><a class="anchor" href="#_クラッシックスコアリング"></a>1.4.1 クラッシックスコアリング</h4>
+<h4 id="_ボウリングスコアに使う記号"><a class="anchor" href="#_ボウリングスコアに使う記号"></a>1.4.1 ボウリングスコアに使う記号</h4>
 <div class="paragraph">
-<p>従来から使われていて、広く普及しているスコア計算方式です。</p>
+<p>ボウリングスコアに使う記号と意味を <a href="_preparation.html#scoring_symbols">表 1.1</a> に示します。</p>
 </div>
-<div class="ulist">
-<div class="title">ゲームの構成</div>
-<ul>
-<li>
-<p>ボウリングの1ゲームは、10 個のフレームをもって構成する。</p>
-</li>
-<li>
-<p>競技者は、ストライクの場合を除き、それぞれのフレームで 2 回ずつ投球する。ただし、第 10 フレームがストライク又はスペアの場合には、サービスフレームとして、ストライクの場合は、さらに 2 回投球でき、スペアの場合には 1 回投球できる。</p>
-</li>
-<li>
-<p>ゲームの成績は、適正な投球によって、倒されたピンの数をもって計算し、10 個のフレームの合計点によって、これを表す。</p>
-</li>
-<li>
-<p>適正に投球されたボールとは、競技者の持っているボールが、手から放れファールラインを越えたものをいう。</p>
-</li>
-</ul>
-</div>
-<table id="scoring_rule01" class="tableblock frame-all grid-all stretch">
+<table id="scoring_symbols" class="tableblock frame-all grid-all stretch">
 <caption class="title">表 1.1 ボウリングスコアに使う記号と意味</caption>
 <colgroup>
 <col style="width: 8.8495%;">
@@ -406,6 +399,29 @@ astah* では、複数のモデル図をまとめてたモデルファイルを�
 </tr>
 </tbody>
 </table>
+</div>
+<div class="sect3">
+<h4 id="classic"><a class="anchor" href="#classic"></a>1.4.2 クラッシックスコアリング</h4>
+<div class="paragraph">
+<p>従来から使われていて、広く普及しているスコア計算方式です。</p>
+</div>
+<div class="ulist">
+<div class="title">スコア計算の規定</div>
+<ul>
+<li>
+<p>ボウリングの1ゲームは、10 個のフレームをもって構成する。</p>
+</li>
+<li>
+<p>競技者は、ストライクの場合を除き、それぞれのフレームで 2 回ずつ投球する。ただし、第 10 フレームがストライク又はスペアの場合には、サービスフレームとして、ストライクの場合は、さらに 2 回投球でき、スペアの場合には 1 回投球できる。</p>
+</li>
+<li>
+<p>ゲームの成績は、適正な投球によって、倒されたピンの数をもって計算し、10 個のフレームの合計点によって、これを表す。</p>
+</li>
+<li>
+<p>適正に投球されたボールとは、競技者の持っているボールが、手から放れファールラインを越えたものをいう。</p>
+</li>
+</ul>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/classic_score_sample.jpg" alt="classic score sample" width="100%">
@@ -414,7 +430,7 @@ astah* では、複数のモデル図をまとめてたモデルファイルを�
 </div>
 </div>
 <div class="sect3">
-<h4 id="_カレントフレームスコアリング"><a class="anchor" href="#_カレントフレームスコアリング"></a>1.4.2 カレントフレームスコアリング</h4>
+<h4 id="_カレントフレームスコアリング"><a class="anchor" href="#_カレントフレームスコアリング"></a>1.4.3 カレントフレームスコアリング</h4>
 <div class="paragraph">
 <p>2018年アジア競技大会で採用された新しいスコア計算方式です。</p>
 </div>
@@ -452,17 +468,32 @@ astah* では、複数のモデル図をまとめてたモデルファイルを�
 </div>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="注記"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>ボーリングのハンディキャップは、参加者が普段プレイしているときのアベレージ（平均スコア）を基に、力量に応じて設定するそうです。
+このチュートリアルでは、ハンディキャップは取り扱わないでおきます。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_copyright.html">注意事項</a> | ↑ Up: <a href="uml_tutorial.html">モデルを使って ソフトウェアを開発しよう: astah* を使った UMLチュートリアル</a> | Next: <a href="_requirement_anaylysis.html">2</a> →</p>
+<p>← Previous: <a href="_copyright.html">注意事項</a> | ↑ Up: <a href="uml_tutorial.html">モデルを使ってソフトウェアを開発しよう</a> | Next: <a href="_requirement_anaylysis.html">2</a> →</p>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-バージョン html_0120<br>
+バージョン html_0166<br>
 最終更新 2022-01-17 06:53:14 +0900
 </div>
 </div>
