@@ -30,6 +30,8 @@ endif::[]
 
 [[add_design_model]]
 .プロジェクトに設計モデルを追加する
+[example]
+--
 . プロジェクトにモデルを追加する。
 ** 構造ツリー上で、プロジェクトを選択する。
 ** 右クリックしてポップアップメニューを開き、「モデルの追加＞モデル」を選択する（ <<add_design_model01>> ）。
@@ -47,7 +49,7 @@ image::add_design_model01.png[{half-width}]
 [[add_design_model02]]
 .モデルに設計用のモデルとして名前をつけた
 image::add_design_model02.png[{half-width}]
-
+--
 
 ==== 設計モデルにオブジェクト図を追加する
 

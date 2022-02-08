@@ -385,7 +385,7 @@ table.tableblock #preamble > .sectionbody > .paragraph:first-of-type p { font-si
 .admonitionblock > table td.content { padding-left: 1.125em; padding-right: 1.25em; border-left: 1px solid rgba(145, 135, 84, 0.15); color: #666; }
 .admonitionblock > table td.content > :last-child > :last-child { margin-bottom: 0; }
 
-.exampleblock > .content { border-style: solid; border-width: 1px; border-color: #eddbdb; margin-bottom: 1.25em; padding: 1.25em; background: #fefdfd; -webkit-border-radius: 6px; border-radius: 6px; }
+.exampleblock > .content { border-style: solid; border-width: 1px; border-color: #eddbdb; margin-bottom: 1.25em; padding: 1.25em; background: #F1EDE7; -webkit-border-radius: 6px; border-radius: 6px; }
 .exampleblock > .content > :first-child { margin-top: 0; }
 .exampleblock > .content > :last-child { margin-bottom: 0; }
 
@@ -700,3 +700,4 @@ li.L5, li.L6, li.L7, li.L8
 { list-style-type: decimal !important }
 
 h1 { font-weight: bold; }
+

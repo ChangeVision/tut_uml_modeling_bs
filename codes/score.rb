@@ -74,11 +74,11 @@ end
 
 # スコアは各人の10フレーム分のスコアを記録する
 class Score
-  attr_accessor :id, :name, :fno, :frames, :state
+  attr_accessor :id, :player, :fno, :frames, :state
 
   def initialize(name)
     @id = SecureRandom.urlsafe_base64(8)
-    @name = name
+    @player = name
     @fno = 1
     @frames = []
     (-1..13).each do |fno| # (-1, 0) are dummy frame
@@ -183,7 +183,7 @@ class Score
   end
 
   def to_s
-    "Score(id: #{@id}),\nName:#{@name}, Frame:#{@fno},\n#{@frames.join("\n")}"
+    "Score(id: #{@id}),\nPlayer:#{@Player}, Frame:#{@fno},\n#{@frames.join("\n")}"
   end
 end
 
@@ -202,7 +202,7 @@ class Game
   end
 
   def turn_player_name
-    @scores[@turn].name
+    @scores[@turn].player
   end
 
   def next_turn
@@ -231,9 +231,9 @@ end
 class ScoreSheet
   attr_accessor :id, :time, :games
 
-  def initialize(time)
+  def initialize(date)
     @id = SecureRandom.urlsafe_base64(8)
-    @time = time
+    @play_date = date
     @games = []
   end
 
@@ -281,6 +281,7 @@ if $PROGRAM_NAME == __FILE__
   ]
 
   until game.finished?
+    puts '----------------------------------------'
     puts "turn: #{game.turn_player_name}"
     score_index = game.turn
     pins = game_records[score_index].shift

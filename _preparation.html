@@ -20,8 +20,8 @@
 <h1>モデルを使ってソフトウェアを開発しよう</h1>
 <div class="details">
 <span id="author" class="author">株式会社チェンジビジョン</span><br>
-<span id="revnumber">バージョン html_0166,</span>
-<span id="revdate">2022-01-28</span>
+<span id="revnumber">バージョン html_0283,</span>
+<span id="revdate">2022-02-09</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">目次</div>
@@ -42,17 +42,13 @@
 </li>
 </ul>
 </li>
-<li><a href="_requirement_anaylysis.html">2 スコアのデータ構造を調べる</a>
+<li><a href="_requirement_anaylysis.html">2 スコアシートのデータ構造を調べる</a>
 </li>
 <li><a href="_スコアの状態を調べる.html">3 スコアの状態を調べる</a>
 </li>
-<li><a href="_structure_design.html">4 スコアの構造を図にする</a>
+<li><a href="_summary.html">4 まとめ</a>
 </li>
-<li><a href="_behavier_design.html">5 スコア記録の振る舞いを図にする</a>
-</li>
-<li><a href="_summary.html">6 まとめ</a>
-</li>
-<li><a href="_other_diagrams.html">7 他の図、他の機能など</a>
+<li><a href="_other_diagrams.html">5 他の図、他の機能など</a>
 </li>
 <li><a href="_appendix-01.html">付録 A: 関連資料、ワークシート等</a>
 </li>
@@ -135,46 +131,10 @@
 <div class="paragraph">
 <p>業務やシステムを分析（あるいは設計）するときは、たいてい複数種類のモデル図を使って表します。
 astah* では、複数のモデル図をまとめてたモデルファイルを「プロジェクト」と呼んでいます。
-「 <a href="_preparation.html#create_proj01">演習で使うプロジェクトを作成する</a> 」に従って、演習用のプロジェクトを用意しましょう。</p>
+<a href="_preparation.html#create_proj01">リスト1</a> に従って、演習用のプロジェクトを用意しましょう。</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="注記"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>astah* のプロジェクトの作り方についての詳しい説明は、次のページを参考にしてください。</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">astah*  機能ガイド プロジェクトの作成と利用</dt>
-<dd>
-<p><code><a href="https://astah.change-vision.com/ja/manual/278-project-file.html" class="bare">https://astah.change-vision.com/ja/manual/278-project-file.html</a></code></p>
-</dd>
-</dl>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="ヒント"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>新規プロジェクトを作成したら、先に名前をつけて保存しておくとよいでしょう。</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div id="create_proj01" class="openblock">
-<div class="title">演習で使うプロジェクトを作成する</div>
+<div id="create_proj01" class="exampleblock">
+<div class="title">リスト 1. 演習で使うプロジェクトを作成する</div>
 <div class="content">
 <div class="olist arabic">
 <ol class="arabic">
@@ -188,7 +148,7 @@ astah* では、複数のモデル図をまとめてたモデルファイルを�
 </div>
 <div id="create_project01" class="imageblock">
 <div class="content">
-<img src="images/create_project01.png" alt="create project01" width="50%">
+<img src="images/GSW-20220206-131611.png" alt="GSW 20220206 131611" width="75%">
 </div>
 <div class="title">図 1.1 新しいプロジェクトを作成する</div>
 </div>
@@ -201,7 +161,7 @@ astah* では、複数のモデル図をまとめてたモデルファイルを�
 </div>
 <div id="create_project02" class="imageblock">
 <div class="content">
-<img src="images/create_project02.png" alt="create project02" width="50%">
+<img src="images/GSW-20220206-131639.png" alt="GSW 20220206 131639" width="75%">
 </div>
 <div class="title">図 1.2 新しいプロジェクトが作成された</div>
 </div>
@@ -209,27 +169,56 @@ astah* では、複数のモデル図をまとめてたモデルファイルを�
 <ol class="arabic" start="4">
 <li>
 <p>「ファイル」メニューから「プロジェクトを保存」を選択する（ <a href="_preparation.html#create_project03">図 1.3</a> ）。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>「保存」ダイアログが開く。</p>
+</li>
+</ul>
+</div>
 </li>
 </ol>
 </div>
 <div id="create_project03" class="imageblock">
 <div class="content">
-<img src="images/create_project03.png" alt="create project03" width="50%">
+<img src="images/GSW-20220206-131657.png" alt="GSW 20220206 131657" width="75%">
 </div>
 <div class="title">図 1.3 新しいプロジェクトを保存する</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="5">
 <li>
-<p>「保存」ダイアログが開くので、プロジェクトの保存場所と保存するファイル名を指定して、「保存」ボタンをクリックする。ここでは保存場所として「デスクトップ」に「BowlingScore」フォルダを作成し、「bowling_score」を指定した（ <a href="_preparation.html#create_project04">図 1.4</a> ）。</p>
+<p>プロジェクトの保存場所と保存するファイル名を指定する。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>ここでは、保存場所として「デスクトップ」に「BowlingScore」フォルダを作成した。</p>
+</li>
+<li>
+<p>ファイル名に「bowling_score」を指定して保存した（ <a href="_preparation.html#create_project04">図 1.4</a> ）。</p>
+</li>
+</ul>
+</div>
 </li>
 </ol>
 </div>
 <div id="create_project04" class="imageblock">
 <div class="content">
-<img src="images/create_project04.png" alt="create project04" width="75%">
+<img src="images/GSW-20220206-131840.png" alt="GSW 20220206 131840" width="75%">
 </div>
 <div class="title">図 1.4 ダイアログを操作してプロジェクトを保存する場所とプロジェクトファイル名を指定する</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="ヒント"></i>
+</td>
+<td class="content">
+新規プロジェクトを作成したら、このように、モデルを作成する前に名前をつけて保存しておくとよいでしょう。
+</td>
+</tr>
+</table>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="6">
@@ -240,11 +229,33 @@ astah* では、複数のモデル図をまとめてたモデルファイルを�
 </div>
 <div id="create_project05" class="imageblock">
 <div class="content">
-<img src="images/create_project05.png" alt="create project05" width="75%">
+<img src="images/GSW-20220206-131907.png" alt="GSW 20220206 131907" width="75%">
 </div>
-<div class="title">図 1.5 ダイアログを操作してプロジェクトを保存する場所とプロジェクトファイル名を指定する</div>
+<div class="title">図 1.5 プロジェクトファイル名が、プロジェクト名に反映された</div>
 </div>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="注記"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>astah* のプロジェクトの作り方についての詳しい説明は、機能ガイドの「プロジェクトの作成と利用」を参考にしてください。</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">astah*  機能ガイド プロジェクトの作成と利用</dt>
+<dd>
+<p><code><a href="https://astah.change-vision.com/ja/manual/278-project-file.html" class="bare">https://astah.change-vision.com/ja/manual/278-project-file.html</a></code></p>
+</dd>
+</dl>
+</div>
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -394,8 +405,8 @@ astah* では、複数のモデル図をまとめてたモデルファイルを�
 <div class="paragraph nav-footer">
 <p></p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ファール</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ファールラインを越えて投球されたという記号。1投目でファールした場合、ピンを倒しても1投目のピン数は0になる。2投目は全ピンを立て直す。2投目でファールした場合、ピンを倒しても2投目のピン数は0になる。第10フレームの3投目がファールの場合も、ピンを倒しても3投目のピン数は0になる。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ファウル</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ファウルラインを越えて投球されたという記号。1投目でファウルした場合、ピンを倒しても1投目のピン数は0になる。2投目は全ピンを立て直す。2投目でファウルした場合、ピンを倒しても2投目のピン数は0になる。第10フレームの3投目がファウルの場合、ピンを倒しても3投目のピン数は0になる。</p></td>
 </tr>
 </tbody>
 </table>
@@ -405,28 +416,52 @@ astah* では、複数のモデル図をまとめてたモデルファイルを�
 <div class="paragraph">
 <p>従来から使われていて、広く普及しているスコア計算方式です。</p>
 </div>
+<div class="exampleblock">
+<div class="title">リスト 2. スコア計算の規定</div>
+<div class="content">
 <div class="ulist">
-<div class="title">スコア計算の規定</div>
 <ul>
 <li>
 <p>ボウリングの1ゲームは、10 個のフレームをもって構成する。</p>
 </li>
 <li>
-<p>競技者は、ストライクの場合を除き、それぞれのフレームで 2 回ずつ投球する。ただし、第 10 フレームがストライク又はスペアの場合には、サービスフレームとして、ストライクの場合は、さらに 2 回投球でき、スペアの場合には 1 回投球できる。</p>
+<p>競技者は、ストライクの場合を除き、それぞれのフレームで 2 回ずつ投球する。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>ただし、第10フレームがストライクまたはスペアの場合、サービスフレームが追加される。</p>
 </li>
 <li>
-<p>ゲームの成績は、適正な投球によって、倒されたピンの数をもって計算し、10 個のフレームの合計点によって、これを表す。</p>
+<p>ストライクの場合は、サービスフレームで2回投球できる。</p>
 </li>
 <li>
-<p>適正に投球されたボールとは、競技者の持っているボールが、手から放れファールラインを越えたものをいう。</p>
+<p>スペアの場合は、サービスフレームで1回投球できる。</p>
 </li>
 </ul>
+</div>
+</li>
+<li>
+<p>ゲームの成績は、10個のフレームの合計点によってこれを表す。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>適正な投球によって倒されたピンの数をもって計算する。</p>
+</li>
+<li>
+<p>適正に投球されたボールとは、競技者の持っているボールが、手から放れファウルラインを越えたものをいう。</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/classic_score_sample.jpg" alt="classic score sample" width="100%">
 </div>
-<div class="title">図 1.7 スコアの例</div>
+<div class="title">図 1.7 スコアの例（クラッシクスコアリングの場合）</div>
 </div>
 </div>
 <div class="sect3">
@@ -434,8 +469,10 @@ astah* では、複数のモデル図をまとめてたモデルファイルを�
 <div class="paragraph">
 <p>2018年アジア競技大会で採用された新しいスコア計算方式です。</p>
 </div>
+<div class="exampleblock">
+<div class="title">リスト 3. クラッシックスコアリングと異なる点</div>
+<div class="content">
 <div class="ulist">
-<div class="title">クラッシックスコアリングと異なる点</div>
 <ul>
 <li>
 <p>1投目によって10ピンすべてを倒した場合はストライクとなる。ストライクのとき、そのフレームの得点は30となる。</p>
@@ -450,6 +487,8 @@ astah* では、複数のモデル図をまとめてたモデルファイルを�
 <p>第10フレームでストライクあるいはスペアをとった場合も、3投目はない。</p>
 </li>
 </ul>
+</div>
+</div>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -476,7 +515,7 @@ astah* では、複数のモデル図をまとめてたモデルファイルを�
 </td>
 <td class="content">
 <div class="paragraph">
-<p>ボーリングのハンディキャップは、参加者が普段プレイしているときのアベレージ（平均スコア）を基に、力量に応じて設定するそうです。
+<p>ボーリングのハンディキャップは、参加者が普段プレーしているときのアベレージ（平均スコア）を基に、力量に応じて設定するそうです。
 このチュートリアルでは、ハンディキャップは取り扱わないでおきます。</p>
 </div>
 </td>
@@ -493,8 +532,8 @@ astah* では、複数のモデル図をまとめてたモデルファイルを�
 </div>
 <div id="footer">
 <div id="footer-text">
-バージョン html_0166<br>
-最終更新 2022-01-17 06:53:14 +0900
+バージョン html_0283<br>
+最終更新 2022-02-05 11:39:09 +0900
 </div>
 </div>
 <script type="text/x-mathjax-config">
