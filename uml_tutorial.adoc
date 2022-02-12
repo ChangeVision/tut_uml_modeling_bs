@@ -29,7 +29,7 @@ include::uml_tutorial01.adoc[]
 
 include::uml_tutorial02.adoc[]
 
-// include::uml_tutorial03.adoc[]
+include::uml_tutorial03.adoc[]
 
 // include::uml_tutorial04.adoc[]
 

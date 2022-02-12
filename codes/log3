@@ -1,0 +1,1370 @@
+Score Sheet Date: (id:bLf0D7vcxPk)
+----------------------------------------
+turn: くぼあき
+input pins: 7
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:1,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    .|          7|          0|           0|   BEFORE_2ND|
+| 2|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 3|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 4|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 5|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:1,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 2|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 3|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 4|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 5|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+----------------------------------------
+turn: くぼあき
+input pins: 0
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:2,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 3|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 4|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 5|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:1,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 2|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 3|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 4|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 5|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+----------------------------------------
+turn: うえはら
+input pins: 6
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:2,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 3|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 4|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 5|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:1,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  0|    .|          6|          0|           0|   BEFORE_2ND|
+| 2|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 3|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 4|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 5|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+----------------------------------------
+turn: うえはら
+input pins: 3
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:2,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 3|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 4|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 5|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:2,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|        FIXED|
+| 2|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 3|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 4|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 5|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+----------------------------------------
+turn: くぼあき
+input pins: 5
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:2,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  5|  0|    .|          5|          0|           0|   BEFORE_2ND|
+| 3|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 4|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 5|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:2,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|        FIXED|
+| 2|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 3|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 4|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 5|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+----------------------------------------
+turn: くぼあき
+input pins: 5
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:3,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  5|  5|    .|         10|          0|           0|      PENDING|
+| 3|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 4|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 5|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:2,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|        FIXED|
+| 2|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 3|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 4|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 5|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+----------------------------------------
+turn: うえはら
+input pins: 9
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:3,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  5|  5|    .|         10|          0|           0|      PENDING|
+| 3|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 4|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 5|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:2,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|        FIXED|
+| 2|  9|  0|    .|          9|          0|           0|   BEFORE_2ND|
+| 3|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 4|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 5|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+----------------------------------------
+turn: うえはら
+input pins: 0
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:3,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  5|  5|    .|         10|          0|           0|      PENDING|
+| 3|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 4|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 5|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:3,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|        FIXED|
+| 2|  9|  0|   18|          9|          0|           0|        FIXED|
+| 3|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 4|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 5|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+----------------------------------------
+turn: くぼあき
+input pins: 10
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:4,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  5|  5|   27|         20|         10|           0|        FIXED|
+| 3| 10|  0|    .|         10|          0|           0|      PENDING|
+| 4|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 5|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:3,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|        FIXED|
+| 2|  9|  0|   18|          9|          0|           0|        FIXED|
+| 3|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 4|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 5|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+----------------------------------------
+turn: うえはら
+input pins: 0
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:4,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  5|  5|   27|         20|         10|           0|        FIXED|
+| 3| 10|  0|    .|         10|          0|           0|      PENDING|
+| 4|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 5|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:3,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|        FIXED|
+| 2|  9|  0|   18|          9|          0|           0|        FIXED|
+| 3|  0|  0|    .|          0|          0|           0|   BEFORE_2ND|
+| 4|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 5|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+----------------------------------------
+turn: うえはら
+input pins: 3
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:4,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  5|  5|   27|         20|         10|           0|        FIXED|
+| 3| 10|  0|    .|         10|          0|           0|      PENDING|
+| 4|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 5|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:4,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|        FIXED|
+| 2|  9|  0|   18|          9|          0|           0|        FIXED|
+| 3|  0|  3|   21|          3|          0|           0|        FIXED|
+| 4|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 5|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+----------------------------------------
+turn: くぼあき
+input pins: 10
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:5,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  5|  5|   27|         20|         10|           0|        FIXED|
+| 3| 10|  0|    .|         10|          0|           0|      PENDING|
+| 4| 10|  0|    .|         10|          0|           0|      PENDING|
+| 5|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:4,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|        FIXED|
+| 2|  9|  0|   18|          9|          0|           0|        FIXED|
+| 3|  0|  3|   21|          3|          0|           0|        FIXED|
+| 4|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 5|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+----------------------------------------
+turn: うえはら
+input pins: 8
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:5,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  5|  5|   27|         20|         10|           0|        FIXED|
+| 3| 10|  0|    .|         10|          0|           0|      PENDING|
+| 4| 10|  0|    .|         10|          0|           0|      PENDING|
+| 5|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:4,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|        FIXED|
+| 2|  9|  0|   18|          9|          0|           0|        FIXED|
+| 3|  0|  3|   21|          3|          0|           0|        FIXED|
+| 4|  8|  0|    .|          8|          0|           0|   BEFORE_2ND|
+| 5|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+----------------------------------------
+turn: うえはら
+input pins: 2
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:5,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  5|  5|   27|         20|         10|           0|        FIXED|
+| 3| 10|  0|    .|         10|          0|           0|      PENDING|
+| 4| 10|  0|    .|         10|          0|           0|      PENDING|
+| 5|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:5,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|        FIXED|
+| 2|  9|  0|   18|          9|          0|           0|        FIXED|
+| 3|  0|  3|   21|          3|          0|           0|        FIXED|
+| 4|  8|  2|    .|         10|          0|           0|      PENDING|
+| 5|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+----------------------------------------
+turn: くぼあき
+input pins: 5
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:5,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  5|  5|   27|         20|         10|           0|        FIXED|
+| 3| 10|  0|   52|         25|          0|          15|        FIXED|
+| 4| 10|  0|    .|         10|          0|           0|      PENDING|
+| 5|  5|  0|    .|          5|          0|           0|   BEFORE_2ND|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:5,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|        FIXED|
+| 2|  9|  0|   18|          9|          0|           0|        FIXED|
+| 3|  0|  3|   21|          3|          0|           0|        FIXED|
+| 4|  8|  2|    .|         10|          0|           0|      PENDING|
+| 5|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+----------------------------------------
+turn: くぼあき
+input pins: 4
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:6,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  5|  5|   27|         20|         10|           0|        FIXED|
+| 3| 10|  0|   52|         25|          0|          15|        FIXED|
+| 4| 10|  0|   71|         19|          0|           9|        FIXED|
+| 5|  5|  4|   80|          9|          0|           0|        FIXED|
+| 6|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:5,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|        FIXED|
+| 2|  9|  0|   18|          9|          0|           0|        FIXED|
+| 3|  0|  3|   21|          3|          0|           0|        FIXED|
+| 4|  8|  2|    .|         10|          0|           0|      PENDING|
+| 5|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+----------------------------------------
+turn: うえはら
+input pins: 7
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:6,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  5|  5|   27|         20|         10|           0|        FIXED|
+| 3| 10|  0|   52|         25|          0|          15|        FIXED|
+| 4| 10|  0|   71|         19|          0|           9|        FIXED|
+| 5|  5|  4|   80|          9|          0|           0|        FIXED|
+| 6|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:5,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|        FIXED|
+| 2|  9|  0|   18|          9|          0|           0|        FIXED|
+| 3|  0|  3|   21|          3|          0|           0|        FIXED|
+| 4|  8|  2|   38|         17|          7|           0|        FIXED|
+| 5|  7|  0|    .|          7|          0|           0|   BEFORE_2ND|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+----------------------------------------
+turn: うえはら
+input pins: 3
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:6,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  5|  5|   27|         20|         10|           0|        FIXED|
+| 3| 10|  0|   52|         25|          0|          15|        FIXED|
+| 4| 10|  0|   71|         19|          0|           9|        FIXED|
+| 5|  5|  4|   80|          9|          0|           0|        FIXED|
+| 6|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:6,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|        FIXED|
+| 2|  9|  0|   18|          9|          0|           0|        FIXED|
+| 3|  0|  3|   21|          3|          0|           0|        FIXED|
+| 4|  8|  2|   38|         17|          7|           0|        FIXED|
+| 5|  7|  3|    .|         10|          0|           0|      PENDING|
+| 6|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+----------------------------------------
+turn: くぼあき
+input pins: 10
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:7,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  5|  5|   27|         20|         10|           0|        FIXED|
+| 3| 10|  0|   52|         25|          0|          15|        FIXED|
+| 4| 10|  0|   71|         19|          0|           9|        FIXED|
+| 5|  5|  4|   80|          9|          0|           0|        FIXED|
+| 6| 10|  0|    .|         10|          0|           0|      PENDING|
+| 7|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:6,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|        FIXED|
+| 2|  9|  0|   18|          9|          0|           0|        FIXED|
+| 3|  0|  3|   21|          3|          0|           0|        FIXED|
+| 4|  8|  2|   38|         17|          7|           0|        FIXED|
+| 5|  7|  3|    .|         10|          0|           0|      PENDING|
+| 6|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+----------------------------------------
+turn: うえはら
+input pins: 10
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:7,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  5|  5|   27|         20|         10|           0|        FIXED|
+| 3| 10|  0|   52|         25|          0|          15|        FIXED|
+| 4| 10|  0|   71|         19|          0|           9|        FIXED|
+| 5|  5|  4|   80|          9|          0|           0|        FIXED|
+| 6| 10|  0|    .|         10|          0|           0|      PENDING|
+| 7|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:7,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|        FIXED|
+| 2|  9|  0|   18|          9|          0|           0|        FIXED|
+| 3|  0|  3|   21|          3|          0|           0|        FIXED|
+| 4|  8|  2|   38|         17|          7|           0|        FIXED|
+| 5|  7|  3|   58|         20|         10|           0|        FIXED|
+| 6| 10|  0|    .|         10|          0|           0|      PENDING|
+| 7|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+----------------------------------------
+turn: くぼあき
+input pins: 7
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:7,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  5|  5|   27|         20|         10|           0|        FIXED|
+| 3| 10|  0|   52|         25|          0|          15|        FIXED|
+| 4| 10|  0|   71|         19|          0|           9|        FIXED|
+| 5|  5|  4|   80|          9|          0|           0|        FIXED|
+| 6| 10|  0|    .|         10|          0|           0|      PENDING|
+| 7|  7|  0|    .|          7|          0|           0|   BEFORE_2ND|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:7,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|        FIXED|
+| 2|  9|  0|   18|          9|          0|           0|        FIXED|
+| 3|  0|  3|   21|          3|          0|           0|        FIXED|
+| 4|  8|  2|   38|         17|          7|           0|        FIXED|
+| 5|  7|  3|   58|         20|         10|           0|        FIXED|
+| 6| 10|  0|    .|         10|          0|           0|      PENDING|
+| 7|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+----------------------------------------
+turn: くぼあき
+input pins: 3
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:8,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  5|  5|   27|         20|         10|           0|        FIXED|
+| 3| 10|  0|   52|         25|          0|          15|        FIXED|
+| 4| 10|  0|   71|         19|          0|           9|        FIXED|
+| 5|  5|  4|   80|          9|          0|           0|        FIXED|
+| 6| 10|  0|  100|         20|          0|          10|        FIXED|
+| 7|  7|  3|    .|         10|          0|           0|      PENDING|
+| 8|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:7,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|        FIXED|
+| 2|  9|  0|   18|          9|          0|           0|        FIXED|
+| 3|  0|  3|   21|          3|          0|           0|        FIXED|
+| 4|  8|  2|   38|         17|          7|           0|        FIXED|
+| 5|  7|  3|   58|         20|         10|           0|        FIXED|
+| 6| 10|  0|    .|         10|          0|           0|      PENDING|
+| 7|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+----------------------------------------
+turn: うえはら
+input pins: 9
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:8,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  5|  5|   27|         20|         10|           0|        FIXED|
+| 3| 10|  0|   52|         25|          0|          15|        FIXED|
+| 4| 10|  0|   71|         19|          0|           9|        FIXED|
+| 5|  5|  4|   80|          9|          0|           0|        FIXED|
+| 6| 10|  0|  100|         20|          0|          10|        FIXED|
+| 7|  7|  3|    .|         10|          0|           0|      PENDING|
+| 8|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:7,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|        FIXED|
+| 2|  9|  0|   18|          9|          0|           0|        FIXED|
+| 3|  0|  3|   21|          3|          0|           0|        FIXED|
+| 4|  8|  2|   38|         17|          7|           0|        FIXED|
+| 5|  7|  3|   58|         20|         10|           0|        FIXED|
+| 6| 10|  0|    .|         10|          0|           0|      PENDING|
+| 7|  9|  0|    .|          9|          0|           0|   BEFORE_2ND|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+----------------------------------------
+turn: うえはら
+input pins: 1
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:8,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  5|  5|   27|         20|         10|           0|        FIXED|
+| 3| 10|  0|   52|         25|          0|          15|        FIXED|
+| 4| 10|  0|   71|         19|          0|           9|        FIXED|
+| 5|  5|  4|   80|          9|          0|           0|        FIXED|
+| 6| 10|  0|  100|         20|          0|          10|        FIXED|
+| 7|  7|  3|    .|         10|          0|           0|      PENDING|
+| 8|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:8,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|        FIXED|
+| 2|  9|  0|   18|          9|          0|           0|        FIXED|
+| 3|  0|  3|   21|          3|          0|           0|        FIXED|
+| 4|  8|  2|   38|         17|          7|           0|        FIXED|
+| 5|  7|  3|   58|         20|         10|           0|        FIXED|
+| 6| 10|  0|   78|         20|          0|          10|        FIXED|
+| 7|  9|  1|    .|         10|          0|           0|      PENDING|
+| 8|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+----------------------------------------
+turn: くぼあき
+input pins: 5
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:8,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  5|  5|   27|         20|         10|           0|        FIXED|
+| 3| 10|  0|   52|         25|          0|          15|        FIXED|
+| 4| 10|  0|   71|         19|          0|           9|        FIXED|
+| 5|  5|  4|   80|          9|          0|           0|        FIXED|
+| 6| 10|  0|  100|         20|          0|          10|        FIXED|
+| 7|  7|  3|  115|         15|          5|           0|        FIXED|
+| 8|  5|  0|    .|          5|          0|           0|   BEFORE_2ND|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:8,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|        FIXED|
+| 2|  9|  0|   18|          9|          0|           0|        FIXED|
+| 3|  0|  3|   21|          3|          0|           0|        FIXED|
+| 4|  8|  2|   38|         17|          7|           0|        FIXED|
+| 5|  7|  3|   58|         20|         10|           0|        FIXED|
+| 6| 10|  0|   78|         20|          0|          10|        FIXED|
+| 7|  9|  1|    .|         10|          0|           0|      PENDING|
+| 8|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+----------------------------------------
+turn: くぼあき
+input pins: 4
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:9,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  5|  5|   27|         20|         10|           0|        FIXED|
+| 3| 10|  0|   52|         25|          0|          15|        FIXED|
+| 4| 10|  0|   71|         19|          0|           9|        FIXED|
+| 5|  5|  4|   80|          9|          0|           0|        FIXED|
+| 6| 10|  0|  100|         20|          0|          10|        FIXED|
+| 7|  7|  3|  115|         15|          5|           0|        FIXED|
+| 8|  5|  4|  124|          9|          0|           0|        FIXED|
+| 9|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:8,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|        FIXED|
+| 2|  9|  0|   18|          9|          0|           0|        FIXED|
+| 3|  0|  3|   21|          3|          0|           0|        FIXED|
+| 4|  8|  2|   38|         17|          7|           0|        FIXED|
+| 5|  7|  3|   58|         20|         10|           0|        FIXED|
+| 6| 10|  0|   78|         20|          0|          10|        FIXED|
+| 7|  9|  1|    .|         10|          0|           0|      PENDING|
+| 8|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+----------------------------------------
+turn: うえはら
+input pins: 8
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:9,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  5|  5|   27|         20|         10|           0|        FIXED|
+| 3| 10|  0|   52|         25|          0|          15|        FIXED|
+| 4| 10|  0|   71|         19|          0|           9|        FIXED|
+| 5|  5|  4|   80|          9|          0|           0|        FIXED|
+| 6| 10|  0|  100|         20|          0|          10|        FIXED|
+| 7|  7|  3|  115|         15|          5|           0|        FIXED|
+| 8|  5|  4|  124|          9|          0|           0|        FIXED|
+| 9|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:8,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|        FIXED|
+| 2|  9|  0|   18|          9|          0|           0|        FIXED|
+| 3|  0|  3|   21|          3|          0|           0|        FIXED|
+| 4|  8|  2|   38|         17|          7|           0|        FIXED|
+| 5|  7|  3|   58|         20|         10|           0|        FIXED|
+| 6| 10|  0|   78|         20|          0|          10|        FIXED|
+| 7|  9|  1|   96|         18|          8|           0|        FIXED|
+| 8|  8|  0|    .|          8|          0|           0|   BEFORE_2ND|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+----------------------------------------
+turn: うえはら
+input pins: 0
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:9,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  5|  5|   27|         20|         10|           0|        FIXED|
+| 3| 10|  0|   52|         25|          0|          15|        FIXED|
+| 4| 10|  0|   71|         19|          0|           9|        FIXED|
+| 5|  5|  4|   80|          9|          0|           0|        FIXED|
+| 6| 10|  0|  100|         20|          0|          10|        FIXED|
+| 7|  7|  3|  115|         15|          5|           0|        FIXED|
+| 8|  5|  4|  124|          9|          0|           0|        FIXED|
+| 9|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:9,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|        FIXED|
+| 2|  9|  0|   18|          9|          0|           0|        FIXED|
+| 3|  0|  3|   21|          3|          0|           0|        FIXED|
+| 4|  8|  2|   38|         17|          7|           0|        FIXED|
+| 5|  7|  3|   58|         20|         10|           0|        FIXED|
+| 6| 10|  0|   78|         20|          0|          10|        FIXED|
+| 7|  9|  1|   96|         18|          8|           0|        FIXED|
+| 8|  8|  0|  104|          8|          0|           0|        FIXED|
+| 9|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+----------------------------------------
+turn: くぼあき
+input pins: 7
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:9,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  5|  5|   27|         20|         10|           0|        FIXED|
+| 3| 10|  0|   52|         25|          0|          15|        FIXED|
+| 4| 10|  0|   71|         19|          0|           9|        FIXED|
+| 5|  5|  4|   80|          9|          0|           0|        FIXED|
+| 6| 10|  0|  100|         20|          0|          10|        FIXED|
+| 7|  7|  3|  115|         15|          5|           0|        FIXED|
+| 8|  5|  4|  124|          9|          0|           0|        FIXED|
+| 9|  7|  0|    .|          7|          0|           0|   BEFORE_2ND|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:9,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|        FIXED|
+| 2|  9|  0|   18|          9|          0|           0|        FIXED|
+| 3|  0|  3|   21|          3|          0|           0|        FIXED|
+| 4|  8|  2|   38|         17|          7|           0|        FIXED|
+| 5|  7|  3|   58|         20|         10|           0|        FIXED|
+| 6| 10|  0|   78|         20|          0|          10|        FIXED|
+| 7|  9|  1|   96|         18|          8|           0|        FIXED|
+| 8|  8|  0|  104|          8|          0|           0|        FIXED|
+| 9|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+----------------------------------------
+turn: くぼあき
+input pins: 3
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:10,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  5|  5|   27|         20|         10|           0|        FIXED|
+| 3| 10|  0|   52|         25|          0|          15|        FIXED|
+| 4| 10|  0|   71|         19|          0|           9|        FIXED|
+| 5|  5|  4|   80|          9|          0|           0|        FIXED|
+| 6| 10|  0|  100|         20|          0|          10|        FIXED|
+| 7|  7|  3|  115|         15|          5|           0|        FIXED|
+| 8|  5|  4|  124|          9|          0|           0|        FIXED|
+| 9|  7|  3|    .|         10|          0|           0|      PENDING|
+|10|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:9,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|        FIXED|
+| 2|  9|  0|   18|          9|          0|           0|        FIXED|
+| 3|  0|  3|   21|          3|          0|           0|        FIXED|
+| 4|  8|  2|   38|         17|          7|           0|        FIXED|
+| 5|  7|  3|   58|         20|         10|           0|        FIXED|
+| 6| 10|  0|   78|         20|          0|          10|        FIXED|
+| 7|  9|  1|   96|         18|          8|           0|        FIXED|
+| 8|  8|  0|  104|          8|          0|           0|        FIXED|
+| 9|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+----------------------------------------
+turn: うえはら
+input pins: 10
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:10,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  5|  5|   27|         20|         10|           0|        FIXED|
+| 3| 10|  0|   52|         25|          0|          15|        FIXED|
+| 4| 10|  0|   71|         19|          0|           9|        FIXED|
+| 5|  5|  4|   80|          9|          0|           0|        FIXED|
+| 6| 10|  0|  100|         20|          0|          10|        FIXED|
+| 7|  7|  3|  115|         15|          5|           0|        FIXED|
+| 8|  5|  4|  124|          9|          0|           0|        FIXED|
+| 9|  7|  3|    .|         10|          0|           0|      PENDING|
+|10|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:10,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|        FIXED|
+| 2|  9|  0|   18|          9|          0|           0|        FIXED|
+| 3|  0|  3|   21|          3|          0|           0|        FIXED|
+| 4|  8|  2|   38|         17|          7|           0|        FIXED|
+| 5|  7|  3|   58|         20|         10|           0|        FIXED|
+| 6| 10|  0|   78|         20|          0|          10|        FIXED|
+| 7|  9|  1|   96|         18|          8|           0|        FIXED|
+| 8|  8|  0|  104|          8|          0|           0|        FIXED|
+| 9| 10|  0|    .|         10|          0|           0|      PENDING|
+|10|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+----------------------------------------
+turn: くぼあき
+input pins: 7
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:10,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  5|  5|   27|         20|         10|           0|        FIXED|
+| 3| 10|  0|   52|         25|          0|          15|        FIXED|
+| 4| 10|  0|   71|         19|          0|           9|        FIXED|
+| 5|  5|  4|   80|          9|          0|           0|        FIXED|
+| 6| 10|  0|  100|         20|          0|          10|        FIXED|
+| 7|  7|  3|  115|         15|          5|           0|        FIXED|
+| 8|  5|  4|  124|          9|          0|           0|        FIXED|
+| 9|  7|  3|  141|         17|          7|           0|        FIXED|
+|10|  7|  0|    .|          7|          0|           0|   BEFORE_2ND|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:10,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|        FIXED|
+| 2|  9|  0|   18|          9|          0|           0|        FIXED|
+| 3|  0|  3|   21|          3|          0|           0|        FIXED|
+| 4|  8|  2|   38|         17|          7|           0|        FIXED|
+| 5|  7|  3|   58|         20|         10|           0|        FIXED|
+| 6| 10|  0|   78|         20|          0|          10|        FIXED|
+| 7|  9|  1|   96|         18|          8|           0|        FIXED|
+| 8|  8|  0|  104|          8|          0|           0|        FIXED|
+| 9| 10|  0|    .|         10|          0|           0|      PENDING|
+|10|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+----------------------------------------
+turn: くぼあき
+input pins: 3
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:11,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  5|  5|   27|         20|         10|           0|        FIXED|
+| 3| 10|  0|   52|         25|          0|          15|        FIXED|
+| 4| 10|  0|   71|         19|          0|           9|        FIXED|
+| 5|  5|  4|   80|          9|          0|           0|        FIXED|
+| 6| 10|  0|  100|         20|          0|          10|        FIXED|
+| 7|  7|  3|  115|         15|          5|           0|        FIXED|
+| 8|  5|  4|  124|          9|          0|           0|        FIXED|
+| 9|  7|  3|  141|         17|          7|           0|        FIXED|
+|10|  7|  3|    .|         10|          0|           0|      PENDING|
+|11|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:10,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|        FIXED|
+| 2|  9|  0|   18|          9|          0|           0|        FIXED|
+| 3|  0|  3|   21|          3|          0|           0|        FIXED|
+| 4|  8|  2|   38|         17|          7|           0|        FIXED|
+| 5|  7|  3|   58|         20|         10|           0|        FIXED|
+| 6| 10|  0|   78|         20|          0|          10|        FIXED|
+| 7|  9|  1|   96|         18|          8|           0|        FIXED|
+| 8|  8|  0|  104|          8|          0|           0|        FIXED|
+| 9| 10|  0|    .|         10|          0|           0|      PENDING|
+|10|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+----------------------------------------
+turn: くぼあき
+input pins: 4
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:11,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  5|  5|   27|         20|         10|           0|        FIXED|
+| 3| 10|  0|   52|         25|          0|          15|        FIXED|
+| 4| 10|  0|   71|         19|          0|           9|        FIXED|
+| 5|  5|  4|   80|          9|          0|           0|        FIXED|
+| 6| 10|  0|  100|         20|          0|          10|        FIXED|
+| 7|  7|  3|  115|         15|          5|           0|        FIXED|
+| 8|  5|  4|  124|          9|          0|           0|        FIXED|
+| 9|  7|  3|  141|         17|          7|           0|        FIXED|
+|10|  7|  3|  155|         14|          4|           0|        FIXED|
+|11|  4|  0|    .|          4|          0|           0|   BEFORE_2ND|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:10,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|        FIXED|
+| 2|  9|  0|   18|          9|          0|           0|        FIXED|
+| 3|  0|  3|   21|          3|          0|           0|        FIXED|
+| 4|  8|  2|   38|         17|          7|           0|        FIXED|
+| 5|  7|  3|   58|         20|         10|           0|        FIXED|
+| 6| 10|  0|   78|         20|          0|          10|        FIXED|
+| 7|  9|  1|   96|         18|          8|           0|        FIXED|
+| 8|  8|  0|  104|          8|          0|           0|        FIXED|
+| 9| 10|  0|    .|         10|          0|           0|      PENDING|
+|10|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+----------------------------------------
+turn: うえはら
+input pins: 6
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:11,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  5|  5|   27|         20|         10|           0|        FIXED|
+| 3| 10|  0|   52|         25|          0|          15|        FIXED|
+| 4| 10|  0|   71|         19|          0|           9|        FIXED|
+| 5|  5|  4|   80|          9|          0|           0|        FIXED|
+| 6| 10|  0|  100|         20|          0|          10|        FIXED|
+| 7|  7|  3|  115|         15|          5|           0|        FIXED|
+| 8|  5|  4|  124|          9|          0|           0|        FIXED|
+| 9|  7|  3|  141|         17|          7|           0|        FIXED|
+|10|  7|  3|  155|         14|          4|           0|        FIXED|
+|11|  4|  0|    .|          4|          0|           0|   BEFORE_2ND|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:10,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|        FIXED|
+| 2|  9|  0|   18|          9|          0|           0|        FIXED|
+| 3|  0|  3|   21|          3|          0|           0|        FIXED|
+| 4|  8|  2|   38|         17|          7|           0|        FIXED|
+| 5|  7|  3|   58|         20|         10|           0|        FIXED|
+| 6| 10|  0|   78|         20|          0|          10|        FIXED|
+| 7|  9|  1|   96|         18|          8|           0|        FIXED|
+| 8|  8|  0|  104|          8|          0|           0|        FIXED|
+| 9| 10|  0|    .|         10|          0|           0|      PENDING|
+|10|  6|  0|    .|          6|          0|           0|   BEFORE_2ND|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+----------------------------------------
+turn: うえはら
+input pins: 3
+Game(id:gzyZfHUH6co),
+Score(id: uL4DXFiCtu4),
+Player:, Frame:11,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  5|  5|   27|         20|         10|           0|        FIXED|
+| 3| 10|  0|   52|         25|          0|          15|        FIXED|
+| 4| 10|  0|   71|         19|          0|           9|        FIXED|
+| 5|  5|  4|   80|          9|          0|           0|        FIXED|
+| 6| 10|  0|  100|         20|          0|          10|        FIXED|
+| 7|  7|  3|  115|         15|          5|           0|        FIXED|
+| 8|  5|  4|  124|          9|          0|           0|        FIXED|
+| 9|  7|  3|  141|         17|          7|           0|        FIXED|
+|10|  7|  3|  155|         14|          4|           0|        FIXED|
+|11|  4|  0|    .|          4|          0|           0|   BEFORE_2ND|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: jdQMfRdtj-E),
+Player:, Frame:10,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|        FIXED|
+| 2|  9|  0|   18|          9|          0|           0|        FIXED|
+| 3|  0|  3|   21|          3|          0|           0|        FIXED|
+| 4|  8|  2|   38|         17|          7|           0|        FIXED|
+| 5|  7|  3|   58|         20|         10|           0|        FIXED|
+| 6| 10|  0|   78|         20|          0|          10|        FIXED|
+| 7|  9|  1|   96|         18|          8|           0|        FIXED|
+| 8|  8|  0|  104|          8|          0|           0|        FIXED|
+| 9| 10|  0|  123|         19|          0|           9|        FIXED|
+|10|  6|  3|  132|          9|          0|           0|        FIXED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Game(id:gzyZfHUH6co) is finished.

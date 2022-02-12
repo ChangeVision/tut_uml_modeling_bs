@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="description" content="この文書は、モデリングツールにastah*を使って、ソフトウェアの開発にUMLを使う方法について学ぶチュートリアルです。">
+<meta name="author" content="株式会社チェンジビジョン">
+<title>モデルを使ってソフトウェアを開発しよう</title>
+<link rel="stylesheet" href="css/mystyle.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
+                       font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
+             .nav-footer{text-align: center; margin-top: auto;}
+             .nav-footer > p > a {white-space: nowrap;}</style>
+</head>
+<body id="_スコアの状態を調べる" class="book toc2 toc-left">
+<div id="header">
+<h1>モデルを使ってソフトウェアを開発しよう</h1>
+<div class="details">
+<span id="author" class="author">株式会社チェンジビジョン</span><br>
+<span id="revnumber">バージョン html_0291,</span>
+<span id="revdate">2022-02-10</span>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">目次</div>
+<p><span class="toc-root"><a href="uml_tutorial.html">モデルを使ってソフトウェアを開発しよう</a></span></p><ul class="sectlevel1">
+<li><a href="_preface.html">はじめに</a>
+</li>
+<li><a href="_copyright.html">注意事項</a>
+</li>
+<li><a href="_preparation.html">1 準備</a>
+</li>
+<li><a href="_requirement_anaylysis.html">2 スコアシートのデータ構造を調べる</a>
+</li>
+<li><a href="_スコアの状態を調べる.html"><span class="toc-current">3 スコアの状態を調べる</span></a>
+<ul class="sectlevel2">
+<li><a href="_スコアの状態を調べる.html#_フレームの状態について検討する">3.1 フレームの状態について検討する</a>
+</li>
+<li><a href="_スコアの状態を調べる.html#_フレームの状態をステートマシン図で表す">3.2 フレームの状態をステートマシン図で表す</a>
+</li>
+<li><a href="_スコアの状態を調べる.html#_サービスフレームの扱いについて検討する">3.3 サービスフレームの扱いについて検討する</a>
+</li>
+<li><a href="_スコアの状態を調べる.html#_ゲームの進行について検討する">3.4 ゲームの進行について検討する</a>
+</li>
+</ul>
+</li>
+<li><a href="_summary.html">4 まとめ</a>
+</li>
+<li><a href="_other_diagrams.html">5 他の図、他の機能など</a>
+</li>
+<li><a href="_appendix-01.html">付録 A: 関連資料、ワークシート等</a>
+</li>
+<li><a href="_glossary.html">用語集</a>
+</li>
+<li><a href="_bibliography.html">参考文献</a>
+</li>
+<li><a href="_colophon.html">奥付</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_スコアの状態を調べる"><a class="anchor" href="#_スコアの状態を調べる"></a>3 スコアの状態を調べる</h2>
+<div class="sectionbody">
+<div class="paragraph lead">
+<p>処理をプログラムとして実現するには、構造のモデルだけではなく、構造のモデルの構成要素を動かす手順が必要になります。
+要素をどのように動かせばよいのかを検討するには「振舞いのモデル」を使います。
+振舞いのモデルを使って、ゲームスコアをつける手順に従うとき、スコアにはどのような状態があるのか検討してみましょう。</p>
+</div>
+<div class="sect2">
+<h3 id="_フレームの状態について検討する"><a class="anchor" href="#_フレームの状態について検討する"></a>3.1 フレームの状態について検討する</h3>
+<div class="paragraph">
+<p><a href="_requirement_anaylysis.html#scoresheet01">図 2.1</a> を見ると、ゲームの進行状況によってフレームが提示する情報には <a href="_スコアの状態を調べる.html#frama_differences">リスト20</a> のような違いがあります。</p>
+</div>
+<div id="frama_differences" class="exampleblock">
+<div class="title">リスト 20. フレームの提示する情報の違い</div>
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>まだプレーしていないフレーム</p>
+</li>
+<li>
+<p>1投目の投球を待っているフレーム</p>
+</li>
+<li>
+<p>2投目の投球を待っているフレーム</p>
+</li>
+<li>
+<p>2投目が投球されて獲得ピン数が確定したフレーム</p>
+</li>
+<li>
+<p>ストライクのボーナスが確定しないフレーム</p>
+</li>
+<li>
+<p>スペアのボーナスが確定しないフレーム</p>
+</li>
+<li>
+<p>スペアまたはストライクのボーナスが確定したフレーム</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_まだプレーしていないフレーム"><a class="anchor" href="#_まだプレーしていないフレーム"></a>3.1.1 まだプレーしていないフレーム</h4>
+<div class="paragraph">
+<p>まだプレーしてないフレームは、フレームの最初の状態です（ <a href="_スコアの状態を調べる.html#reserved01">図 3.1</a> ）。
+このフレームは、ピン数の入力を待っていません。</p>
+</div>
+<div id="reserved01" class="imageblock">
+<div class="content">
+<img src="images/reserved.png" alt="reserved" width="75%">
+</div>
+<div class="title">図 3.1 まだプレーしていないフレーム</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_1投目の投球を待っているフレーム"><a class="anchor" href="#_1投目の投球を待っているフレーム"></a>3.1.2 1投目の投球を待っているフレーム</h4>
+<div class="paragraph">
+<p>現在プレー中のフレームで、まだ1投目が投球されていない状態のフレームです（ <a href="_スコアの状態を調べる.html#before_1st01">図 3.2</a> ）。
+次にピン数を受け取ると、このフレームの1投目に記録されます。</p>
+</div>
+<div id="before_1st01" class="imageblock">
+<div class="content">
+<img src="images/before_1st.png" alt="before 1st" width="75%">
+</div>
+<div class="title">図 3.2 1投目の投球を待っているフレーム</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_2投目の投球を待っているフレーム"><a class="anchor" href="#_2投目の投球を待っているフレーム"></a>3.1.3 2投目の投球を待っているフレーム</h4>
+<div class="paragraph">
+<p>現在プレー中のフレームで、1投目がストライクでなかったときに2投目を待っている状態のフレームです（ <a href="_スコアの状態を調べる.html#before_2nd01">図 3.3</a> ）。
+次にピン数を受け取ると、このフレームの2投目に記録されます。</p>
+</div>
+<div id="before_2nd01" class="imageblock">
+<div class="content">
+<img src="images/before_2nd.png" alt="before 2nd" width="75%">
+</div>
+<div class="title">図 3.3 2投目の投球を待っているフレーム</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_スペアのボーナスの確定待ちのフレーム"><a class="anchor" href="#_スペアのボーナスの確定待ちのフレーム"></a>3.1.4 スペアのボーナスの確定待ちのフレーム</h4>
+<div class="paragraph">
+<p>現在プレー中のフレームの前のフレームがスペアで、現在のフレームが1投目の投球を待っているとき、前のフレームはスペアボーナスの確定待ちの状態です（ <a href="_スコアの状態を調べる.html#pending_spare01">図 3.4</a> ）。
+次にピン数を受け取ると、このフレームの1投目に記録されるとともに、前のフレームのスペアボーナスが確定します。</p>
+</div>
+<div id="pending_spare01" class="imageblock">
+<div class="content">
+<img src="images/pending_spare.png" alt="pending spare" width="75%">
+</div>
+<div class="title">図 3.4 スペアのボーナスの確定待ちのフレーム</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ストライクのボーナスの確定待ちのフレーム"><a class="anchor" href="#_ストライクのボーナスの確定待ちのフレーム"></a>3.1.5 ストライクのボーナスの確定待ちのフレーム</h4>
+<div class="paragraph">
+<p>ストライクボーナスの確定待ちには2通りの場合があります。</p>
+</div>
+<div class="paragraph">
+<p>まず、現在プレー中のフレームの前のフレームがストライクで、現在のフレームが2投目の投球を待っているときです。
+このとき、前のフレームはストライクボーナスの確定待ちの状態です（ <a href="_スコアの状態を調べる.html#pending_strike01">図 3.5</a> ）。
+次にピン数を受け取ると、このフレームの2投目に記録されるとともに、前のフレームのストライクボーナスが確定します。</p>
+</div>
+<div id="pending_strike01" class="imageblock">
+<div class="content">
+<img src="images/pending_strike.png" alt="pending strike" width="75%">
+</div>
+<div class="title">図 3.5 ストライクのボーナスの確定待ちのフレーム（次がストライクでない）</div>
+</div>
+<div class="paragraph">
+<p>いまひとつは、現在プレー中のフレームが1投目の投球を待っていて、前のフレームと前の前のフレームがともにストライクであったとき（ダブルのとき）ときです。
+このとき、前の前のフレームはストライクボーナスの確定待ちの状態です（ <a href="_スコアの状態を調べる.html#pending_double01">図 3.6</a> ）。
+次にピン数を受け取ると、このフレームの1投目に記録されるとともに、前の前のフレームのストライクボーナスが確定します。</p>
+</div>
+<div id="pending_double01" class="imageblock">
+<div class="content">
+<img src="images/pending_double.png" alt="pending double" width="75%">
+</div>
+<div class="title">図 3.6 ストライクのボーナスの確定待ちのフレーム（次がストライク）</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_獲得ピン数とボーナスが確定したフレーム"><a class="anchor" href="#_獲得ピン数とボーナスが確定したフレーム"></a>3.1.6 獲得ピン数とボーナスが確定したフレーム</h4>
+<div class="paragraph">
+<p>現在のフレームがスペアやストライクにならなかったとき、そのフレームはボーナスの確定待ちにならず、この段階でそのフレームのトータル（ボーナスなしの獲得ピン数）が確定します。</p>
+</div>
+<div class="paragraph">
+<p>スペアボーナスの確定待ち、またはストライクボーナスの確定待ちのフレームは、後のフレームの投球によってボーナスが確定すると、フレームのトータルが確定します。
+このとき、確定待ちのフレームでは、そのフレームの獲得ピン数と確定したボーナスの合計がそのフレームのトータルになります。</p>
+</div>
+<div class="paragraph">
+<p>フレームのトータルが求められると、それ以前のフレームまでの「延べのトータル」にそのフレームのトータルを加算して、延べのトータルを更新します。そして、更新した延べのトータルがフレームの下部に記録されます（ <a href="_スコアの状態を調べる.html#fixed01">図 3.7</a> ）。</p>
+</div>
+<div id="fixed01" class="imageblock">
+<div class="content">
+<img src="images/fixed01.png" alt="fixed01" width="75%">
+</div>
+<div class="title">図 3.7 2投目を投球して、ピン数が確定したフレーム（のべのトータルが求められている）</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_フレームの状態をステートマシン図で表す"><a class="anchor" href="#_フレームの状態をステートマシン図で表す"></a>3.2 フレームの状態をステートマシン図で表す</h3>
+<div class="paragraph">
+<p>フレームの状態を検討した結果、フレームはいくつかの状態を持つことがわかりました。
+フレームが表示できる情報も、状態によって異なることがわかりました。
+このことを、図に表してみましょう。
+状態とその変化（状態遷移と呼びます）を表すには、ステートマシン図を使います。</p>
+</div>
+<div class="sect3">
+<h4 id="_フレームクラスにステートマシン図を追加する"><a class="anchor" href="#_フレームクラスにステートマシン図を追加する"></a>3.2.1 フレームクラスにステートマシン図を追加する</h4>
+<div class="paragraph">
+<p>「Frame」クラスの状態を表す図を描きたいので、「Frame」クラスに図を追加しましょう。</p>
+</div>
+<div id="add_frame_stm00" class="exampleblock">
+<div class="title">リスト 21. フレームクラスにステートマシン図を追加する</div>
+<div class="content">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>「Frame」クラスにステートマシン図を追加する</p>
+<div class="ulist">
+<ul>
+<li>
+<p>構造ツリーから「Frame」クラスを選択し、右クリックしてポップアップメニューを表示を開く（ <a href="_スコアの状態を調べる.html#add_frame_stm01">図 3.8</a> ）。</p>
+</li>
+<li>
+<p>「図の追加＞ステートマシン図」でステートマシン図が追加される。</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="add_frame_stm01" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-154421.png" alt="GSW 20220207 154421" width="75%">
+</div>
+<div class="title">図 3.8 フレームクラスにステートマシン図を追加する</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>ステートマシン図に名前をつける</p>
+<div class="ulist">
+<ul>
+<li>
+<p>追加したステートマシン図のプロパティの「ベース」を開く。</p>
+</li>
+<li>
+<p>名前を編集して「Frameクラスのステートマシン図」とする（ <a href="#add_frame_stm02">[add_frame_stm02]</a> ）。</p>
+</li>
+<li>
+<p>ダイアグラムエディタのタイトルやタブにも反映される。</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ステートマシン図に状態を追加する"><a class="anchor" href="#_ステートマシン図に状態を追加する"></a>3.2.2 ステートマシン図に状態を追加する</h4>
+<div class="paragraph">
+<p>ステートマシン図に、フレームの状態を追加しましょう。</p>
+</div>
+<div id="add_frame_state00" class="exampleblock">
+<div class="title">リスト 22. ステートマシン図にフレームの状態を追加する</div>
+<div class="content">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>パレットから「開始疑似状態」を選択し、ステートマシン図に追加する。</p>
+</li>
+<li>
+<p>パレットから「状態」を選択し、ステートマシン図に追加する。</p>
+</li>
+<li>
+<p>「まだプレーしていないフレーム」を「RESERVED」という名前にする。</p>
+</li>
+<li>
+<p>パレットから「遷移」を選択して、「開始疑似状態」から「RESERVED」へ遷移を引く（ <a href="_スコアの状態を調べる.html#frame_state01">図 3.9</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="frame_state01" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220209-152917.png" alt="GSW 20220209 152917" width="100%">
+</div>
+<div class="title">図 3.9 状態の追加（１）</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="5">
+<li>
+<p>「1投目の投球を待っているフレーム」を「BEFORE_1ST」という名前にする。</p>
+</li>
+<li>
+<p>「BEFORE_1ST」という状態名の状態を追加する。</p>
+</li>
+</ol>
+</div>
+<div id="frame_stm02" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-155242.png" alt="GSW 20220207 155242" width="100%">
+</div>
+<div class="title">図 3.10 状態の追加（２）</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>「2投目の投球を待っているフレーム」を「BEFORE_2ND」</p>
+</li>
+<li>
+<p>「スペアのボーナスの確定待ちのフレーム」と「ストライクのボーナスの確定待ちのフレーム」を「PENDING」</p>
+</li>
+<li>
+<p>「獲得ピン数とボーナスが確定したフレーム」を表す「FIXED」</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_サービスフレームの扱いについて検討する"><a class="anchor" href="#_サービスフレームの扱いについて検討する"></a>3.3 サービスフレームの扱いについて検討する</h3>
+<div class="paragraph">
+<p>「クラッシックスコアリング」の場合、第10フレームが他のフレームとは異なっています。
+サービスフレームという考え方があり、ストライクやスペアの場合に追加で投球できます。</p>
+</div>
+<div class="paragraph">
+<p>このサービスフレームの扱い方にについて整理しておきましょう。</p>
+</div>
+<div class="sect3">
+<h4 id="_第10フレームがストライクもスペアもない場合"><a class="anchor" href="#_第10フレームがストライクもスペアもない場合"></a>3.3.1 第10フレームがストライクもスペアもない場合</h4>
+<div class="paragraph">
+<p>第10フレームがストライクでもスペアもない場合、サービスフレームは提供されません。
+第9フレームまでの通常のフレームと同様、1投目と2投目を記録するだけです（ <a href="_スコアの状態を調べる.html#ten_no_service">図 3.11</a>  ）。</p>
+</div>
+<div id="ten_no_service" class="imageblock">
+<div class="content">
+<img src="images/ten_no_service_combo.png" alt="ten no service combo" width="75%">
+</div>
+<div class="title">図 3.11 第10フレームがストライクもスペアもない場合</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_第10フレームがスペアの場合"><a class="anchor" href="#_第10フレームがスペアの場合"></a>3.3.2 第10フレームがスペアの場合</h4>
+<div class="paragraph">
+<p>第10フレームの2投目でスペアになった場合、1投目と2投目を通常のフレームと同様に記録したのち、もう1投追加されます。
+これを、第10フレームに加えて、第11フレームの1投目が追加されたとみなします。
+つまり、ゲームスコアのデータを「 <a href="_スコアの状態を調べる.html#ten_spare_service">図 3.12</a> 」のように構成します。</p>
+</div>
+<div id="ten_spare_service" class="imageblock">
+<div class="content">
+<img src="images/ten_spare_combo.png" alt="ten spare combo" width="75%">
+</div>
+<div class="title">図 3.12 第10フレームがスペアの場合（第11フレームの2投目はない）</div>
+</div>
+<div class="paragraph">
+<p>スコアをこのように構成しておくと、第10フレームの場合も、通常フレームの組み合わせによってボーナスが計算できます。
+ゲーム終了時の第10フレームのスコア（ピン数に以後の投球によるボーナスを加えたスコア）を取得するとそれがゲームのスコアになります。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_第10フレームの1投目がストライクの場合"><a class="anchor" href="#_第10フレームの1投目がストライクの場合"></a>3.3.3 第10フレームの1投目がストライクの場合</h4>
+<div class="paragraph">
+<p>第10フレームの1投目がストライクの場合、第10フレームをストライクとした上で、もう2投追加されます。
+これを、第10フレームに加えて、第11フレームの1投目と2投目が追加されたとみなします。
+つまり、ゲームスコアのデータを「 <a href="_スコアの状態を調べる.html#ten_one_strike_service">図 3.13</a> 」のように構成します。
+だたし、第11フレームの1投目がストライクの場合は、同じ2投追加でも次の「2投目もストライクの場合」の考え方を使います。</p>
+</div>
+<div id="ten_one_strike_service" class="imageblock">
+<div class="content">
+<img src="images/ten_one_strike_combo.png" alt="ten one strike combo" width="75%">
+</div>
+<div class="title">図 3.13 第10フレームの1投目がストライクの場合</div>
+</div>
+<div class="paragraph">
+<p>スコアをこのように構成しておくと、第10フレームの場合も、通常フレームの組み合わせによってボーナスが計算できます。
+ゲーム終了時の10フレームのスコア（ピン数に以後の投球によるボーナスを加えたスコア）を取得するとそれがゲームのスコアになります。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_第10フレームの2投目もストライクの場合"><a class="anchor" href="#_第10フレームの2投目もストライクの場合"></a>3.3.4 第10フレームの2投目もストライクの場合</h4>
+<div class="paragraph">
+<p>第10フレームの2投目もストライクの場合、第10フレーム、第11フレームをストライクとした上で、もう1投追加されます。
+これを、第10フレーム、第11フレームに加えて、第12フレーム目の1投目が追加されたとみなします。
+つまり、ゲームスコアのデータを「 <a href="_スコアの状態を調べる.html#ten_two_strike_service">図 3.14</a> 」のように構成します。
+このように構成すれば、通常のフレームでダブルをとったときの計算方法（ストライクが続いたときはさらに次のフレームの1投目が2投目として加算される）のままで第10フレームのボーナスが計算できます。</p>
+</div>
+<div id="ten_two_strike_service" class="imageblock">
+<div class="content">
+<img src="images/ten_two_strike_combo.png" alt="ten two strike combo" width="75%">
+</div>
+<div class="title">図 3.14 第10フレームの2投目もストライクの場合</div>
+</div>
+<div class="paragraph">
+<p>スコアをこのように構成しておくと、第10フレームの場合も、通常フレームの組み合わせによってボーナスが計算できます。
+ゲーム終了時の10フレームのスコア（ピン数に以後の投球によるボーナスを加えたスコア）を取得するとそれがゲームのスコアになります。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_クラス図に検討結果を反映する"><a class="anchor" href="#_クラス図に検討結果を反映する"></a>3.3.5 クラス図に検討結果を反映する</h4>
+<div class="paragraph">
+<p>第10フレームの場合にもサービスフレームのために追加のフレームを用意することで、通常フレームと同じようにピン数やボーナスを扱えるようになりました。</p>
+</div>
+<div class="paragraph">
+<p>クラス図にこの結果を反映しましょう。</p>
+</div>
+<div id="add_service_frame" class="exampleblock">
+<div class="title">リスト 23. クラス図にサービスフレームを検討結果を反映する</div>
+<div class="content">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>「Frame」クラス側の関連端の多重度を「10」から「12」に変更する。</p>
+</li>
+<li>
+<p>関連にノートをつけて説明をつけておく。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>パレットからノートを選択し、クラス図に追加する。</p>
+</li>
+<li>
+<p>ノートに「Frame側の多重度は、サービスフレーム用に必要なフレーム分だけ追加してある」という説明を追加する。</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>ノートから関連の線に向かってアンカーを引く。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>パレットからノートのアンカーを選択し、ノートにマウスカーソルを移動して青枠が表示されるのを待つ。</p>
+</li>
+<li>
+<p>マウスのボタンを押したまま、マウスカーソルをドラッグし、関連の線に近づけ青枠が表示されるのを待つ。</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="ヒント"></i>
+</td>
+<td class="content">
+ノート内の文章を編集するときは、ノートを選択した状態でプロパティを使って編集すると、改行の入力が容易になります。
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ゲームの進行について検討する"><a class="anchor" href="#_ゲームの進行について検討する"></a>3.4 ゲームの進行について検討する</h3>
+
+</div>
+</div>
+</div>
+<div class="paragraph nav-footer">
+<p>← Previous: <a href="_requirement_anaylysis.html">2</a> | ↑ Up: <a href="uml_tutorial.html">モデルを使ってソフトウェアを開発しよう</a> | Next: <a href="_summary.html">4</a> →</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+バージョン html_0291<br>
+最終更新 2022-02-05 11:39:09 +0900
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>
