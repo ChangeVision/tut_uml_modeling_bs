@@ -1,0 +1,68 @@
+ifndef::revnumber[]
+include::front_matter.adoc[]
+endif::[]
+
+[[_program_test]]
+== できあがったプログラムを試す
+
+[.lead]
+対応づけルールを使って、モデルから変換して作成したプログラムができあがりました。
+でいあがったプログラムを確認し、実際に動かしてみましょう。
+
+=== 作成したプログラム
+
+作成したプログラムの全体を確認しましょう（ <<ruby_all_code01>> ）。
+
+
+[[ruby_all_code01]]
+.score.rb
+[example]
+--
+[source,ruby,linenums]
+----
+include::{sourcesdir}/score.rb[]
+----
+--
+
+=== プログラムをテストする
+
+
+
+
+[[ruby_all_code02]]
+.テストスクリプト
+[example]
+--
+[source,ruby]
+----
+
+if $PROGRAM_NAME == __FILE__
+  sheet = ScoreSheet.new(Time.now)
+  sheet.add_game
+  game = sheet.games.last
+  game.entry('くぼあき')
+  game.entry('うえはら')
+  puts sheet
+
+  game_records = [
+    # [6, 3, 9, 0, 0, 3, 8, 2, 7, 3, 10, 9, 1, 8, 0, 10, 10, 6, 4],
+    # [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 5, 3],
+    [7, 0, 5, 5, 10, 10, 5, 4, 10, 7, 3, 5, 4, 7, 3, 7, 3, 4],
+    [6, 3, 9, 0, 0, 3, 8, 2, 7, 3, 10, 9, 1, 8, 0, 10, 6, 3]
+  ]
+
+  until game.finished?
+    puts '----------------------------------------'
+    puts "turn: #{game.turn_player_name}"
+    score_index = game.turn
+    pins = game_records[score_index].shift
+    puts "input pins: #{pins}"
+    game.playing(score_index, pins)
+    puts game.to_s
+    gets
+  end
+
+  puts "Game(id:#{game.id}) is finished."
+end
+----
+--

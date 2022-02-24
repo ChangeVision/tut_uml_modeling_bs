@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="description" content="この文書は、モデリングツールにastah*を使って、ソフトウェアの開発にUMLを使う方法について学ぶチュートリアルです。">
+<meta name="author" content="株式会社チェンジビジョン">
+<title>モデルを使ってソフトウェアを開発しよう</title>
+<link rel="stylesheet" href="css/mystyle.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/rouge-custom.css">
+<style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
+                       font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
+             .nav-footer{text-align: center; margin-top: auto;}
+             .nav-footer > p > a {white-space: nowrap;}</style>
+</head>
+<body id="_model_to_code_design" class="book toc2 toc-left">
+<div id="header">
+<h1>モデルを使ってソフトウェアを開発しよう</h1>
+<div class="details">
+<span id="author" class="author">株式会社チェンジビジョン</span><br>
+<span id="revnumber">バージョン html_0417,</span>
+<span id="revdate">2022-02-24</span>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">目次</div>
+<p><span class="toc-root"><a href="uml_tutorial.html">モデルを使ってソフトウェアを開発しよう</a></span></p><ul class="sectlevel1">
+<li><a href="_preface.html">はじめに</a>
+</li>
+<li><a href="_copyright.html">注意事項</a>
+</li>
+<li><a href="_preparation.html">1 準備</a>
+</li>
+<li><a href="_structure_design.html">2 スコアシートのデータ構造を調べる</a>
+</li>
+<li><a href="_model_to_code_design.html"><span class="toc-current">3 モデルとコードの対応づけ</span></a>
+<ul class="sectlevel2">
+<li><a href="_model_to_code_design.html#_対応づけ検討用モデルの作成">3.1 対応づけ検討用モデルの作成</a>
+</li>
+<li><a href="_model_to_code_design.html#_変換ルールを使ったコードを確認する">3.2 変換ルールを使ったコードを確認する</a>
+</li>
+<li><a href="_model_to_code_design.html#_まとめ_2">3.3 まとめ</a>
+</li>
+</ul>
+</li>
+<li><a href="_behavior_design.html">4 スコアやフレームの状態を調べる</a>
+</li>
+<li><a href="_program_test.html">5 できあがったプログラムを試す</a>
+</li>
+<li><a href="_summary.html">6 まとめ</a>
+</li>
+<li><a href="_other_diagrams.html">7 他の図、他の機能など</a>
+</li>
+<li><a href="_appendix-01.html">付録 A: 関連資料、ワークシート等</a>
+</li>
+<li><a href="_glossary.html">用語集</a>
+</li>
+<li><a href="_bibliography.html">参考文献</a>
+</li>
+<li><a href="_colophon.html">奥付</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_model_to_code_design"><a class="anchor" href="#_model_to_code_design"></a>3 モデルとコードの対応づけ</h2>
+<div class="sectionbody">
+<div class="paragraph lead">
+<p>プログラムがどのように動作するのか検討するときには、振舞いのモデルを使います。
+振舞いのモデルを作成する前に、構造のモデルと振舞いのモデルがどのようなコードとして実現されるのかについて、このチュートリアルで用いる方式を決めておきましょう。
+このことを「モデルとコードの対応づけ」と呼ぶことにします。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="ヒント"></i>
+</td>
+<td class="content">
+このような対応づけを「モデル変換ルール」と呼ぶこともあります。また、開発プロセスのなかでこの対応づけを検討する「方式設計」と呼ぶ人もいます。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>モデルとコードの対応づけを決めてそれを前提にして設計する（モデルを作る）ことは、実装に依存する情報と依存しない情報を分離することを促すため、実装に依存しないモデルを作るのに役立ちます。</p>
+</div>
+<div class="sect2">
+<h3 id="_対応づけ検討用モデルの作成"><a class="anchor" href="#_対応づけ検討用モデルの作成"></a>3.1 対応づけ検討用モデルの作成</h3>
+<div class="paragraph">
+<p>このチュートリアルでは実装にRubyを使うことにしました。
+そこで、対応づけの方式を検討するために、サンプルモデルとサンプルモデルに対応するRubyプログラムを作ってみましょう。</p>
+</div>
+<div class="sect3">
+<h4 id="_対応づけ検討用プロジェクトを用意する"><a class="anchor" href="#_対応づけ検討用プロジェクトを用意する"></a>3.1.1 対応づけ検討用プロジェクトを用意する</h4>
+<div class="paragraph">
+<p>「モデルとコードの対応づけ」の検討用に、astah* で別のプロジェクトを作成しましょう。</p>
+</div>
+<div class="exampleblock">
+<div class="title">リスト 20. 対応づけ検討用プロジェクトを作成する</div>
+<div class="content">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>astah* で新規プロジェクトを作成する。</p>
+</li>
+<li>
+<p>作成したプロジェクトをいったん保存する。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>モデルファイルの名前は「stm_sample.asta」とする。</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>プロジェクトが保存できたら、プロジェクトにクラス図を追加します（ <a href="_model_to_code_design.html#add_stm_sample_class_diag">リスト21</a> ）。</p>
+</div>
+<div id="add_stm_sample_class_diag" class="exampleblock">
+<div class="title">リスト 21. 対応づけ検討用プロジェクトにクラス図を用意する</div>
+<div class="content">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>構造ツリーで、プロジェクト名をクリックしてポップアップメニューを開く。</p>
+</li>
+<li>
+<p>「図の追加＞クラス図」でクラス図を追加する。</p>
+</li>
+<li>
+<p>プロパティから、クラス図の名前を「クラス図」に変更する。</p>
+</li>
+</ol>
+</div>
+<div id="add_stm_sample00" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220213-005309.png" alt="GSW 20220213 005309" width="50%">
+</div>
+<div class="title">図 3.1 対応づけの説明に使うプロジェクトにクラス図を追加した</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>対応づけの説明用に、簡単なクラス「Sample」の定義から始めましょう。
+このクラスは、操作「Play」と属性「attr_a」「attr_b」を持つクラスとします。
+これをUMLのクラスとして表してみましょう（ <a href="_model_to_code_design.html#add_sample_class00">リスト22</a> ）。</p>
+</div>
+<div id="add_sample_class00" class="exampleblock">
+<div class="title">リスト 22. クラス図に「Sample」クラスを追加する</div>
+<div class="content">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>パレットからクラスを選択し、クラス図に追加する。</p>
+</li>
+<li>
+<p>クラス名を「Sample」にする（ <a href="_model_to_code_design.html#sample_class01">図 3.2</a> ）。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>クラスに操作「play」を追加する。</p>
+</li>
+<li>
+<p>クラスに属性「attr_a」「attr_b」を追加する。</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="sample_class01" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220212-220754.png" alt="GSW 20220212 220754" width="75%">
+</div>
+<div class="title">図 3.2 クラス図に「Sample」クラスを追加した</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>これをRubyのコードで表すと <a href="_model_to_code_design.html#ruby_sample01">リスト23</a> のようになります。</p>
+</div>
+<div id="ruby_sample01" class="exampleblock">
+<div class="title">リスト 23. 「Sample」クラスを表すRubyのコード</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="k">class</span> <span class="nc">Sample</span>
+  <span class="k">def</span> <span class="nf">initialize</span>
+    <span class="vi">@attrs_a</span> <span class="o">=</span> <span class="kp">true</span>
+    <span class="vi">@attrs_b</span> <span class="o">=</span> <span class="kp">true</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">play</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_クラスにステートマシン図を追加する"><a class="anchor" href="#_クラスにステートマシン図を追加する"></a>3.1.2 クラスにステートマシン図を追加する</h4>
+<div class="paragraph">
+<p>このサンプルにおいては、いま追加した操作「play」が、「Sample」クラスの振舞いを提供しているとします。
+しかし、クラス図に描いた「Sample」クラスに操作「play」を追加しただけでは、その処理内容はわかりません。
+どこかに「play」の処理内容を表した図が必要です。</p>
+</div>
+<div class="paragraph">
+<p>そこで、「Sample」クラスに対して、操作「play」の振舞いを表すステートマシン図を追加します（ <a href="_model_to_code_design.html#add_stm_sample01">リスト24</a> ）。
+ここで、図を追加する対象を「Sample」クラスにしているのは、このステートマシン図が「Sample」クラスの振舞いのモデル図であるとわかるようにするためです。</p>
+</div>
+<div id="add_stm_sample01" class="exampleblock">
+<div class="title">リスト 24. 「Sample」クラスにステートマシン図を追加する</div>
+<div class="content">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>構造ツリーから「Sample」クラスを選択し、右クリックしてポップアップメニューを表示する（ <a href="_model_to_code_design.html#add_stm_sample02">図 3.3</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="add_stm_sample02" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220213-020944.png" alt="GSW 20220213 020944" width="75%">
+</div>
+<div class="title">図 3.3 「Sample」クラスにステートマシン図を追加する</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>「図の追加＞ステートマシン図」でステートマシン図が追加される。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>プロパティから図の名前を編集し、「Sampleのplayのステートマシン図」とする（ <a href="_model_to_code_design.html#add_stm_sample03">図 3.4</a> ）。</p>
+</li>
+<li>
+<p>ダイアグラムエディタのタイトルやタブにも反映される。</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="add_stm_sample03" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220213-013034.png" alt="GSW 20220213 013034" width="75%">
+</div>
+<div class="title">図 3.4 追加したステートマシン図に名前をつけた。</div>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">ステートマシン図を学ぶチュートリアル</div>
+<div class="paragraph">
+<p>ここでは、モデルとコードの対応づけを説明するために、振舞いのモデルの一種であるステートマシン図を作成しています。
+ステートマシン図を使って振舞いを設計する方法については、次のチュートリアルも参考にしてみてください。</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">ステートマシン図 &amp; 状態遷移表チュートリアル</dt>
+<dd>
+<p><code><a href="https://www.changevision.co/tutorial-statemachine-japanese.html" class="bare">https://www.changevision.co/tutorial-statemachine-japanese.html</a></code></p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ステートマシン図に状態を追加する"><a class="anchor" href="#_ステートマシン図に状態を追加する"></a>3.1.3 ステートマシン図に状態を追加する</h4>
+<div class="paragraph">
+<p>次に、追加したステートマシン図に、状態を追加します。</p>
+</div>
+<div class="exampleblock">
+<div class="title">リスト 25. ステートマシン図に状態を追加する</div>
+<div class="content">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>パレットから「状態」を選択し、ステートマシン図に状態を追加する。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>追加した状態の状態名は「状態0」（数字は追加の都度変わる）となっている（ <a href="_model_to_code_design.html#add_stm_sample04">図 3.5</a> ）。</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="add_stm_sample04" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220213-093229.png" alt="GSW 20220213 093229" width="75%">
+</div>
+<div class="title">図 3.5 新しい状態を追加した</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>「状態0」を選択し、プロパティの「ベース」タブの「名前」を編集して、状態の名前を「ST0」にする（ <a href="_model_to_code_design.html#add_stm_sample05">図 3.6</a> ）。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>状態「ST0」は、このサンプルの例示用に使う状態名のひとつ。</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="add_stm_sample05" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220213-104448.png" alt="GSW 20220213 104448" width="75%">
+</div>
+<div class="title">図 3.6 新しい状態に状態名をつけた</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="3">
+<li>
+<p>このサンプルでは3つの状態を使いたいので、状態をもう2つ追加する（ <a href="_model_to_code_design.html#add_stm_sample06">図 3.7</a> ）。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>「ST1」、「ST2」を追加した。</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="add_stm_sample06" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220213-111820.png" alt="GSW 20220213 111820" width="75%">
+</div>
+<div class="title">図 3.7 新しい状態に状態名をつけた</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="3">
+<li>
+<p>開始疑似状態、終了疑似状態を追加した（ <a href="_model_to_code_design.html#add_stm_sample07">図 3.8</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="add_stm_sample07" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220213-112341.png" alt="GSW 20220213 112341" width="75%">
+</div>
+<div class="title">図 3.8 開始疑似状態、終了疑似状態を追加した</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ステートマシン図に状態遷移を追加する"><a class="anchor" href="#_ステートマシン図に状態遷移を追加する"></a>3.1.4 ステートマシン図に状態遷移を追加する</h4>
+<div class="paragraph">
+<p>状態が追加できたので、こんどは状態遷移を追加しましょう。
+ここで、開始疑似状態は、この図における最初の状態を示すのに使います。
+終了疑似状態は、その図における最後の状態（ひとつとは限りません）を示すのに使います。</p>
+</div>
+<div id="add_stm_trans00" class="exampleblock">
+<div class="title">リスト 26. 状態遷移を追加する</div>
+<div class="content">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>パレットから「遷移」を選択して、「開始疑似状態」の内部へマウスカーソルを移動し、青枠が表示されるのを待つ（ <a href="_model_to_code_design.html#add_stm_trans01">図 3.9</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="add_stm_trans01" class="imageblock">
+<div class="content">
+<img src="images/add_stm_transition_58.png" alt="add stm transition 58" width="75%">
+</div>
+<div class="title">図 3.9 開始疑似状態の内側で青枠を表示させる</div>
+</div>
+<div id="add_stm_trans02" class="imageblock">
+<div class="content">
+<img src="images/add_stm_transition_73.png" alt="add stm transition 73" width="75%">
+</div>
+<div class="title">図 3.10 青枠が表示されたらマウスのボタンを押したままマウスカーソルをドラッグする</div>
+</div>
+<div id="add_stm_trans03" class="imageblock">
+<div class="content">
+<img src="images/add_stm_transition_81.png" alt="add stm transition 81" width="75%">
+</div>
+<div class="title">図 3.11 「ST0」でも青枠が表示されたらマウスのボタンを離す</div>
+</div>
+<div id="add_stm_trans04" class="imageblock">
+<div class="content">
+<img src="images/add_stm_transition_215.png" alt="add stm transition 215" width="75%">
+</div>
+<div class="title">図 3.12 ほかの状態遷移も追加する</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ステートマシン図にイベントやアクションを追加する"><a class="anchor" href="#_ステートマシン図にイベントやアクションを追加する"></a>3.1.5 ステートマシン図にイベントやアクションを追加する</h4>
+<div class="paragraph">
+<p>ステートマシン図において、状態は「イベント」の発生を待っているところです。
+多くの場合、イベントは、そのクラス自身の操作では処理を先に進められなくなるようなできごとです。
+たとえば、外部からの入力（操作待ちや受信待ちなど）や、一定の時間経過などがイベントの候補になります。</p>
+</div>
+<div class="paragraph">
+<p>状態遷移は、ある状態において待っていたイベントが発生して、別の状態へ移ることを表しています。
+イベントには、イベントが発生したとき、実際に遷移するか判定する条件を追加できます。
+この条件のことを「ガード条件」と呼びます。
+ガード条件つきのイベントでは、イベントが発生したときにガード条件を評価し、条件が真なら状態遷移します。
+ガード条件が偽のとき、イベントは起きたことになります（消費されると呼びます）が、状態は遷移しません。</p>
+</div>
+<div class="paragraph">
+<p>そして、状態遷移には、イベントが発生したときに実行したい処理を追加できます。
+この処理のことを「アクション（またはエフェクト）」と呼びます。</p>
+</div>
+<div class="paragraph">
+<p>イベントが発生すると、ガード条件つきのイベントならさらにガード条件も真なら、状態遷移に伴うアクションが実行され、それから次の状態へ遷移します。
+まず、「ST0」から「ST1」への状態遷移を、イベントが「ev1」でガード条件は「gd（が真）」のとき、アクション「act1」を実行するよう編集してみましょう。</p>
+</div>
+<div id="add_evt_act00" class="exampleblock">
+<div class="title">リスト 27. 状態遷移にイベントやアクションを追加する（１）</div>
+<div class="content">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>「ST0」から「ST1」への状態遷移を選択し、この遷移のプロパティを表示し、ベースタブを開く。</p>
+</li>
+<li>
+<p>プロパティを編集する（ <a href="_model_to_code_design.html#add_evt_act01">図 3.13</a> ）。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>「トリガー」にイベント名を設定する。ここでは「ev1」というイベントを設定する。</p>
+</li>
+<li>
+<p>「ガード」にガード条件を設定する。ここでは「gd1（が真）」を設定しする。</p>
+</li>
+<li>
+<p>「アクション」にアクションを設定する。ここでは「act1」という処理があるとして、これを設定する。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>act1は、2つの引数（イベントとパラメータ）を持つメソッドと想定する。</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="add_evt_act01" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220215-071155.png" alt="GSW 20220215 071155" width="75%">
+</div>
+<div class="title">図 3.13 「ST0」から「ST1」への状態遷移のイベントとアクションを編集する</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>次に、「ST1」からの「ST2」への遷移です。
+この遷移に割り当てるイベントは、「ev2」、アクションを「act2」とします。
+そして、このアクションの実行後、ガード条件「gd2」が真なら「ST2」へ、偽ならアクション「act3」を実行してから「ST1」へ遷移するように変更してみます（ <a href="_model_to_code_design.html#add_evt_act02">リスト28</a> ）。</p>
+</div>
+<div class="paragraph">
+<p>遷移先が2つあるなら、状態遷移を別々に引けばよさそうです。
+ところが、同じイベントを待っていてる遷移先が2つ以上あると、どちらの状態へ背にするのか決定できなくなります（あいまいな状態遷移と呼びます）。
+そこで、1つのイベントによる遷移先が状況によって変わる場合には「選択疑似状態」を使います。</p>
+</div>
+<div id="add_evt_act02" class="exampleblock">
+<div class="title">リスト 28. 状態遷移にイベントやアクションを追加する（２）</div>
+<div class="content">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>パレットから「選択疑似状態」を選択し、ステートマシン図に追加する（ <a href="_model_to_code_design.html#add_evt_act03">図 3.14</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="add_evt_act03" class="imageblock">
+<div class="content">
+<img src="images/add_stm_trans45.png" alt="add stm trans45" width="75%">
+</div>
+<div class="title">図 3.14 「選択疑似状態」をステートマシン図に追加する</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>「ST1」から「ST2」への状態遷移を選択し、「ST2」側のハンドル（丸印）をマウスでつまみ、「選択疑似状態」へつなぎ直す（ <a href="_model_to_code_design.html#add_evt_act04">図 3.15</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="add_evt_act04" class="imageblock">
+<div class="content">
+<img src="images/add_stm_trans120.png" alt="add stm trans120" width="75%">
+</div>
+<div class="title">図 3.15 既存の状態遷移を追加した「選択疑似状態」へつなぎ直す</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="3">
+<li>
+<p>「選択疑似状態」から「ST0」と「ST2」への状態遷移を追加する（ <a href="_model_to_code_design.html#add_evt_act05">図 3.16</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="add_evt_act05" class="imageblock">
+<div class="content">
+<img src="images/add_stm_trans218.png" alt="add stm trans218" width="75%">
+</div>
+<div class="title">図 3.16 「選択疑似状態」から「ST0」と「ST2」への状態遷移を追加する</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="4">
+<li>
+<p>それぞれの遷移のプロパティを編集する（ <a href="_model_to_code_design.html#add_evt_act06">図 3.17</a> ）。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>トリガーに「ev2」、ガード条件はなし、アクションを「act2」に設定する。</p>
+</li>
+<li>
+<p>ガードにガード条件「!gd2（gd2ではない）」、アクションを「act3」に設定する。</p>
+</li>
+<li>
+<p>ガードにガード条件「gd2」に設定する。</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="add_evt_act06" class="imageblock">
+<div class="content">
+<img src="images/add_stm_trans589.png" alt="add stm trans589" width="75%">
+</div>
+<div class="title">図 3.17 状態遷移のイベントとアクションを編集する</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="5">
+<li>
+<p>同様にして、あと2つほど状態遷移を追加する（ <a href="_model_to_code_design.html#add_evt_act07">図 3.18</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="add_evt_act07" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220216-045358.png" alt="GSW 20220216 045358" width="75%">
+</div>
+<div class="title">図 3.18 さらに状態遷移とイベントとアクションを追加した</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ステートマシン図に対応するコードを作成する"><a class="anchor" href="#_ステートマシン図に対応するコードを作成する"></a>3.1.6 ステートマシン図に対応するコードを作成する</h4>
+<div class="paragraph">
+<p>ステートマシン図ができたので、この図に合うようなRubyのコードを作成すルールを考えましょう。</p>
+</div>
+<div class="sect4">
+<h5 id="_状態を保持する変数を追加する"><a class="anchor" href="#_状態を保持する変数を追加する"></a>状態を保持する変数を追加する</h5>
+<div class="paragraph">
+<p>まず、「Sample」クラスに状態を保持するインスタンス変数を追加します（ <a href="_model_to_code_design.html#ruby_sample02">リスト29</a> ）。
+初期値は、最初の状態（ ST0 ）にします。</p>
+</div>
+<div id="ruby_sample02" class="exampleblock">
+<div class="title">リスト 29. 状態を保持するインスタンス変数を追加する</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="k">class</span> <span class="nc">Sample</span>
+  <span class="k">def</span> <span class="nf">initialize</span>
+    <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST0</span> <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="vi">@attrs_a</span> <span class="o">=</span> <span class="kp">true</span>
+    <span class="vi">@attrs_b</span> <span class="o">=</span> <span class="kp">true</span>
+  <span class="k">end</span>
+
+  <span class="c1"># 略</span>
+
+<span class="k">end</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>現在の状態を保持する変数を用意し、 ST0 で初期化する。「 :ST0 」はRubyのシンボルの表記法。シンボルは名前付きの数値定数。</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_状態遷移を担当するメソッドを作成する"><a class="anchor" href="#_状態遷移を担当するメソッドを作成する"></a>状態遷移を担当するメソッドを作成する</h5>
+<div class="paragraph">
+<p>ステートマシン図に書いた状態遷移を担当する操作「play」をPlayメソッドとして作成します（ <a href="_model_to_code_design.html#ruby_sample03">リスト30</a> ）。
+ルールの検討用なので、途中には処理の確認用の表示処理を書いておきます。</p>
+</div>
+<div id="ruby_sample03" class="exampleblock">
+<div class="title">リスト 30. 状態遷移を担当するメソッドを作成する</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="k">class</span> <span class="nc">Sample</span>
+  <span class="c1"># 略</span>
+
+  <span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
+    <span class="nb">puts</span> <span class="s2">"</span><span class="si">#{</span><span class="vi">@state</span><span class="si">}</span><span class="s2"> -&gt;"</span> <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="nb">puts</span> <span class="s2">"  event:</span><span class="si">#{</span><span class="n">evt</span><span class="si">}</span><span class="s2">, param: </span><span class="si">#{</span><span class="n">param</span><span class="si">}</span><span class="s2">"</span> <i class="conum" data-value="2"></i><b>(2)</b>
+    <span class="k">case</span> <span class="vi">@state</span> <i class="conum" data-value="3"></i><b>(3)</b>
+    <span class="k">when</span> <span class="ss">:ST0</span>
+      <span class="n">st0_proc</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span> <i class="conum" data-value="4"></i><b>(4)</b>
+    <span class="k">when</span> <span class="ss">:ST1</span>
+      <span class="n">st1_proc</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
+    <span class="k">when</span> <span class="ss">:ST2</span>
+      <span class="c1"># none</span>
+    <span class="k">end</span>
+    <span class="nb">puts</span> <span class="s2">"       -&gt; </span><span class="si">#{</span><span class="vi">@state</span><span class="si">}</span><span class="s2">"</span> <i class="conum" data-value="5"></i><b>(5)</b>
+    <span class="nb">puts</span> <span class="s1">'finished.'</span> <span class="k">if</span> <span class="vi">@state</span> <span class="o">==</span> <span class="ss">:ST2</span> <i class="conum" data-value="6"></i><b>(6)</b>
+  <span class="k">end</span>
+
+  <span class="c1"># 略</span>
+<span class="k">end</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>遷移前の状態を表示する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>イベントとパラメータを表示する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>状態ごとの処理を case文を使って分岐する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>状態ごとの詳細な処理を担当するメソッドを呼び出す（ここでは st0_proc） 。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>遷移後の状態を表示する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>終了状態になったことを知らせる。</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_ガード条件の判定用メソッドを作成する"><a class="anchor" href="#_ガード条件の判定用メソッドを作成する"></a>ガード条件の判定用メソッドを作成する</h5>
+<div class="paragraph">
+<p>このサンプルのステートマシン図には、状態遷移のガード条件として「gd1」「gd2」が登場します。
+これらをメソッドとして作成します。
+サンプルとして、属性の値を使った演算を割り当てました（ <a href="_model_to_code_design.html#ruby_sample04">リスト31</a> ）。</p>
+</div>
+<div id="ruby_sample04" class="exampleblock">
+<div class="title">リスト 31. ガード条件のメソッドを作成する</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="k">class</span> <span class="nc">Sample</span>
+  <span class="c1"># 略</span>
+
+  <span class="k">def</span> <span class="nf">gd1?</span> <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="vi">@attr_a</span> <span class="o">&amp;&amp;</span> <span class="vi">@attr_b</span> <i class="conum" data-value="2"></i><b>(2)</b>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">gd2?</span> <i class="conum" data-value="3"></i><b>(3)</b>
+    <span class="o">!</span><span class="vi">@attr_a</span> <span class="o">||</span> <span class="vi">@attr_b</span>
+  <span class="k">end</span>
+
+  <span class="c1"># 略</span>
+<span class="k">end</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>「gd1」用のメソッド。Rubyでは、真偽値を返すメソッドに「?」をつけることがある。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>属性値を使った条件式の例。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>「gd2」用のメソッド。</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_状態遷移を追加する１"><a class="anchor" href="#_状態遷移を追加する１"></a>状態遷移を追加する（１）</h5>
+<div class="paragraph">
+<p>状態ごとの処理を受け持つメソッドを作成します。
+まず、「ST0」からの状態遷移に対するメソッド「st0_proc」です（ <a href="_model_to_code_design.html#ruby_sample05">リスト32</a> ）。</p>
+</div>
+<div id="ruby_sample05" class="exampleblock">
+<div class="title">リスト 32. 「ST0」の状態遷移のメソッドを作成する</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="k">class</span> <span class="nc">Sample</span>
+  <span class="c1"># 略</span>
+
+  <span class="k">def</span> <span class="nf">st0_proc</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
+    <span class="k">case</span> <span class="n">evt</span> <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="k">when</span> <span class="ss">:ev1</span> <i class="conum" data-value="2"></i><b>(2)</b>
+      <span class="k">if</span> <span class="n">gd1?</span> <i class="conum" data-value="3"></i><b>(3)</b>
+        <span class="nb">puts</span> <span class="s2">"    gd1: </span><span class="si">#{</span><span class="n">gd1?</span><span class="si">}</span><span class="s2">"</span>
+        <span class="n">act1</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span> <i class="conum" data-value="4"></i><b>(4)</b>
+        <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST1</span> <i class="conum" data-value="5"></i><b>(5)</b>
+      <span class="k">else</span> <i class="conum" data-value="6"></i><b>(6)</b>
+        <span class="nb">puts</span> <span class="s2">"    &lt;&lt;&lt; gd1: </span><span class="si">#{</span><span class="n">gd1?</span><span class="si">}</span><span class="s2">, transition is ignored. &gt;&gt;&gt;"</span>
+      <span class="k">end</span>
+    <span class="k">when</span> <span class="ss">:ev3</span> <i class="conum" data-value="7"></i><b>(7)</b>
+      <span class="n">act3</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
+      <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST2</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="c1"># 略</span>
+<span class="k">end</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>イベントで場合分けする。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>イベントが「ev1」の場合。イベントはRubyのシンボルを使って表す。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>ガード条件による判定。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>アクション「act1」の呼び出し。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>次の状態「ST1」への遷移。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>ガード条件が偽だったとき。イベントが無視されたことを表示する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>イベントが「ev3」の場合。</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>この部分のRubyのコードとステートマシン図の対応を図で表してみましょう（ <a href="_model_to_code_design.html#ruby_sample06">図 3.19</a> ）。</p>
+</div>
+<div id="ruby_sample06" class="imageblock">
+<div class="content">
+<img src="images/ruby_sample05.png" alt="ruby sample05" width="100%">
+</div>
+<div class="title">図 3.19 Rubyのコードとステートマシン図の対応関係（１）</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_状態遷移を追加する２"><a class="anchor" href="#_状態遷移を追加する２"></a>状態遷移を追加する（２）</h5>
+<div class="paragraph">
+<p>こんどは、「ST1」からの状態遷移に対するメソッド「st1_proc」です（ <a href="_model_to_code_design.html#ruby_sample07">リスト33</a> ）。</p>
+</div>
+<div id="ruby_sample07" class="exampleblock">
+<div class="title">リスト 33. 「ST1」の状態遷移のメソッドを作成する</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="k">class</span> <span class="nc">Sample</span>
+  <span class="c1"># 略</span>
+
+  <span class="k">def</span> <span class="nf">st1_proc</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
+    <span class="k">case</span> <span class="n">evt</span>
+    <span class="k">when</span> <span class="ss">:ev2</span> <i class="conum" data-value="1"></i><b>(1)</b>
+      <span class="n">act2</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span> <i class="conum" data-value="2"></i><b>(2)</b>
+      <span class="nb">puts</span> <span class="s2">"    gd2: </span><span class="si">#{</span><span class="n">gd2?</span><span class="si">}</span><span class="s2">"</span>
+      <span class="k">if</span> <span class="n">gd2?</span> <i class="conum" data-value="3"></i><b>(3)</b>
+        <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST2</span> <i class="conum" data-value="4"></i><b>(4)</b>
+      <span class="k">else</span>
+        <span class="n">act3</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span> <i class="conum" data-value="5"></i><b>(5)</b>
+        <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST0</span> <i class="conum" data-value="6"></i><b>(6)</b>
+      <span class="k">end</span>
+    <span class="k">when</span> <span class="ss">:ev3</span> <i class="conum" data-value="7"></i><b>(7)</b>
+      <span class="n">act3</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
+      <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST0</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="c1"># 略</span>
+<span class="k">end</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>イベントが「ev2」の場合。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>アクション「act2」の呼び出し。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>選択疑似状態におけるガード条件による判定。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>次の状態「ST0」への遷移。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>選択疑似状態からの遷移におけるアクション「act3」の呼び出し。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>次の状態「ST2」への遷移。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>イベントが「ev3」の場合。</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>この部分のRubyのコードとステートマシン図の対応を図で表してみましょう（ <a href="_model_to_code_design.html#ruby_sample08">図 3.20</a> ）。</p>
+</div>
+<div id="ruby_sample08" class="imageblock">
+<div class="content">
+<img src="images/ruby_sample08.png" alt="ruby sample08" width="100%">
+</div>
+<div class="title">図 3.20 Rubyのコードとステートマシン図の対応関係（２）</div>
+</div>
+<div class="paragraph">
+<p>アクション「act1」、「act2」、「act3」は、呼び出しされたときのイベントやパラメータが確認できる簡便なメソッドにしておきます（ <a href="_model_to_code_design.html#ruby_sample09">リスト34</a> ）。
+また、アクションとガード条件は、「Sample」クラス内部で使うメソッドなので、「private」なメソッドにしておきます。</p>
+</div>
+<div id="ruby_sample09" class="exampleblock">
+<div class="title">リスト 34. 「ST1」の状態遷移のメソッドを作成する</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="k">class</span> <span class="nc">Sample</span>
+  <span class="c1"># 略</span>
+
+  <span class="n">praivate</span> <i class="conum" data-value="1"></i><b>(1)</b>
+
+  <span class="k">def</span> <span class="nf">act1</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">prm</span><span class="p">)</span>
+    <span class="nb">puts</span> <span class="s2">"     act1: event:</span><span class="si">#{</span><span class="n">evt</span><span class="si">}</span><span class="s2">, param: </span><span class="si">#{</span><span class="n">prm</span><span class="si">}</span><span class="s2">"</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">act2</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">prm</span><span class="p">)</span>
+    <span class="nb">puts</span> <span class="s2">"     act2: event:</span><span class="si">#{</span><span class="n">evt</span><span class="si">}</span><span class="s2">, param: </span><span class="si">#{</span><span class="n">prm</span><span class="si">}</span><span class="s2">"</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">act3</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">prm</span><span class="p">)</span>
+    <span class="nb">puts</span> <span class="s2">"     act3: event:</span><span class="si">#{</span><span class="n">evt</span><span class="si">}</span><span class="s2">, param: </span><span class="si">#{</span><span class="n">prm</span><span class="si">}</span><span class="s2">"</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">gd1?</span> <i class="conum" data-value="2"></i><b>(2)</b>
+    <span class="vi">@attr_a</span> <span class="o">&amp;&amp;</span> <span class="vi">@attr_b</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">gd2?</span>
+    <span class="o">!</span><span class="vi">@attr_a</span> <span class="o">||</span> <span class="vi">@attr_b</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>この宣言以降のメソッドは、可視性が「private」なメソッドになる。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>ガード条件の判定用メソッドも「private」なメソッドに含めた。</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>これで、ステートマシン図で表したクラスの振舞いをRubyのコードに対応づけらました。</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_追加したアクション等をクラス図に反映する"><a class="anchor" href="#_追加したアクション等をクラス図に反映する"></a>3.1.7 追加したアクション等をクラス図に反映する</h4>
+<div class="paragraph">
+<p>ステートマシン図を作成するときに追加したアクションは、このステートマシン図を割り当てているクラス（ここでは「Sample」クラス）の操作にしておきましょう。
+ここで、「Sample」クラスをテストするクラス「SampleTest」も追加しておきます。</p>
+</div>
+<div id="update_sample_class00" class="exampleblock">
+<div class="title">リスト 35. イベントやアクションをクラス図を更新する</div>
+<div class="content">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>クラス図を開く。</p>
+</li>
+<li>
+<p>「Sample」クラスクを選択し、プロパティから「操作」タブを表示する。</p>
+</li>
+<li>
+<p>「＋」アイコンを使って操作「act1」を追加する。</p>
+</li>
+<li>
+<p>可視性を「private」に設定する。</p>
+</li>
+<li>
+<p>「act2」、「act3」についても同じように設定する。</p>
+</li>
+<li>
+<p>ガード条件に使うメソッド「gd1?」「gd2」も追加しておく（ <a href="_model_to_code_design.html#update_sample_class01">図 3.21</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="update_sample_class01" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220216-050914.png" alt="GSW 20220216 050914" width="75%">
+</div>
+<div class="title">図 3.21 「Sample」クラス内部で使う操作を追加する</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="7">
+<li>
+<p>「SampleTest」クラスを追加しておく（ <a href="_model_to_code_design.html#update_sample_class02">図 3.22</a> ）。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>このテスト用クラスには、テストを実行する「run」メソッドを用意しておく。</p>
+</li>
+<li>
+<p>テスト用のメソッドをいくつか追加しておく。</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>「SampleTest」から「Sample」クラスへ関連を引き、関連端名を「samp01」、多重度を「1」としておく。</p>
+</li>
+</ol>
+</div>
+<div id="update_sample_class02" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220224-113632.png" alt="GSW 20220224 113632" width="75%">
+</div>
+<div class="title">図 3.22 「SampleTest」クラスと関連を追加する</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>これで、クラス図とステートマシン図とRubyのコードの対応づけができました。
+実際の問題について、クラス図やステートマシン図を作成するときは、このようなルールを使う前提で作成します。
+そして、Rubyでコードを作成するときは、作成した図と対網づけのルールを使ってコードを作成します。</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">列挙型（enum）をクラス図に反映する方法について</div>
+<div class="paragraph">
+<p>Rubyにはenumのような列挙子を直接定義する方法がないので、このチュートリアルの簡単のために、状態を表す定数を定義するために「シンボル（:ST0など）」を使いました。</p>
+</div>
+<div class="paragraph">
+<p>astah* は、Java, C#、C++ については、enumを設定する方法を提供していますので、その方法で代用してもよいでしょう。</p>
+</div>
+<div class="paragraph">
+<p>詳しい設定方法については、次の記事を参考にしてみてください。</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Java、enumの設定</dt>
+<dd>
+<p><code><a href="http://astah-users.change-vision.com/ja/modules/xhnewbb/viewtopic.php?topic_id=1249" class="bare">http://astah-users.change-vision.com/ja/modules/xhnewbb/viewtopic.php?topic_id=1249</a></code></p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_変換ルールを使ったコードを確認する"><a class="anchor" href="#_変換ルールを使ったコードを確認する"></a>3.2 変換ルールを使ったコードを確認する</h3>
+<div class="paragraph">
+<p>検討用のクラス図とステートマシン図に対応づけたRubyのプログラムの動作を確認してみましょう。</p>
+</div>
+<div class="sect3">
+<h4 id="_検討用モデルに対応したrubyプログラムの全体"><a class="anchor" href="#_検討用モデルに対応したrubyプログラムの全体"></a>3.2.1 検討用モデルに対応したRubyプログラムの全体</h4>
+<div class="paragraph">
+<p>作成したプログラムの全体を <a href="_model_to_code_design.html#ruby_sample_code01">リスト36</a>  に示します。
+このプログラムのコードには、「SampleTest」のインスタンスを作成して、テストを起動する処理や、テストメソッドの具体例が含まれています。</p>
+</div>
+<div id="ruby_sample_code01" class="exampleblock">
+<div class="title">リスト 36. stm_sample.rb</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+</pre></td><td class="code"><pre><span class="c1"># frozen_string_literal: true</span>
+
+<span class="c1"># ステートマシン図とコードの対応づけルールの検討用クラス</span>
+<span class="k">class</span> <span class="nc">Sample</span>
+  <span class="nb">attr_accessor</span> <span class="ss">:attr_a</span><span class="p">,</span> <span class="ss">:attr_b</span>
+
+  <span class="k">def</span> <span class="nf">initialize</span>
+    <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST0</span>
+    <span class="vi">@attrs_a</span> <span class="o">=</span> <span class="kp">true</span>
+    <span class="vi">@attrs_b</span> <span class="o">=</span> <span class="kp">true</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">st0_proc</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
+    <span class="k">case</span> <span class="n">evt</span>
+    <span class="k">when</span> <span class="ss">:ev1</span>
+      <span class="k">if</span> <span class="n">gd1?</span> <span class="c1"># guard</span>
+        <span class="nb">puts</span> <span class="s2">"    gd1: </span><span class="si">#{</span><span class="n">gd1?</span><span class="si">}</span><span class="s2">"</span>
+        <span class="n">act1</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
+        <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST1</span>
+      <span class="k">else</span>
+        <span class="nb">puts</span> <span class="s2">"    &lt;&lt;&lt; gd1: </span><span class="si">#{</span><span class="n">gd1?</span><span class="si">}</span><span class="s2">, transition is ignored. &gt;&gt;&gt;"</span>
+      <span class="k">end</span>
+    <span class="k">when</span> <span class="ss">:ev3</span>
+      <span class="n">act3</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
+      <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST2</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">st1_proc</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
+    <span class="k">case</span> <span class="n">evt</span>
+    <span class="k">when</span> <span class="ss">:ev2</span>
+      <span class="n">act2</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
+      <span class="nb">puts</span> <span class="s2">"    gd2: </span><span class="si">#{</span><span class="n">gd2?</span><span class="si">}</span><span class="s2">"</span>
+      <span class="k">if</span> <span class="n">gd2?</span> <span class="c1"># guard on choice.</span>
+        <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST2</span>
+      <span class="k">else</span>
+        <span class="n">act3</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
+        <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST0</span>
+      <span class="k">end</span>
+    <span class="k">when</span> <span class="ss">:ev3</span>
+      <span class="n">act3</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
+      <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST0</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
+    <span class="nb">puts</span> <span class="s2">"</span><span class="si">#{</span><span class="vi">@state</span><span class="si">}</span><span class="s2"> -&gt;"</span>
+    <span class="nb">puts</span> <span class="s2">"  event:</span><span class="si">#{</span><span class="n">evt</span><span class="si">}</span><span class="s2">, param: </span><span class="si">#{</span><span class="n">param</span><span class="si">}</span><span class="s2">"</span>
+    <span class="k">case</span> <span class="vi">@state</span>
+    <span class="k">when</span> <span class="ss">:ST0</span>
+      <span class="n">st0_proc</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
+    <span class="k">when</span> <span class="ss">:ST1</span>
+      <span class="n">st1_proc</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
+    <span class="k">when</span> <span class="ss">:ST2</span>
+      <span class="c1"># none</span>
+    <span class="k">end</span>
+    <span class="nb">puts</span> <span class="s2">"       -&gt; </span><span class="si">#{</span><span class="vi">@state</span><span class="si">}</span><span class="s2">"</span>
+    <span class="nb">puts</span> <span class="s1">'finished.'</span> <span class="k">if</span> <span class="vi">@state</span> <span class="o">==</span> <span class="ss">:ST2</span>
+  <span class="k">end</span>
+
+  <span class="kp">private</span>
+
+  <span class="k">def</span> <span class="nf">act1</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">prm</span><span class="p">)</span>
+    <span class="nb">puts</span> <span class="s2">"     act1: event:</span><span class="si">#{</span><span class="n">evt</span><span class="si">}</span><span class="s2">, param: </span><span class="si">#{</span><span class="n">prm</span><span class="si">}</span><span class="s2">"</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">act2</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">prm</span><span class="p">)</span>
+    <span class="nb">puts</span> <span class="s2">"     act2: event:</span><span class="si">#{</span><span class="n">evt</span><span class="si">}</span><span class="s2">, param: </span><span class="si">#{</span><span class="n">prm</span><span class="si">}</span><span class="s2">"</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">act3</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">prm</span><span class="p">)</span>
+    <span class="nb">puts</span> <span class="s2">"     act3: event:</span><span class="si">#{</span><span class="n">evt</span><span class="si">}</span><span class="s2">, param: </span><span class="si">#{</span><span class="n">prm</span><span class="si">}</span><span class="s2">"</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">gd1?</span>
+    <span class="vi">@attr_a</span> <span class="o">&amp;&amp;</span> <span class="vi">@attr_b</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">gd2?</span>
+    <span class="o">!</span><span class="vi">@attr_a</span> <span class="o">||</span> <span class="vi">@attr_b</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c1"># 検討用クラスのテストケースを提供するクラス</span>
+<span class="k">class</span> <span class="nc">SampleTest</span>
+  <span class="k">def</span> <span class="nf">test_base</span><span class="p">(</span><span class="n">events</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="n">samp01</span> <span class="o">=</span> <span class="no">Sample</span><span class="p">.</span><span class="nf">new</span>
+    <span class="n">samp01</span><span class="p">.</span><span class="nf">attr_a</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">samp01</span><span class="p">.</span><span class="nf">attr_b</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">events</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">evt</span><span class="o">|</span>
+      <span class="n">samp01</span><span class="p">.</span><span class="nf">play</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">.</span><span class="nf">usec</span><span class="p">)</span>
+    <span class="k">end</span>
+    <span class="nb">puts</span> <span class="s1">'================'</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">test01</span>
+    <span class="n">test_base</span><span class="p">(</span><span class="sx">%i[ev1 ev2]</span><span class="p">,</span> <span class="p">[</span><span class="kp">true</span><span class="p">,</span> <span class="kp">true</span><span class="p">])</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">test02</span>
+    <span class="n">test_base</span><span class="p">(</span><span class="sx">%i[ev1 ev3]</span><span class="p">,</span> <span class="p">[</span><span class="kp">false</span><span class="p">,</span> <span class="kp">false</span><span class="p">])</span> <span class="c1"># :ev1 will be ignored.</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">test03</span>
+    <span class="n">test_base</span><span class="p">(</span><span class="sx">%i[ev1 ev2 ev3]</span><span class="p">,</span> <span class="p">[</span><span class="kp">true</span><span class="p">,</span> <span class="kp">false</span><span class="p">])</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">run</span>
+    <span class="n">test01</span>
+    <span class="n">test02</span>
+    <span class="n">test03</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">if</span> <span class="vg">$PROGRAM_NAME</span> <span class="o">==</span> <span class="kp">__FILE__</span>
+  <span class="nb">test</span> <span class="o">=</span> <span class="no">SampleTest</span><span class="p">.</span><span class="nf">new</span>
+  <span class="nb">test</span><span class="p">.</span><span class="nf">run</span>
+<span class="k">end</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_検討用モデルに対応したrubyプログラムを動かす"><a class="anchor" href="#_検討用モデルに対応したrubyプログラムを動かす"></a>3.2.2 検討用モデルに対応したRubyプログラムを動かす</h4>
+<div class="paragraph">
+<p>コマンドプロンプトを起動して（MacやLinuxならターミナルを起動して）、プログラムを実行してみます（ <a href="_model_to_code_design.html#ruby_sample_code02">リスト37</a> ）。</p>
+</div>
+<div id="ruby_sample_code02" class="exampleblock">
+<div class="title">リスト 37. 【端末】stm_sample.rb を実行する</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="console"><span class="gp">C:\Users\kuboaki&gt;</span><span class="nb">cd </span>Desktop<span class="se">\B</span>owlingScore
+<span class="go">
+</span><span class="gp">C:\Users\kuboaki\Desktop\BowlingScore&gt;</span>ruby stm_sample.rb
+<span class="gp">ST0 -&gt;</span><span class="w">
+</span><span class="go">  event:ev1, param: 676481
+    gd1: true
+     act1: event:ev1, param: 676481
+</span><span class="gp">       -&gt;</span><span class="w"> </span>ST1
+<span class="gp">ST1 -&gt;</span><span class="w">
+</span><span class="go">  event:ev2, param: 678623
+     act2: event:ev2, param: 678623
+    gd2: true
+</span><span class="gp">       -&gt;</span><span class="w"> </span>ST2
+<span class="go">finished.
+================
+</span><span class="gp">ST0 -&gt;</span><span class="w">
+</span><span class="go">  event:ev1, param: 680596
+</span><span class="gp">    &lt;&lt;&lt; gd1: false, transition is ignored. &gt;</span><span class="o">&gt;&gt;</span>
+<span class="gp">       -&gt;</span><span class="w"> </span>ST0
+<span class="gp">ST0 -&gt;</span><span class="w">
+</span><span class="go">  event:ev3, param: 681783
+     act3: event:ev3, param: 681783
+</span><span class="gp">       -&gt;</span><span class="w"> </span>ST2
+<span class="go">finished.
+================
+</span><span class="gp">ST0 -&gt;</span><span class="w">
+</span><span class="go">  event:ev1, param: 683477
+</span><span class="gp">    &lt;&lt;&lt; gd1: false, transition is ignored. &gt;</span><span class="o">&gt;&gt;</span>
+<span class="gp">       -&gt;</span><span class="w"> </span>ST0
+<span class="gp">ST0 -&gt;</span><span class="w">
+</span><span class="go">  event:ev2, param: 685784
+</span><span class="gp">       -&gt;</span><span class="w"> </span>ST0
+<span class="gp">ST0 -&gt;</span><span class="w">
+</span><span class="go">  event:ev3, param: 708214
+     act3: event:ev3, param: 708214
+</span><span class="gp">       -&gt;</span><span class="w"> </span>ST2
+<span class="go">finished.
+================
+
+</span><span class="gp">C:\Users\kuboaki\Desktop\BowlingScore&gt;</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>動作させると、状態遷移やイベントが表示されますので、作成したモデル図を比較して期待した動作をしているか確認してみましょう。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_まとめ_2"><a class="anchor" href="#_まとめ_2"></a>3.3 まとめ</h3>
+<div class="paragraph">
+<p>クラス図とステートマシン図で動作を表現すれば、Rubyのコードに変換できることがわかりました。</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">モデル変換とモデル駆動開発（MDD）</div>
+<div class="paragraph">
+<p>ここで示したようなモデルとコードの対応づけのほかに、モデルから別のモデルへ、あるいはコードから別のコードへといった対応づけも考えられます。
+これらは、ソフトウェア設計における「モデル変換」と呼ばれています（コードも一種のモデル表現とみなせます）。
+そして、モデル変換を用いて開発プロセスにおける各工程間をモデルで接続して開発する方法のことを「モデル駆動開発（MDD: Model Driven Development）」と呼びます。</p>
+</div>
+<div class="paragraph">
+<p>モデル駆動開発を紹介している記事として次の記事があります。</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">モデル駆動開発におけるモデル変換の役割</dt>
+<dd>
+<p><code><a href="https://codezine.jp/article/detail/10597" class="bare">https://codezine.jp/article/detail/10597</a></code></p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>この記事では、モデル変換の繰り返しによる開発方法であることや、その実施例を紹介しています。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph nav-footer">
+<p>← Previous: <a href="_structure_design.html">2</a> | ↑ Up: <a href="uml_tutorial.html">モデルを使ってソフトウェアを開発しよう</a> | Next: <a href="_behavior_design.html">4</a> →</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+バージョン html_0417<br>
+最終更新 2022-02-24 17:45:00 +0900
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>
