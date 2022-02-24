@@ -20,7 +20,7 @@
 <h1>モデルを使ってソフトウェアを開発しよう</h1>
 <div class="details">
 <span id="author" class="author">株式会社チェンジビジョン</span><br>
-<span id="revnumber">バージョン html_0417,</span>
+<span id="revnumber">バージョン html_0427,</span>
 <span id="revdate">2022-02-24</span>
 </div>
 <div id="toc" class="toc2">
@@ -119,7 +119,8 @@
 </div>
 <div class="paragraph">
 <p>Ruby は、Windows、Mac、Linuxで動作するオープンソースの言語プログラミング言語です。
-インストール方法は利用環境によって異なりますので、詳しくは、Rubyの公式サイトの説明やWebの記事を参考にしてください。</p>
+インストール方法は利用環境によって異なります。
+詳しくは、Rubyの公式サイトの説明や、関連するウェブサイトの記事を参考にしてください。</p>
 </div>
 <div class="dlist">
 <dl>
@@ -152,12 +153,10 @@ Rubyになじみがない人は、公式サイトにある次のようなペー�
 <div class="paragraph">
 <p>業務やシステムを分析（あるいは設計）するときは、たいてい複数種類のモデル図を使って表します。
 astah* では、複数のモデル図をまとめてたモデルファイルを「プロジェクト」と呼んでいます。
-<a href="_preparation.html#create_proj01">リスト1</a> に従って、演習用のプロジェクトを用意しましょう。</p>
+「<a href="_preparation.html#create_proj01">演習で使うプロジェクトを作成する</a> 」の手順に従って、演習用のプロジェクトを用意しましょう。</p>
 </div>
-<div id="create_proj01" class="exampleblock">
-<div class="title">リスト 1. 演習で使うプロジェクトを作成する</div>
-<div class="content">
-<div class="olist arabic">
+<div id="create_proj01" class="olist arabic">
+<div class="title">演習で使うプロジェクトを作成する</div>
 <ol class="arabic">
 <li>
 <p>astah* を起動する。</p>
@@ -213,7 +212,7 @@ astah* では、複数のモデル図をまとめてたモデルファイルを�
 <div class="ulist">
 <ul>
 <li>
-<p>ここでは、保存場所として「デスクトップ」に「BowlingScore」フォルダを作成した。</p>
+<p>ここでは、保存場所として「デスクトップ」に「BowlingScore」フォルダーを作成した。</p>
 </li>
 <li>
 <p>ファイル名に「bowling_score」を指定して保存した（ <a href="_preparation.html#create_project04">図 1.4</a> ）。</p>
@@ -253,8 +252,6 @@ astah* では、複数のモデル図をまとめてたモデルファイルを�
 <img src="images/GSW-20220206-131907.png" alt="GSW 20220206 131907" width="75%">
 </div>
 <div class="title">図 1.5 プロジェクトファイル名が、プロジェクト名に反映された</div>
-</div>
-</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -399,19 +396,9 @@ astah* では、複数のモデル図をまとめてたモデルファイルを�
 <div class="paragraph nav-footer">
 <p></p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>スプリット</p>
-</div>
-<div class="ulist">
-<ul>
-</ul>
-</div>
-<div class="paragraph nav-footer">
-<p></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1投目で1番ピン（ヘッドピンともいう）と他のいくつかのピンが倒れ、2 本以上のピンが次のような状態に残った場合。スプリットの場合は、1投目のピン数を○で囲む。</p>
-<p class="tableblock">* 残っているピンの中間のピンが少なくとも1本倒れたとき。例えば7と9あるいは3と10。
-* 残っているピンのすぐ前のピンが少なくとも1本倒れたとき。例えば5と6。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">スプリット</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1投目で1番ピン（ヘッドピンともいう）と他のいくつかのピンが倒れ、2 本以上のピンが次のような状態に残った場合。スプリットの場合は、1投目のピン数を○で囲む。
+（残っているピンの中間のピンが少なくとも1本倒れたとき。例えば7と9あるいは3と10。残っているピンのすぐ前のピンが少なくとも1本倒れたとき。例えば5と6。）</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top"><div class="content"><div class="imageblock">
@@ -435,10 +422,10 @@ astah* では、複数のモデル図をまとめてたモデルファイルを�
 <div class="sect3">
 <h4 id="classic_scoring"><a class="anchor" href="#classic_scoring"></a>1.4.2 クラッシックスコアリング</h4>
 <div class="paragraph">
-<p>従来から使われていて、広く普及しているスコア計算方式です。</p>
+<p>古くから使われていて、広く普及しているスコア計算方式です。</p>
 </div>
 <div class="exampleblock">
-<div class="title">リスト 2. スコア計算の規定</div>
+<div class="title">リスト 1. スコア計算の規定</div>
 <div class="content">
 <div class="ulist">
 <ul>
@@ -491,7 +478,7 @@ astah* では、複数のモデル図をまとめてたモデルファイルを�
 <p>2018年アジア競技大会で採用された新しいスコア計算方式です。</p>
 </div>
 <div class="exampleblock">
-<div class="title">リスト 3. クラッシックスコアリングと異なる点</div>
+<div class="title">リスト 2. クラッシックスコアリングと異なる点</div>
 <div class="content">
 <div class="ulist">
 <ul>
@@ -553,7 +540,7 @@ astah* では、複数のモデル図をまとめてたモデルファイルを�
 </div>
 <div id="footer">
 <div id="footer-text">
-バージョン html_0417<br>
+バージョン html_0427<br>
 最終更新 2022-02-24 17:45:00 +0900
 </div>
 </div>

@@ -21,7 +21,7 @@
 <h1>モデルを使ってソフトウェアを開発しよう</h1>
 <div class="details">
 <span id="author" class="author">株式会社チェンジビジョン</span><br>
-<span id="revnumber">バージョン html_0417,</span>
+<span id="revnumber">バージョン html_0427,</span>
 <span id="revdate">2022-02-24</span>
 </div>
 <div id="toc" class="toc2">
@@ -48,6 +48,8 @@
 <li><a href="_behavior_design.html#_スコアの状態をステートマシン図で表す">4.4 スコアの状態をステートマシン図で表す</a>
 </li>
 <li><a href="_behavior_design.html#_ゲームの進行について検討する">4.5 ゲームの進行について検討する</a>
+</li>
+<li><a href="_behavior_design.html#_まとめ_3">4.6 まとめ</a>
 </li>
 </ul>
 </li>
@@ -78,10 +80,10 @@
 <div class="sect2">
 <h3 id="_フレームの状態について検討する"><a class="anchor" href="#_フレームの状態について検討する"></a>4.1 フレームの状態について検討する</h3>
 <div class="paragraph">
-<p><a href="_structure_design.html#scoresheet01">図 2.1</a> を見ると、ゲームの進行状況によってフレームが提示する情報には <a href="_behavior_design.html#frama_differences">リスト38</a> のような違いがあります。</p>
+<p><a href="_structure_design.html#scoresheet01">図 2.1</a> を見ると、ゲームの進行状況によってフレームが提示する情報には <a href="_behavior_design.html#frama_differences">リスト16</a> のような違いがあります。</p>
 </div>
 <div id="frama_differences" class="exampleblock">
-<div class="title">リスト 38. フレームの提示する情報の違い</div>
+<div class="title">リスト 16. フレームの提示する情報の違い</div>
 <div class="content">
 <div class="ulist">
 <ul>
@@ -197,7 +199,7 @@
 </div>
 <div class="paragraph">
 <p>スペアボーナスの確定待ち、またはストライクボーナスの確定待ちのフレームは、後のフレームの投球によってボーナスが確定すると、フレームのトータルが確定します。
-このとき、確定待ちのフレームでは、そのフレームの獲得ピン数と確定したボーナスの合計がそのフレームのトータルになります。</p>
+このとき、確定待ちのフレームでは、そのフレームの獲得ピン数と確定したボーナスの合計がそのフレームのトータルです。</p>
 </div>
 <div class="paragraph">
 <p>フレームのトータルが求められると、それ以前のフレームまでの「のべのトータル」にそのフレームのトータルを加算して、のべのトータルを更新します。そして、更新したのべのトータルがフレームの下部に記録されます（ <a href="_behavior_design.html#fixed01">図 4.7</a> ）。
@@ -224,10 +226,8 @@
 <div class="paragraph">
 <p>「Frame」クラスの状態を表す図を描きたいので、「Frame」クラスに図を追加しましょう。</p>
 </div>
-<div id="add_frame_stm00" class="exampleblock">
-<div class="title">リスト 39. 「Frame」クラスにステートマシン図を追加する</div>
-<div class="content">
-<div class="olist arabic">
+<div id="add_frame_stm00" class="olist arabic">
+<div class="title">「Frame」クラスにステートマシン図を追加する</div>
 <ol class="arabic">
 <li>
 <p>「Frame」クラスにステートマシン図を追加する</p>
@@ -257,7 +257,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>追加したステートマシン図のプロパティの「ベース」を開く。</p>
+<p>追加したステートマシン図のプロパティーの「ベース」を開く。</p>
 </li>
 <li>
 <p>名前を編集して「Frameクラスのステートマシン図」とする。</p>
@@ -271,20 +271,16 @@
 </ol>
 </div>
 </div>
-</div>
-</div>
 <div class="sect3">
 <h4 id="_フレームのステートマシン図を作成する"><a class="anchor" href="#_フレームのステートマシン図を作成する"></a>4.2.2 フレームのステートマシン図を作成する</h4>
 <div class="paragraph">
 <p>ステートマシン図に、フレームの状態と状態遷移を追加しましょう。</p>
 </div>
-<div id="add_frame_state00" class="exampleblock">
-<div class="title">リスト 40. ステートマシン図に「Frame」クラスの状態遷移を作成する</div>
-<div class="content">
-<div class="olist arabic">
+<div id="add_frame_state00" class="olist arabic">
+<div class="title">ステートマシン図に「Frame」クラスの状態遷移を作成する</div>
 <ol class="arabic">
 <li>
-<p>「Frame」クラスの最初の状態を作成する（ <a href="_behavior_design.html#frame_stm01">[frame_stm01]</a> ）。</p>
+<p>「Frame」クラスの最初の状態を作成する（ <a href="_behavior_design.html#frame_stm01">図 4.9</a> ）。</p>
 <div class="ulist">
 <ul>
 <li>
@@ -304,14 +300,16 @@
 </li>
 </ol>
 </div>
-<div id="frame_stm01" class="paragraph">
-<p>「Frame」クラスに状態を追加する
-image::GSW-20220209-152917.png[width='100%']</p>
+<div id="frame_stm01" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220209-152917.png" alt="GSW 20220209 152917" width="100%">
+</div>
+<div class="title">図 4.9 「Frame」クラスに状態を追加する</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="2">
 <li>
-<p>最初の状態遷移にイベントを割り当てる（ <a href="_behavior_design.html#frame_stm02">図 4.9</a> ）。</p>
+<p>最初の状態遷移にイベントを割り当てる（ <a href="_behavior_design.html#frame_stm02">図 4.10</a> ）。</p>
 <div class="ulist">
 <ul>
 <li>
@@ -329,12 +327,12 @@ image::GSW-20220209-152917.png[width='100%']</p>
 <div class="content">
 <img src="images/frame_stm02.png" alt="frame stm02" width="100%">
 </div>
-<div class="title">図 4.9 状態の追加（２）</div>
+<div class="title">図 4.10 状態の追加（２）</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="3">
 <li>
-<p>1投目のあとの状態遷移を追加する（ <a href="_behavior_design.html#frame_stm03">図 4.10</a> ）。</p>
+<p>1投目のあとの状態遷移を追加する（ <a href="_behavior_design.html#frame_stm03">図 4.11</a> ）。</p>
 <div class="ulist">
 <ul>
 <li>
@@ -371,12 +369,12 @@ image::GSW-20220209-152917.png[width='100%']</p>
 <div class="content">
 <img src="images/frame_stm03.png" alt="frame stm03" width="100%">
 </div>
-<div class="title">図 4.10 状態の追加（３）</div>
+<div class="title">図 4.11 状態の追加（３）</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="5">
 <li>
-<p>2投目のあとの状態遷移を追加する（ <a href="_behavior_design.html#frame_stm03">図 4.10</a> ）。</p>
+<p>2投目のあとの状態遷移を追加する（ <a href="_behavior_design.html#frame_stm03">図 4.11</a> ）。</p>
 <div class="ulist">
 <ul>
 <li>
@@ -420,31 +418,29 @@ image::GSW-20220209-152917.png[width='100%']</p>
 <div class="content">
 <img src="images/frame_stm04.png" alt="frame stm04" width="100%">
 </div>
-<div class="title">図 4.11 状態の追加（４）</div>
-</div>
-</div>
+<div class="title">図 4.12 状態の追加（４）</div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_フレームのクラス図を更新する"><a class="anchor" href="#_フレームのクラス図を更新する"></a>4.2.3 フレームのクラス図を更新する</h4>
 <div class="paragraph">
-<p>ステートマシン図で状態遷移のために追加したアクションやガード条件用の処理を「Frame」クラスのメソッドに追加しておきましょう（ <a href="_behavior_design.html#frame_stm05">図 4.12</a> ）。</p>
+<p>ステートマシン図で状態遷移のために追加したアクションやガード条件用の処理を「Frame」クラスのメソッドに追加しておきましょう（ <a href="_behavior_design.html#frame_stm05">図 4.13</a> ）。</p>
 </div>
 <div id="frame_stm05" class="imageblock">
 <div class="content">
 <img src="images/GSW-20220224-154030.png" alt="GSW 20220224 154030" width="25%">
 </div>
-<div class="title">図 4.12 ステートマシン図に合わせて「Frame」クラスを更新する</div>
+<div class="title">図 4.13 ステートマシン図に合わせて「Frame」クラスを更新する</div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_フレームの処理をプログラムに変換する"><a class="anchor" href="#_フレームの処理をプログラムに変換する"></a>4.2.4 フレームの処理をプログラムに変換する</h4>
 <div class="paragraph">
 <p>フレームのクラスとステートマシン図が作成できたので、Rubyのプログラムに変換してみましょう。
-変換したプログラムの初期化とアクションの部分は、 <a href="_behavior_design.html#ruby_frame_code01">リスト41</a> のようになるでしょう。</p>
+変換したプログラムの初期化とアクションの部分は、 <a href="_behavior_design.html#ruby_frame_code01">リスト17</a> のようになるでしょう。</p>
 </div>
 <div id="ruby_frame_code01" class="exampleblock">
-<div class="title">リスト 41. score.rb(1)</div>
+<div class="title">リスト 17. score.rb(1)</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -525,10 +521,10 @@ image::GSW-20220209-152917.png[width='100%']</p>
 </div>
 </div>
 <div class="paragraph">
-<p>ガード条件やとアクションのメソッドは、 <a href="_behavior_design.html#ruby_frame_code02">リスト42</a> のようになるでしょう。</p>
+<p>ガード条件やとアクションのメソッドは、 <a href="_behavior_design.html#ruby_frame_code02">リスト18</a> のようになるでしょう。</p>
 </div>
 <div id="ruby_frame_code02" class="exampleblock">
-<div class="title">リスト 42. score.rb(2)</div>
+<div class="title">リスト 18. score.rb(2)</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -650,13 +646,13 @@ image::GSW-20220209-152917.png[width='100%']</p>
 <h4 id="_第10フレームがストライクもスペアもない場合"><a class="anchor" href="#_第10フレームがストライクもスペアもない場合"></a>4.3.1 第10フレームがストライクもスペアもない場合</h4>
 <div class="paragraph">
 <p>第10フレームがストライクでもスペアもない場合、サービスフレームは提供されません。
-第9フレームまでの通常のフレームと同様、1投目と2投目を記録するだけです（ <a href="_behavior_design.html#ten_no_service">図 4.13</a>  ）。</p>
+第9フレームまでの通常のフレームと同様、1投目と2投目を記録するだけです（ <a href="_behavior_design.html#ten_no_service">図 4.14</a>  ）。</p>
 </div>
 <div id="ten_no_service" class="imageblock">
 <div class="content">
 <img src="images/ten_no_service_combo.png" alt="ten no service combo" width="75%">
 </div>
-<div class="title">図 4.13 第10フレームがストライクもスペアもない場合</div>
+<div class="title">図 4.14 第10フレームがストライクもスペアもない場合</div>
 </div>
 </div>
 <div class="sect3">
@@ -664,17 +660,17 @@ image::GSW-20220209-152917.png[width='100%']</p>
 <div class="paragraph">
 <p>第10フレームの2投目でスペアになった場合、1投目と2投目を通常のフレームと同様に記録したのち、もう1投追加されます。
 これを、第10フレームに加えて、第11フレームの1投目が追加されたとみなします。
-つまり、ゲームスコアのデータを「 <a href="_behavior_design.html#ten_spare_service">図 4.14</a> 」のように構成します。</p>
+つまり、ゲームスコアのデータを「 <a href="_behavior_design.html#ten_spare_service">図 4.15</a> 」のように構成します。</p>
 </div>
 <div id="ten_spare_service" class="imageblock">
 <div class="content">
 <img src="images/ten_spare_combo.png" alt="ten spare combo" width="75%">
 </div>
-<div class="title">図 4.14 第10フレームがスペアの場合（第11フレームの2投目はない）</div>
+<div class="title">図 4.15 第10フレームがスペアの場合（第11フレームの2投目はない）</div>
 </div>
 <div class="paragraph">
 <p>スコアをこのように構成しておくと、第10フレームの場合も、通常フレームの組み合わせによってボーナスが計算できます。
-ゲーム終了時の第10フレームのスコア（ピン数に以後の投球によるボーナスを加えたスコア）を取得するとそれがゲームのスコアになります。</p>
+ゲーム終了時の第10フレームのスコア（ピン数に以後の投球によるボーナスを加えたスコア）を取得すると、それがゲームのスコアです。</p>
 </div>
 </div>
 <div class="sect3">
@@ -682,18 +678,18 @@ image::GSW-20220209-152917.png[width='100%']</p>
 <div class="paragraph">
 <p>第10フレームの1投目がストライクの場合、第10フレームをストライクとした上で、もう2投追加されます。
 これを、第10フレームに加えて、第11フレームの1投目と2投目が追加されたとみなします。
-つまり、ゲームスコアのデータを「 <a href="_behavior_design.html#ten_one_strike_service">図 4.15</a> 」のように構成します。
+つまり、ゲームスコアのデータを「 <a href="_behavior_design.html#ten_one_strike_service">図 4.16</a> 」のように構成します。
 だたし、第11フレームの1投目がストライクの場合は、同じ2投追加でも次の「2投目もストライクの場合」の考え方を使います。</p>
 </div>
 <div id="ten_one_strike_service" class="imageblock">
 <div class="content">
 <img src="images/ten_one_strike_combo.png" alt="ten one strike combo" width="75%">
 </div>
-<div class="title">図 4.15 第10フレームの1投目がストライクの場合</div>
+<div class="title">図 4.16 第10フレームの1投目がストライクの場合</div>
 </div>
 <div class="paragraph">
 <p>スコアをこのように構成しておくと、第10フレームの場合も、通常フレームの組み合わせによってボーナスが計算できます。
-ゲーム終了時の10フレームのスコア（ピン数に以後の投球によるボーナスを加えたスコア）を取得するとそれがゲームのスコアになります。</p>
+ゲーム終了時の10フレームのスコア（ピン数に以後の投球によるボーナスを加えたスコア）を取得すると、それがゲームのスコアです。</p>
 </div>
 </div>
 <div class="sect3">
@@ -701,18 +697,18 @@ image::GSW-20220209-152917.png[width='100%']</p>
 <div class="paragraph">
 <p>第10フレームの2投目もストライクの場合、第10フレーム、第11フレームをストライクとした上で、もう1投追加されます。
 これを、第10フレーム、第11フレームに加えて、第12フレーム目の1投目が追加されたとみなします。
-つまり、ゲームスコアのデータを「 <a href="_behavior_design.html#ten_two_strike_service">図 4.16</a> 」のように構成します。
+つまり、ゲームスコアのデータを「 <a href="_behavior_design.html#ten_two_strike_service">図 4.17</a> 」のように構成します。
 このように構成すれば、通常のフレームでダブルをとったときの計算方法（ストライクが続いたときはさらに次のフレームの1投目が2投目として加算される）のままで第10フレームのボーナスが計算できます。</p>
 </div>
 <div id="ten_two_strike_service" class="imageblock">
 <div class="content">
 <img src="images/ten_two_strike_combo.png" alt="ten two strike combo" width="75%">
 </div>
-<div class="title">図 4.16 第10フレームの2投目もストライクの場合</div>
+<div class="title">図 4.17 第10フレームの2投目もストライクの場合</div>
 </div>
 <div class="paragraph">
 <p>スコアをこのように構成しておくと、第10フレームの場合も、通常フレームの組み合わせによってボーナスが計算できます。
-ゲーム終了時の10フレームのスコア（ピン数に以後の投球によるボーナスを加えたスコア）を取得するとそれがゲームのスコアになります。</p>
+ゲーム終了時の10フレームのスコア（ピン数に以後の投球によるボーナスを加えたスコア）を取得すると、それがゲームのスコアです。</p>
 </div>
 </div>
 </div>
@@ -725,13 +721,13 @@ image::GSW-20220209-152917.png[width='100%']</p>
 <div class="sect3">
 <h4 id="_scoreクラスにステートマシン図を追加する"><a class="anchor" href="#_scoreクラスにステートマシン図を追加する"></a>4.4.1 「Score」クラスにステートマシン図を追加する</h4>
 <div class="paragraph">
-<p>「Frame」クラスにステートマシン図を追加したのと同じ手順で、「Score」クラスにステートマシン図を追加します（ <a href="_behavior_design.html#add_score_stm00">図 4.17</a> ）。</p>
+<p>「Frame」クラスにステートマシン図を追加したのと同じ手順で、「Score」クラスにステートマシン図を追加します（ <a href="_behavior_design.html#add_score_stm00">図 4.18</a> ）。</p>
 </div>
 <div id="add_score_stm00" class="imageblock">
 <div class="content">
 <img src="images/GSW-20220224-143517.png" alt="GSW 20220224 143517" width="75%">
 </div>
-<div class="title">図 4.17 「Score」クラスにステートマシン図を追加する</div>
+<div class="title">図 4.18 「Score」クラスにステートマシン図を追加する</div>
 </div>
 </div>
 <div class="sect3">
@@ -739,13 +735,11 @@ image::GSW-20220209-152917.png[width='100%']</p>
 <div class="paragraph">
 <p>ステートマシン図に、検討した結果を使って、スコアの状態と状態遷移を追加しましょう。</p>
 </div>
-<div id="add_score_state00" class="exampleblock">
-<div class="title">リスト 43. ステートマシン図に「Score」クラスの状態遷移を作成する</div>
-<div class="content">
-<div class="olist arabic">
+<div id="add_score_state00" class="olist arabic">
+<div class="title">ステートマシン図に「Score」クラスの状態遷移を作成する</div>
 <ol class="arabic">
 <li>
-<p>「Score」クラスの状態を追加する（ <a href="_behavior_design.html#add_score_stm01">図 4.18</a> ）。</p>
+<p>「Score」クラスの状態を追加する（ <a href="_behavior_design.html#add_score_stm01">図 4.19</a> ）。</p>
 <div class="ulist">
 <ul>
 <li>
@@ -773,12 +767,12 @@ image::GSW-20220209-152917.png[width='100%']</p>
 <div class="content">
 <img src="images/GSW-20220224-145100.png" alt="GSW 20220224 145100" width="75%">
 </div>
-<div class="title">図 4.18 ステートマシン図に「Score」クラスの状態を追加する</div>
+<div class="title">図 4.19 ステートマシン図に「Score」クラスの状態を追加する</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="2">
 <li>
-<p>「Score」クラスのイベントとアクションを作成する（ <a href="_behavior_design.html#add_score_stm02">図 4.19</a> ）。</p>
+<p>「Score」クラスのイベントとアクションを作成する（ <a href="_behavior_design.html#add_score_stm02">図 4.20</a> ）。</p>
 </li>
 <li>
 <p>「WAIT_FOR_1ST」からの遷移には、ストライクの場合、ストライクでない場合、ゲームが終了の場合があるので、「選択疑似状態」を追加する。</p>
@@ -821,9 +815,7 @@ image::GSW-20220209-152917.png[width='100%']</p>
 <div class="content">
 <img src="images/GSW-20220224-152010.png" alt="GSW 20220224 152010" width="100%">
 </div>
-<div class="title">図 4.19 ステートマシン図に「Score」クラスのイベントとアクションを追加する</div>
-</div>
-</div>
+<div class="title">図 4.20 ステートマシン図に「Score」クラスのイベントとアクションを追加する</div>
 </div>
 </div>
 <div class="sect3">
@@ -832,12 +824,10 @@ image::GSW-20220209-152917.png[width='100%']</p>
 <p>第10フレームの場合にもサービスフレームのために追加のフレームを用意することで、通常フレームと同じようにピン数やボーナスを扱えるようになりました。</p>
 </div>
 <div class="paragraph">
-<p>クラス図にこの結果を反映しましょう（ <a href="_behavior_design.html#update_class_for_score_frame00">リスト44</a> ）。</p>
+<p>クラス図にこの結果を反映しましょう。</p>
 </div>
-<div id="update_class_for_score_frame00" class="exampleblock">
-<div class="title">リスト 44. ステートマシン図に合わせてクラス図を更新する（ <a href="_behavior_design.html#update_class_for_score_frame01">図 4.20</a> ）</div>
-<div class="content">
-<div class="olist arabic">
+<div id="update_class_for_score_frame00" class="olist arabic">
+<div class="title">ステートマシン図に合わせてクラス図を更新する（ <a href="_behavior_design.html#update_class_for_score_frame01">図 4.21</a> ）</div>
 <ol class="arabic">
 <li>
 <p>「Frame」クラス側の関連端の多重度を「10」から「12」に変更する。</p>
@@ -912,9 +902,7 @@ image::GSW-20220209-152917.png[width='100%']</p>
 <div class="content">
 <img src="images/GSW-20220224-154728.png" alt="GSW 20220224 154728" width="100%">
 </div>
-<div class="title">図 4.20 ステートマシン図に合わせてクラス図を更新する</div>
-</div>
-</div>
+<div class="title">図 4.21 ステートマシン図に合わせてクラス図を更新する</div>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -923,7 +911,7 @@ image::GSW-20220209-152917.png[width='100%']</p>
 <i class="fa icon-tip" title="ヒント"></i>
 </td>
 <td class="content">
-ノート内の文章を編集するときは、ノートを選択した状態でプロパティを使って編集すると、改行の入力が容易になります。
+ノート内の文章を編集するときは、ノートを選択した状態でプロパティーを使って編集すると、改行が入力しやすくなります。
 </td>
 </tr>
 </table>
@@ -933,10 +921,10 @@ image::GSW-20220209-152917.png[width='100%']</p>
 <h4 id="_スコアの処理をプログラムに変換する"><a class="anchor" href="#_スコアの処理をプログラムに変換する"></a>4.4.4 スコアの処理をプログラムに変換する</h4>
 <div class="paragraph">
 <p>スコアのクラスとステートマシン図が作成できたので、Rubyのプログラムに変換してみましょう。
-変換したプログラムの初期化やユーティリティメソッドの部分は、 <a href="_behavior_design.html#ruby_score_code01">リスト45</a> のようになるでしょう。</p>
+変換したプログラムの初期化やユーティリティメソッドの部分は、 <a href="_behavior_design.html#ruby_score_code01">リスト19</a> のようになるでしょう。</p>
 </div>
 <div id="ruby_score_code01" class="exampleblock">
-<div class="title">リスト 45. score.rb(3)</div>
+<div class="title">リスト 19. score.rb(3)</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -1013,11 +1001,11 @@ image::GSW-20220209-152917.png[width='100%']</p>
 </tr>
 <tr>
 <td><i class="conum" data-value="7"></i><b>7</b></td>
-<td>フレーム番号とフレームの配列のインデックスを紐づけるメソッド（ダミーのフレームを第1フレームの前に追加したためのオフセット）。</td>
+<td>フレーム番号とフレームの配列のインデックスをひもづけるメソッド（ダミーのフレームを第1フレームの前に追加したためのオフセット）。</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="8"></i><b>8</b></td>
-<td>現在のフレームを「次のフレームへ進める」メソッド。</td>
+<td>現在のフレームを「次のフレームへ進める」メソッド。このメソッドでは、次のフレームに「SETUP」イベントを送る。</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="9"></i><b>9</b></td>
@@ -1028,10 +1016,10 @@ image::GSW-20220209-152917.png[width='100%']</p>
 </div>
 </div>
 <div class="paragraph">
-<p>ボーナス計算やトータル計算のメソッドは <a href="_behavior_design.html#ruby_score_code02">リスト46</a> のようになるでしょう。</p>
+<p>ボーナス計算やトータル計算のメソッドは <a href="_behavior_design.html#ruby_score_code02">リスト20</a> のようになるでしょう。</p>
 </div>
 <div id="ruby_score_code02" class="exampleblock">
-<div class="title">リスト 46. score.rb(4)</div>
+<div class="title">リスト 20. score.rb(4)</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -1097,15 +1085,15 @@ image::GSW-20220209-152917.png[width='100%']</p>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>1投目のあとのスペアボーナスを計算するメソッド。</td>
+<td>1投目のあとのスペアボーナスを計算するメソッド。前のフレームのスコアが確定するので、前のフレームへ「DETERMINE」イベントを送る。</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>1投目のあとのストライクボーナスを計算するメソッド。</td>
+<td>1投目のあとのストライクボーナスを計算するメソッド。前の前のフレームからストライクが続いていた場合、ここでスコアが確定するので、前の前のフレームへ「DETERMINE」イベントを送る。</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>2投目のあとのストライクボーナスを計算するメソッド。</td>
+<td>2投目のあとのストライクボーナスを計算するメソッド。前のフレームのスコアが確定するので、前のフレームへ「DETERMINE」イベントを送る。</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="6"></i><b>6</b></td>
@@ -1120,10 +1108,10 @@ image::GSW-20220209-152917.png[width='100%']</p>
 </div>
 </div>
 <div class="paragraph">
-<p>そして。ステートマシン図で表した、実際にゲームの進行に合わせてスコアを記録する処理をするメソッドは <a href="_behavior_design.html#ruby_score_code03">リスト47</a> のようになるでしょう。</p>
+<p>そして、ステートマシン図で表した、実際にゲームの進行に合わせてスコアを記録する処理をするメソッドは <a href="_behavior_design.html#ruby_score_code03">リスト21</a> のようになるでしょう。</p>
 </div>
 <div id="ruby_score_code03" class="exampleblock">
-<div class="title">リスト 47. score.rb(5)</div>
+<div class="title">リスト 21. score.rb(5)</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -1182,7 +1170,7 @@ image::GSW-20220209-152917.png[width='100%']</p>
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>「WAIT_FOR_1ST」状態のときのメソッド。</td>
+<td>「WAIT_FOR_1ST」状態のときの状態遷移のメソッド。</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
@@ -1194,7 +1182,7 @@ image::GSW-20220209-152917.png[width='100%']</p>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>「ストライクだった」の場合は、次のフレーム進んで「WAIT_FOR_1ST」へ遷移する。</td>
+<td>「ストライクだった」の場合は、次のフレームへ進んで「WAIT_FOR_1ST」へ遷移する。</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
@@ -1202,7 +1190,7 @@ image::GSW-20220209-152917.png[width='100%']</p>
 </tr>
 <tr>
 <td><i class="conum" data-value="6"></i><b>6</b></td>
-<td>「WAIT_FOR_2ND」状態のときのメソッド。</td>
+<td>「WAIT_FOR_2ND」状態のときの状態遷移のメソッド。</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="7"></i><b>7</b></td>
@@ -1214,11 +1202,11 @@ image::GSW-20220209-152917.png[width='100%']</p>
 </tr>
 <tr>
 <td><i class="conum" data-value="9"></i><b>9</b></td>
-<td>それ以外のときは、次のフレーム進んで「WAIT_FOR_1ST」へ遷移する。</td>
+<td>それ以外のときは、次のフレームへ進んで「WAIT_FOR_1ST」へ遷移する。</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="10"></i><b>10</b></td>
-<td>スコアを記録するステートマシン図の振舞いを担当するメソッド。状態に応じてそれぞれの状態用のメソッドを呼び出す。</td>
+<td>スコアを記録するステートマシン図の振る舞いを担当するメソッド。状態に応じてそれぞれの状態用のメソッドを呼び出す。</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="11"></i><b>11</b></td>
@@ -1229,7 +1217,7 @@ image::GSW-20220209-152917.png[width='100%']</p>
 </div>
 </div>
 <div class="paragraph">
-<p>これで、フレームとスコアを、それぞれのステートマシン図で表した振舞いに合わせて動作するプログラムに変換できました。</p>
+<p>これで、フレームとスコアを、それぞれのステートマシン図で表した振る舞いに合わせて動作するプログラムに変換できました。</p>
 </div>
 </div>
 </div>
@@ -1255,21 +1243,21 @@ image::GSW-20220209-152917.png[width='100%']</p>
 <div class="sect3">
 <h4 id="_gameクラスの処理"><a class="anchor" href="#_gameクラスの処理"></a>4.5.2 Gameクラスの処理</h4>
 <div class="paragraph">
-<p>みなさんが、プレーするときは <a href="_behavior_design.html#game_steps00">リスト48</a> に示すような手順でプレーするでしょう。</p>
+<p>みなさんが、プレーするときは <a href="_behavior_design.html#game_steps00">リスト22</a> に示すような手順でプレーするでしょう。</p>
 </div>
 <div id="game_steps00" class="exampleblock">
-<div class="title">リスト 48. ボウリングのゲームを進める手順（ヨーロピアン方式）</div>
+<div class="title">リスト 22. ボウリングのゲームを進める手順（ヨーロピアン方式）</div>
 <div class="content">
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>スコアシートに参加するプレーヤー名を書く。</p>
+<p>スコアシートに参加するプレーヤー名を書く（エントリーする）。</p>
 </li>
 <li>
-<p>書いたプレーヤーの順に1フレーム分プレーする。</p>
+<p>書いたプレーヤーの順に1フレーム分プレーする（各自のターン）。</p>
 </li>
 <li>
-<p>次のプレーヤと交代する。</p>
+<p>次のプレーヤと交代する（次のターンへ進む）。</p>
 </li>
 <li>
 <p>全員がゲーム終了するまで手順を繰り返す。</p>
@@ -1279,10 +1267,10 @@ image::GSW-20220209-152917.png[width='100%']</p>
 </div>
 </div>
 <div class="paragraph">
-<p>この方式に合わせてスコアを記録する処理をする「Game」クラスは、 <a href="_behavior_design.html#ruby_game_code01">リスト49</a> のようになるでしょう。</p>
+<p>この方式に合わせてスコアを記録する処理をする「Game」クラスは、 <a href="_behavior_design.html#ruby_game_code01">リスト23</a> のようになるでしょう。</p>
 </div>
 <div id="ruby_game_code01" class="exampleblock">
-<div class="title">リスト 49. score.rb(6)</div>
+<div class="title">リスト 23. score.rb(6)</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -1371,14 +1359,14 @@ image::GSW-20220209-152917.png[width='100%']</p>
 </div>
 </div>
 <div class="paragraph">
-<p>クラス図にもこの結果を反映しておきましょう（ <a href="_behavior_design.html#update_class_for_game_score00">図 4.21</a> ）。
+<p>クラス図にもこの結果を反映しておきましょう（ <a href="_behavior_design.html#update_class_for_game_score00">図 4.22</a> ）。
 現在のプレーヤーは、関連端名が「turn」の関連にによって参照しているScoreを使っています。</p>
 </div>
 <div id="update_class_for_game_score00" class="imageblock">
 <div class="content">
 <img src="images/GSW-20220224-172836.png" alt="GSW 20220224 172836" width="100%">
 </div>
-<div class="title">図 4.21 「Game」クラスを更新したクラス図</div>
+<div class="title">図 4.22 「Game」クラスを更新したクラス図</div>
 </div>
 </div>
 <div class="sect3">
@@ -1388,10 +1376,10 @@ image::GSW-20220209-152917.png[width='100%']</p>
 新しいスコアシートを作成して、そこに必要な数のゲームを追加すれば済みそうです。</p>
 </div>
 <div class="paragraph">
-<p>この方式に合わせてスコアを記録する処理をする「Game」クラスは、 <a href="_behavior_design.html#ruby_scoresheet_code01">リスト50</a> のようになるでしょう。</p>
+<p>この方式に合わせてスコアを記録する処理をする「Game」クラスは、 <a href="_behavior_design.html#ruby_scoresheet_code01">リスト24</a> のようになるでしょう。</p>
 </div>
 <div id="ruby_scoresheet_code01" class="exampleblock">
-<div class="title">リスト 50. score.rb(7)</div>
+<div class="title">リスト 24. score.rb(7)</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -1441,14 +1429,59 @@ image::GSW-20220209-152917.png[width='100%']</p>
 </div>
 </div>
 <div class="paragraph">
-<p>クラス図にもこの結果を反映しておきましょう（ <a href="_behavior_design.html#update_class_for_scoresheet00">図 4.22</a> ）。
+<p>クラス図にもこの結果を反映しておきましょう（ <a href="_behavior_design.html#update_class_for_scoresheet00">図 4.23</a> ）。
 現在のプレーヤーは、関連端名が「turn」の関連にによって参照しているScoreを使っています。</p>
 </div>
 <div id="update_class_for_scoresheet00" class="imageblock">
 <div class="content">
 <img src="images/GSW-20220224-174042.png" alt="GSW 20220224 174042" width="100%">
 </div>
-<div class="title">図 4.22 「ScoreSheet」クラスを更新したクラス図</div>
+<div class="title">図 4.23 「ScoreSheet」クラスを更新したクラス図</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_まとめ_3"><a class="anchor" href="#_まとめ_3"></a>4.6 まとめ</h3>
+<div class="paragraph">
+<p>ボウリングのゲームスコアを記録するスコアシートの振る舞いを検討しました。</p>
+</div>
+<div class="sect3">
+<h4 id="_振る舞いのモデルを作成した手順"><a class="anchor" href="#_振る舞いのモデルを作成した手順"></a>4.6.1 振る舞いのモデルを作成した手順</h4>
+<div class="paragraph">
+<p>振る舞いのモデルに登場する構成要素や要素間の関連を見つけ出すために、 <a href="_behavior_design.html#step_for_behavier_model">リスト25</a> のような手順を使いました。</p>
+</div>
+<div id="step_for_behavier_model" class="exampleblock">
+<div class="title">リスト 25. スコアシートの振る舞いのモデルを作成した手順</div>
+<div class="content">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>スコアが記録されるときのフレームの変化を観察して、フレームにどのような状態があるか洗い出した。</p>
+</li>
+<li>
+<p>洗い出したフレームの状態に関連するイベントやアクションを考えてステートマシン図に表した。</p>
+</li>
+<li>
+<p>ゲームを進めるときのスコアの変化を観察して、スコアにどのような状態があるか洗い出した。</p>
+</li>
+<li>
+<p>洗い出したスコアの状態に関連するイベントやアクションを考えてステートマシン図に表した。</p>
+</li>
+<li>
+<p>サービスフレームの動作を観察して、通常のフレームを追加してスコアを記録する方法を発見した。</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_振る舞いのモデルは設計時にプログラムの動作を規定する"><a class="anchor" href="#_振る舞いのモデルは設計時にプログラムの動作を規定する"></a>4.6.2 振る舞いのモデルは設計時にプログラムの動作を規定する</h4>
+<div class="paragraph">
+<p>ステートマシン図を使うことで、フレームやスコアの動作を表せました。
+そして、モデルとコードの対応づけを使えば、ステートマシン図からRubyのプログラムへ変換できます。
+つまり、解決すべき課題があったとき、その課題を構造のモデルと振る舞いのモデルで表すことができれば、そのモデルなりのプログラムが作成できるわけです。
+一方、このような方法で作成したプログラムが期待した動作をしない場合には、モデルが誤っているか、対応づけのルールに不備があるということです。</p>
 </div>
 </div>
 </div>
@@ -1460,7 +1493,7 @@ image::GSW-20220209-152917.png[width='100%']</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-バージョン html_0417<br>
+バージョン html_0427<br>
 最終更新 2022-02-24 17:45:00 +0900
 </div>
 </div>
