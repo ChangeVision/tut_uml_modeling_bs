@@ -35,6 +35,18 @@ Ruby は、Windows、Mac、Linuxで動作するオープンソースの言語プ
 
 Rubyのインストール:: `https://www.ruby-lang.org/ja/documentation/installation/`
 
+
+このチュートリアルでは、Rubyの高度な機能、規模の大きなライブラリやフレームワークは使いません。
+ですが、Rubyについて多少の知識は必要になるでしょう。
+Rubyになじみがない人は、公式サイトにある次のようなページを参考にするとよいでしょう。
+
+
+他言語からのRuby入門:: `https://www.ruby-lang.org/ja/documentation/ruby-from-other-languages/`
+
+
+20分ではじめるRuby:: `https://www.ruby-lang.org/ja/documentation/quickstart/`
+
+
 === 演習用のプロジェクトを用意する
 
 業務やシステムを分析（あるいは設計）するときは、たいてい複数種類のモデル図を使って表します。
@@ -136,7 +148,7 @@ a| image::foul.png[{thumbnail}] | ファウル | ファウルラインを越え�
 |===
 
 
-[[classic]]
+[[classic_scoring]]
 ==== クラッシックスコアリング
 
 従来から使われていて、広く普及しているスコア計算方式です。

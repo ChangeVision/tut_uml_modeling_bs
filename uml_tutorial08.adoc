@@ -1,0 +1,62 @@
+ifndef::revnumber[]
+include::front_matter.adoc[]
+endif::[]
+
+[[_model_to_code_translation]]
+== モデルからコードを得る
+
+実装に使うクラス図とステートマシン図が作成できたので、これらを参照して実装コードを作成しましょう。
+
+実装に使うプログラミング言語はRubyです。
+クラス図やステートマシン図に合わせてRubyのコードを書いていきましょう。
+
+=== パッケージ構成
+
+モデル図ではBowlingパッケージにクラスを配置しています。
+RubyにはModuleがあるので、これをモデル図のパッケージに対応させます。
+
+* Module
+** Bowling(bowling.rb)
+** GameScore(game_score.rb)
+** Frame(frane.rb)
+
+=== 実装
+
+==== frame.rb
+
+.【Ruby】frame.rb
+[example]
+--
+[source,ruby,linenums]
+----
+include::{sourcesdir}/frame.rb[]
+----
+--
+
+
+==== game_score.rb
+
+.【Ruby】game_score.rb
+[example]
+--
+[source,ruby,linenums]
+----
+include::{sourcesdir}/game_score.rb[]
+----
+--
+
+
+
+
+==== bowling.rb
+
+.【Ruby】bowling.rb
+[example]
+--
+[source,ruby,linenums]
+----
+include::{sourcesdir}/bowling.rb[]
+----
+--
+
+

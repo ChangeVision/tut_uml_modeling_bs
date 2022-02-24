@@ -12,6 +12,7 @@ gem 'asciidoctor-pdf-cjk'
 
 # gem 'asciidoctor-multipage'
 
+gem 'thor'
 gem 'rouge'
 gem 'coderay'
 gem 'pygments.rb'
