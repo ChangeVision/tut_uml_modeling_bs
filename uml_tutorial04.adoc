@@ -90,7 +90,8 @@ image::pending_double.png[{three-quarters-width}]
 スペアボーナスの確定待ち、またはストライクボーナスの確定待ちのフレームは、後のフレームの投球によってボーナスが確定すると、フレームのトータルが確定します。
 このとき、確定待ちのフレームでは、そのフレームの獲得ピン数と確定したボーナスの合計がそのフレームのトータルになります。
 
-フレームのトータルが求められると、それ以前のフレームまでの「延べのトータル」にそのフレームのトータルを加算して、延べのトータルを更新します。そして、更新した延べのトータルがフレームの下部に記録されます（ <<fixed01>> ）。
+フレームのトータルが求められると、それ以前のフレームまでの「のべのトータル」にそのフレームのトータルを加算して、のべのトータルを更新します。そして、更新したのべのトータルがフレームの下部に記録されます（ <<fixed01>> ）。
+このとき、確定待ちになっていたフレームものべのトータルが更新され、その段階のゲームのトータルも更新されます。
 
 [[fixed01]]
 .2投目を投球して、ピン数が確定したフレーム（のべのトータルが求められている）
@@ -104,12 +105,12 @@ image::fixed01.png[{three-quarters-width}]
 このことを、図に表してみましょう。
 状態とその変化（状態遷移と呼びます）を表すには、ステートマシン図を使います。
 
-==== フレームクラスにステートマシン図を追加する
+==== 「Frame」クラスにステートマシン図を追加する
 
 「Frame」クラスの状態を表す図を描きたいので、「Frame」クラスに図を追加しましょう。
 
 [[add_frame_stm00]]
-.フレームクラスにステートマシン図を追加する
+.「Frame」クラスにステートマシン図を追加する
 [example]
 --
 . 「Frame」クラスにステートマシン図を追加する
@@ -117,49 +118,238 @@ image::fixed01.png[{three-quarters-width}]
 ** 「図の追加＞ステートマシン図」でステートマシン図が追加される。
 
 [[add_frame_stm01]]
-.フレームクラスにステートマシン図を追加する
+.「Frame]クラスにステートマシン図を追加する
 image::GSW-20220207-154421.png[{three-quarters-width}]
 
 [start=2]
 . ステートマシン図に名前をつける
 ** 追加したステートマシン図のプロパティの「ベース」を開く。
-** 名前を編集して「Frameクラスのステートマシン図」とする（ <<add_frame_stm02>> ）。
+** 名前を編集して「Frameクラスのステートマシン図」とする。
 ** ダイアグラムエディタのタイトルやタブにも反映される。
 --
 
-==== ステートマシン図に状態を追加する
+==== フレームのステートマシン図を作成する
 
-ステートマシン図に、フレームの状態を追加しましょう。
+ステートマシン図に、フレームの状態と状態遷移を追加しましょう。
 
 [[add_frame_state00]]
-.ステートマシン図にフレームの状態を追加する
+.ステートマシン図に「Frame」クラスの状態遷移を作成する
 [example]
 --
-. パレットから「開始疑似状態」を選択し、ステートマシン図に追加する。
-. パレットから「状態」を選択し、ステートマシン図に追加する。
-. 「まだプレーしていないフレーム」を「RESERVED」という名前にする。
-. パレットから「遷移」を選択して、「開始疑似状態」から「RESERVED」へ遷移を引く（ <<frame_state01>> ）。
+. 「Frame」クラスの最初の状態を作成する（ <<frame_stm01>> ）。
+** パレットから「開始疑似状態」を選択し、ステートマシン図に追加する。
+** パレットから「状態」を選択し、ステートマシン図に追加する。
+** 「まだプレーしていない」状態を「RESERVED」という名前にする。
+** パレットから「遷移」を選択して、「開始疑似状態」から「RESERVED」へ遷移を引く。
 
-
-[[frame_state01]]
-.状態の追加（１）
+[[frame_stm01]]
+「Frame」クラスに状態を追加する
 image::GSW-20220209-152917.png[{full-width}]
 
-[start=5]
-. 「1投目の投球を待っているフレーム」を「BEFORE_1ST」という名前にする。
-. 「BEFORE_1ST」という状態名の状態を追加する。
-
+[start=2]
+. 最初の状態遷移にイベントを割り当てる（ <<frame_stm02>> ）。
+** 「1投目の投球を待っている」状態「BEFORE_1ST」を追加する。
+** 「RESERVED」から「BEFORE_1ST」へ状態遷移を引き、イベント「SETUP」を割り当てる。
 
 [[frame_stm02]]
 .状態の追加（２）
-image::GSW-20220207-155242.png[{full-width}]
+image::frame_stm02.png[{full-width}]
 
+[start=3]
+. 1投目のあとの状態遷移を追加する（ <<frame_stm03>> ）。
+** 「2投目の投球を待っている」状態を「BEFORE_2ND」として追加する。
+** 「スペアのボーナスの確定待ち」と「ストライクのボーナスの確定待ち」を「PENDING」として追加する。
+** 「選択疑似状態」を追加する。
+** ピン数を受け取るイベント「PINS」（パラメータとしてピン数 pins を持つ）を「BEFORE_1ST」から「選択疑似状態」hえの遷移に割り当てる。アクションとして、イベントで受け取ったピン数を1投目のピン数に保存する。
+. 選択疑似状態からの遷移を追加する。
+** 1投目のピン数がストライクであれば「PENDING」へ遷移する。このとき2投目のピン数は「0」にする。
+** 1投目のピン数がストラクでなければ「BEFORE_2ND」へ遷移する。
 
-. 「2投目の投球を待っているフレーム」を「BEFORE_2ND」
-. 「スペアのボーナスの確定待ちのフレーム」と「ストライクのボーナスの確定待ちのフレーム」を「PENDING」
-. 「獲得ピン数とボーナスが確定したフレーム」を表す「FIXED」
+[[frame_stm03]]
+.状態の追加（３）
+image::frame_stm03.png[{full-width}]
+
+[start=5]
+. 2投目のあとの状態遷移を追加する（ <<frame_stm03>> ）。
+** 「獲得ピン数とボーナスが確定した」状態を表す「FIXED」として追加する。
+** 2投目の後の処理の選択のために「選択疑似状態」を追加する。
+** 「BEFORE_2ND」でイベント「PINS」を受け取ると、選択疑似状態へ遷移する。アクションとして、受け取ったピン数を2投目のピン数に保存する。
+. 選択疑似状態からの遷移を追加する。
+** 2投目のピン数がスペアであれば「PENDING」へ遷移する。
+** 2投目のピン数がスペアでなければ「FIXED」へ遷移する。
+. 「PENDING」からの遷移を追加する。
+** 「PENDING」中のフレームで、イベント「DETERMINE」を受け取ったらトータルが確定したとし、「FIXED」へ遷移する。
+
+[[frame_stm04]]
+.状態の追加（４）
+image::frame_stm04.png[{full-width}]
 
 --
+
+==== フレームのクラス図を更新する
+
+ステートマシン図で状態遷移のために追加したアクションやガード条件用の処理を「Frame」クラスのメソッドに追加しておきましょう（ <<frame_stm05>> ）。
+
+[[frame_stm05]]
+.ステートマシン図に合わせて「Frame」クラスを更新する
+image::GSW-20220224-154030.png[{quarter-width}]
+
+
+==== フレームの処理をプログラムに変換する
+
+フレームのクラスとステートマシン図が作成できたので、Rubyのプログラムに変換してみましょう。
+変換したプログラムの初期化とアクションの部分は、 <<ruby_frame_code01>> のようになるでしょう。
+
+
+[[ruby_frame_code01]]
+.score.rb(1)
+[example]
+--
+[source,ruby]
+----
+# frozen_string_literal: true
+
+require 'securerandom'
+
+# Frameは1フレーム分のピン数やボーナスを記録する
+class Frame
+  attr_reader :frame_no
+  attr_accessor :first, :second, :spare_bonus, :strike_bonus, :total, :state
+
+  def initialize(frame_no)
+    @frame_no = frame_no
+    @first = 0
+    @second = 0
+    @spare_bonus = 0
+    @strike_bonus = 0
+    @total = 0
+    @state = :RESERVED # <1>
+  end
+
+  def action(event, pins=0)
+    case @state # <2>
+    when :RESERVED
+      case event
+      when :SETUP # <3>
+        @state = :BEFORE_1ST
+      else
+        puts "invalid event: #{event} is ignored."
+      end
+    when :BEFORE_1ST
+      before_1st_porc(event, pins) # <4>
+    when :BEFORE_2ND
+      before_2nd_proc(event, pins) # <5>
+    when :PENDING
+      case event
+      when :DETERMINE # <6>
+        @state = :FIXED
+      end
+    when :FIXED
+      puts 'fixed.'
+    end
+  end
+
+  # 略
+end
+----
+<1> フレームの初期状態は「RESERVED」とする。状態はRubyのシンボルを使って表現する。
+<2> 状態に応じて処理を分ける。
+<3> 「RESERVED」状態では「SETUP」イベントを受け取り、「BEFORE_1ST」状態へ遷移する。他のイベントが来たら無視する。
+<4> 「BEFORE_1ST」状態では「PINS」イベントを待つ。詳細な処理は「before_1st_porc」メソッドに記載する。
+<5> 「BEFORE_2ND」状態では「PINS」イベントを待つ。詳細な処理は「before_2nd_porc」メソッドに記載する。
+<6> 「PENDING」状態では「DETERMINE」イベントを受け取り、「FIXED」状態へ遷移する。
+--
+
+
+ガード条件やとアクションのメソッドは、 <<ruby_frame_code02>> のようになるでしょう。
+
+
+[[ruby_frame_code02]]
+.score.rb(2)
+[example]
+--
+[source,ruby]
+----
+class Frame
+  # 略
+
+  def frame_score # <1>
+    @first + @second + @spare_bonus + @strike_bonus
+  end
+
+  def strike? # <2>
+    @first == 10
+  end
+
+  def spare?
+    @first < 10 && (@first + @second) == 10
+  end
+
+  def miss?
+    @first < 10 && @second.zero && @state == :FIXED
+  end
+
+  def gutter?
+    @first.zero
+  end
+
+  def fixed? # <3>
+    @state == :FIXED
+  end
+
+  def to_s # <4>
+    total = if @state == :FIXED
+              @total
+            else
+              '   .'
+            end
+    format '|%2d|%3s|%3s|%5s|%11d|%11d|%12d|%13s|',
+           @frame_no, @first, @second, total, frame_score,
+           @spare_bonus, @strike_bonus, @state
+  end
+
+  private
+
+  def before_1st_porc(evt, pins) # <5>
+    case evt
+    when :PINS
+      puts "invalid pins: #{pins}" if pins.negative? || pins > 10
+      @first = pins
+      @state = if strike?
+                 @second = 0
+                 :PENDING
+               else
+                 :BEFORE_2ND
+               end
+    else
+      puts "invalid event: #{evt} on #{@state}."
+    end
+  end
+
+  def before_2nd_proc(evt, pins) # <6>
+    case evt
+    when :PINS
+      puts "invalid pins: #{pins}" if pins.negative? || pins > (10 - @first)
+      @second = pins
+      @state = if spare?
+                 :PENDING
+               else
+                 :FIXED
+               end
+    else
+      puts "invalid event: #{evt} on #{@state}."
+    end
+  end
+end
+----
+<1> フレームのスコアを計算するメソッド
+<2> ストライクかどうか判定するガード条件用のメソッド。
+<3> フレームのスコアが確定したか調べるメソッド。
+<4> 「Frame」クラスのインスタンスを文字列化するメソッド。呼び出し時点の「Frame」クラスが保持するインスタン変数の値を出力するのに使う。
+<5> 「1投目の投球を待っている」状態を担当するメソッド。イベント「PINS」を受け取り、1投目のピン数に保存する。その後ストライクかどうか調べ、次の状態へ遷移する。
+<6> 「2投目の投球を待っている」状態を担当するメソッド。イベント「PINS」を受け取り、2投目のピン数に保存する。その後スペアかどうか調べ、次の状態へ遷移する。
+--
+
 
 === サービスフレームの扱いについて検討する
 
@@ -221,32 +411,451 @@ image::ten_two_strike_combo.png[{three-quarters-width}]
 ゲーム終了時の10フレームのスコア（ピン数に以後の投球によるボーナスを加えたスコア）を取得するとそれがゲームのスコアになります。
 
 
+=== スコアの状態をステートマシン図で表す
+
+サービスフレームの扱い方を検討した結果、工夫すれば通常のフレームと同じように扱えることがわかりました。
+それでは、フレームの集まりであるスコアについて、どのような処理をすればよいのか検討しましょう。
+
+
+==== 「Score」クラスにステートマシン図を追加する
+
+「Frame」クラスにステートマシン図を追加したのと同じ手順で、「Score」クラスにステートマシン図を追加します（ <<add_score_stm00>> ）。
+
+[[add_score_stm00]]
+.「Score」クラスにステートマシン図を追加する
+image::GSW-20220224-143517.png[{three-quarters-width}]
+
+==== スコアのステートマシン図を作成する
+
+ステートマシン図に、検討した結果を使って、スコアの状態と状態遷移を追加しましょう。
+
+[[add_score_state00]]
+.ステートマシン図に「Score」クラスの状態遷移を作成する
+[example]
+--
+. 「Score」クラスの状態を追加する（ <<add_score_stm01>> ）。
+** パレットから「開始疑似状態」をステートマシン図に追加する。
+** パレットから「状態」を選択し、ステートマシン図に追加する。
+** 「1投目待ち」の状態として状態名を「WAIT_FOR_1ST」に設定する。
+** 「2投目待ち」の状態として状態名を「WAIT_FOR_2ND」に設定する。
+** 「ゲームの終了」の状態として状態名を「FINISHED」に設定する。
+**. パレットから「終了疑似状態」をステートマシン図に追加する。
+
+[[add_score_stm01]]
+.ステートマシン図に「Score」クラスの状態を追加する
+image::GSW-20220224-145100.png[{three-quarters-width}]
+
+[start=2]
+. 「Score」クラスのイベントとアクションを作成する（ <<add_score_stm02>> ）。
+. 「WAIT_FOR_1ST」からの遷移には、ストライクの場合、ストライクでない場合、ゲームが終了の場合があるので、「選択疑似状態」を追加する。
+** 「WAIT_FOR_1ST」から「選択疑似状態」への遷移では、ピン数を受け取るのを待っている。受け取ったときには、現在にフレームへピン数のイベントを送る。その後、1投目のあとのスペアとストライクのボーナスを計算し、のべのトータルを更新する。
+** 「選択疑似状態」から「WAIT_FOR_1ST」への遷移のガード条件は「ストライクである」こと。このときはアクションとして「次のフレームへ進む」。
+** 「選択疑似状態」から「WAIT_FOR_2ND」への遷移のガード条件は「ストライクでない（かつゲーム終了ではない）」こと。
+** 「選択疑似状態」から「FINISHED」への遷移のガード条件は「ゲーム終了である」であること。
+. 「WAIT_FOR_2ND」からの遷移には、ゲーム終了の場合とそうでない場合があるので、「選択疑似状態」を追加する。
+** 「WAIT_FOR_1ST」から「選択疑似状態」への遷移では、ピン数を受け取るのを待っている。受け取ったときには、現在にフレームへピン数のイベントを送る。その後、2投目のあとのスペアとストライクのボーナスを計算し、のべのトータルを更新する。
+** 「選択疑似状態」から「WAIT_FOR_1ST」への遷移の遷移のガード条件は「ゲーム終了ではない」こと。このときはアクションとして「次のフレームへ進む」。
+** 「選択疑似状態」から「FINISHED」への遷移のガード条件は「ゲーム終了である」であること。
+
+[[add_score_stm02]]
+.ステートマシン図に「Score」クラスのイベントとアクションを追加する
+image::GSW-20220224-152010.png[{full-width}]
+
+
+--
+
 ==== クラス図に検討結果を反映する
 
 第10フレームの場合にもサービスフレームのために追加のフレームを用意することで、通常フレームと同じようにピン数やボーナスを扱えるようになりました。
 
-クラス図にこの結果を反映しましょう。
+クラス図にこの結果を反映しましょう（ <<update_class_for_score_frame00>> ）。
 
 
-[[add_service_frame]]
-.クラス図にサービスフレームを検討結果を反映する
+[[update_class_for_score_frame00]]
+.ステートマシン図に合わせてクラス図を更新する（ <<update_class_for_score_frame01>> ）
 [example]
 --
 . 「Frame」クラス側の関連端の多重度を「10」から「12」に変更する。
 . 関連にノートをつけて説明をつけておく。
 ** パレットからノートを選択し、クラス図に追加する。
 ** ノートに「Frame側の多重度は、サービスフレーム用に必要なフレーム分だけ追加してある」という説明を追加する。
-. ノートから関連の線に向かってアンカーを引く。
+**. ノートから関連の線に向かってアンカーを引く。
 ** パレットからノートのアンカーを選択し、ノートにマウスカーソルを移動して青枠が表示されるのを待つ。
 ** マウスのボタンを押したまま、マウスカーソルをドラッグし、関連の線に近づけ青枠が表示されるのを待つ。
+. 「Score」クラスにステートマシン図で作成したメソッドを追加しておく。
+** 「次のフレームへ進む」メソッド「go_next_frame」を追加する。
+** 「ゲーム終了か判定する」メソッド「finished?」を追加する。
+** 「1投目のあとのスペアのボーナスを計算する」メソッド「calc_spare_bonus_after_1st」を追加する。
+** 「1投目のあとのストライクのボーナスを計算する」メソッド「calc_strike_bonus_after_1st」を追加する。
+** 「2投目のあとのストライクのボーナスを計算する」メソッド「calc_strike_bonus_after_2st」を追加する。
+**  「のべのトータルを更新する」メソッド「update_total」を追加する。
+** スコアを記録するメソッド（ステートマシン図の処理を担当する）メソッド「scoring」を追加する。
+** ステートマシン図の状態ごとの処理を担当するメソッド「wait_for_1st_proc」と「wait_for_2nd_proc」を追加する。
+** スコアの記録を文字列化するメソッド「to_s」を追加する。
+. 関連を追加する
+** 「Score」クラスから「Frame」クラスへ、「現在のフレーム」を指す関連「current」を追加する。
 
+
+[[update_class_for_score_frame01]]
+.ステートマシン図に合わせてクラス図を更新する
+image::GSW-20220224-154728.png[{full-width}]
+--
 
 TIP: ノート内の文章を編集するときは、ノートを選択した状態でプロパティを使って編集すると、改行の入力が容易になります。
 
+
+==== スコアの処理をプログラムに変換する
+
+スコアのクラスとステートマシン図が作成できたので、Rubyのプログラムに変換してみましょう。
+変換したプログラムの初期化やユーティリティメソッドの部分は、 <<ruby_score_code01>> のようになるでしょう。
+
+
+[[ruby_score_code01]]
+.score.rb(3)
+[example]
 --
+[source,ruby]
+----
+# frozen_string_literal: true
+
+require 'securerandom' # <1>
+
+class Frame
+  # 略
+end
+
+# スコアは各人の10フレーム分のスコアを記録する
+class Score # <2>
+  attr_accessor :id, :player, :fno, :frames, :state
+
+  def initialize(name)
+    @id = SecureRandom.urlsafe_base64(8) # <3>
+    @player = name
+    @fno = 1
+    @frames = []
+    (-1..13).each do |fno| # (-1, 0) are dummy frame # <4>
+      @frames.append Frame.new(fno)
+    end
+    @state = :WAIT_FOR_1ST # <5>
+    @frames[fno2idx(@fno)].action(:SETUP) # <6>
+  end
+
+  def fno2idx(fno) # <7>
+    fno + 1 # frame number 1 => array index 3 (0 origin).
+  end
+
+  def frame(fno)
+    @frames[fno2idx(fno)] # return index on @frams at frame number.
+  end
+
+  def go_next_frame # <8>
+    @fno += 1
+    @frames[fno2idx(fno)].action(:SETUP)
+  end
+
+  def current # <9>
+    frame(@fno)
+  end
+
+  # 略
+end
+----
+<1> 安全なIDを生成するためのライブラリをインポートした。
+<2> 「Score」クラスの定義のはじまり。
+<3> スコアのインスタンスにIDをつけておく。
+<4> 「Frame」のインスタンスの作成。クラス図では、「Score」から「Frame」へのコンポジションとして表されている部分。設計上は12個だが、サービスフレームで「次」を参照する場面、第1フレームで「前のフレーム」「前の前のフレーム」を参照する場面で参照するダミーのフレームを追加している。
+<5> スコアの最初の状態を「WAIT_FOR_1ST」にする。
+<6> 第1フレームへ「SETUP」イベントを送る。
+<7> フレーム番号とフレームの配列のインデックスを紐づけるメソッド（ダミーのフレームを第1フレームの前に追加したためのオフセット）。
+<8> 現在のフレームを「次のフレームへ進める」メソッド。
+<9> 「現在のフレーム」を参照するためのメソッド。クラス図では関連端名が「current」の「Frame」クラスへの関連で表されている。
+--
+
+ボーナス計算やトータル計算のメソッドは <<ruby_score_code02>> のようになるでしょう。
+
+[[ruby_score_code02]]
+.score.rb(4)
+[example]
+--
+[source,ruby]
+----
+# 略
+
+# スコアは各人の10フレーム分のスコアを記録する
+class Score
+
+  # 略
+
+  def prev # <1>
+    frame(@fno - 1)
+  end
+
+  def pprev # <2>
+    frame(@fno - 2)
+  end
+
+  def calc_spare_bonus_after_1st # <3>
+    return unless prev.spare?
+
+    prev.spare_bonus = current.first
+    prev.action(:DETERMINE)
+  end
+
+  def calc_strike_bonus_after_1st # <4>
+    return unless prev.strike? && pprev.strike?
+
+    pprev.strike_bonus = prev.first + current.first
+    pprev.action(:DETERMINE)
+  end
+
+  def calc_strike_bonus_after_2nd # <5>
+    return unless prev.strike?
+
+    prev.strike_bonus = current.first + current.second
+    prev.action(:DETERMINE)
+  end
+
+  def update_total # <6>
+    @frames.each_cons(2) do |prev, cur|
+      cur.total = prev.total + cur.frame_score
+    end
+  end
+
+  def finished? # <7>
+    frame(10).fixed?
+  end
+
+  # 略
+end
+----
+<1> ボーナス計算で使う、「前のフレーム」を得るメソッド。
+<2> ボーナス計算で使う、「前の前のフレーム」を得るメソッド。
+<3> 1投目のあとのスペアボーナスを計算するメソッド。
+<4> 1投目のあとのストライクボーナスを計算するメソッド。
+<5> 2投目のあとのストライクボーナスを計算するメソッド。
+<6> 「のべのトータル」を更新するメソッド。each_consは、配列から指定した数ずつ要素を取り出すメソッド。
+<7> 「ゲーム終了」の判定用のメソッド。サービスフレームの検討結果から、第10フレームが「FIXED」になれば、そのゲームは終了とみなせる。
+--
+
+そして。ステートマシン図で表した、実際にゲームの進行に合わせてスコアを記録する処理をするメソッドは <<ruby_score_code03>> のようになるでしょう。
+
+[[ruby_score_code03]]
+.score.rb(5)
+[example]
+--
+[source,ruby]
+----
+# 略
+
+# スコアは各人の10フレーム分のスコアを記録する
+class Score
+
+  # 略
+
+  def wait_for_1st_proc(pins) # <1>
+    current.action(:PINS, pins) # <2>
+    calc_spare_bonus_after_1st
+    calc_strike_bonus_after_1st
+    update_total
+    if finished? # <3>
+      @state = :FINISHED
+    elsif current.strike? # <4>
+      @state = :WAIT_FOR_1ST
+      go_next_frame
+    else # <5>
+      @state = :WAIT_FOR_2ND
+    end
+  end
+
+  def wait_for_2nd_proc(pins) # <6>
+    current.action(:PINS, pins) # <7>
+    calc_strike_bonus_after_2nd
+    update_total
+    if finished? # <8>
+      @state = :FINISHED
+    else # <9>
+      @state = :WAIT_FOR_1ST
+      go_next_frame
+    end
+  end
+
+  def scoring(pins) # <10>
+    case @state
+    when :WAIT_FOR_1ST
+      wait_for_1st_proc(pins)
+    when :WAIT_FOR_2ND
+      wait_for_2nd_proc(pins)
+    when :FINISHED
+      puts 'finished'
+    end
+  end
+
+  def to_s # <11>
+    "Score(id: #{@id}),\nPlayer:#{@Player}, Frame:#{@fno},\n#{@frames.join("\n")}"
+  end
+end
+----
+<1> 「WAIT_FOR_1ST」状態のときのメソッド。
+<2> 現在のフレームについて、ピン数を更新し、ボーナスを計算し、のべのトータルを更新する。
+<3> 「選択疑似状態」での遷移先の分岐処理。「ゲーム終了」の場合は「FINISHED」へ遷移する。
+<4> 「ストライクだった」の場合は、次のフレーム進んで「WAIT_FOR_1ST」へ遷移する。
+<5> それ以外のときは2投目を待つので、「WAIT_FOR_2ND」へ遷移する。
+<6> 「WAIT_FOR_2ND」状態のときのメソッド。
+<7> 現在のフレームについて、ピン数を更新し、ボーナスを計算し、のべのトータルを更新する。
+<8> 「選択疑似状態」での遷移先の分岐処理。「ゲーム終了」の場合は「FINISHED」へ遷移する。
+<9> それ以外のときは、次のフレーム進んで「WAIT_FOR_1ST」へ遷移する。
+<10> スコアを記録するステートマシン図の振舞いを担当するメソッド。状態に応じてそれぞれの状態用のメソッドを呼び出す。
+<11> 「スコア」クラスのインスタンスの内容を文字列化するメソッド。
+--
+
+これで、フレームとスコアを、それぞれのステートマシン図で表した振舞いに合わせて動作するプログラムに変換できました。
 
 
 === ゲームの進行について検討する
 
+残るは、複数名のスコアのセットで構成される「Game」と、複数の「Game」を記録する「ScoreSheet」クラスです。
+
+==== ボウリングのゲーム方式
+
+
+ボウリングを複数名で楽しむとき、みなさんはたいてい、1組のチームで1つのレーンを使って、1フレームごとにプレーヤーが交代しながらプレイします。
+このようなゲームの方式は、「ヨーロピアン方式」と呼ばれています。
+
+別の方式として、ボールラック（ボールが返ってくるラック）をはさんだ2つのレーンを、1フレームごとに交互に使ってプレーする方式があります。
+このようなゲームの方式は「アメリカン方式」と呼ばれています。
+
+このチュートリアルでは、ヨーロピアン方式を使うことにします。
+
+==== Gameクラスの処理
+
+みなさんが、プレーするときは <<game_steps00>> に示すような手順でプレーするでしょう。
+
+
+[[game_steps00]]
+.ボウリングのゲームを進める手順（ヨーロピアン方式）
+[example]
+--
+. スコアシートに参加するプレーヤー名を書く。
+. 書いたプレーヤーの順に1フレーム分プレーする。
+. 次のプレーヤと交代する。
+. 全員がゲーム終了するまで手順を繰り返す。
+--
+
+この方式に合わせてスコアを記録する処理をする「Game」クラスは、 <<ruby_game_code01>> のようになるでしょう。
+
+
+[[ruby_game_code01]]
+.score.rb(6)
+[example]
+--
+[source,ruby]
+----
+# 略
+# Gameクラスは複数名の1ゲーム分のスコアのセットを構成する
+class Game
+  attr_reader :id, :turn, :scores
+
+  def initialize
+    @id = SecureRandom.urlsafe_base64(8) # <1>
+    @turn = 0
+    @scores = []
+  end
+
+  def entry(name = 'unknown') # <2>
+    @scores.append(Score.new(name))
+  end
+
+  def turn_player_name # <3>
+    @scores[@turn].player
+  end
+
+  def go_next_turn # <4>
+    @turn = (@turn + 1) % @scores.size
+  end
+
+  def playing(score_index, pins) # <5>
+    @scores[score_index].scoring(pins)
+    if @scores[score_index].fno > 10 # <6>
+      go_next_turn if @scores[score_index].finished?
+    elsif @scores[score_index].current.state == :BEFORE_1ST # <7>
+      go_next_turn
+    end
+  end
+
+  def finished? # <8>
+    @scores.reject(&:finished?) == []
+  end
+
+  def to_s # <9>
+    "Game(id:#{@id}),\n#{@scores.join("\n")}"
+  end
+end
+----
+<1> ゲームごとににユニークなIDをつけておく。
+<2> ゲームに参加するプレーヤーを登録するメソッド。そのプレーヤーの今回のゲーム分のスコアも用意する。
+<3> 現在プレー中のプレーヤー名を取得するメソッド。
+<4> 次のプレーヤーに交代するメソッド。登録したプレーヤーの順に進み、最後まで来たら最初のプレーヤーへ戻る。
+<5> ゲームを実行するメソッド。現在のプレーヤーのスコアクラスのscoring メソッドを呼び出して1フレーム分のプレーを記録する。
+<6> サービスフレームでは、2フレーム以上プレーする場合があるので、そのときは交代しない。
+<7> 現在のプレーヤーの現在の状態が「BEFORE_1ST」なら、次のフレームの投球待ちになっているので、プレーヤーを交代する。
+<8> すべてのプレーヤーがゲーム終了かどうか調べるメソッド。
+<9> ゲームの状況を文字列化するメソッド。
+--
+
+クラス図にもこの結果を反映しておきましょう（ <<update_class_for_game_score00>> ）。
+現在のプレーヤーは、関連端名が「turn」の関連にによって参照しているScoreを使っています。
+
+[[update_class_for_game_score00]]
+.「Game」クラスを更新したクラス図
+image::GSW-20220224-172836.png[{full-width}]
+
+==== ScoreSheetクラスの処理
+
+「Game」クラスが作成できたので、スコアシートを扱う「ScoreSheet」クラスも作成できそうですね。
+新しいスコアシートを作成して、そこに必要な数のゲームを追加すれば済みそうです。
+
+この方式に合わせてスコアを記録する処理をする「Game」クラスは、 <<ruby_scoresheet_code01>> のようになるでしょう。
+
+
+[[ruby_scoresheet_code01]]
+.score.rb(7)
+[example]
+--
+[source,ruby]
+----
+# 略
+# ScoreSheetは、複数名の複数回のGameを記録する
+class ScoreSheet
+  attr_accessor :id, :time, :games
+
+  def initialize(date) # <1>
+    @id = SecureRandom.urlsafe_base64(8) # <2>
+    @play_date = date
+    @games = []
+  end
+
+  def add_game(games = 1) # <3>
+    games.times do
+      @games.append(Game.new)
+    end
+  end
+
+  def to_s # <4>
+    "Score Sheet Date: #{@time}(id:#{@id})"
+  end
+end
+----
+<1> スコアシートを作成するときは、作成時の日時を控えておく。
+<2> スコアシートごとににユニークなIDをつけておく。
+<3> 希望する数のゲームをシートに追加するメソッド。引数がないときは1組だけ追加する。
+<4> スコアシートの状況を文字列化するメソッド。
+--
+
+クラス図にもこの結果を反映しておきましょう（ <<update_class_for_scoresheet00>> ）。
+現在のプレーヤーは、関連端名が「turn」の関連にによって参照しているScoreを使っています。
+
+[[update_class_for_scoresheet00]]
+.「ScoreSheet」クラスを更新したクラス図
+image::GSW-20220224-174042.png[{full-width}]
 
 

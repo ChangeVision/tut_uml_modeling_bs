@@ -17,27 +17,27 @@ class Frame
     @state = :RESERVED
   end
 
-  def first_pins(pins)
-    puts "invalid pins: #{pins}" if pins.negative? || pins > 10
-
-    @first = pins
-    if strike?
-      @second = 0
-      @state = :PENDING
-    else
-      @state = :BEFORE_2ND
+  def action(event, pins=0)
+    case @state
+    when :RESERVED
+      case event
+      when :SETUP
+        @state = :BEFORE_1ST
+      else
+        puts "invalid event: #{event} is ignored."
+      end
+    when :BEFORE_1ST
+      before_1st_porc(event, pins)
+    when :BEFORE_2ND
+      before_2nd_proc(event, pins)
+    when :PENDING
+      case event
+      when :DETERMINE
+        @state = :FIXED
+      end
+    when :FIXED
+      puts 'fixed.'
     end
-  end
-
-  def second_pins(pins)
-    puts "invalid pins: #{pins}" if pins.negative? || pins > (10 - @first)
-
-    @second = pins
-    @state = if spare?
-               :PENDING
-             else
-               :FIXED
-             end
   end
 
   def frame_score
@@ -60,6 +60,10 @@ class Frame
     @first.zero
   end
 
+  def fixed?
+    @state == :FIXED
+  end
+
   def to_s
     total = if @state == :FIXED
               @total
@@ -69,6 +73,39 @@ class Frame
     format '|%2d|%3s|%3s|%5s|%11d|%11d|%12d|%13s|',
            @frame_no, @first, @second, total, frame_score,
            @spare_bonus, @strike_bonus, @state
+  end
+
+  private
+
+  def before_1st_porc(evt, pins)
+    case evt
+    when :PINS
+      puts "invalid pins: #{pins}" if pins.negative? || pins > 10
+      @first = pins
+      @state = if strike?
+                 @second = 0
+                 :PENDING
+               else
+                 :BEFORE_2ND
+               end
+    else
+      puts "invalid event: #{evt} on #{@state}."
+    end
+  end
+
+  def before_2nd_proc(evt, pins)
+    case evt
+    when :PINS
+      puts "invalid pins: #{pins}" if pins.negative? || pins > (10 - @first)
+      @second = pins
+      @state = if spare?
+                 :PENDING
+               else
+                 :FIXED
+               end
+    else
+      puts "invalid event: #{evt} on #{@state}."
+    end
   end
 end
 
@@ -85,7 +122,7 @@ class Score
       @frames.append Frame.new(fno)
     end
     @state = :WAIT_FOR_1ST
-    @frames[fno2idx(@fno)].state = :BEFORE_1ST
+    @frames[fno2idx(@fno)].action(:SETUP)
   end
 
   def fno2idx(fno)
@@ -96,9 +133,9 @@ class Score
     @frames[fno2idx(fno)] # return index on @frams at frame number.
   end
 
-  def next_frame
+  def go_next_frame
     @fno += 1
-    @frames[fno2idx(fno)].state = :BEFORE_1ST
+    @frames[fno2idx(fno)].action(:SETUP)
   end
 
   def current
@@ -117,21 +154,21 @@ class Score
     return unless prev.spare?
 
     prev.spare_bonus = current.first
-    prev.state = :FIXED
+    prev.action(:DETERMINE)
   end
 
   def calc_strike_bonus_after_1st
     return unless prev.strike? && pprev.strike?
 
     pprev.strike_bonus = prev.first + current.first
-    pprev.state = :FIXED
+    pprev.action(:DETERMINE)
   end
 
   def calc_strike_bonus_after_2nd
     return unless prev.strike?
 
     prev.strike_bonus = current.first + current.second
-    prev.state = :FIXED
+    prev.action(:DETERMINE)
   end
 
   def update_total
@@ -141,11 +178,11 @@ class Score
   end
 
   def finished?
-    frame(10).state == :FIXED
+    frame(10).fixed?
   end
 
-  def act_wait_for_1st(pins)
-    current.first_pins(pins)
+  def wait_for_1st_proc(pins)
+    current.action(:PINS, pins)
     calc_spare_bonus_after_1st
     calc_strike_bonus_after_1st
     update_total
@@ -153,30 +190,30 @@ class Score
       @state = :FINISHED
     elsif current.strike?
       @state = :WAIT_FOR_1ST
-      next_frame
+      go_next_frame
     else
       @state = :WAIT_FOR_2ND
     end
   end
 
-  def act_wait_for_2nd(pins)
-    current.second_pins(pins)
+  def wait_for_2nd_proc(pins)
+    current.action(:PINS, pins)
     calc_strike_bonus_after_2nd
     update_total
     if finished?
       @state = :FINISHED
     else
       @state = :WAIT_FOR_1ST
-      next_frame
+      go_next_frame
     end
   end
 
   def scoring(pins)
     case @state
     when :WAIT_FOR_1ST
-      act_wait_for_1st(pins)
+      wait_for_1st_proc(pins)
     when :WAIT_FOR_2ND
-      act_wait_for_2nd(pins)
+      wait_for_2nd_proc(pins)
     when :FINISHED
       puts 'finished'
     end
@@ -205,16 +242,16 @@ class Game
     @scores[@turn].player
   end
 
-  def next_turn
+  def go_next_turn
     @turn = (@turn + 1) % @scores.size
   end
 
   def playing(score_index, pins)
     @scores[score_index].scoring(pins)
     if @scores[score_index].fno > 10
-      next_turn if @scores[score_index].finished?
+      go_next_turn if @scores[score_index].finished?
     elsif @scores[score_index].current.state == :BEFORE_1ST
-      next_turn
+      go_next_turn
     end
   end
 
@@ -250,24 +287,7 @@ end
 
 if $PROGRAM_NAME == __FILE__
   sheet = ScoreSheet.new(Time.now)
-  sheet.add_game # sheet.add_game(2)
-  game = sheet.games.first
-  game.entry('くぼあき')
-  game.entry('うえはら')
-  # puts sheet
-
-  # until game.finished?
-  #   puts "turn: #{game.turn_player_name}"
-  #   score_index = game.turn
-  #   print 'input pins: '
-  #   pins = gets.chomp.to_i
-  #   game.playing(score_index, pins)
-  #   puts game.to_s
-  # end
-
-  # puts "Game(id:#{game.id}) is finished."
-
-  sheet.add_game # new games added.
+  sheet.add_game
   game = sheet.games.last
   game.entry('くぼあき')
   game.entry('うえはら')
@@ -288,32 +308,8 @@ if $PROGRAM_NAME == __FILE__
     puts "input pins: #{pins}"
     game.playing(score_index, pins)
     puts game.to_s
+    gets
   end
 
   puts "Game(id:#{game.id}) is finished."
-
-  # game_records = [
-  #   [7, 0, 5, 5, 10, 10, 5, 4, 10, 7, 3, 5, 4, 7, 3, 10, 7, 0],
-  #   [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 5, 3],
-  #   [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 4, 6],
-  #   [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
-  #   [4, 5, 4, 5, 1, 9, 8, 0, 10, 10, 10, 8, 2, 7, 3, 4, 5, 7,8,9],
-  #   [7, 0, 5, 5, 10, 10, 5, 4, 10, 7, 3, 5, 4, 7, 3, 10, 7, 0,10,10],
-  #   [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 5, 3, 10,10],
-  #   [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
-  #   [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 4, 6, 5,5],
-  #   [6, 3, 9, 0, 0, 3, 8, 2, 7, 3, 3],
-  #   [10, 8, 2, 7, 2, 10, 10],
-  # ]
-  # game_records.each do |pins_list|
-  #   puts '========================'
-  #   game = Game.new
-  #   pins_list.each do |pins|
-  #     game.scoring(pins)
-  #     if game.finished?
-  #       p 'already finished'
-  #       break
-  #     end
-  #   end
-  # end
 end

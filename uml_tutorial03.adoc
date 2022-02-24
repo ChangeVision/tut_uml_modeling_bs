@@ -556,7 +556,7 @@ end
 .「Sample」クラス内部で使う操作を追加する
 image::GSW-20220216-050914.png[{three-quarters-width}]
 
-[start=6]
+[start=7]
 . 「SampleTest」クラスを追加しておく（ <<update_sample_class02>> ）。
 ** このテスト用クラスには、テストを実行する「run」メソッドを用意しておく。
 ** テスト用のメソッドをいくつか追加しておく。
