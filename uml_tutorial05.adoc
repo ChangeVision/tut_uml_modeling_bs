@@ -9,60 +9,203 @@ endif::[]
 対応づけルールを使って、モデルから変換して作成したプログラムができあがりました。
 でいあがったプログラムを確認し、実際に動かしてみましょう。
 
-=== 作成したプログラム
+=== プログラムを完成させる
 
-作成したプログラムの全体を確認しましょう（ <<ruby_all_code01>> ）。
+まず、プログラムをテストできるよう、完成させましょう。
+
+==== 作成したプログラム全体を確認する
+
+まず、作成したプログラムの全体を確認しましょう（ <<ruby_all_code01>> ）。
 
 
 [[ruby_all_code01]]
 .score.rb
 [example]
 --
-[source,ruby,linenums]
+[source,ruby,linenums,start=1]
+
 ----
-include::{sourcesdir}/score.rb[]
+include::{sourcesdir}/score.rb[lines=1..286]
 ----
 --
 
-=== プログラムをテストする
+==== テスト用のプログラムを追加する
 
-
-
+作成したプログラムの末尾に、テストするためのプログラムを追加します（ <<ruby_all_code02>> ）。
+実際にピン数を与えてスコアを作成しているのは「 `game.playing` 」の呼び出しです。
+このテストコードでは、ピン数のデータは、1ゲーム分のピン数をまとめています。
+しかし、スコアシートのプログラム本体はピン数を受け取るたびに動作するように作られているので、ピン数を1投球ずつ与える方法でも動かせます。
 
 [[ruby_all_code02]]
-.テストスクリプト
+.score.rb（テストコード部分）
 [example]
 --
-[source,ruby]
+[source,ruby,linenums,start=288]
 ----
-
-if $PROGRAM_NAME == __FILE__
-  sheet = ScoreSheet.new(Time.now)
-  sheet.add_game
-  game = sheet.games.last
-  game.entry('くぼあき')
+if $PROGRAM_NAME == __FILE__ # <1>
+  sheet = ScoreSheet.new(Time.now) # <2>
+  sheet.add_game # <3>
+  game = sheet.games.last # <4>
+  game.entry('くぼあき') # <5>
   game.entry('うえはら')
-  puts sheet
+  puts sheet # <6>
 
-  game_records = [
+  game_records = [ # <7>
     # [6, 3, 9, 0, 0, 3, 8, 2, 7, 3, 10, 9, 1, 8, 0, 10, 10, 6, 4],
     # [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 5, 3],
     [7, 0, 5, 5, 10, 10, 5, 4, 10, 7, 3, 5, 4, 7, 3, 7, 3, 4],
     [6, 3, 9, 0, 0, 3, 8, 2, 7, 3, 10, 9, 1, 8, 0, 10, 6, 3]
   ]
 
-  until game.finished?
+  until game.finished? # <8>
     puts '----------------------------------------'
     puts "turn: #{game.turn_player_name}"
-    score_index = game.turn
-    pins = game_records[score_index].shift
+    score_index = game.turn # <9>
+    pins = game_records[score_index].shift # <10>
     puts "input pins: #{pins}"
-    game.playing(score_index, pins)
-    puts game.to_s
-    gets
+    game.playing(score_index, pins) # <11>
+    puts game.to_s # <12>
+    gets # <13>
   end
 
   puts "Game(id:#{game.id}) is finished."
 end
 ----
+<1> 実行時プログラム名とファイル名が同じとき（このファイル自身から実行したとき）に実行する部分のはじまり。
+<2> 新しいスコアシートを作成する。
+<3> 作成したスコアシートにゲームを追加する。
+<4> 追加したゲームを選ぶ（ここでは最後のゲームを選ぶ方法をとった）。
+<5> ゲームへプレーヤーがエントリーする。このプレーヤーのこのゲーム用のスコアが用意される。
+<6> スコアシートの作成日付とIDの表示。
+<7> テスト用データ。1行が1人の1ゲーム分のピン数のデータ。
+<8> ゲームの終了まで繰り返し。
+<9> turnは、そのゲーム内の何番目のプレーヤーか（ゲーム中の何番目のスコアか）を表している。このテストコードでは2人がエントリしているので、0→1→0→1 と繰り返す。
+<10> 現在のturnのプレーヤーのピン数のテストデータを先頭から1つずつ取り出す。
+<11> 現在のturnのプレーヤーのスコアにピン数を渡して、スコアへ反映する。
+<12> 現在のゲームの全体像を取得して表示する。
+<13> ここで空の改行キーを入力してテストを進める。テストを1回ずつ止めて実行できる。この入力待ちをやめれば一括して実行できる。
 --
+
+
+=== プログラムをテストする
+
+テスト用のプログラムも作成できたので、実行してみましょう。
+
+コマンドプロンプトを起動して（MacやLinuxならターミナルを起動して）、プログラムを実行します（ <<ruby_all_code03>> ）。
+
+
+出力フォーマットは、左から「フレーム番号」「1投目のピン数」「2投目のピン数」「のべのトータル」「フレームのトータル」「スペアボーナス」「ストライクボーナス」「フレームの状態」です。
+
+フレームの状態の変化を追ってみて、フレームのステートマシン図と対応していることを確認してみましょう。
+
+
+[[ruby_all_code03]]
+.【端末】score.rb を実行する
+[example]
+--
+[source,console]
+----
+C:\Users\kuboaki>cd Desktop\BowlingScore
+
+C:\Users\kuboaki\Desktop\BowlingScore>ruby score.rb
+Score Sheet Date: 2022-02-25 10:31:31 +0900(id:nzvTi8leDr4) # <1>
+----------------------------------------
+turn: くぼあき # <2>
+input pins: 7 # <3>
+Game(id:zwBxlorJlog), # <4>
+Score(id: lLAtK77i0L8), # <5>
+Player:くぼあき, Frame:1, # <6>
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED| # <7>
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    .|          7|          0|           0|   BEFORE_2ND| # <8>
+| 2|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 3|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 4|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 5|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: R7gXk20w4Vg),
+Player:うえはら, Frame:1,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 2|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 3|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 4|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 5|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+
+
+(略）
+
+----------------------------------------
+turn: うえはら
+input pins: 3
+Game(id:zwBxlorJlog),
+Score(id: lLAtK77i0L8),
+Player:くぼあき, Frame:11,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  5|  5|   27|         20|         10|           0|        FIXED|
+| 3| 10|  0|   52|         25|          0|          15|        FIXED|
+| 4| 10|  0|   71|         19|          0|           9|        FIXED|
+| 5|  5|  4|   80|          9|          0|           0|        FIXED|
+| 6| 10|  0|  100|         20|          0|          10|        FIXED|
+| 7|  7|  3|  115|         15|          5|           0|        FIXED|
+| 8|  5|  4|  124|          9|          0|           0|        FIXED|
+| 9|  7|  3|  141|         17|          7|           0|        FIXED|
+|10|  7|  3|  155|         14|          4|           0|        FIXED|
+|11|  4|  0|    .|          4|          0|           0|   BEFORE_2ND| # <9>
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: R7gXk20w4Vg),
+Player:うえはら, Frame:10,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|        FIXED|
+| 2|  9|  0|   18|          9|          0|           0|        FIXED|
+| 3|  0|  3|   21|          3|          0|           0|        FIXED|
+| 4|  8|  2|   38|         17|          7|           0|        FIXED|
+| 5|  7|  3|   58|         20|         10|           0|        FIXED|
+| 6| 10|  0|   78|         20|          0|          10|        FIXED|
+| 7|  9|  1|   96|         18|          8|           0|        FIXED|
+| 8|  8|  0|  104|          8|          0|           0|        FIXED|
+| 9| 10|  0|  123|         19|          0|           9|        FIXED|
+|10|  6|  3|  132|          9|          0|           0|        FIXED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+
+Game(id:zwBxlorJlog) is finished.
+C:\Users\kuboaki\Desktop\BowlingScore>
+----
+<1> スコアシートの作成日付とIDの表示。
+<2> どのプレーヤーのターンなのかを表示した。
+<3> プログラムが受け取ったピン数。
+<4> 現在のゲームのID。
+<5> 続くスコアのID。
+<6> プレーヤーとそのプレーヤーの現在のフレーム番号。
+<7> 前の前のフレームを無条件に扱うためのダミーフレーム。
+<8> 1投目が終わったので、フレームは2投目の投球前の状態。
+<9> ここは2投目の投球前の状態だが、第10フレームの状態が「FIXED」なのでゲームは終了。
+--
+
+=== まとめ
+
+作成したプログラムを、テストコードを使って動かしてみました。
+テストした結果、作成したモデル（クラス図やステートマシン図）に従って動作していることが確認できました。
+

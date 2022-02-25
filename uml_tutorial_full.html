@@ -17,8 +17,8 @@
 <h1>モデルを使ってソフトウェアを開発しよう</h1>
 <div class="details">
 <span id="author" class="author">株式会社チェンジビジョン</span><br>
-<span id="revnumber">バージョン html_0426,</span>
-<span id="revdate">2022-02-24</span>
+<span id="revnumber">バージョン html_0430,</span>
+<span id="revdate">2022-02-25</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">目次</div>
@@ -70,8 +70,9 @@
 </li>
 <li><a href="#_program_test">5 できあがったプログラムを試す</a>
 <ul class="sectlevel2">
-<li><a href="#_作成したプログラム">5.1 作成したプログラム</a></li>
+<li><a href="#_プログラムを完成させる">5.1 プログラムを完成させる</a></li>
 <li><a href="#_プログラムをテストする">5.2 プログラムをテストする</a></li>
+<li><a href="#_まとめ_4">5.3 まとめ</a></li>
 </ul>
 </li>
 <li><a href="#_summary">6 まとめ</a></li>
@@ -4511,9 +4512,14 @@ astah* では、オブジェクト図を作成するときは「クラス図」�
 でいあがったプログラムを確認し、実際に動かしてみましょう。</p>
 </div>
 <div class="sect2">
-<h3 id="_作成したプログラム"><a class="anchor" href="#_作成したプログラム"></a>5.1 作成したプログラム</h3>
+<h3 id="_プログラムを完成させる"><a class="anchor" href="#_プログラムを完成させる"></a>5.1 プログラムを完成させる</h3>
 <div class="paragraph">
-<p>作成したプログラムの全体を確認しましょう（ <a href="#ruby_all_code01">リスト26</a> ）。</p>
+<p>まず、プログラムをテストできるよう、完成させましょう。</p>
+</div>
+<div class="sect3">
+<h4 id="_作成したプログラム全体を確認する"><a class="anchor" href="#_作成したプログラム全体を確認する"></a>5.1.1 作成したプログラム全体を確認する</h4>
+<div class="paragraph">
+<p>まず、作成したプログラムの全体を確認しましょう（ <a href="#ruby_all_code01">リスト26</a> ）。</p>
 </div>
 <div id="ruby_all_code01" class="exampleblock">
 <div class="title">リスト 26. score.rb</div>
@@ -4806,35 +4812,6 @@ astah* では、オブジェクト図を作成するときは「クラス図」�
 284
 285
 286
-287
-288
-289
-290
-291
-292
-293
-294
-295
-296
-297
-298
-299
-300
-301
-302
-303
-304
-305
-306
-307
-308
-309
-310
-311
-312
-313
-314
-315
 </pre></td><td class="code"><pre><span class="c1"># frozen_string_literal: true</span>
 
 <span class="nb">require</span> <span class="s1">'securerandom'</span>
@@ -5057,7 +5034,7 @@ astah* では、オブジェクト図を作成するときは「クラス図」�
   <span class="k">end</span>
 
   <span class="k">def</span> <span class="nf">to_s</span>
-    <span class="s2">"Score(id: </span><span class="si">#{</span><span class="vi">@id</span><span class="si">}</span><span class="s2">),</span><span class="se">\n</span><span class="s2">Player:</span><span class="si">#{</span><span class="vi">@Player</span><span class="si">}</span><span class="s2">, Frame:</span><span class="si">#{</span><span class="vi">@fno</span><span class="si">}</span><span class="s2">,</span><span class="se">\n</span><span class="si">#{</span><span class="vi">@frames</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
+    <span class="s2">"Score(id: </span><span class="si">#{</span><span class="vi">@id</span><span class="si">}</span><span class="s2">),</span><span class="se">\n</span><span class="s2">Player:</span><span class="si">#{</span><span class="vi">@player</span><span class="si">}</span><span class="s2">, Frame:</span><span class="si">#{</span><span class="vi">@fno</span><span class="si">}</span><span class="s2">,</span><span class="se">\n</span><span class="si">#{</span><span class="vi">@frames</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
   <span class="k">end</span>
 <span class="k">end</span>
 
@@ -5118,37 +5095,8 @@ astah* では、オブジェクト図を作成するときは「クラス図」�
   <span class="k">end</span>
 
   <span class="k">def</span> <span class="nf">to_s</span>
-    <span class="s2">"Score Sheet Date: </span><span class="si">#{</span><span class="vi">@time</span><span class="si">}</span><span class="s2">(id:</span><span class="si">#{</span><span class="vi">@id</span><span class="si">}</span><span class="s2">)"</span>
+    <span class="s2">"Score Sheet Date: </span><span class="si">#{</span><span class="vi">@play_date</span><span class="si">}</span><span class="s2">(id:</span><span class="si">#{</span><span class="vi">@id</span><span class="si">}</span><span class="s2">)"</span>
   <span class="k">end</span>
-<span class="k">end</span>
-
-<span class="k">if</span> <span class="vg">$PROGRAM_NAME</span> <span class="o">==</span> <span class="kp">__FILE__</span>
-  <span class="n">sheet</span> <span class="o">=</span> <span class="no">ScoreSheet</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">)</span>
-  <span class="n">sheet</span><span class="p">.</span><span class="nf">add_game</span>
-  <span class="n">game</span> <span class="o">=</span> <span class="n">sheet</span><span class="p">.</span><span class="nf">games</span><span class="p">.</span><span class="nf">last</span>
-  <span class="n">game</span><span class="p">.</span><span class="nf">entry</span><span class="p">(</span><span class="s1">'くぼあき'</span><span class="p">)</span>
-  <span class="n">game</span><span class="p">.</span><span class="nf">entry</span><span class="p">(</span><span class="s1">'うえはら'</span><span class="p">)</span>
-  <span class="nb">puts</span> <span class="n">sheet</span>
-
-  <span class="n">game_records</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="c1"># [6, 3, 9, 0, 0, 3, 8, 2, 7, 3, 10, 9, 1, 8, 0, 10, 10, 6, 4],</span>
-    <span class="c1"># [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 5, 3],</span>
-    <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
-    <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-  <span class="p">]</span>
-
-  <span class="k">until</span> <span class="n">game</span><span class="p">.</span><span class="nf">finished?</span>
-    <span class="nb">puts</span> <span class="s1">'----------------------------------------'</span>
-    <span class="nb">puts</span> <span class="s2">"turn: </span><span class="si">#{</span><span class="n">game</span><span class="p">.</span><span class="nf">turn_player_name</span><span class="si">}</span><span class="s2">"</span>
-    <span class="n">score_index</span> <span class="o">=</span> <span class="n">game</span><span class="p">.</span><span class="nf">turn</span>
-    <span class="n">pins</span> <span class="o">=</span> <span class="n">game_records</span><span class="p">[</span><span class="n">score_index</span><span class="p">].</span><span class="nf">shift</span>
-    <span class="nb">puts</span> <span class="s2">"input pins: </span><span class="si">#{</span><span class="n">pins</span><span class="si">}</span><span class="s2">"</span>
-    <span class="n">game</span><span class="p">.</span><span class="nf">playing</span><span class="p">(</span><span class="n">score_index</span><span class="p">,</span> <span class="n">pins</span><span class="p">)</span>
-    <span class="nb">puts</span> <span class="n">game</span><span class="p">.</span><span class="nf">to_s</span>
-    <span class="nb">gets</span>
-  <span class="k">end</span>
-
-  <span class="nb">puts</span> <span class="s2">"Game(id:</span><span class="si">#{</span><span class="n">game</span><span class="p">.</span><span class="nf">id</span><span class="si">}</span><span class="s2">) is finished."</span>
 <span class="k">end</span>
 </pre></td></tr></tbody></table></code></pre>
 </div>
@@ -5156,44 +5104,294 @@ astah* では、オブジェクト図を作成するときは「クラス図」�
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_プログラムをテストする"><a class="anchor" href="#_プログラムをテストする"></a>5.2 プログラムをテストする</h3>
+<div class="sect3">
+<h4 id="_テスト用のプログラムを追加する"><a class="anchor" href="#_テスト用のプログラムを追加する"></a>5.1.2 テスト用のプログラムを追加する</h4>
+<div class="paragraph">
+<p>作成したプログラムの末尾に、テストするためのプログラムを追加します（ <a href="#ruby_all_code02">リスト27</a> ）。
+実際にピン数を与えてスコアを作成しているのは「 <code>game.playing</code> 」の呼び出しです。
+このテストコードでは、ピン数のデータは、1ゲーム分のピン数をまとめています。
+しかし、スコアシートのプログラム本体はピン数を受け取るたびに動作するように作られているので、ピン数を1投球ずつ与える方法でも動かせます。</p>
+</div>
 <div id="ruby_all_code02" class="exampleblock">
-<div class="title">リスト 27. テストスクリプト</div>
+<div class="title">リスト 27. score.rb（テストコード部分）</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="ruby"><span class="k">if</span> <span class="vg">$PROGRAM_NAME</span> <span class="o">==</span> <span class="kp">__FILE__</span>
-  <span class="n">sheet</span> <span class="o">=</span> <span class="no">ScoreSheet</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">)</span>
-  <span class="n">sheet</span><span class="p">.</span><span class="nf">add_game</span>
-  <span class="n">game</span> <span class="o">=</span> <span class="n">sheet</span><span class="p">.</span><span class="nf">games</span><span class="p">.</span><span class="nf">last</span>
-  <span class="n">game</span><span class="p">.</span><span class="nf">entry</span><span class="p">(</span><span class="s1">'くぼあき'</span><span class="p">)</span>
+<pre class="rouge highlight"><code data-lang="ruby"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+</pre></td><td class="code"><pre><span class="k">if</span> <span class="vg">$PROGRAM_NAME</span> <span class="o">==</span> <span class="kp">__FILE__</span> <i class="conum" data-value="1"></i><b>(1)</b>
+  <span class="n">sheet</span> <span class="o">=</span> <span class="no">ScoreSheet</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">)</span> <i class="conum" data-value="2"></i><b>(2)</b>
+  <span class="n">sheet</span><span class="p">.</span><span class="nf">add_game</span> <i class="conum" data-value="3"></i><b>(3)</b>
+  <span class="n">game</span> <span class="o">=</span> <span class="n">sheet</span><span class="p">.</span><span class="nf">games</span><span class="p">.</span><span class="nf">last</span> <i class="conum" data-value="4"></i><b>(4)</b>
+  <span class="n">game</span><span class="p">.</span><span class="nf">entry</span><span class="p">(</span><span class="s1">'くぼあき'</span><span class="p">)</span> <i class="conum" data-value="5"></i><b>(5)</b>
   <span class="n">game</span><span class="p">.</span><span class="nf">entry</span><span class="p">(</span><span class="s1">'うえはら'</span><span class="p">)</span>
-  <span class="nb">puts</span> <span class="n">sheet</span>
+  <span class="nb">puts</span> <span class="n">sheet</span> <i class="conum" data-value="6"></i><b>(6)</b>
 
-  <span class="n">game_records</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="n">game_records</span> <span class="o">=</span> <span class="p">[</span> <i class="conum" data-value="7"></i><b>(7)</b>
     <span class="c1"># [6, 3, 9, 0, 0, 3, 8, 2, 7, 3, 10, 9, 1, 8, 0, 10, 10, 6, 4],</span>
     <span class="c1"># [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 5, 3],</span>
     <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
     <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
   <span class="p">]</span>
 
-  <span class="k">until</span> <span class="n">game</span><span class="p">.</span><span class="nf">finished?</span>
+  <span class="k">until</span> <span class="n">game</span><span class="p">.</span><span class="nf">finished?</span> <i class="conum" data-value="8"></i><b>(8)</b>
     <span class="nb">puts</span> <span class="s1">'----------------------------------------'</span>
     <span class="nb">puts</span> <span class="s2">"turn: </span><span class="si">#{</span><span class="n">game</span><span class="p">.</span><span class="nf">turn_player_name</span><span class="si">}</span><span class="s2">"</span>
-    <span class="n">score_index</span> <span class="o">=</span> <span class="n">game</span><span class="p">.</span><span class="nf">turn</span>
-    <span class="n">pins</span> <span class="o">=</span> <span class="n">game_records</span><span class="p">[</span><span class="n">score_index</span><span class="p">].</span><span class="nf">shift</span>
+    <span class="n">score_index</span> <span class="o">=</span> <span class="n">game</span><span class="p">.</span><span class="nf">turn</span> <i class="conum" data-value="9"></i><b>(9)</b>
+    <span class="n">pins</span> <span class="o">=</span> <span class="n">game_records</span><span class="p">[</span><span class="n">score_index</span><span class="p">].</span><span class="nf">shift</span> <i class="conum" data-value="10"></i><b>(10)</b>
     <span class="nb">puts</span> <span class="s2">"input pins: </span><span class="si">#{</span><span class="n">pins</span><span class="si">}</span><span class="s2">"</span>
-    <span class="n">game</span><span class="p">.</span><span class="nf">playing</span><span class="p">(</span><span class="n">score_index</span><span class="p">,</span> <span class="n">pins</span><span class="p">)</span>
-    <span class="nb">puts</span> <span class="n">game</span><span class="p">.</span><span class="nf">to_s</span>
-    <span class="nb">gets</span>
+    <span class="n">game</span><span class="p">.</span><span class="nf">playing</span><span class="p">(</span><span class="n">score_index</span><span class="p">,</span> <span class="n">pins</span><span class="p">)</span> <i class="conum" data-value="11"></i><b>(11)</b>
+    <span class="nb">puts</span> <span class="n">game</span><span class="p">.</span><span class="nf">to_s</span> <i class="conum" data-value="12"></i><b>(12)</b>
+    <span class="nb">gets</span> <i class="conum" data-value="13"></i><b>(13)</b>
   <span class="k">end</span>
 
   <span class="nb">puts</span> <span class="s2">"Game(id:</span><span class="si">#{</span><span class="n">game</span><span class="p">.</span><span class="nf">id</span><span class="si">}</span><span class="s2">) is finished."</span>
-<span class="k">end</span></code></pre>
+<span class="k">end</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>実行時プログラム名とファイル名が同じとき（このファイル自身から実行したとき）に実行する部分のはじまり。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>新しいスコアシートを作成する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>作成したスコアシートにゲームを追加する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>追加したゲームを選ぶ（ここでは最後のゲームを選ぶ方法をとった）。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>ゲームへプレーヤーがエントリーする。このプレーヤーのこのゲーム用のスコアが用意される。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>スコアシートの作成日付とIDの表示。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>テスト用データ。1行が1人の1ゲーム分のピン数のデータ。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>ゲームの終了まで繰り返し。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>turnは、そのゲーム内の何番目のプレーヤーか（ゲーム中の何番目のスコアか）を表している。このテストコードでは2人がエントリしているので、0→1→0→1 と繰り返す。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="10"></i><b>10</b></td>
+<td>現在のturnのプレーヤーのピン数のテストデータを先頭から1つずつ取り出す。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="11"></i><b>11</b></td>
+<td>現在のturnのプレーヤーのスコアにピン数を渡して、スコアへ反映する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="12"></i><b>12</b></td>
+<td>現在のゲームの全体像を取得して表示する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="13"></i><b>13</b></td>
+<td>ここで空の改行キーを入力してテストを進める。テストを1回ずつ止めて実行できる。この入力待ちをやめれば一括して実行できる。</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_プログラムをテストする"><a class="anchor" href="#_プログラムをテストする"></a>5.2 プログラムをテストする</h3>
+<div class="paragraph">
+<p>テスト用のプログラムも作成できたので、実行してみましょう。</p>
+</div>
+<div class="paragraph">
+<p>コマンドプロンプトを起動して（MacやLinuxならターミナルを起動して）、プログラムを実行します（ <a href="#ruby_all_code03">リスト28</a> ）。</p>
+</div>
+<div class="paragraph">
+<p>出力フォーマットは、左から「フレーム番号」「1投目のピン数」「2投目のピン数」「のべのトータル」「フレームのトータル」「スペアボーナス」「ストライクボーナス」「フレームの状態」です。</p>
+</div>
+<div class="paragraph">
+<p>フレームの状態の変化を追ってみて、フレームのステートマシン図と対応していることを確認してみましょう。</p>
+</div>
+<div id="ruby_all_code03" class="exampleblock">
+<div class="title">リスト 28. 【端末】score.rb を実行する</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="console"><span class="gp">C:\Users\kuboaki&gt;</span><span class="nb">cd </span>Desktop<span class="se">\B</span>owlingScore
+<span class="go">
+</span><span class="gp">C:\Users\kuboaki\Desktop\BowlingScore&gt;</span>ruby score.rb
+<span class="go">Score Sheet Date: 2022-02-25 10:31:31 +0900(id:nzvTi8leDr4) <i class="conum" data-value="1"></i><b>(1)</b>
+----------------------------------------
+turn: くぼあき <i class="conum" data-value="2"></i><b>(2)</b>
+input pins: 7 <i class="conum" data-value="3"></i><b>(3)</b>
+Game(id:zwBxlorJlog), <i class="conum" data-value="4"></i><b>(4)</b>
+Score(id: lLAtK77i0L8), <i class="conum" data-value="5"></i><b>(5)</b>
+Player:くぼあき, Frame:1, <i class="conum" data-value="6"></i><b>(6)</b>
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED| <i class="conum" data-value="7"></i><b>(7)</b>
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    .|          7|          0|           0|   BEFORE_2ND| <i class="conum" data-value="8"></i><b>(8)</b>
+| 2|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 3|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 4|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 5|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: R7gXk20w4Vg),
+Player:うえはら, Frame:1,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
+| 2|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 3|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 4|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 5|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
+|10|  0|  0|    .|          0|          0|           0|     RESERVED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+
+
+(略）
+
+----------------------------------------
+turn: うえはら
+input pins: 3
+Game(id:zwBxlorJlog),
+Score(id: lLAtK77i0L8),
+Player:くぼあき, Frame:11,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|        FIXED|
+| 2|  5|  5|   27|         20|         10|           0|        FIXED|
+| 3| 10|  0|   52|         25|          0|          15|        FIXED|
+| 4| 10|  0|   71|         19|          0|           9|        FIXED|
+| 5|  5|  4|   80|          9|          0|           0|        FIXED|
+| 6| 10|  0|  100|         20|          0|          10|        FIXED|
+| 7|  7|  3|  115|         15|          5|           0|        FIXED|
+| 8|  5|  4|  124|          9|          0|           0|        FIXED|
+| 9|  7|  3|  141|         17|          7|           0|        FIXED|
+|10|  7|  3|  155|         14|          4|           0|        FIXED|
+|11|  4|  0|    .|          4|          0|           0|   BEFORE_2ND| <i class="conum" data-value="9"></i><b>(9)</b>
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Score(id: R7gXk20w4Vg),
+Player:うえはら, Frame:10,
+|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|        FIXED|
+| 2|  9|  0|   18|          9|          0|           0|        FIXED|
+| 3|  0|  3|   21|          3|          0|           0|        FIXED|
+| 4|  8|  2|   38|         17|          7|           0|        FIXED|
+| 5|  7|  3|   58|         20|         10|           0|        FIXED|
+| 6| 10|  0|   78|         20|          0|          10|        FIXED|
+| 7|  9|  1|   96|         18|          8|           0|        FIXED|
+| 8|  8|  0|  104|          8|          0|           0|        FIXED|
+| 9| 10|  0|  123|         19|          0|           9|        FIXED|
+|10|  6|  3|  132|          9|          0|           0|        FIXED|
+|11|  0|  0|    .|          0|          0|           0|     RESERVED|
+|12|  0|  0|    .|          0|          0|           0|     RESERVED|
+|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+
+Game(id:zwBxlorJlog) is finished.
+</span><span class="gp">C:\Users\kuboaki\Desktop\BowlingScore&gt;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>スコアシートの作成日付とIDの表示。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>どのプレーヤーのターンなのかを表示した。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>プログラムが受け取ったピン数。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>現在のゲームのID。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>続くスコアのID。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>プレーヤーとそのプレーヤーの現在のフレーム番号。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>前の前のフレームを無条件に扱うためのダミーフレーム。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>1投目が終わったので、フレームは2投目の投球前の状態。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>ここは2投目の投球前の状態だが、第10フレームの状態が「FIXED」なのでゲームは終了。</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_まとめ_4"><a class="anchor" href="#_まとめ_4"></a>5.3 まとめ</h3>
+<div class="paragraph">
+<p>作成したプログラムを、テストコードを使って動かしてみました。
+テストした結果、作成したモデル（クラス図やステートマシン図）に従って動作していることが確認できました。</p>
 </div>
 </div>
 </div>
@@ -5387,8 +5585,8 @@ astah* では、オブジェクト図を作成するときは「クラス図」�
 <p>「モデルを使ってソフトウェアを開発しよう」</p>
 </div>
 <div class="paragraph">
-<p>発行日 : 2022-02-24<br>
-バージョン : html_0426<br>
+<p>発行日 : 2022-02-25<br>
+バージョン : html_0430<br>
 作成者 : 株式会社チェンジビジョン<br>
 本書の内容に関する質問等がありましたら、作成者までお知らせください。</p>
 </div>
@@ -5397,8 +5595,8 @@ astah* では、オブジェクト図を作成するときは「クラス図」�
 </div>
 <div id="footer">
 <div id="footer-text">
-バージョン html_0426<br>
-最終更新 2022-02-24 17:45:00 +0900
+バージョン html_0430<br>
+最終更新 2022-02-25 02:00:10 +0900
 </div>
 </div>
 <script type="text/x-mathjax-config">

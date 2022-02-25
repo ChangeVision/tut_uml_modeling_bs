@@ -220,7 +220,7 @@ class Score
   end
 
   def to_s
-    "Score(id: #{@id}),\nPlayer:#{@Player}, Frame:#{@fno},\n#{@frames.join("\n")}"
+    "Score(id: #{@id}),\nPlayer:#{@player}, Frame:#{@fno},\n#{@frames.join("\n")}"
   end
 end
 
@@ -281,7 +281,7 @@ class ScoreSheet
   end
 
   def to_s
-    "Score Sheet Date: #{@time}(id:#{@id})"
+    "Score Sheet Date: #{@play_date}(id:#{@id})"
   end
 end
 

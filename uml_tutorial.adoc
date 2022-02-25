@@ -7,7 +7,7 @@ include::front_matter.adoc[]
 // （issue resolves #1181 restore media=prepress behavior #1190）
 
 // 下記は、このファイルの場所からではなく、:imagesdir:からの相対ディレクトリであることに注意
-:front-cover-image: image:cover_page.png[]
+// :front-cover-image: image:cover_page.png[]
 
 
 // 表題をfront_matterに書いておいても、
