@@ -6,8 +6,8 @@ class Sample
 
   def initialize
     @state = :ST0
-    @attrs_a = true
-    @attrs_b = true
+    @attr_a = true
+    @attr_b = true
   end
 
   def st0_proc(evt, param)
