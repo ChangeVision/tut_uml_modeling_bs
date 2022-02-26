@@ -70,7 +70,7 @@ class Frame
             else
               '   .'
             end
-    format '|%2d|%3s|%3s|%5s|%11d|%11d|%12d|%13s|',
+    format '|%2d|%3s|%3s|%5s|%11d|%11d|%12d|%11s|',
            @frame_no, @first, @second, total, frame_score,
            @spare_bonus, @strike_bonus, @state
   end
@@ -220,7 +220,9 @@ class Score
   end
 
   def to_s
-    "Score(id: #{@id}),\nPlayer:#{@player}, Frame:#{@fno},\n#{@frames.join("\n")}"
+    "Player:#{@player}, Score(id: #{@id}), Frame:#{@fno},
+|No|1st|2nd|Total|Frame Score|Spare Bonus|Strike Bonus|Frame State|
+#{@frames.join("\n")}"
   end
 end
 
@@ -292,7 +294,7 @@ if $PROGRAM_NAME == __FILE__
   game.entry('くぼあき')
   game.entry('うえはら')
   puts sheet
-
+  
   game_records = [
     # [6, 3, 9, 0, 0, 3, 8, 2, 7, 3, 10, 9, 1, 8, 0, 10, 10, 6, 4],
     # [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 5, 3],

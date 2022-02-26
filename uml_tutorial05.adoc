@@ -108,87 +108,86 @@ end
 C:\Users\kuboaki>cd Desktop\BowlingScore
 
 C:\Users\kuboaki\Desktop\BowlingScore>ruby score.rb
-Score Sheet Date: 2022-02-25 10:31:31 +0900(id:nzvTi8leDr4) # <1>
+Score Sheet Date: 2022-02-26 02:08:21 +0900(id:0GG70gNRWtk) # <1>
 ----------------------------------------
 turn: くぼあき # <2>
 input pins: 7 # <3>
 Game(id:zwBxlorJlog), # <4>
-Score(id: lLAtK77i0L8), # <5>
-Player:くぼあき, Frame:1, # <6>
-|-1|  0|  0|    .|          0|          0|           0|     RESERVED| # <7>
-| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 1|  7|  0|    .|          7|          0|           0|   BEFORE_2ND| # <8>
-| 2|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 3|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 4|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 5|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
-|10|  0|  0|    .|          0|          0|           0|     RESERVED|
-|11|  0|  0|    .|          0|          0|           0|     RESERVED|
-|12|  0|  0|    .|          0|          0|           0|     RESERVED|
-|13|  0|  0|    .|          0|          0|           0|     RESERVED|
-Score(id: R7gXk20w4Vg),
-Player:うえはら, Frame:1,
-|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 1|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
-| 2|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 3|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 4|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 5|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
-|10|  0|  0|    .|          0|          0|           0|     RESERVED|
-|11|  0|  0|    .|          0|          0|           0|     RESERVED|
-|12|  0|  0|    .|          0|          0|           0|     RESERVED|
-|13|  0|  0|    .|          0|          0|           0|     RESERVED|
-
+Player:くぼあき, Score(id: q5rZ-vnFM1o), Frame:1, # <5>
+|No|1st|2nd|Total|Frame Score|Spare Bonus|Strike Bonus|Frame State|
+|-1|  0|  0|    .|          0|          0|           0|   RESERVED| # <6>
+| 0|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 1|  7|  0|    .|          7|          0|           0| BEFORE_2ND| # <7>
+| 2|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 3|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 4|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 5|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|   RESERVED|
+|10|  0|  0|    .|          0|          0|           0|   RESERVED|
+|11|  0|  0|    .|          0|          0|           0|   RESERVED|
+|12|  0|  0|    .|          0|          0|           0|   RESERVED|
+|13|  0|  0|    .|          0|          0|           0|   RESERVED|
+Player:うえはら, Score(id: plq9pFD6nSA), Frame:1,
+|No|1st|2nd|Total|Frame Score|Spare Bonus|Strike Bonus|Frame State|
+|-1|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 1|  0|  0|    .|          0|          0|           0| BEFORE_1ST|
+| 2|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 3|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 4|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 5|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|   RESERVED|
+|10|  0|  0|    .|          0|          0|           0|   RESERVED|
+|11|  0|  0|    .|          0|          0|           0|   RESERVED|
+|12|  0|  0|    .|          0|          0|           0|   RESERVED|
+|13|  0|  0|    .|          0|          0|           0|   RESERVED|
 
 (略）
 
 ----------------------------------------
 turn: うえはら
 input pins: 3
-Game(id:zwBxlorJlog),
-Score(id: lLAtK77i0L8),
-Player:くぼあき, Frame:11,
-|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 1|  7|  0|    7|          7|          0|           0|        FIXED|
-| 2|  5|  5|   27|         20|         10|           0|        FIXED|
-| 3| 10|  0|   52|         25|          0|          15|        FIXED|
-| 4| 10|  0|   71|         19|          0|           9|        FIXED|
-| 5|  5|  4|   80|          9|          0|           0|        FIXED|
-| 6| 10|  0|  100|         20|          0|          10|        FIXED|
-| 7|  7|  3|  115|         15|          5|           0|        FIXED|
-| 8|  5|  4|  124|          9|          0|           0|        FIXED|
-| 9|  7|  3|  141|         17|          7|           0|        FIXED|
-|10|  7|  3|  155|         14|          4|           0|        FIXED|
-|11|  4|  0|    .|          4|          0|           0|   BEFORE_2ND| # <9>
-|12|  0|  0|    .|          0|          0|           0|     RESERVED|
-|13|  0|  0|    .|          0|          0|           0|     RESERVED|
-Score(id: R7gXk20w4Vg),
-Player:うえはら, Frame:10,
-|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 1|  6|  3|    9|          9|          0|           0|        FIXED|
-| 2|  9|  0|   18|          9|          0|           0|        FIXED|
-| 3|  0|  3|   21|          3|          0|           0|        FIXED|
-| 4|  8|  2|   38|         17|          7|           0|        FIXED|
-| 5|  7|  3|   58|         20|         10|           0|        FIXED|
-| 6| 10|  0|   78|         20|          0|          10|        FIXED|
-| 7|  9|  1|   96|         18|          8|           0|        FIXED|
-| 8|  8|  0|  104|          8|          0|           0|        FIXED|
-| 9| 10|  0|  123|         19|          0|           9|        FIXED|
-|10|  6|  3|  132|          9|          0|           0|        FIXED|
-|11|  0|  0|    .|          0|          0|           0|     RESERVED|
-|12|  0|  0|    .|          0|          0|           0|     RESERVED|
-|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Game(id:7npHua_W2pE),
+Player:くぼあき, Score(id: q5rZ-vnFM1o), Frame:11,
+|No|1st|2nd|Total|Frame Score|Spare Bonus|Strike Bonus|Frame State|
+|-1|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|      FIXED|
+| 2|  5|  5|   27|         20|         10|           0|      FIXED|
+| 3| 10|  0|   52|         25|          0|          15|      FIXED|
+| 4| 10|  0|   71|         19|          0|           9|      FIXED|
+| 5|  5|  4|   80|          9|          0|           0|      FIXED|
+| 6| 10|  0|  100|         20|          0|          10|      FIXED|
+| 7|  7|  3|  115|         15|          5|           0|      FIXED|
+| 8|  5|  4|  124|          9|          0|           0|      FIXED|
+| 9|  7|  3|  141|         17|          7|           0|      FIXED|
+|10|  7|  3|  155|         14|          4|           0|      FIXED|
+|11|  4|  0|    .|          4|          0|           0| BEFORE_2ND| # <8>
+|12|  0|  0|    .|          0|          0|           0|   RESERVED|
+|13|  0|  0|    .|          0|          0|           0|   RESERVED|
+Player:うえはら, Score(id: plq9pFD6nSA), Frame:10,
+|No|1st|2nd|Total|Frame Score|Spare Bonus|Strike Bonus|Frame State|
+|-1|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|      FIXED|
+| 2|  9|  0|   18|          9|          0|           0|      FIXED|
+| 3|  0|  3|   21|          3|          0|           0|      FIXED|
+| 4|  8|  2|   38|         17|          7|           0|      FIXED|
+| 5|  7|  3|   58|         20|         10|           0|      FIXED|
+| 6| 10|  0|   78|         20|          0|          10|      FIXED|
+| 7|  9|  1|   96|         18|          8|           0|      FIXED|
+| 8|  8|  0|  104|          8|          0|           0|      FIXED|
+| 9| 10|  0|  123|         19|          0|           9|      FIXED|
+|10|  6|  3|  132|          9|          0|           0|      FIXED|
+|11|  0|  0|    .|          0|          0|           0|   RESERVED|
+|12|  0|  0|    .|          0|          0|           0|   RESERVED|
+|13|  0|  0|    .|          0|          0|           0|   RESERVED|
 
 Game(id:zwBxlorJlog) is finished.
 C:\Users\kuboaki\Desktop\BowlingScore>
@@ -197,11 +196,10 @@ C:\Users\kuboaki\Desktop\BowlingScore>
 <2> どのプレーヤーのターンなのかを表示した。
 <3> プログラムが受け取ったピン数。
 <4> 現在のゲームのID。
-<5> 続くスコアのID。
-<6> プレーヤーとそのプレーヤーの現在のフレーム番号。
-<7> 前の前のフレームを無条件に扱うためのダミーフレーム。
-<8> 1投目が終わったので、フレームは2投目の投球前の状態。
-<9> ここは2投目の投球前の状態だが、第10フレームの状態が「FIXED」なのでゲームは終了。
+<5> プレーヤーとそのプレーヤーのスコアのID、現在のフレーム番号。
+<6> 前の前のフレームを無条件に扱うためのダミーフレーム。
+<7> 1投目が終わったので、フレームは2投目の投球前の状態。
+<8> ここは2投目の投球前の状態だが、第10フレームの状態が「FIXED」なのでゲームは終了。
 --
 
 === まとめ

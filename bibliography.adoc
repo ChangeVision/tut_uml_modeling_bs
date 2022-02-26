@@ -4,10 +4,10 @@
 
 - [[[UMLSPEC]]] OMG 統一モデリング言語（UNIFIED MODELING LANGUAGE）.
 **  https://www.omg.org/spec/UML/
-- [[[SYSML]]] OMG System Modeling Language (SysML).
-**  http://www.omg.org/spec/SysML/
-- [[[mathgirl]]] 数学ガール.
-** https://www.hyuki.com/girl
+// - [[[SYSML]]] OMG System Modeling Language (SysML).
+// **  http://www.omg.org/spec/SysML/
+// - [[[mathgirl]]] 数学ガール.
+// ** https://www.hyuki.com/girl
 - [[[robustness01]]] ワークブック形式で学ぶUMLオブジェクトモデリング.
 ** ローゼンバーグ, スコット. ソフトバンク. 2002.
 - [[[robustness02]]] ユースケース駆動開発実践ガイド.

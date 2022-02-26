@@ -21,8 +21,8 @@
 <h1>モデルを使ってソフトウェアを開発しよう</h1>
 <div class="details">
 <span id="author" class="author">株式会社チェンジビジョン</span><br>
-<span id="revnumber">バージョン html_0431,</span>
-<span id="revdate">2022-02-25</span>
+<span id="revnumber">バージョン html_0439,</span>
+<span id="revdate">2022-02-26</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">目次</div>
@@ -53,9 +53,7 @@
 </li>
 <li><a href="_other_diagrams.html">7 他の図、他の機能など</a>
 </li>
-<li><a href="_appendix-01.html">付録 A: 関連資料、ワークシート等</a>
-</li>
-<li><a href="_glossary.html">用語集</a>
+<li><a href="_appendix-01.html">付録 A: モデルやプログラムの作成例</a>
 </li>
 <li><a href="_bibliography.html">参考文献</a>
 </li>
@@ -445,7 +443,7 @@
             <span class="k">else</span>
               <span class="s1">'   .'</span>
             <span class="k">end</span>
-    <span class="nb">format</span> <span class="s1">'|%2d|%3s|%3s|%5s|%11d|%11d|%12d|%13s|'</span><span class="p">,</span>
+    <span class="nb">format</span> <span class="s1">'|%2d|%3s|%3s|%5s|%11d|%11d|%12d|%11s|'</span><span class="p">,</span>
            <span class="vi">@frame_no</span><span class="p">,</span> <span class="vi">@first</span><span class="p">,</span> <span class="vi">@second</span><span class="p">,</span> <span class="n">total</span><span class="p">,</span> <span class="n">frame_score</span><span class="p">,</span>
            <span class="vi">@spare_bonus</span><span class="p">,</span> <span class="vi">@strike_bonus</span><span class="p">,</span> <span class="vi">@state</span>
   <span class="k">end</span>
@@ -595,7 +593,9 @@
   <span class="k">end</span>
 
   <span class="k">def</span> <span class="nf">to_s</span>
-    <span class="s2">"Score(id: </span><span class="si">#{</span><span class="vi">@id</span><span class="si">}</span><span class="s2">),</span><span class="se">\n</span><span class="s2">Player:</span><span class="si">#{</span><span class="vi">@player</span><span class="si">}</span><span class="s2">, Frame:</span><span class="si">#{</span><span class="vi">@fno</span><span class="si">}</span><span class="s2">,</span><span class="se">\n</span><span class="si">#{</span><span class="vi">@frames</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
+    <span class="s2">"Player:</span><span class="si">#{</span><span class="vi">@player</span><span class="si">}</span><span class="s2">, Score(id: </span><span class="si">#{</span><span class="vi">@id</span><span class="si">}</span><span class="s2">), Frame:</span><span class="si">#{</span><span class="vi">@fno</span><span class="si">}</span><span class="s2">,
+|No|1st|2nd|Total|Frame Score|Spare Bonus|Strike Bonus|Frame State|
+</span><span class="si">#{</span><span class="vi">@frames</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
   <span class="k">end</span>
 <span class="k">end</span>
 
@@ -657,8 +657,6 @@
 
   <span class="k">def</span> <span class="nf">to_s</span>
     <span class="s2">"Score Sheet Date: </span><span class="si">#{</span><span class="vi">@play_date</span><span class="si">}</span><span class="s2">(id:</span><span class="si">#{</span><span class="vi">@id</span><span class="si">}</span><span class="s2">)"</span>
-  <span class="k">end</span>
-<span class="k">end</span>
 </pre></td></tr></tbody></table></code></pre>
 </div>
 </div>
@@ -819,87 +817,86 @@
 <pre class="rouge highlight"><code data-lang="console"><span class="gp">C:\Users\kuboaki&gt;</span><span class="nb">cd </span>Desktop<span class="se">\B</span>owlingScore
 <span class="go">
 </span><span class="gp">C:\Users\kuboaki\Desktop\BowlingScore&gt;</span>ruby score.rb
-<span class="go">Score Sheet Date: 2022-02-25 10:31:31 +0900(id:nzvTi8leDr4) <i class="conum" data-value="1"></i><b>(1)</b>
+<span class="go">Score Sheet Date: 2022-02-26 02:08:21 +0900(id:0GG70gNRWtk) <i class="conum" data-value="1"></i><b>(1)</b>
 ----------------------------------------
 turn: くぼあき <i class="conum" data-value="2"></i><b>(2)</b>
 input pins: 7 <i class="conum" data-value="3"></i><b>(3)</b>
 Game(id:zwBxlorJlog), <i class="conum" data-value="4"></i><b>(4)</b>
-Score(id: lLAtK77i0L8), <i class="conum" data-value="5"></i><b>(5)</b>
-Player:くぼあき, Frame:1, <i class="conum" data-value="6"></i><b>(6)</b>
-|-1|  0|  0|    .|          0|          0|           0|     RESERVED| <i class="conum" data-value="7"></i><b>(7)</b>
-| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 1|  7|  0|    .|          7|          0|           0|   BEFORE_2ND| <i class="conum" data-value="8"></i><b>(8)</b>
-| 2|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 3|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 4|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 5|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
-|10|  0|  0|    .|          0|          0|           0|     RESERVED|
-|11|  0|  0|    .|          0|          0|           0|     RESERVED|
-|12|  0|  0|    .|          0|          0|           0|     RESERVED|
-|13|  0|  0|    .|          0|          0|           0|     RESERVED|
-Score(id: R7gXk20w4Vg),
-Player:うえはら, Frame:1,
-|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 1|  0|  0|    .|          0|          0|           0|   BEFORE_1ST|
-| 2|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 3|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 4|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 5|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 6|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 7|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 8|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 9|  0|  0|    .|          0|          0|           0|     RESERVED|
-|10|  0|  0|    .|          0|          0|           0|     RESERVED|
-|11|  0|  0|    .|          0|          0|           0|     RESERVED|
-|12|  0|  0|    .|          0|          0|           0|     RESERVED|
-|13|  0|  0|    .|          0|          0|           0|     RESERVED|
-
+Player:くぼあき, Score(id: q5rZ-vnFM1o), Frame:1, <i class="conum" data-value="5"></i><b>(5)</b>
+|No|1st|2nd|Total|Frame Score|Spare Bonus|Strike Bonus|Frame State|
+|-1|  0|  0|    .|          0|          0|           0|   RESERVED| <i class="conum" data-value="6"></i><b>(6)</b>
+| 0|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 1|  7|  0|    .|          7|          0|           0| BEFORE_2ND| <i class="conum" data-value="7"></i><b>(7)</b>
+| 2|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 3|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 4|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 5|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|   RESERVED|
+|10|  0|  0|    .|          0|          0|           0|   RESERVED|
+|11|  0|  0|    .|          0|          0|           0|   RESERVED|
+|12|  0|  0|    .|          0|          0|           0|   RESERVED|
+|13|  0|  0|    .|          0|          0|           0|   RESERVED|
+Player:うえはら, Score(id: plq9pFD6nSA), Frame:1,
+|No|1st|2nd|Total|Frame Score|Spare Bonus|Strike Bonus|Frame State|
+|-1|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 1|  0|  0|    .|          0|          0|           0| BEFORE_1ST|
+| 2|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 3|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 4|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 5|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|   RESERVED|
+|10|  0|  0|    .|          0|          0|           0|   RESERVED|
+|11|  0|  0|    .|          0|          0|           0|   RESERVED|
+|12|  0|  0|    .|          0|          0|           0|   RESERVED|
+|13|  0|  0|    .|          0|          0|           0|   RESERVED|
 
 (略）
 
 ----------------------------------------
 turn: うえはら
 input pins: 3
-Game(id:zwBxlorJlog),
-Score(id: lLAtK77i0L8),
-Player:くぼあき, Frame:11,
-|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 1|  7|  0|    7|          7|          0|           0|        FIXED|
-| 2|  5|  5|   27|         20|         10|           0|        FIXED|
-| 3| 10|  0|   52|         25|          0|          15|        FIXED|
-| 4| 10|  0|   71|         19|          0|           9|        FIXED|
-| 5|  5|  4|   80|          9|          0|           0|        FIXED|
-| 6| 10|  0|  100|         20|          0|          10|        FIXED|
-| 7|  7|  3|  115|         15|          5|           0|        FIXED|
-| 8|  5|  4|  124|          9|          0|           0|        FIXED|
-| 9|  7|  3|  141|         17|          7|           0|        FIXED|
-|10|  7|  3|  155|         14|          4|           0|        FIXED|
-|11|  4|  0|    .|          4|          0|           0|   BEFORE_2ND| <i class="conum" data-value="9"></i><b>(9)</b>
-|12|  0|  0|    .|          0|          0|           0|     RESERVED|
-|13|  0|  0|    .|          0|          0|           0|     RESERVED|
-Score(id: R7gXk20w4Vg),
-Player:うえはら, Frame:10,
-|-1|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 0|  0|  0|    .|          0|          0|           0|     RESERVED|
-| 1|  6|  3|    9|          9|          0|           0|        FIXED|
-| 2|  9|  0|   18|          9|          0|           0|        FIXED|
-| 3|  0|  3|   21|          3|          0|           0|        FIXED|
-| 4|  8|  2|   38|         17|          7|           0|        FIXED|
-| 5|  7|  3|   58|         20|         10|           0|        FIXED|
-| 6| 10|  0|   78|         20|          0|          10|        FIXED|
-| 7|  9|  1|   96|         18|          8|           0|        FIXED|
-| 8|  8|  0|  104|          8|          0|           0|        FIXED|
-| 9| 10|  0|  123|         19|          0|           9|        FIXED|
-|10|  6|  3|  132|          9|          0|           0|        FIXED|
-|11|  0|  0|    .|          0|          0|           0|     RESERVED|
-|12|  0|  0|    .|          0|          0|           0|     RESERVED|
-|13|  0|  0|    .|          0|          0|           0|     RESERVED|
+Game(id:7npHua_W2pE),
+Player:くぼあき, Score(id: q5rZ-vnFM1o), Frame:11,
+|No|1st|2nd|Total|Frame Score|Spare Bonus|Strike Bonus|Frame State|
+|-1|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|      FIXED|
+| 2|  5|  5|   27|         20|         10|           0|      FIXED|
+| 3| 10|  0|   52|         25|          0|          15|      FIXED|
+| 4| 10|  0|   71|         19|          0|           9|      FIXED|
+| 5|  5|  4|   80|          9|          0|           0|      FIXED|
+| 6| 10|  0|  100|         20|          0|          10|      FIXED|
+| 7|  7|  3|  115|         15|          5|           0|      FIXED|
+| 8|  5|  4|  124|          9|          0|           0|      FIXED|
+| 9|  7|  3|  141|         17|          7|           0|      FIXED|
+|10|  7|  3|  155|         14|          4|           0|      FIXED|
+|11|  4|  0|    .|          4|          0|           0| BEFORE_2ND| <i class="conum" data-value="8"></i><b>(8)</b>
+|12|  0|  0|    .|          0|          0|           0|   RESERVED|
+|13|  0|  0|    .|          0|          0|           0|   RESERVED|
+Player:うえはら, Score(id: plq9pFD6nSA), Frame:10,
+|No|1st|2nd|Total|Frame Score|Spare Bonus|Strike Bonus|Frame State|
+|-1|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|      FIXED|
+| 2|  9|  0|   18|          9|          0|           0|      FIXED|
+| 3|  0|  3|   21|          3|          0|           0|      FIXED|
+| 4|  8|  2|   38|         17|          7|           0|      FIXED|
+| 5|  7|  3|   58|         20|         10|           0|      FIXED|
+| 6| 10|  0|   78|         20|          0|          10|      FIXED|
+| 7|  9|  1|   96|         18|          8|           0|      FIXED|
+| 8|  8|  0|  104|          8|          0|           0|      FIXED|
+| 9| 10|  0|  123|         19|          0|           9|      FIXED|
+|10|  6|  3|  132|          9|          0|           0|      FIXED|
+|11|  0|  0|    .|          0|          0|           0|   RESERVED|
+|12|  0|  0|    .|          0|          0|           0|   RESERVED|
+|13|  0|  0|    .|          0|          0|           0|   RESERVED|
 
 Game(id:zwBxlorJlog) is finished.
 </span><span class="gp">C:\Users\kuboaki\Desktop\BowlingScore&gt;</span></code></pre>
@@ -925,22 +922,18 @@ Game(id:zwBxlorJlog) is finished.
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>続くスコアのID。</td>
+<td>プレーヤーとそのプレーヤーのスコアのID、現在のフレーム番号。</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="6"></i><b>6</b></td>
-<td>プレーヤーとそのプレーヤーの現在のフレーム番号。</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="7"></i><b>7</b></td>
 <td>前の前のフレームを無条件に扱うためのダミーフレーム。</td>
 </tr>
 <tr>
-<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
 <td>1投目が終わったので、フレームは2投目の投球前の状態。</td>
 </tr>
 <tr>
-<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
 <td>ここは2投目の投球前の状態だが、第10フレームの状態が「FIXED」なのでゲームは終了。</td>
 </tr>
 </table>
@@ -963,8 +956,8 @@ Game(id:zwBxlorJlog) is finished.
 </div>
 <div id="footer">
 <div id="footer-text">
-バージョン html_0431<br>
-最終更新 2022-02-25 02:00:10 +0900
+バージョン html_0439<br>
+最終更新 2022-02-25 13:20:50 +0900
 </div>
 </div>
 <script type="text/x-mathjax-config">

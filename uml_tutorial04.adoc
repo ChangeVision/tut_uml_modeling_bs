@@ -297,7 +297,7 @@ class Frame
             else
               '   .'
             end
-    format '|%2d|%3s|%3s|%5s|%11d|%11d|%12d|%13s|',
+    format '|%2d|%3s|%3s|%5s|%11d|%11d|%12d|%11s|',
            @frame_no, @first, @second, total, frame_score,
            @spare_bonus, @strike_bonus, @state
   end
@@ -678,7 +678,9 @@ class Score
   end
 
   def to_s # <11>
-    "Score(id: #{@id}),\nPlayer:#{@Player}, Frame:#{@fno},\n#{@frames.join("\n")}"
+    "Player:#{@player}, Score(id: #{@id}), Frame:#{@fno},
+|No|1st|2nd|Total|Frame Score|Spare Bonus|Strike Bonus|Frame State|
+#{@frames.join("\n")}"
   end
 end
 ----
@@ -692,7 +694,7 @@ end
 <8> 「選択疑似状態」での遷移先の分岐処理。「ゲーム終了」の場合は「FINISHED」へ遷移する。
 <9> それ以外のときは、次のフレームへ進んで「WAIT_FOR_1ST」へ遷移する。
 <10> スコアを記録するステートマシン図の振る舞いを担当するメソッド。状態に応じてそれぞれの状態用のメソッドを呼び出す。
-<11> 「スコア」クラスのインスタンスの内容を文字列化するメソッド。
+<11> 「スコア」クラスのインスタンスの内容（内包するフレームも含む）を文字列化するメソッド。
 --
 
 これで、フレームとスコアを、それぞれのステートマシン図で表した振る舞いに合わせて動作するプログラムに変換できました。
