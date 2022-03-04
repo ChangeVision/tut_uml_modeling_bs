@@ -3,6 +3,7 @@ include::front_matter.adoc[]
 endif::[]
 
 [[_model_to_code_design]]
+[%nonfacing]
 == モデルとコードの対応づけ
 
 [.lead]
@@ -26,14 +27,11 @@ TIP: このような対応づけを「モデル変換ルール」と呼ぶこと
 「モデルとコードの対応づけ」の検討用に、{astah} で別のプロジェクトを作成しましょう。
 
 .対応づけ検討用プロジェクトを作成する
-[example]
---
 . {astah} で新規プロジェクトを作成する。
 . 作成したプロジェクトをいったん保存する。
 ** モデルファイルの名前は「stm_sample.asta」とする。
---
 
-プロジェクトが保存できたら、プロジェクトにクラス図を追加します（ <<add_stm_sample_class_diag>> ）。
+プロジェクトが保存できたら、プロジェクトにクラス図を追加します。// （ <<add_stm_sample_class_diag>> ）。
 
 
 [[add_stm_sample_class_diag]]
@@ -66,9 +64,9 @@ image::GSW-20220212-220754.png[{three-quarters-width}]
 これをRubyのコードで表すと <<ruby_sample01>> のようになります。
 
 [[ruby_sample01]]
-.「Sample」クラスを表すRubyのコード
-[example]
---
+.【Ruby】「Sample」クラスを表すRubyのコード
+//[example]
+//--
 [source,ruby]
 ----
 class Sample
@@ -81,7 +79,7 @@ class Sample
   end
 end
 ----
---
+//--
 
 ==== クラスにステートマシン図を追加する
 
@@ -171,17 +169,18 @@ image::GSW-20220213-112341.png[{three-quarters-width}]
 image::add_stm_transition_58.png[{three-quarters-width}]
 
 [start=2]
-. 青枠が表示されたらマウスのボタンを押したままマウスカーソルを移動する（ <<add_stm_trans02>> ）。
+. 青枠が表示されたらマウスカーソルをドラッグする（マウスのボタンを押したままマウスカーソルを移動する）。
+. マウスカーソルを「ST0」へドラッグして青枠が表示されるのを待つ（ <<add_stm_trans02>> ）。
 
 [[add_stm_trans02]]
-.青枠が表示されたらマウスのボタンを押したままマウスカーソルをドラッグする
+.「ST0」へマウスカーソルをドラッグして青枠が表示されるのを待つ
 image::add_stm_transition_73.png[{three-quarters-width}]
 
-[start=3]
-. 青枠が表示されたらマウスのボタンを押したままマウスカーソルを移動する（ <<add_stm_trans03>> ）。
+[start=4]
+. 「ST0」でも青枠が表示されたらマウスのボタンを離すと状態遷移が引かれる（ <<add_stm_trans03>> ）。
 
 [[add_stm_trans03]]
-.「ST0」でも青枠が表示されたらマウスのボタンを離す
+.「ST0」でも青枠が表示されたらマウスのボタンを離すと状態遷移が引かれる
 image::add_stm_transition_81.png[{three-quarters-width}]
 
 [start=4]
@@ -289,9 +288,9 @@ image::GSW-20220216-045358.png[{three-quarters-width}]
 初期値は、最初の状態（ ST0 ）にします。
 
 [[ruby_sample02]]
-.状態を保持するインスタンス変数を追加する
-[example]
---
+.【Ruby】状態を保持するインスタンス変数を追加する
+//[example]
+//--
 [source,ruby]
 ----
 class Sample
@@ -306,7 +305,7 @@ class Sample
 end
 ----
 <1> 現在の状態を保持する変数を用意し、 ST0 で初期化する。「 :ST0 」はRubyのシンボルの表記法。シンボルは名前付きの数値定数。
---
+//--
 
 ===== 状態遷移を担当するメソッドを作成する
 
@@ -314,9 +313,9 @@ end
 ルールの検討用なので、途中には処理の確認用の表示処理を書いておきます。
 
 [[ruby_sample03]]
-.状態遷移を担当するメソッドを作成する
-[example]
---
+.【Ruby】状態遷移を担当するメソッドを作成する
+//[example]
+//--
 [source,ruby]
 ----
 class Sample
@@ -346,7 +345,7 @@ end
 <4> 状態ごとの詳細な処理を担当するメソッドを呼び出す（ここでは st0_proc） 。
 <5> 遷移後の状態を表示する。
 <6> 終了状態になったことを知らせる。
---
+//--
 
 ===== ガード条件の判定用メソッドを作成する
 
@@ -355,9 +354,9 @@ end
 サンプルとして、属性の値を使った演算を割り当てました（ <<ruby_sample04>> ）。
 
 [[ruby_sample04]]
-.ガード条件のメソッドを作成する
-[example]
---
+.【Ruby】ガード条件のメソッドを作成する
+//[example]
+//--
 [source,ruby]
 ----
 class Sample
@@ -377,7 +376,7 @@ end
 <1> 「gd1」用のメソッド。Rubyでは、真偽値を返すメソッドに「?」をつけることがある。
 <2> 属性値を使った条件式の例。
 <3> 「gd2」用のメソッド。
---
+//--
 
 
 ===== 状態遷移を追加する（１）
@@ -386,9 +385,9 @@ end
 まず、「ST0」からの状態遷移に対するメソッド「st0_proc」です（ <<ruby_sample05>> ）。
 
 [[ruby_sample05]]
-.「ST0」の状態遷移のメソッドを作成する
-[example]
---
+.【Ruby】「ST0」の状態遷移のメソッドを作成する
+//[example]
+//--
 [source,ruby]
 ----
 class Sample
@@ -420,7 +419,7 @@ end
 <5> 次の状態「ST1」への遷移。
 <6> ガード条件が偽だったとき。イベントが無視されたことを表示する。
 <7> イベントが「ev3」の場合。
---
+//--
 
 この部分のRubyのコードとステートマシン図の対応を図で表してみましょう（ <<ruby_sample06>> ）。
 
@@ -433,9 +432,9 @@ image::ruby_sample05.png[{full-width}]
 こんどは、「ST1」からの状態遷移に対するメソッド「st1_proc」です（ <<ruby_sample07>> ）。
 
 [[ruby_sample07]]
-.「ST1」の状態遷移のメソッドを作成する
-[example]
---
+.【Ruby】「ST1」の状態遷移のメソッドを作成する
+//[example]
+//--
 [source,ruby]
 ----
 class Sample
@@ -468,7 +467,7 @@ end
 <5> 選択疑似状態からの遷移におけるアクション「act3」の呼び出し。
 <6> 次の状態「ST2」への遷移。
 <7> イベントが「ev3」の場合。
---
+//--
 
 この部分のRubyのコードとステートマシン図の対応を図で表してみましょう（ <<ruby_sample08>> ）。
 
@@ -480,9 +479,9 @@ image::ruby_sample08.png[{full-width}]
 また、アクションとガード条件は、「Sample」クラス内部で使うメソッドなので、「private」なメソッドにしておきます。
 
 [[ruby_sample09]]
-.「ST1」の状態遷移のメソッドを作成する
-[example]
---
+.【Ruby】「ST1」の状態遷移のメソッドを作成する
+//[example]
+//--
 [source,ruby]
 ----
 class Sample
@@ -513,7 +512,7 @@ end
 ----
 <1> この宣言以降のメソッドは、可視性が「private」なメソッドになる。
 <2> ガード条件の判定用メソッドも「private」なメソッドに含めた。
---
+//--
 
 これで、ステートマシン図で表したクラスの振る舞いをRubyのコードに対応づけられました。
 
@@ -525,18 +524,18 @@ end
 [[update_sample_class00]]
 .イベントやアクションをクラス図に反映する
 . クラス図を開く。
-. 「Sample」クラスクを選択し、プロパティーから「操作」タブを表示する。
+. 「Sample」クラスを選択し、プロパティーから「操作」タブを表示する。
 . 「＋」アイコンを使って操作「act1」を追加する。
 . 可視性を「private」に設定する。
-. 「act2」、「act3」についても同じように設定する。
-. ガード条件に使うメソッド「gd1?」「gd2」も追加しておく（ <<update_sample_class01>> ）。
+. 「act2」、「act3」についても同じように設定する（ <<update_sample_class01>> ）。
 
 [[update_sample_class01]]
 .「Sample」クラス内部で使う操作を追加する
 image::GSW-20220216-050914.png[{three-quarters-width}]
 
-[start=7]
-. 「SampleTest」クラスを追加しておく（ <<update_sample_class02>> ）。
+[start=6]
+. ガード条件に使うメソッド「gd1?」「gd2?」も追加しておく。
+. 「SampleTest」クラスを追加する（ <<update_sample_class02>> ）。
 ** このテスト用クラスには、テストを実行する「run」メソッドを用意しておく。
 ** テスト用のメソッドをいくつか追加しておく。
 . 「SampleTest」から「Sample」クラスへ関連を引き、関連端名を「samp01」、多重度を「1」としておく。
@@ -575,14 +574,14 @@ Java、enumの設定:: `http://astah-users.change-vision.com/ja/modules/xhnewbb/
 
 
 [[ruby_sample_code01]]
-.stm_sample.rb
-[example]
---
+.【Ruby】stm_sample.rb
+//[example]
+//--
 [source,ruby,linenums]
 ----
 include::{sourcesdir}/stm_sample.rb[]
 ----
---
+//--
 
 ==== 検討用モデルに対応したRubyプログラムを動かす
 
@@ -590,8 +589,8 @@ include::{sourcesdir}/stm_sample.rb[]
 
 [[ruby_sample_code02]]
 .【端末】stm_sample.rb を実行する
-[example]
---
+//[example]
+//--
 [source,console]
 ----
 C:\Users\kuboaki>cd Desktop\BowlingScore
@@ -635,7 +634,7 @@ finished.
 
 C:\Users\kuboaki\Desktop\BowlingScore>
 ----
---
+//--
 
 動作させると、状態遷移やイベントが表示されますので、作成したモデル図を比較して期待した動作をしているか確認してみましょう。
 

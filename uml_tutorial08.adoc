@@ -3,6 +3,7 @@ include::front_matter.adoc[]
 endif::[]
 
 [[_model_to_code_translation]]
+[%nonfacing]
 == モデルからコードを得る
 
 実装に使うクラス図とステートマシン図が作成できたので、これらを参照して実装コードを作成しましょう。
@@ -25,25 +26,25 @@ RubyにはModuleがあるので、これをモデル図のパッケージに対�
 ==== frame.rb
 
 .【Ruby】frame.rb
-[example]
---
+//[example]
+//--
 [source,ruby,linenums]
 ----
 include::{sourcesdir}/frame.rb[]
 ----
---
+//--
 
 
 ==== game_score.rb
 
 .【Ruby】game_score.rb
-[example]
---
+//[example]
+//--
 [source,ruby,linenums]
 ----
 include::{sourcesdir}/game_score.rb[]
 ----
---
+//--
 
 
 
@@ -51,12 +52,12 @@ include::{sourcesdir}/game_score.rb[]
 ==== bowling.rb
 
 .【Ruby】bowling.rb
-[example]
---
+//[example]
+//--
 [source,ruby,linenums]
 ----
 include::{sourcesdir}/bowling.rb[]
 ----
---
+//--
 
 

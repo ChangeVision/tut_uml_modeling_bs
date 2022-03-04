@@ -3,6 +3,7 @@ include::front_matter.adoc[]
 endif::[]
 
 [[_structure_design]]
+[%nonfacing]
 == スコアの構造を図にする
 
 [.lead]
@@ -30,7 +31,7 @@ endif::[]
 
 [[add_design_model]]
 .プロジェクトに設計モデルを追加する
-[example]
+[sidebar]
 --
 . プロジェクトにモデルを追加する。
 ** 構造ツリー上で、プロジェクトを選択する。

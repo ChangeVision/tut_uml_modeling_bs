@@ -109,7 +109,8 @@ def make_pdf(source, target)
   revno = update_revnumber(source, target)
   revdate = `date "+%Y-%m-%d"`
   puts "Converting #{source} to #{target} (#{revno}). (this one takes a while)"
-  `bundle exec asciidoctor-pdf -r asciidoctor-pdf-cjk  -a revdate='#{revdate}'  -r #{CODE_STYLE} -r #{LIB_EXT} -r #{LIB_EXT2} -r  #{LIB_EXT3} -a pdf-stylesdir=#{THEME_DIR} -a pdf-style=#{THEME_FILE} -a pdf-fontsdir=#{FONTS_DIR} #{source} --out=#{target}` #  2>/dev/null`
+  # `bundle exec asciidoctor-pdf -r asciidoctor-pdf-cjk  -a revdate='#{revdate}'  -r #{CODE_STYLE} -r #{LIB_EXT} -r #{LIB_EXT2} -r  #{LIB_EXT3} -a pdf-stylesdir=#{THEME_DIR} -a pdf-style=#{THEME_FILE} -a pdf-fontsdir=#{FONTS_DIR} #{source} --out=#{target}` #  2>/dev/null`
+    `bundle exec asciidoctor-pdf -a scripts=cjk -a revdate='#{revdate}'  -r #{CODE_STYLE} -r #{LIB_EXT} -r #{LIB_EXT2} -r  #{LIB_EXT3} -a pdf-stylesdir=#{THEME_DIR} -a pdf-style=#{THEME_FILE} -a pdf-fontsdir=#{FONTS_DIR} #{source} --out=#{target}` #  2>/dev/null`
 end
 
 # 各章のadocと依存物を調べて、更新時に生成するルールを動的に生成する

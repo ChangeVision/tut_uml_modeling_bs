@@ -7,7 +7,7 @@ gem 'json'
 gem 'awesome_print'
 
 gem 'asciidoctor-pdf'
-gem 'asciidoctor-pdf-cjk'
+# gem 'asciidoctor-pdf-cjk'
 # gem 'asciidoctor-epub3', '1.5.0.alpha.7'
 
 # gem 'asciidoctor-multipage'

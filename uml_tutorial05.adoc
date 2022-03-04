@@ -3,6 +3,7 @@ include::front_matter.adoc[]
 endif::[]
 
 [[_program_test]]
+[%nonfacing]
 == できあがったプログラムを試す
 
 [.lead]
@@ -19,15 +20,15 @@ endif::[]
 
 
 [[ruby_all_code01]]
-.score.rb
-[example]
---
+.【Ruby】score.rb
+//[example]
+//--
 [source,ruby,linenums,start=1]
 
 ----
 include::{sourcesdir}/score.rb[lines=1..286]
 ----
---
+//--
 
 ==== テスト用のプログラムを追加する
 
@@ -37,9 +38,9 @@ include::{sourcesdir}/score.rb[lines=1..286]
 しかし、スコアシートのプログラム本体はピン数を受け取るたびに動作するように作られているので、ピン数を1投球ずつ与える方法でも動かせます。
 
 [[ruby_all_code02]]
-.score.rb（テストコード部分）
-[example]
---
+.【Ruby】score.rb（テストコード部分）
+//[example]
+//--
 [source,ruby,linenums,start=288]
 ----
 if $PROGRAM_NAME == __FILE__ # <1>
@@ -84,7 +85,7 @@ end
 <11> 現在のturnのプレーヤーのスコアにピン数を渡して、スコアへ反映する。
 <12> 現在のゲームの全体像を取得して表示する。
 <13> ここで空の改行キーを入力してテストを進める。テストを1回ずつ止めて実行できる。この入力待ちをやめれば一括して実行できる。
---
+//--
 
 
 === プログラムをテストする
@@ -101,8 +102,8 @@ end
 
 [[ruby_all_code03]]
 .【端末】score.rb を実行する
-[example]
---
+//[example]
+//--
 [source,console]
 ----
 C:\Users\kuboaki>cd Desktop\BowlingScore
@@ -200,7 +201,7 @@ C:\Users\kuboaki\Desktop\BowlingScore>
 <6> 前の前のフレームを無条件に扱うためのダミーフレーム。
 <7> 1投目が終わったので、フレームは2投目の投球前の状態。
 <8> ここは2投目の投球前の状態だが、第10フレームの状態が「FIXED」なのでゲームは終了。
---
+//--
 
 === まとめ
 
