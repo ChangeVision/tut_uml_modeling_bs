@@ -1,7 +1,7 @@
 :encoding: utf-8
 :lang: ja
-:doctype: arcicle // book
-// :media: screen
+:doctype: book
+:media: screen
 :doctitle: モデルを使ってソフトウェアを開発しよう
 :author: 株式会社チェンジビジョン
 :description: この文書は、モデリングツールにastah*を使って、ソフトウェアの開発にUMLを使う方法について学ぶチュートリアルです。

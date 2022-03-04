@@ -1,5 +1,5 @@
 include::revnumber.adoc[]
-:doctype: article // book // textlint のエラー対策（実際には front_matter.adoc に記載してある）
+:doctype: book // textlint のエラー対策（実際には front_matter.adoc に記載してある）
 include::front_matter.adoc[]
 
 // 開始ページの処理に不具合があることから
@@ -18,6 +18,8 @@ include::front_matter.adoc[]
 = {doctitle}
 
 :sectnums!:
+
+<<<<
 
 include::preface.adoc[]
 
