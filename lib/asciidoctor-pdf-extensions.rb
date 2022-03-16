@@ -79,7 +79,7 @@ module AsciidoctorPdfExtensions
 
   def layout_toc_level sections, num_levels, line_metrics, dot_leader, num_front_matter_pages = 0
     # sections.each { |key, val| p key }
-    sect = sections.select { |sect| sect.sectname == 'colophon' }
+    sect = sections.select { |sect| sect.sectname == 'colophon'}
     # p sect[0].sectname
     sections.delete(sect[0])
     super
@@ -87,7 +87,7 @@ module AsciidoctorPdfExtensions
 
   def start_new_chapter chapter
     start_new_page unless at_page_top?
-    if @ppbook && verso_page? && !(chapter.option? 'nonfacing')
+    if @ppbook && verso_page? && !(chapter.option? '%nonfacing')
       update_colors # prevents Ghostscript from reporting a warning when running content is written to blank page
       start_new_page unless chapter.sectname == 'colophon'
     end
@@ -133,7 +133,7 @@ module AsciidoctorPdfExtensions
     elsif sectname == 'colophon' or sectname == 'discrete'
       layout_heading_custom_2 node, title, align: :left
     elsif sectname == 'chapter'
-      start_new_page if verso_page? && sectname == '%nofacing'
+      start_new_page if verso_page?
       if numbered
         layout_heading_custom_3 node, title, align: :right
       else

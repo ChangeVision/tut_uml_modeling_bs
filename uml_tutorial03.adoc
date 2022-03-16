@@ -3,7 +3,7 @@ include::front_matter.adoc[]
 endif::[]
 
 [[_model_to_code_design]]
-[%nonfacing]
+// [%nonfacing]
 == モデルとコードの対応づけ
 
 [.lead]

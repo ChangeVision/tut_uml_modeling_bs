@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="scoresheet.css">
+  <title>ボウリングスコア</title>
+</head>
+
+<body>
+<h1>ボウリングスコア</h1>
+
+<hr>
+<% game_score = @game.game_score %>
+<% if game_score.current.nil? %>
+  <% current_frame_no = 1 %>
+<% else %>
+  <% current_frame_no = game_score.current.frame_no %>
+<% end %>
+
+<h2>ゲーム（ID: <%= @game.id %>）のスコア</h2>
+<% if game_score.finished?() %>
+  <p id="links"><a href="list.erb">履歴一覧の表示</a>｜
+    <a href="index.html">メニュー画面に戻る</a></p>
+<% else %>
+  <p id="msg">ピン数を入力して「スコアを更新する」を押してください</p>
+<% end %>
+
+<table>
+  <tr>
+    <th class="username">名前</th>
+    <% (1..9).each do |no| %>
+      <% if no == current_frame_no && game_score.state == :SECOND %>
+        <th class="current" colspan="2"><%= no %></th>
+      <% elsif no == (current_frame_no + 1) && game_score.state == :FIRST %>
+        <th class="current" colspan="2"><%= no %></th>
+      <% else %>
+        <th colspan="2"><%= no %></th>
+      <% end %>
+    <% end %>
+
+    <% no = 10 %>
+    <% if no == (current_frame_no + 1) && game_score.state == :FIRST %>
+      <th class="current-ten" colspan="3"><%= no %></th>
+    <% elsif no <= current_frame_no && [:SECOND, :SERVICE_FIRST1, :SERVICE_FIRST2, :SERVICE_FIRST3, :SERVICE_SECOND].include?(game_score.state) %>
+      <th class="current-ten" colspan="3"><%= no %></th>
+    <% else %>
+      <th class="ten" colspan="3"><%= no %></th>
+    <% end %>
+
+    <% if game_score.finished?() %>
+      <th class="current-total">Total</th>
+    <% else %>
+      <th class="total">Total</th>
+    <% end %>
+  </tr>
+  <tr>
+    <td class="player" rowspan="2"><%= @game.player %></td>
+
+    <!-- from 1st frame to before current frame -->
+    <% frame = game_score.head %>
+
+    <% while frame.next %>
+      <td class="first">
+        <% if frame.strike?() %>
+          <div class="strike"></div>
+        <% elsif frame.gutter?() %>
+          G
+        <% else %>
+          <%= frame.first %>
+        <% end %>
+      </td>
+      <% if frame.frame_no < 10 %>
+        <td class="second">
+          <% if frame.strike?() %>
+          <% elsif frame.spare? %>
+            <div class="spare"></div>
+          <% elsif frame.miss?() %>
+            ―
+          <% else %>
+            <%= frame.second %>
+          <% end %>
+        </td>
+      <% end %>
+      <% frame = frame.next %>
+    <% end %>
+
+    <!-- current_frame -->
+    <% if game_score.state == :FIRST %> <!-- FIRST: before 1st roll -->
+      <td class="first">
+        <% if frame.strike?() %>
+          <div class="strike"></div>
+        <% elsif frame.gutter?() %>
+          G
+        <% else %>
+          <%= frame.first %>
+        <% end %>
+      </td>
+      <td class="second">
+        <% if frame.strike?() %>
+        <% elsif frame.spare? %>
+          <div class="spare"></div>
+        <% elsif frame.miss?() %>
+          ―
+        <% else %>
+          <%= frame.second %>
+        <% end %>
+      </td>
+      <% if frame.frame_no == 10 %>
+        <td class="second"></td>
+      <% end %>
+
+    <% elsif game_score.state == :SECOND %> <!-- SECOND: after 1st roll -->
+      <td class="first">
+        <% if frame.strike?() %>
+          <div class="strike"></div>
+        <% elsif frame.gutter?() %>
+          G
+        <% else %>
+          <%= frame.first %>
+        <% end %>
+      </td>
+      <td class="second"></td>
+      <% if frame.frame_no == 10 %>
+        <td class="second"></td>
+      <% end %>
+
+    <% elsif game_score.state == :SERVICE_FIRST1 %> <!-- SERVICE_FIRST1 -->
+      <td class="first">
+        <% if frame.gutter?() %>
+          G
+        <% else %>
+          <%= frame.first %>
+        <% end %>
+      </td>
+      <td class="second">
+          <div class="spare"></div>
+      </td>
+      <td class="second"></td>
+
+    <% elsif game_score.state == :SERVICE_FIRST2 %> <!-- SERVICE_FIRST2 -->
+      <td class="first">
+        <div class="strike"></div>
+      </td>
+      <td class="second"></td>
+      <td class="second"></td>
+
+    <% elsif game_score.state == :SERVICE_FIRST3 %> <!-- SERVICE_FIRST3 -->
+      <td class="second">
+        <div class="strike"></div>
+      </td>
+      <td class="second"></td>
+
+    <% elsif game_score.state == :SERVICE_SECOND %> <!-- SERVICE_SECOND -->
+      <td class="second">
+        <% if frame.strike?() %>
+          <div class="strike"></div>
+        <% elsif frame.gutter?() %>
+          G
+        <% else %>
+          <%= frame.first %>
+        <% end %>
+      </td>
+      <td class="second"></td>
+
+    <% elsif game_score.state == :FINISHED %> <!-- FINISHED -->
+      <% if frame.frame_no == 10 %> <!-- no service frame -->
+        <td class="first">
+          <% if frame.strike?() %>
+            <div class="strike"></div>
+          <% elsif frame.gutter?() %>
+            G
+          <% else %>
+            <%= frame.first %>
+          <% end %>
+        </td>
+        <td class="second">
+          <% if frame.strike?() %>
+          <% elsif frame.spare?() %>
+            <div class="spare"></div>
+          <% elsif frame.miss?() %>
+            ―
+          <% else %>
+            <%= frame.second %>
+          <% end %>
+        </td>
+        <td class="second"></td>
+
+      <% elsif frame.frame_no == 11 %> <!-- one service frame -->
+        <% if frame.prev.strike? %>
+          <td class="second">
+            <% if frame.strike? %>
+              <div class="strike"></div>
+            <% elsif frame.gutter?() %>
+              G
+            <% else %>
+              <%= frame.first %>
+            <% end %>
+          </td>
+          <td class="second">
+            <% if frame.spare? %>
+              <div class="spare"></div>
+            <% elsif frame.miss?() %>
+              -
+            <% else %>
+              <%= frame.second %>
+            <% end %>
+          </td>
+        <% elsif frame.prev.spare? %>
+          <td class="second">
+            <div class="spare"></div>
+          </td>
+          <td class="second">
+            <% if frame.strike? %>
+              <div class="strike"></div>
+            <% elsif frame.gutter?() %>
+              G
+            <% else %>
+              <%= frame.first %>
+            <% end %>
+          </td>
+        <% end %>
+
+      <% elsif frame.frame_no == 12 %> <!-- two service frame -->
+        <td class="second">
+          <% if frame.strike? %>
+            <div class="strike"></div>
+          <% elsif frame.gutter?() %>
+            G
+          <% else %>
+            <%= frame.first %>
+          <% end %>
+        </td>
+      <% end %>
+    <% end %>
+
+    <!-- after current frame to last frame -->
+    <% ((current_frame_no + 1)..10).each do |frame_no| %>
+      <td class="first"></td>
+      <td class="second"></td>
+      <% if frame_no == 10 %>
+        <td class="second"></td>
+      <% end %>
+    <% end %>
+
+    <!-- game total score -->
+    <td class="total" rowspan="2">
+      <% if game_score.state == :FINISHED %>
+        <%= game_score.total %>
+      <% else %>
+        <% frame = game_score.current %>
+        <% if game_score.state == :FIRST || game_score.state == :SERVICE_FIRST1 || game_score.state == :SERVICE_FIRST2 || game_score.state == :SERVICE_FIRST3 %>
+          <% if frame.spare? %>
+            <% if frame.prev.nil? %>
+              <% tmp_score = '' %>
+            <% else %>
+              <% frame = frame.prev %>
+              <% tmp_score = frame.total_score %>
+            <% end %>
+          <% elsif frame.strike? %>
+            <% if frame.prev.nil? %>
+              <% tmp_score = '' %>
+            <% else %>
+              <% frame = frame.prev %>
+              <% if frame.strike? %>
+                <% if frame.prev.nil? %>
+                  <% tmp_score = '' %>
+                <% else %>
+                  <% frame = frame.prev %>
+                  <% tmp_score = frame.total_score %>
+                <% end %>
+              <% else %>
+                <% tmp_score = frame.total_score %>
+              <% end %>
+            <% end %>
+          <% else %>
+            <% tmp_score = frame.total_score %>
+          <% end %>
+        <% elsif game_score.state == :SECOND || game_score.state == :SERVICE_SECOND %>
+          <% if frame.prev.nil? %>
+            <% tmp_score = '' %>
+          <% else %>
+            <% frame = frame.prev %>
+            <% if frame.strike? %>
+              <% if frame.prev.nil? %>
+                <% tmp_score = '' %>
+              <% else %>
+                <% frame = frame.prev %>
+                <% tmp_score = frame.total_score %>
+              <% end %>
+            <% else %>
+              <% tmp_score = frame.total_score %>
+            <% end %>
+          <% end %>
+        <% end %>
+        <%= tmp_score %>
+      <% end %>
+    </td>
+  </tr>
+
+  <tr> <!-- each frame score -->
+    <% colspan = 2 %>
+    <% frame = game_score.head %>
+
+    <% while frame %>
+      <% colspan = 3 if frame.frame_no == 10 %>
+
+      <% if frame.frame_no == (current_frame_no - 2) %>
+        <% if game_score.state == :FIRST || game_score.state == :SERVICE_FIRST1 || game_score.state == :SERVICE_FIRST2 || game_score.state == :SERVICE_FIRST3 %>
+          <td class="score" colspan="<%= colspan %>">
+            <%= frame.total_score() %>
+          </td>
+        <% elsif game_score.state == :SECOND || game_score.state == :SERVICE_SECOND %>
+          <td class="score" colspan="<%= colspan %>">
+            <%= frame.total_score() %>
+          </td>
+        <% elsif game_score.state == :FINISHED %>
+          <td class="score" colspan="<%= colspan %>">
+            <%= frame.total_score() %>
+          </td>
+        <% else %>
+          <td class="score" colspan="<%= colspan %>"></td>
+        <% end %>
+
+      <% elsif frame.frame_no == (current_frame_no - 1) %>
+        <% if game_score.state == :FIRST %>
+          <% if frame.strike? && frame.next.strike? %>
+            <td class="score" colspan="<%= colspan %>"></td>
+          <% else %>
+          <td class="score" colspan="<%= colspan %>">
+            <%= frame.total_score() %>
+          </td>
+          <% end %>
+        <% elsif game_score.state == :SECOND %>
+          <% if frame.strike? %>
+            <td class="score" colspan="<%= colspan %>"></td>
+          <% else %>
+            <td class="score" colspan="<%= colspan %>">
+              <%= frame.total_score() %>
+            </td>
+          <% end %>
+        <% else %>
+          <% if game_score.state == :SERVICE_FIRST1 %>
+            <td class="score" colspan="<%= colspan %>">
+              <%= frame.total_score() %>
+            </td>
+          <% elsif game_score.state == :FINISHED %>
+            <td class="score" colspan="<%= colspan %>">
+              <%= frame.total_score() %>
+            </td>
+          <% else %>
+            <td class="score" colspan="<%= colspan %>"></td>
+          <% end %>
+        <% end %>
+
+      <% elsif frame.frame_no == current_frame_no %>
+        <% if game_score.state == :FIRST %>
+          <% if frame.strike? || frame.spare? %>
+            <td class="score" colspan="<%= colspan %>"</td>
+          <% else %>
+            <td class="score" colspan="<%= colspan %>">
+              <%= frame.total_score() %>
+            </td>
+          <% end %>
+        <% elsif game_score.state == :SECOND %>
+          <td class="score" colspan="<%= colspan %>"></td>
+        <% else %>
+          <% if game_score.state == :FINISHED %>
+            <td class="score" colspan="<%= colspan %>">
+              <%= frame.total_score() %>
+            </td>
+          <% else %>
+            <td class="score" colspan="<%= colspan %>"></td>
+          <% end %>
+        <% end %>
+
+      <% else %>
+        <td class="score" colspan="<%= colspan %>">
+          <%= frame.total_score() %>
+        </td>
+      <% end %>
+
+      <% break if frame.frame_no >= 10 %>
+      <% frame = frame.next %>
+    <% end %>
+
+    <% ((current_frame_no + 1)..10).each do |frame_no| %>
+      <% colspan = 3 if frame_no == 10 %>
+      <td class="score" colspan="<%= colspan %>"></td>
+    <% end %>
+  </tr>
+</table>
+
+<hr>
+<% unless game_score.finished?() %>
+  <form method="post" action="update_score" name="pins_input_form">
+    <input autofocus type="number" name="pins" size="4" min="0" max="10" step="1" value="0" />
+    <button class="exec_btn" size="12" type="submit">スコアを更新する</button>
+  </form>
+  <hr>
+<% end %>
+
+<p>frame no: <%= current_frame_no %><br />
+state: <%= game_score.state %><br />
+dump: <%= @game.report().gsub("\n", "<br />\n") %>
+</p>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="scoresheet.css">
+  <title>ボウリングスコア</title>
+</head>
+<body>
+<h1>ボウリングスコア</h1>
+
+<hr>
+
+<% game_score = @game.game_score %>
+<% if game_score.current.nil? %>
+  <% current_frame_no = 1 %>
+<% else %>
+  <% current_frame_no = game_score.current.frame_no %>
+<% end %>
+
+<h2>ゲーム（ID: <%= @game.id %>）のスコア</h2>
+<p id="links"><a href="list.erb">履歴一覧の表示</a>｜
+<a href="index.html">メニュー画面に戻る</a></p> 
+<p id="msg">ピン数を入力して「スコアを更新する」を押してください</p>
+
+<table>
+  <tr>
+    <th class="username">名前</th>
+    <th class="current" colspan="2">1</th>
+    <% (2..9).each do |i| %>
+      <th colspan="2"><%= i %></th>
+    <% end %>
+    <th class="ten" colspan="3"><%= 10 %></th>
+    <th class="total">Total</th>
+  </tr>
+  <tr>
+    <td class="player" rowspan="2"><%= @game.player %></td>
+    <% (1..10).each do |i| %>
+      <td class="first"></td>
+      <td class="second"></td>
+    <%  end %>
+    <td class="second"></td>
+    <td class="total" rowspan="2"></td>
+  </tr>
+  <tr>
+    <% (1..9).each do |i| %>
+      <td class="score" colspan="2"></td>
+    <% end %>
+    <td class="score" colspan="3"></td>
+  </tr>
+</table>
+
+<hr>
+
+<form method="post" action="update_score" name="input_pins_form">
+  <input autofocus type="number" name="pins" size="4" min="0" max="10" step="1" value="0" />
+  <button class="exec_btn" size="12" type="submit">スコアを更新する</button>
+</form>
+
+<hr>
+<p>frame no: <%= current_frame_no %><br />
+state: <%= game_score.state %><br />
+dump: <%= @game.report().gsub("\n", '<br />') %>
+</p>
+
+</body>
+</html>

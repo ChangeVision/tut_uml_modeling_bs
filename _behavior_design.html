@@ -21,7 +21,7 @@
 <h1>モデルを使ってソフトウェアを開発しよう</h1>
 <div class="details">
 <span id="author" class="author">株式会社チェンジビジョン</span><br>
-<span id="revnumber">バージョン html_0480,</span>
+<span id="revnumber">バージョン html_0488,</span>
 <span id="revdate">2022-03-05</span>
 </div>
 <div id="toc" class="toc2">
@@ -804,7 +804,7 @@
 <p>「選択疑似状態」から「WAIT_FOR_1ST」への遷移のガード条件は「ゲーム終了ではない」こと。このときはアクションとして「次のフレームへ進む」。</p>
 </li>
 <li>
-<p>「選択疑似状態」から「FINISHED」への遷移のガード条件は「ゲーム終了である」であること。</p>
+<p>「選択疑似状態」から「FINISHED」への遷移のガード条件は「ゲーム終了である」であること。ゲーム終了は、10フレーム目の状態が「FIXED」になったことで判定できる（そのようなメソッドを用意する）。</p>
 </li>
 </ul>
 </div>
@@ -831,6 +831,13 @@
 <ol class="arabic">
 <li>
 <p>「Frame」クラス側の関連端の多重度を「10」から「12」に変更する。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>これは、通常のフレームを追加する方法でサービスフレームを処理するための追加。</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
 <p>関連にノートをつけて説明をつけておく。</p>
@@ -1233,7 +1240,8 @@
 <div class="sect3">
 <h4 id="_gameクラスの処理"><a class="anchor" href="#_gameクラスの処理"></a>4.5.2 Gameクラスの処理</h4>
 <div class="paragraph">
-<p>みなさんが、プレーするときは <a href="_behavior_design.html#game_steps00">ボウリングのゲームを進める手順（ヨーロピアン方式）</a> に示すような手順でプレーするでしょう。</p>
+<p>ほとんどのみなさんがボウリングをやるときにゲームを進行する手順は、「ヨーロピアン方式」と呼ばれています。
+「ヨーロピアン方式」による進行を想定して、「Game」クラスはどのような手順で動作させるべきか整理しましょう。</p>
 </div>
 <div id="game_steps00" class="sidebarblock">
 <div class="content">
@@ -1430,7 +1438,7 @@
 <div class="sect3">
 <h4 id="_振る舞いのモデルを作成した手順"><a class="anchor" href="#_振る舞いのモデルを作成した手順"></a>4.6.1 振る舞いのモデルを作成した手順</h4>
 <div class="paragraph">
-<p>振る舞いのモデルに登場する構成要素や要素間の関連を見つけ出すために、 <a href="_behavior_design.html#step_for_behavier_model">スコアシートの振る舞いのモデルを作成した手順</a> のような手順を使いました。</p>
+<p>振る舞いのモデルに登場する構成要素や要素間の関連を見つけ出し、ゲームの手順を整理しました。</p>
 </div>
 <div id="step_for_behavier_model" class="sidebarblock">
 <div class="content">
@@ -1475,7 +1483,7 @@
 </div>
 <div id="footer">
 <div id="footer-text">
-バージョン html_0480<br>
+バージョン html_0488<br>
 最終更新 2022-03-04 17:59:55 +0900
 </div>
 </div>
