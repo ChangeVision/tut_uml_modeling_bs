@@ -706,5 +706,5 @@ lineno { font-size: 1.2em }
 table.linenotable { margin: 0 }
 pre.rouge.highlight {  padding: 0 }
 
-.sidebarblock > .content > .title { font-size: 1.2em; font-weight: bold; }
+.sidebarblock > .content > .title { font-size: 1.0em; font-weight: bold; }
 .olist > .title  { font-size: 1.2em; color: #703f1c;  font-weight: bold; }

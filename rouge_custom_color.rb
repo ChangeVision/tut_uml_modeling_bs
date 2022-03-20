@@ -67,7 +67,7 @@ module Rouge
       style Name::Variable::Instance,         :fg => '#ff8c00'
       style Name::Variable,                   :fg => '#800000'
       style Operator::Word,                   :fg => '#000000', :bold => true
-      style Operator,                         :fg => '#000000', :bold => true
+      style Operator,                         :fg => '#25254d' # '#000000', :bold => true
       style Text::Whitespace,                 :fg => '#bbbbbb'
       style Text,                             :bg => '#f8f8f8'
     end

@@ -21,8 +21,8 @@
 <h1>モデルを使ってソフトウェアを開発しよう</h1>
 <div class="details">
 <span id="author" class="author">株式会社チェンジビジョン</span><br>
-<span id="revnumber">バージョン html_0488,</span>
-<span id="revdate">2022-03-05</span>
+<span id="revnumber">バージョン html_0543,</span>
+<span id="revdate">2022-03-21</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">目次</div>
@@ -287,7 +287,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>状態「ST0」は、このサンプルの例示用に使う状態名のひとつ。</p>
+<p>状態「ST0」は、このサンプルの例示用に使う状態名の1つ。</p>
 </li>
 </ul>
 </div>
@@ -340,7 +340,7 @@
 <p>状態が追加できたので、こんどは状態遷移を追加しましょう。
 ステートマシン図には、通常の状態のほかにいくつかの「疑似状態」が登場します。
 たとえば、「開始疑似状態」は、この図における最初の状態を示すのに使います。
-「終了疑似状態」は、その図における最後の状態（ひとつとは限りません）を示すのに使います。</p>
+「終了疑似状態」は、その図における最後の状態（1つとは限りません）を示すのに使います。</p>
 </div>
 <div id="add_stm_trans00" class="olist arabic">
 <div class="title">状態遷移を追加する</div>
@@ -476,7 +476,7 @@
 </div>
 <div class="paragraph">
 <p>遷移先が2つあるなら、状態遷移を別々に引けばよさそうです。
-ところが、同じイベントを待ってる遷移先が2つ以上あると、どちらの状態へ背にするのか決定できなくなります（あいまいな状態遷移と呼びます）。
+ところが、同じイベントを待ってる遷移先が2つ以上あると、どちらの状態へ遷移するのか決定できなくなります（あいまいな状態遷移と呼びます）。
 そこで、1つのイベントによる遷移先が状況によって変わる場合には「選択疑似状態」を使います。</p>
 </div>
 <div id="add_evt_act02" class="olist arabic">
@@ -548,7 +548,7 @@
 <div class="olist arabic">
 <ol class="arabic" start="5">
 <li>
-<p>同様にして、あと2つほど状態遷移を追加する（ <a href="_model_to_code_design.html#add_evt_act07">図 3.18</a> ）。</p>
+<p>同様にして、もう2つほど状態遷移を追加する（ <a href="_model_to_code_design.html#add_evt_act07">図 3.18</a> ）。</p>
 </li>
 </ol>
 </div>
@@ -772,7 +772,7 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div class="title">図 3.19 Rubyのコードとステートマシン図の対応関係（１）</div>
 </div>
 <div class="paragraph">
-<p>おおむねのことは <a href="_model_to_code_design.html#ruby_sample06">図 3.19</a> をみればわかると思いますが、対応関係を説明しておきます。</p>
+<p>おおむねのことは <a href="_model_to_code_design.html#ruby_sample06">図 3.19</a> を読めばわかるでしょうが、対応関係を説明しておきます。</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -870,7 +870,7 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div class="title">図 3.20 Rubyのコードとステートマシン図の対応関係（２）</div>
 </div>
 <div class="paragraph">
-<p>おおむねのことは <a href="_model_to_code_design.html#ruby_sample08">図 3.20</a> をみればわかると思いますが、対応関係を説明しておきます。</p>
+<p>おおむねのことは <a href="_model_to_code_design.html#ruby_sample08">図 3.20</a> を読めばわかるでしょうが、対応関係を説明しておきます。</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -1349,28 +1349,53 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div class="paragraph">
 <p>クラス図とステートマシン図で動作を表現すれば、Rubyのコードに変換できることがわかりました。</p>
 </div>
-<div class="sidebarblock">
+<div class="sect3">
+<h4 id="_構造のモデルを作成した手順_2"><a class="anchor" href="#_構造のモデルを作成した手順_2"></a>3.3.1 構造のモデルを作成した手順</h4>
+<div class="paragraph">
+<p>構造のモデルに登場する構成要素や要素間の関連を見つけ出し、スコアシートの構造を整理しました。</p>
+</div>
+<div id="step_for_structure_model02" class="sidebarblock">
 <div class="content">
-<div class="title">【参考】モデル変換とモデル駆動開発（MDD）</div>
+<div class="title">スコアシートの構造のモデルを作成した手順</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>スコアシートに関する構成要素の発見</p>
+<div class="ulist">
+<ul>
+<li>
+<p>具体的なスコアシートを観察して、そこにある要素を洗い出してオブジェクト図で表した。</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>スコアシートに関するクラス図の作成</p>
+<div class="ulist">
+<ul>
+<li>
+<p>オブジェクト図に登場したオブジェクトからクラスを、オブジェクト同士のリンクから関連を見出し、クラス図に表した。</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_構造のモデルだけではプログラムは作れない"><a class="anchor" href="#_構造のモデルだけではプログラムは作れない"></a>3.3.2 構造のモデルだけではプログラムは作れない</h4>
 <div class="paragraph">
-<p>ここで示したようなモデルとコードの対応づけのほかに、モデルから別のモデルへ、あるいはコードから別のコードへといった対応づけも考えられます。
-これらは、ソフトウエア設計における「モデル変換」と呼ばれています（コードも一種のモデル表現とみなせます）。
-そして、モデル変換を用いて開発プロセスにおける各工程間をモデルで接続して開発する方法のことを「モデル駆動開発（MDD: Model Driven Development）」と呼びます。</p>
+<p>構造のモデルを作ったことで、プログラムを構成する要素と、要素同士の関係（関連）を表せるようになりました。
+また、クラスのインスタンスをオブジェクト図に見合うように作成すれば、実際に観察したスコアシートと同じようなデータ構造を作成できることもわかりました。</p>
 </div>
 <div class="paragraph">
-<p>モデル駆動開発を紹介している記事として次の記事があります。</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">モデル駆動開発におけるモデル変換の役割</dt>
-<dd>
-<p><code><a href="https://codezine.jp/article/detail/10597" class="bare">https://codezine.jp/article/detail/10597</a></code></p>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>この記事では、モデル変換の繰り返しによる開発方法であることや、その実施例を紹介しています。</p>
-</div>
+<p>ところで、作りたかったのは、ボウリングのゲームスコアをつけるプログラムでした。
+つまり、プレーヤーがフレームごとに交代して投球し、そのたびにスコアを更新する処理です。
+ですが、これまでに作成した構造のモデルでは、ゲームの進行に応じてどんなことを処理するか表せていません。
+そのためには、処理の中身を表す「振る舞いのモデル」を作成する必要があります。
+次の章では、ステートマシン図を使って、フレームやスコアの振る舞いを表すモデルを作成します。</p>
 </div>
 </div>
 </div>
@@ -1382,7 +1407,7 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 </div>
 <div id="footer">
 <div id="footer-text">
-バージョン html_0488<br>
+バージョン html_0543<br>
 最終更新 2022-03-04 17:59:55 +0900
 </div>
 </div>

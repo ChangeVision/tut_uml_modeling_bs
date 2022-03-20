@@ -17,8 +17,8 @@
 <h1>モデルを使ってソフトウェアを開発しよう</h1>
 <div class="details">
 <span id="author" class="author">株式会社チェンジビジョン</span><br>
-<span id="revnumber">バージョン html_0487,</span>
-<span id="revdate">2022-03-05</span>
+<span id="revnumber">バージョン html_0541,</span>
+<span id="revdate">2022-03-21</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">目次</div>
@@ -804,7 +804,7 @@ astah* では、複数のモデル図をまとめたモデルファイルを「�
 </div>
 </li>
 <li>
-<p>ひとつのゲームの進行中は、1フレームごとにプレーヤーが交代して投球する。</p>
+<p>1つのゲームの進行中は、1フレームごとにプレーヤーが交代して投球する。</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1377,7 +1377,7 @@ astah* では、オブジェクト図を作成するときは「クラス図」�
 <div class="content">
 <img src="images/GSW-20220207-031606.png" alt="GSW 20220207 031606" width="100%">
 </div>
-<div class="title">図 2.22 オブジェクト「frame01011」の各スロットの値を設定した</div>
+<div class="title">図 2.22 オブジェクト「frame0101」の各スロットの値を設定した</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="5">
@@ -1798,7 +1798,7 @@ astah* では、オブジェクト図を作成するときは「クラス図」�
 また、動作を検討する中で、属性や関連についても追加や修正が必要になる場合があります。</p>
 </div>
 <div class="paragraph">
-<p>このあと、振る舞いのモデルを検討します。
+<p>そこで、続いて振る舞いのモデルを検討します。
 振る舞いのモデルの作成が進むにつれて、構造のモデルも追加・修正されることになるでしょう。</p>
 </div>
 </div>
@@ -2029,7 +2029,7 @@ astah* では、オブジェクト図を作成するときは「クラス図」�
 <div class="ulist">
 <ul>
 <li>
-<p>状態「ST0」は、このサンプルの例示用に使う状態名のひとつ。</p>
+<p>状態「ST0」は、このサンプルの例示用に使う状態名の1つ。</p>
 </li>
 </ul>
 </div>
@@ -2082,7 +2082,7 @@ astah* では、オブジェクト図を作成するときは「クラス図」�
 <p>状態が追加できたので、こんどは状態遷移を追加しましょう。
 ステートマシン図には、通常の状態のほかにいくつかの「疑似状態」が登場します。
 たとえば、「開始疑似状態」は、この図における最初の状態を示すのに使います。
-「終了疑似状態」は、その図における最後の状態（ひとつとは限りません）を示すのに使います。</p>
+「終了疑似状態」は、その図における最後の状態（1つとは限りません）を示すのに使います。</p>
 </div>
 <div id="add_stm_trans00" class="olist arabic">
 <div class="title">状態遷移を追加する</div>
@@ -2218,7 +2218,7 @@ astah* では、オブジェクト図を作成するときは「クラス図」�
 </div>
 <div class="paragraph">
 <p>遷移先が2つあるなら、状態遷移を別々に引けばよさそうです。
-ところが、同じイベントを待ってる遷移先が2つ以上あると、どちらの状態へ背にするのか決定できなくなります（あいまいな状態遷移と呼びます）。
+ところが、同じイベントを待ってる遷移先が2つ以上あると、どちらの状態へ遷移するのか決定できなくなります（あいまいな状態遷移と呼びます）。
 そこで、1つのイベントによる遷移先が状況によって変わる場合には「選択疑似状態」を使います。</p>
 </div>
 <div id="add_evt_act02" class="olist arabic">
@@ -2290,7 +2290,7 @@ astah* では、オブジェクト図を作成するときは「クラス図」�
 <div class="olist arabic">
 <ol class="arabic" start="5">
 <li>
-<p>同様にして、あと2つほど状態遷移を追加する（ <a href="#add_evt_act07">図 3.18</a> ）。</p>
+<p>同様にして、もう2つほど状態遷移を追加する（ <a href="#add_evt_act07">図 3.18</a> ）。</p>
 </li>
 </ol>
 </div>
@@ -2514,7 +2514,7 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div class="title">図 3.19 Rubyのコードとステートマシン図の対応関係（１）</div>
 </div>
 <div class="paragraph">
-<p>おおむねのことは <a href="#ruby_sample06">図 3.19</a> をみればわかると思いますが、対応関係を説明しておきます。</p>
+<p>おおむねのことは <a href="#ruby_sample06">図 3.19</a> を読めばわかるでしょうが、対応関係を説明しておきます。</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -2612,7 +2612,7 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div class="title">図 3.20 Rubyのコードとステートマシン図の対応関係（２）</div>
 </div>
 <div class="paragraph">
-<p>おおむねのことは <a href="#ruby_sample08">図 3.20</a> をみればわかると思いますが、対応関係を説明しておきます。</p>
+<p>おおむねのことは <a href="#ruby_sample08">図 3.20</a> を読めばわかるでしょうが、対応関係を説明しておきます。</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -3091,28 +3091,53 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div class="paragraph">
 <p>クラス図とステートマシン図で動作を表現すれば、Rubyのコードに変換できることがわかりました。</p>
 </div>
-<div class="sidebarblock">
+<div class="sect3">
+<h4 id="_構造のモデルを作成した手順_2"><a class="anchor" href="#_構造のモデルを作成した手順_2"></a>3.3.1 構造のモデルを作成した手順</h4>
+<div class="paragraph">
+<p>構造のモデルに登場する構成要素や要素間の関連を見つけ出し、スコアシートの構造を整理しました。</p>
+</div>
+<div id="step_for_structure_model02" class="sidebarblock">
 <div class="content">
-<div class="title">【参考】モデル変換とモデル駆動開発（MDD）</div>
+<div class="title">スコアシートの構造のモデルを作成した手順</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>スコアシートに関する構成要素の発見</p>
+<div class="ulist">
+<ul>
+<li>
+<p>具体的なスコアシートを観察して、そこにある要素を洗い出してオブジェクト図で表した。</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>スコアシートに関するクラス図の作成</p>
+<div class="ulist">
+<ul>
+<li>
+<p>オブジェクト図に登場したオブジェクトからクラスを、オブジェクト同士のリンクから関連を見出し、クラス図に表した。</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_構造のモデルだけではプログラムは作れない"><a class="anchor" href="#_構造のモデルだけではプログラムは作れない"></a>3.3.2 構造のモデルだけではプログラムは作れない</h4>
 <div class="paragraph">
-<p>ここで示したようなモデルとコードの対応づけのほかに、モデルから別のモデルへ、あるいはコードから別のコードへといった対応づけも考えられます。
-これらは、ソフトウエア設計における「モデル変換」と呼ばれています（コードも一種のモデル表現とみなせます）。
-そして、モデル変換を用いて開発プロセスにおける各工程間をモデルで接続して開発する方法のことを「モデル駆動開発（MDD: Model Driven Development）」と呼びます。</p>
+<p>構造のモデルを作ったことで、プログラムを構成する要素と、要素同士の関係（関連）を表せるようになりました。
+また、クラスのインスタンスをオブジェクト図に見合うように作成すれば、実際に観察したスコアシートと同じようなデータ構造を作成できることもわかりました。</p>
 </div>
 <div class="paragraph">
-<p>モデル駆動開発を紹介している記事として次の記事があります。</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">モデル駆動開発におけるモデル変換の役割</dt>
-<dd>
-<p><code><a href="https://codezine.jp/article/detail/10597" class="bare">https://codezine.jp/article/detail/10597</a></code></p>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>この記事では、モデル変換の繰り返しによる開発方法であることや、その実施例を紹介しています。</p>
-</div>
+<p>ところで、作りたかったのは、ボウリングのゲームスコアをつけるプログラムでした。
+つまり、プレーヤーがフレームごとに交代して投球し、そのたびにスコアを更新する処理です。
+ですが、これまでに作成した構造のモデルでは、ゲームの進行に応じてどんなことを処理するか表せていません。
+そのためには、処理の中身を表す「振る舞いのモデル」を作成する必要があります。
+次の章では、ステートマシン図を使って、フレームやスコアの振る舞いを表すモデルを作成します。</p>
 </div>
 </div>
 </div>
@@ -3221,7 +3246,7 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <p>ストライクボーナスの確定待ちには2通りの場合があります。</p>
 </div>
 <div class="paragraph">
-<p>まず、現在プレー中のフレームの前のフレームがストライクで、現在のフレームが2投目の投球を待っているときです。
+<p>1つ目は、現在プレー中のフレームの前のフレームがストライクで、現在のフレームが2投目の投球を待っているときです。
 このとき、前のフレームはストライクボーナスの確定待ちの状態です（ <a href="#pending_strike01">図 4.5</a> ）。
 次にピン数を受け取ると、現在のフレームの2投目に記録されるとともに、前のフレームのストライクボーナスが確定します。</p>
 </div>
@@ -3232,7 +3257,7 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div class="title">図 4.5 ストライクのボーナスの確定待ちのフレーム（次がストライクでない）</div>
 </div>
 <div class="paragraph">
-<p>いまひとつは、現在プレー中のフレームが1投目の投球を待っていて、前のフレームと前の前のフレームがともにストライクであったとき（ダブルのとき）ときです。
+<p>2つ目は、現在プレー中のフレームが1投目の投球を待っていて、前のフレームと前の前のフレームがともにストライクであったとき（ダブルのとき）ときです。
 このとき、前の前のフレームはストライクボーナスの確定待ちの状態です（ <a href="#pending_double01">図 4.6</a> ）。
 次にピン数を受け取ると、現在のフレームの1投目に記録されるとともに、前の前のフレームのストライクボーナスが確定します。</p>
 </div>
@@ -3355,12 +3380,12 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div class="content">
 <img src="images/GSW-20220209-152917.png" alt="GSW 20220209 152917" width="100%">
 </div>
-<div class="title">図 4.9 「Frame」クラスに状態を追加する</div>
+<div class="title">図 4.9 「Frame」クラスのステートマシン図に最初の状態を追加する</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="2">
 <li>
-<p>最初の状態遷移にイベントを割り当てる（ <a href="#frame_stm02">図 4.10</a> ）。</p>
+<p>最初の状態遷移とイベントを追加する（ <a href="#frame_stm02">図 4.10</a> ）。</p>
 <div class="ulist">
 <ul>
 <li>
@@ -3378,12 +3403,12 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div class="content">
 <img src="images/frame_stm02.png" alt="frame stm02" width="100%">
 </div>
-<div class="title">図 4.10 状態の追加（２）</div>
+<div class="title">図 4.10 「Frame」クラスのステートマシン図に1投目の前の状態遷移とイベントを追加する</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="3">
 <li>
-<p>1投目のあとの状態遷移を追加する（ <a href="#frame_stm03">図 4.11</a> ）。受け取ったピン数（ストライクだったか）によって遷移先は2通りあるので「選択疑似状態」を使って遷移先を分ける。</p>
+<p>1投目の後の状態遷移とイベントを追加する（ <a href="#frame_stm03">図 4.11</a> ）。1投目の後は、受け取ったピン数によって遷移先は2通りある（ストライクか否か）ので「選択疑似状態」を使って遷移先を分ける。</p>
 <div class="ulist">
 <ul>
 <li>
@@ -3420,12 +3445,12 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div class="content">
 <img src="images/frame_stm03.png" alt="frame stm03" width="100%">
 </div>
-<div class="title">図 4.11 状態の追加（３）</div>
+<div class="title">図 4.11 「Frame」クラスのステートマシン図に1投目の後の状態遷移とイベントを追加する</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic" start="5">
 <li>
-<p>2投目のあとの状態遷移を追加する（ <a href="#frame_stm03">図 4.11</a> ）。受け取ったピン数（スペアになったか）によって遷移先は2通りあるので「選択疑似状態」を使って遷移先を分ける。</p>
+<p>2投目の後の状態遷移とイベントを追加する（ <a href="#frame_stm04">図 4.12</a> ）。2投目の後は、受け取ったピン数によって遷移先は2通りある（スペアか否か）ので「選択疑似状態」を使って遷移先を分ける。</p>
 <div class="ulist">
 <ul>
 <li>
@@ -3469,7 +3494,7 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div class="content">
 <img src="images/frame_stm04.png" alt="frame stm04" width="100%">
 </div>
-<div class="title">図 4.12 状態の追加（４）</div>
+<div class="title">図 4.12 「Frame」クラスのステートマシン図に2投目の後の状態遷移とイベントを追加する</div>
 </div>
 <div class="paragraph">
 <p>これで、フレームのステートマシン図が作成できました。</p>
@@ -3804,8 +3829,10 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <p>「2投目待ち」の状態として状態名を「WAIT_FOR_2ND」に設定する。</p>
 </li>
 <li>
-<p>「ゲームの終了」の状態として状態名を「FINISHED」に設定する。
-**. パレットから「終了疑似状態」をステートマシン図に追加する。</p>
+<p>「ゲームの終了」の状態として状態名を「FINISHED」に設定する。</p>
+</li>
+<li>
+<p>パレットから「終了疑似状態」をステートマシン図に追加する。</p>
 </li>
 </ul>
 </div>
@@ -3828,7 +3855,7 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div class="ulist">
 <ul>
 <li>
-<p>「WAIT_FOR_1ST」から「選択疑似状態」への遷移では、ピン数を受け取るのを待っている。受け取ったときには、現在にフレームへピン数のイベントを送る。その後、1投目のあとのスペアとストライクのボーナスを計算し、のべのトータルを更新する。</p>
+<p>「WAIT_FOR_1ST」から「選択疑似状態」への遷移では、ピン数を受け取るのを待っている。受け取ったときには、現在にフレームへピン数のイベントを送る。その後、1投目の後のスペアとストライクのボーナスを計算し、のべのトータルを更新する。</p>
 </li>
 <li>
 <p>「選択疑似状態」から「WAIT_FOR_1ST」への遷移のガード条件は「ストライクである」こと。このときはアクションとして「次のフレームへ進む」。</p>
@@ -3847,7 +3874,7 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div class="ulist">
 <ul>
 <li>
-<p>「WAIT_FOR_1ST」から「選択疑似状態」への遷移では、ピン数を受け取るのを待っている。受け取ったときには、現在にフレームへピン数のイベントを送る。その後、2投目のあとのスペアとストライクのボーナスを計算し、のべのトータルを更新する。</p>
+<p>「WAIT_FOR_1ST」から「選択疑似状態」への遷移では、ピン数を受け取るのを待っている。受け取ったときには、現在にフレームへピン数のイベントを送る。そして、2投目の後のスペアとストライクのボーナスを計算し、のべのトータルを更新する。</p>
 </li>
 <li>
 <p>「選択疑似状態」から「WAIT_FOR_1ST」への遷移のガード条件は「ゲーム終了ではない」こと。このときはアクションとして「次のフレームへ進む」。</p>
@@ -3896,8 +3923,10 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <p>パレットからノートを選択し、クラス図に追加する。</p>
 </li>
 <li>
-<p>ノートに「Frame側の多重度は、サービスフレーム用に必要なフレーム分だけ追加してある」という説明を追加する。
-**. ノートから関連の線に向かってアンカーを引く。</p>
+<p>ノートに「Frame側の多重度は、サービスフレーム用に必要なフレーム分だけ追加してある」という説明を追加する。</p>
+</li>
+<li>
+<p>ノートから関連の線に向かってアンカーを引く。</p>
 </li>
 <li>
 <p>パレットからノートのアンカーを選択し、ノートにマウスカーソルを移動して青枠が表示されるのを待つ。</p>
@@ -3919,13 +3948,13 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <p>「ゲーム終了か判定する」メソッド「finished?」を追加する。</p>
 </li>
 <li>
-<p>「1投目のあとのスペアのボーナスを計算する」メソッド「calc_spare_bonus_after_1st」を追加する。</p>
+<p>「1投目の後のスペアのボーナスを計算する」メソッド「calc_spare_bonus_after_1st」を追加する。</p>
 </li>
 <li>
-<p>「1投目のあとのストライクのボーナスを計算する」メソッド「calc_strike_bonus_after_1st」を追加する。</p>
+<p>「1投目の後のストライクのボーナスを計算する」メソッド「calc_strike_bonus_after_1st」を追加する。</p>
 </li>
 <li>
-<p>「2投目のあとのストライクのボーナスを計算する」メソッド「calc_strike_bonus_after_2st」を追加する。</p>
+<p>「2投目の後のストライクのボーナスを計算する」メソッド「calc_strike_bonus_after_2st」を追加する。</p>
 </li>
 <li>
 <p>「のべのトータルを更新する」メソッド「update_total」を追加する。</p>
@@ -4135,15 +4164,15 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>1投目のあとのスペアボーナスを計算するメソッド。前のフレームのスコアが確定するので、前のフレームへ「DETERMINE」イベントを送る。</td>
+<td>1投目の後のスペアボーナスを計算するメソッド。前のフレームのスコアが確定するので、前のフレームへ「DETERMINE」イベントを送る。</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>1投目のあとのストライクボーナスを計算するメソッド。前の前のフレームからストライクが続いていた場合、ここでスコアが確定するので、前の前のフレームへ「DETERMINE」イベントを送る。</td>
+<td>1投目の後のストライクボーナスを計算するメソッド。前の前のフレームからストライクが続いていた場合、ここでスコアが確定するので、前の前のフレームへ「DETERMINE」イベントを送る。</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>2投目のあとのストライクボーナスを計算するメソッド。前のフレームのスコアが確定するので、前のフレームへ「DETERMINE」イベントを送る。</td>
+<td>2投目の後のストライクボーナスを計算するメソッド。前のフレームのスコアが確定するので、前のフレームへ「DETERMINE」イベントを送る。</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="6"></i><b>6</b></td>
@@ -4487,7 +4516,7 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div class="sect3">
 <h4 id="_振る舞いのモデルを作成した手順"><a class="anchor" href="#_振る舞いのモデルを作成した手順"></a>4.6.1 振る舞いのモデルを作成した手順</h4>
 <div class="paragraph">
-<p>振る舞いのモデルに登場する構成要素や要素間の関連を見つけ出し、ゲームの手順を整理しました。</p>
+<p>振る舞いのモデルに登場する構成要素（状態、イベント、アクション）を洗い出し、ゲームの手順を整理しました。</p>
 </div>
 <div id="step_for_behavier_model" class="sidebarblock">
 <div class="content">
@@ -4495,19 +4524,41 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>スコアが記録されるときのフレームの変化を観察して、フレームにどのような状態があるか洗い出した。</p>
+<p>スコアに関する状態の発見
+**スコアが記録されるときのフレームの変化を観察して、フレームにどのような状態があるか洗い出した。</p>
 </li>
 <li>
-<p>洗い出したフレームの状態に関連するイベントやアクションを考えてステートマシン図に表した。</p>
+<p>スコアに関するステートマシン図の作成</p>
+<div class="ulist">
+<ul>
+<li>
+<p>洗い出したフレームの状態に、関連するイベントやアクションを考えてステートマシン図に表した。</p>
 </li>
+</ul>
+</div>
+</li>
+<li>
+<p>フレームスコアに関する状態の発見</p>
+<div class="ulist">
+<ul>
 <li>
 <p>ゲームを進めるときのスコアの変化を観察して、スコアにどのような状態があるか洗い出した。</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>フレームに関するステートマシン図の作成</p>
+<div class="ulist">
+<ul>
+<li>
+<p>サービスフレームの動作を観察して、通常のフレームを追加してスコアを記録する方法を発見した。</p>
 </li>
 <li>
 <p>洗い出したスコアの状態に関連するイベントやアクションを考えてステートマシン図に表した。</p>
 </li>
-<li>
-<p>サービスフレームの動作を観察して、通常のフレームを追加してスコアを記録する方法を発見した。</p>
+</ul>
+</div>
 </li>
 </ol>
 </div>
@@ -4515,12 +4566,43 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 </div>
 </div>
 <div class="sect3">
-<h4 id="_振る舞いのモデルは設計時にプログラムの動作を規定する"><a class="anchor" href="#_振る舞いのモデルは設計時にプログラムの動作を規定する"></a>4.6.2 振る舞いのモデルは設計時にプログラムの動作を規定する</h4>
+<h4 id="_モデルとコードの対応づけは振る舞い設計の前に"><a class="anchor" href="#_モデルとコードの対応づけは振る舞い設計の前に"></a>4.6.2 モデルとコードの対応づけは振る舞い設計の前に</h4>
 <div class="paragraph">
 <p>ステートマシン図を使うことで、フレームやスコアの動作を表せました。
-そして、モデルとコードの対応づけを使えば、ステートマシン図からRubyのプログラムへ変換できます。
+そして、あらかじめモデルとコードを対応づけておけば、それを前提として（モデルやコードの構成方式として）振る舞いの設計に活かせます。</p>
+</div>
+<div class="paragraph">
+<p>モデルとコードが対応づけられていれば、Rubyのプログラムはステートマシン図から変換するように作成できます。
 つまり、解決すべき課題があったとき、その課題を構造のモデルと振る舞いのモデルで表すことができれば、そのモデルなりのプログラムが作成できるわけです。
 一方、このような方法で作成したプログラムが期待した動作をしない場合には、モデルが誤っているか、対応づけのルールに不備があるということです。</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">【参考】モデル変換とモデル駆動開発（MDD）</div>
+<div class="paragraph">
+<p>ここで示したようなモデルとコードの対応づけのほかに、モデルから別のモデルへ、あるいはコードから別のコードへといった対応づけも考えられます。
+モデルからコードを生成する方法には、このチュートリアルのように図の要素とコードの要素を対応させるルールを決めて手で変換する方法以外にもあります。
+例えば、コード片のテンプレート（スニペットなどと呼ばれます）にモデルのデータベースへの問い合わせを埋め込んだスクリプトを使って生成する方法はよく使われています</p>
+</div>
+<div class="paragraph">
+<p>これらは、ソフトウエア設計における「モデル変換」と呼ばれています（コードも一種のモデル表現とみなせます）。
+そして、モデル変換を用いて開発プロセスにおける各工程間をモデルで接続して開発する方法のことを「モデル駆動開発（MDD: Model Driven Development）」と呼びます。</p>
+</div>
+<div class="paragraph">
+<p>モデル駆動開発を紹介している記事として次の記事があります。</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">モデル駆動開発におけるモデル変換の役割</dt>
+<dd>
+<p><code><a href="https://codezine.jp/article/detail/10597" class="bare">https://codezine.jp/article/detail/10597</a></code></p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>この記事では、モデル変換の繰り返しによる開発方法であることや、その実施例を紹介しています。</p>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -4531,7 +4613,7 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div class="sectionbody">
 <div class="paragraph lead">
 <p>対応づけルールを使って、モデルから変換して作成したプログラムができあがりました。
-でいあがったプログラムを確認し、実際に動かしてみましょう。</p>
+できあがったプログラムを確認し、実際に動かしてみましょう。</p>
 </div>
 <div class="sect2">
 <h3 id="_プログラムを完成させる"><a class="anchor" href="#_プログラムを完成させる"></a>5.1 プログラムを完成させる</h3>
@@ -4546,8 +4628,7 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div id="ruby_all_code01" class="listingblock">
 <div class="title">リスト 5.1 【Ruby】score.rb</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="ruby"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">  1
-  2
+<pre class="rouge highlight"><code data-lang="ruby"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">  2
   3
   4
   5
@@ -4832,6 +4913,9 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 284
 285
 286
+287
+288
+289
 </pre></td><td class="code"><pre><span class="c1"># frozen_string_literal: true</span>
 
 <span class="nb">require</span> <span class="s1">'securerandom'</span>
@@ -5118,6 +5202,8 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 
   <span class="k">def</span> <span class="nf">to_s</span>
     <span class="s2">"Score Sheet Date: </span><span class="si">#{</span><span class="vi">@play_date</span><span class="si">}</span><span class="s2">(id:</span><span class="si">#{</span><span class="vi">@id</span><span class="si">}</span><span class="s2">)"</span>
+  <span class="k">end</span>
+<span class="k">end</span>
 </pre></td></tr></tbody></table></code></pre>
 </div>
 </div>
@@ -5133,11 +5219,7 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div id="ruby_all_code02" class="listingblock">
 <div class="title">リスト 5.2 【Ruby】score.rb（テストコード部分）</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="ruby"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">288
-289
-290
-291
-292
+<pre class="rouge highlight"><code data-lang="ruby"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">292
 293
 294
 295
@@ -5161,6 +5243,10 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 313
 314
 315
+316
+317
+318
+319
 </pre></td><td class="code"><pre><span class="k">if</span> <span class="vg">$PROGRAM_NAME</span> <span class="o">==</span> <span class="kp">__FILE__</span> <i class="conum" data-value="1"></i><b>(1)</b>
   <span class="n">sheet</span> <span class="o">=</span> <span class="no">ScoreSheet</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">)</span> <i class="conum" data-value="2"></i><b>(2)</b>
   <span class="n">sheet</span><span class="p">.</span><span class="nf">add_game</span> <i class="conum" data-value="3"></i><b>(3)</b>
@@ -5315,7 +5401,7 @@ Player:うえはら, Score(id: plq9pFD6nSA), Frame:1,
 ----------------------------------------
 turn: うえはら
 input pins: 3
-Game(id:7npHua_W2pE),
+Game(id:zwBxlorJlog),
 Player:くぼあき, Score(id: q5rZ-vnFM1o), Frame:11,
 |No|1st|2nd|Total|Frame Score|Spare Bonus|Strike Bonus|Frame State|
 |-1|  0|  0|    .|          0|          0|           0|   RESERVED|
@@ -5525,8 +5611,8 @@ UMLには他にも多くの図の記法が提供されています。
 <p>「モデルを使ってソフトウェアを開発しよう」</p>
 </div>
 <div class="paragraph">
-<p>発行日 : 2022-03-05<br>
-バージョン : html_0487<br>
+<p>発行日 : 2022-03-21<br>
+バージョン : html_0541<br>
 作成者 : 株式会社チェンジビジョン<br>
 本書の内容に関する質問等がありましたら、作成者までお知らせください。</p>
 </div>
@@ -5535,7 +5621,7 @@ UMLには他にも多くの図の記法が提供されています。
 </div>
 <div id="footer">
 <div id="footer-text">
-バージョン html_0487<br>
+バージョン html_0541<br>
 最終更新 2022-03-04 17:59:55 +0900
 </div>
 </div>

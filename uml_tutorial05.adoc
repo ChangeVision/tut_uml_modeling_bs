@@ -2,31 +2,35 @@ ifndef::revnumber[]
 include::front_matter.adoc[]
 endif::[]
 
+// このファイルのコードのタグの行番号をRakefile内のメソッドで求めているのに注意すること。
+
 [[_program_test]]
 [%nonfacing]
 == できあがったプログラムを試す
 
 [.lead]
 対応づけルールを使って、モデルから変換して作成したプログラムができあがりました。
-でいあがったプログラムを確認し、実際に動かしてみましょう。
+できあがったプログラムを確認し、実際に動かしてみましょう。
 
 === プログラムを完成させる
 
 まず、プログラムをテストできるよう、完成させましょう。
 
+
 ==== 作成したプログラム全体を確認する
 
 まず、作成したプログラムの全体を確認しましょう（ <<ruby_all_code01>> ）。
+
+// このファイルのコードのタグの行番号をRakefile内のメソッドで求めているのに注意すること。
 
 
 [[ruby_all_code01]]
 .【Ruby】score.rb
 //[example]
 //--
-[source,ruby,linenums,start=1]
-
+[source,ruby,linenums,start={score_main_start}]
 ----
-include::{sourcesdir}/score.rb[lines=1..286]
+include::{sourcesdir}/score.rb[tag=main]
 ----
 //--
 
@@ -37,40 +41,16 @@ include::{sourcesdir}/score.rb[lines=1..286]
 このテストコードでは、ピン数のデータは、1ゲーム分のピン数をまとめています。
 しかし、スコアシートのプログラム本体はピン数を受け取るたびに動作するように作られているので、ピン数を1投球ずつ与える方法でも動かせます。
 
+// このファイルのコードのタグの行番号をRakefile内のメソッドで求めているのに注意すること。
+
 [[ruby_all_code02]]
 .【Ruby】score.rb（テストコード部分）
 //[example]
 //--
-[source,ruby,linenums,start=288]
+// [source,ruby,linenums]
+[source,ruby,linenums,start={score_test_start}]
 ----
-if $PROGRAM_NAME == __FILE__ # <1>
-  sheet = ScoreSheet.new(Time.now) # <2>
-  sheet.add_game # <3>
-  game = sheet.games.last # <4>
-  game.entry('くぼあき') # <5>
-  game.entry('うえはら')
-  puts sheet # <6>
-
-  game_records = [ # <7>
-    # [6, 3, 9, 0, 0, 3, 8, 2, 7, 3, 10, 9, 1, 8, 0, 10, 10, 6, 4],
-    # [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 5, 3],
-    [7, 0, 5, 5, 10, 10, 5, 4, 10, 7, 3, 5, 4, 7, 3, 7, 3, 4],
-    [6, 3, 9, 0, 0, 3, 8, 2, 7, 3, 10, 9, 1, 8, 0, 10, 6, 3]
-  ]
-
-  until game.finished? # <8>
-    puts '----------------------------------------'
-    puts "turn: #{game.turn_player_name}"
-    score_index = game.turn # <9>
-    pins = game_records[score_index].shift # <10>
-    puts "input pins: #{pins}"
-    game.playing(score_index, pins) # <11>
-    puts game.to_s # <12>
-    gets # <13>
-  end
-
-  puts "Game(id:#{game.id}) is finished."
-end
+include::{sourcesdir}/score.rb[tag=test]
 ----
 <1> 実行時プログラム名とファイル名が同じとき（このファイル自身から実行したとき）に実行する部分のはじまり。
 <2> 新しいスコアシートを作成する。
@@ -154,7 +134,7 @@ Player:うえはら, Score(id: plq9pFD6nSA), Frame:1,
 ----------------------------------------
 turn: うえはら
 input pins: 3
-Game(id:7npHua_W2pE),
+Game(id:zwBxlorJlog),
 Player:くぼあき, Score(id: q5rZ-vnFM1o), Frame:11,
 |No|1st|2nd|Total|Frame Score|Spare Bonus|Strike Bonus|Frame State|
 |-1|  0|  0|    .|          0|          0|           0|   RESERVED|

@@ -1,3 +1,4 @@
+# tag::main[]
 # frozen_string_literal: true
 
 require 'securerandom'
@@ -286,32 +287,34 @@ class ScoreSheet
     "Score Sheet Date: #{@play_date}(id:#{@id})"
   end
 end
-
-if $PROGRAM_NAME == __FILE__
-  sheet = ScoreSheet.new(Time.now)
-  sheet.add_game
-  game = sheet.games.last
-  game.entry('くぼあき')
+# end::main[]
+# tag::test[]
+if $PROGRAM_NAME == __FILE__ # <1>
+  sheet = ScoreSheet.new(Time.now) # <2>
+  sheet.add_game # <3>
+  game = sheet.games.last # <4>
+  game.entry('くぼあき') # <5>
   game.entry('うえはら')
-  puts sheet
-  
-  game_records = [
+  puts sheet # <6>
+
+  game_records = [ # <7>
     # [6, 3, 9, 0, 0, 3, 8, 2, 7, 3, 10, 9, 1, 8, 0, 10, 10, 6, 4],
     # [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 5, 3],
     [7, 0, 5, 5, 10, 10, 5, 4, 10, 7, 3, 5, 4, 7, 3, 7, 3, 4],
     [6, 3, 9, 0, 0, 3, 8, 2, 7, 3, 10, 9, 1, 8, 0, 10, 6, 3]
   ]
 
-  until game.finished?
+  until game.finished? # <8>
     puts '----------------------------------------'
     puts "turn: #{game.turn_player_name}"
-    score_index = game.turn
-    pins = game_records[score_index].shift
+    score_index = game.turn # <9>
+    pins = game_records[score_index].shift # <10>
     puts "input pins: #{pins}"
-    game.playing(score_index, pins)
-    puts game.to_s
-    gets
+    game.playing(score_index, pins) # <11>
+    puts game.to_s # <12>
+    gets # <13>
   end
 
   puts "Game(id:#{game.id}) is finished."
 end
+# end::test[]

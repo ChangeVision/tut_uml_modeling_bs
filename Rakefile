@@ -93,8 +93,9 @@ def make_html_full(source, target)
   revno = update_revnumber(source, target)
   revdate = `date "+%Y-%m-%d"`
   puts "Converting #{source} to #{target} (#{revno})."
+  tag_lines = find_tag_lines('codes/score.rb',['main', 'test'])
   # -a linkcss -a stylesheet=#{CSS_FILE_PATH} はfront_matterに記載した
-  `bundle exec asciidoctor -a revdate='#{revdate}' -r #{CODE_STYLE} -r #{LIB_EXT} -r #{LIB_EXT2}  #{source} -o #{target}`
+  `bundle exec asciidoctor -a score_main_start=#{tag_lines[0]} -a score_test_start=#{tag_lines[1]} -a revdate='#{revdate}' -r #{CODE_STYLE} -r #{LIB_EXT} -r #{LIB_EXT2}  #{source} -o #{target}`
 end
 
 def make_html_multi(source, target)
@@ -102,15 +103,28 @@ def make_html_multi(source, target)
   revdate = `date "+%Y-%m-%d"`
   # -a linkcss -a stylesheet=#{CSS_FILE_PATH} はfront_matterに記載した
   puts "Converting #{source} to multi-part html (#{revno})."
-  `bundle exec asciidoctor -a revdate='#{revdate}' -r #{LIB_EXT4} -b multipage_html5 -r #{CODE_STYLE} -r #{LIB_EXT} -r #{LIB_EXT2}  #{source} -o #{target}`
+  tag_lines = find_tag_lines('codes/score.rb',['main', 'test'])
+  `bundle exec asciidoctor -a score_main_start=#{tag_lines[0]} -a score_test_start=#{tag_lines[1]} -a revdate='#{revdate}' -r #{LIB_EXT4} -b multipage_html5 -r #{CODE_STYLE} -r #{LIB_EXT} -r #{LIB_EXT2}  #{source} -o #{target}`
 end
 
 def make_pdf(source, target)
   revno = update_revnumber(source, target)
   revdate = `date "+%Y-%m-%d"`
   puts "Converting #{source} to #{target} (#{revno}). (this one takes a while)"
+  tag_lines = find_tag_lines('codes/score.rb',['main', 'test'])
   # `bundle exec asciidoctor-pdf -r asciidoctor-pdf-cjk  -a revdate='#{revdate}'  -r #{CODE_STYLE} -r #{LIB_EXT} -r #{LIB_EXT2} -r  #{LIB_EXT3} -a pdf-stylesdir=#{THEME_DIR} -a pdf-style=#{THEME_FILE} -a pdf-fontsdir=#{FONTS_DIR} #{source} --out=#{target}` #  2>/dev/null`
-    `bundle exec asciidoctor-pdf -a scripts=cjk -a revdate='#{revdate}'  -r #{CODE_STYLE} -r #{LIB_EXT} -r #{LIB_EXT2} -r  #{LIB_EXT3} -a pdf-stylesdir=#{THEME_DIR} -a pdf-style=#{THEME_FILE} -a pdf-fontsdir=#{FONTS_DIR} #{source} --out=#{target}` #  2>/dev/null`
+    `bundle exec asciidoctor-pdf -a scripts=cjk -a score_main_start=#{tag_lines[0]} -a score_test_start=#{tag_lines[1]} -a revdate='#{revdate}'  -r #{CODE_STYLE} -r #{LIB_EXT} -r #{LIB_EXT2} -r  #{LIB_EXT3} -a pdf-stylesdir=#{THEME_DIR} -a pdf-style=#{THEME_FILE} -a pdf-fontsdir=#{FONTS_DIR} #{source} --out=#{target}` #  2>/dev/null`
+end
+
+# コードのtagの（次の）行番号を返す
+def find_tag_lines(filename, tagnames)
+  tag_lines = []
+  File.open(filename) do |f|
+    f.each do |line|
+      tag_lines.push(f.lineno + 1) if line =~ /tag::(.+)/ && $1.start_with?(*tagnames)
+    end
+  end
+  tag_lines
 end
 
 # 各章のadocと依存物を調べて、更新時に生成するルールを動的に生成する

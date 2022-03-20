@@ -86,7 +86,7 @@ link:
   # text-decoration:
 literal:
   font_color: 004953 # 556B2F # 008080 # 2C528B # 253A59  # b12146
-  font_family: Migu 1m # RictyDiminished  #M+ 1mn
+  font_family: RictyDiminished  #M+ 1mn # Migu 1m
   font-size: ceil($base_font_size * 0.9)
   # font-style:
   # background-color: f5f5f5
@@ -235,7 +235,7 @@ sidebar:
     align: left
     font_color: $heading_font_color
     font_family: $heading_font_family
-    font_size: $heading_h5_font_size
+    font_size: 12pt  # $heading_h5_font_size
     font_style: $heading_font_style
 table:
   font_family: $heading_font_family

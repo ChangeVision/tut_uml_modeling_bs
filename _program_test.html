@@ -21,8 +21,8 @@
 <h1>モデルを使ってソフトウェアを開発しよう</h1>
 <div class="details">
 <span id="author" class="author">株式会社チェンジビジョン</span><br>
-<span id="revnumber">バージョン html_0488,</span>
-<span id="revdate">2022-03-05</span>
+<span id="revnumber">バージョン html_0543,</span>
+<span id="revdate">2022-03-21</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">目次</div>
@@ -68,7 +68,7 @@
 <div class="sectionbody">
 <div class="paragraph lead">
 <p>対応づけルールを使って、モデルから変換して作成したプログラムができあがりました。
-でいあがったプログラムを確認し、実際に動かしてみましょう。</p>
+できあがったプログラムを確認し、実際に動かしてみましょう。</p>
 </div>
 <div class="sect2">
 <h3 id="_プログラムを完成させる"><a class="anchor" href="#_プログラムを完成させる"></a>5.1 プログラムを完成させる</h3>
@@ -83,8 +83,7 @@
 <div id="ruby_all_code01" class="listingblock">
 <div class="title">リスト 5.1 【Ruby】score.rb</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="ruby"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">  1
-  2
+<pre class="rouge highlight"><code data-lang="ruby"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">  2
   3
   4
   5
@@ -369,6 +368,9 @@
 284
 285
 286
+287
+288
+289
 </pre></td><td class="code"><pre><span class="c1"># frozen_string_literal: true</span>
 
 <span class="nb">require</span> <span class="s1">'securerandom'</span>
@@ -655,6 +657,8 @@
 
   <span class="k">def</span> <span class="nf">to_s</span>
     <span class="s2">"Score Sheet Date: </span><span class="si">#{</span><span class="vi">@play_date</span><span class="si">}</span><span class="s2">(id:</span><span class="si">#{</span><span class="vi">@id</span><span class="si">}</span><span class="s2">)"</span>
+  <span class="k">end</span>
+<span class="k">end</span>
 </pre></td></tr></tbody></table></code></pre>
 </div>
 </div>
@@ -670,11 +674,7 @@
 <div id="ruby_all_code02" class="listingblock">
 <div class="title">リスト 5.2 【Ruby】score.rb（テストコード部分）</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="ruby"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">288
-289
-290
-291
-292
+<pre class="rouge highlight"><code data-lang="ruby"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">292
 293
 294
 295
@@ -698,6 +698,10 @@
 313
 314
 315
+316
+317
+318
+319
 </pre></td><td class="code"><pre><span class="k">if</span> <span class="vg">$PROGRAM_NAME</span> <span class="o">==</span> <span class="kp">__FILE__</span> <i class="conum" data-value="1"></i><b>(1)</b>
   <span class="n">sheet</span> <span class="o">=</span> <span class="no">ScoreSheet</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">)</span> <i class="conum" data-value="2"></i><b>(2)</b>
   <span class="n">sheet</span><span class="p">.</span><span class="nf">add_game</span> <i class="conum" data-value="3"></i><b>(3)</b>
@@ -852,7 +856,7 @@ Player:うえはら, Score(id: plq9pFD6nSA), Frame:1,
 ----------------------------------------
 turn: うえはら
 input pins: 3
-Game(id:7npHua_W2pE),
+Game(id:zwBxlorJlog),
 Player:くぼあき, Score(id: q5rZ-vnFM1o), Frame:11,
 |No|1st|2nd|Total|Frame Score|Spare Bonus|Strike Bonus|Frame State|
 |-1|  0|  0|    .|          0|          0|           0|   RESERVED|
@@ -944,7 +948,7 @@ Game(id:zwBxlorJlog) is finished.
 </div>
 <div id="footer">
 <div id="footer-text">
-バージョン html_0488<br>
+バージョン html_0543<br>
 最終更新 2022-03-04 17:59:55 +0900
 </div>
 </div>
