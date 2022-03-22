@@ -3,6 +3,7 @@ include::front_matter.adoc[]
 endif::[]
 
 [[_preparation]]
+[%nonfacing]
 == 準備
 
 [.lead]

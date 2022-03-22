@@ -3,6 +3,7 @@ include::front_matter.adoc[]
 endif::[]
 
 [[_behavior_design]]
+[%nonfacing]
 == スコアやフレームの状態を調べる
 
 [.lead]

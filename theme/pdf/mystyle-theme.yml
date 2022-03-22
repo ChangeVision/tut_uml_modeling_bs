@@ -127,8 +127,8 @@ heading:
   margin_bottom: $vertical_rhythm * 0.9
 
 # カスタマイズしたライブラリだとChapterタイトルも字下げされてしまう
-# section:
-#   indent: [7mm, 0]
+section:
+  indent: [7mm, 0]
 
 title_page:
   align: center
