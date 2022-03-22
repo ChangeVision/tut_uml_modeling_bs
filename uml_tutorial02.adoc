@@ -3,8 +3,7 @@ include::front_matter.adoc[]
 endif::[]
 
 [[_structure_design]]
-[%nonfacing]
-== スコアシートのデータ構造を調べる
+== スコアシートの構造を調べる
 
 [.lead]
 ボウリングのゲームスコアを記録するスコアシートは、どのような要素で構成されているでしょうか。

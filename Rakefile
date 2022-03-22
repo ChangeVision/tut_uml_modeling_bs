@@ -17,8 +17,10 @@ CSS_FILE_PATH = "#{CSS_DIR}/#{CSS_FILE}"
 ADOCS = FileList['**/*.adoc'].exclude(/^vendor/).exclude(/^lib/)
 TARGET_ADOCS = ['uml_tutorial.adoc'].freeze
 
+# マルチパートで生成される（そのためadocと対応しない）HTMLのリスト
+MULTI_HTMLS = FileList['**/_*.html']
 # adocから生成するファイルのリスト（ADOCSの拡張子を変換している）
-HTMLS = ADOCS.ext('html')
+HTMLS = ADOCS.ext('html') + MULTI_HTMLS
 PDFS = ADOCS.ext('pdf')
 
 THEME_DIR = 'theme/pdf'

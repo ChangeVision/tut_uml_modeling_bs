@@ -71,22 +71,22 @@ class Section
     sectnumlevels = (@document.attr 'sectnumlevels', 3).to_i
     if @numbered && !@caption && slevel <= sectnumlevels
       # 番号付きヘッダ
-      # p "a:#{sectnum} #{title}"
+      # "#{sectnum} #{title} --a"
       "#{sectnum} #{title}"
     else
       # 付録など
       if @numbered && slevel <= sectnumlevels
         caption = (@document.attr 'appendix-caption')
         if caption and @sectname == 'appendix'
-          # p %(b:#{caption}#{sectnum}: #{title})
+          # %(#{caption}#{sectnum}: #{title} --b)
           %(#{caption}#{sectnum}: #{title})
         else
-          # p "c:#{sectnum} #{title}"
+          # "#{sectnum} #{title} --c"
           "#{sectnum} #{title}"
         end
       else
         # 番号なしヘッダ
-        # p "d:#{title}"
+        # #{title} --d"
         title
       end
     end

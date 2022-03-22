@@ -3,7 +3,6 @@ include::front_matter.adoc[]
 endif::[]
 
 [[_structure_design]]
-[%nonfacing]
 == スコアの構造を図にする
 
 [.lead]

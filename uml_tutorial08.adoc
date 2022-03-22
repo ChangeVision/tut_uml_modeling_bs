@@ -3,7 +3,6 @@ include::front_matter.adoc[]
 endif::[]
 
 [[_model_to_code_translation]]
-[%nonfacing]
 == モデルからコードを得る
 
 実装に使うクラス図とステートマシン図が作成できたので、これらを参照して実装コードを作成しましょう。

@@ -1,8 +1,8 @@
 :encoding: utf-8
 :lang: ja
 :doctype: book
-:media: screen
-:doctitle: モデルを使ってソフトウェアを開発しよう
+:media: prepress
+:doctitle: モデルを使ってソフトウェアを開発しよう: UMLチュートリアル
 :author: 株式会社チェンジビジョン
 :description: この文書は、モデリングツールにastah*を使って、ソフトウェアの開発にUMLを使う方法について学ぶチュートリアルです。
 // revnumberは別途、文書に応じて revnumber.adocを読み込む
@@ -44,8 +44,8 @@ include::attributes.adoc[]
 :ruby-version: 2.7.2
 
 // 部、章の体裁を変更 lib/heading-treeprocessor.rb を使う
-// :part-label: 第%s部
-:part-label: Part %s
+:part-label: 第%s部
+// :part-label: Part %s
 // :chapter-label: 第%s章
 :chapter-label: %s
 // :section-label: %s節  // これはやめておく

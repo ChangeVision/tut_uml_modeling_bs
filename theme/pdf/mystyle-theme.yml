@@ -99,23 +99,24 @@ heading:
   font_color: 2D466B
   font_family: GenShinGothic-P
   font_style: bold
+  chapter-break-before: always # auto
   # h1 is used for part titles (book doctype only)
   h1:
-    font_size: floor($base_font_size * 3.2)
+    font_size: floor($base_font_size * 3.0)
     font_color: 466B2D # 1872CC # 5D91DE # 2D466B
     font_style: bold_italic
   h2:
-    font_size: floor($base_font_size * 2.8)
-    font_color: 6B522D # 125699 # 4D78B8 # 2D466B
-    font_style: bold_italic
+    font_size: floor($base_font_size * 2.2)
+    font_color: 6B522D  # 125699 # 4D78B8 # 2D466B
+    # font_style: bold_italic
   h3:
-    font_size: round($base_font_size * 2.4)
+    font_size: round($base_font_size * 2.0)
     font_color: 2D466B # 297acc # 0F4780   # 3D5F91 #2D466B
   h4:
-    font_size: round($base_font_size * 2.0)  # $base_font_size_large
+    font_size: round($base_font_size * 1.6)  # $base_font_size_large
     font_color: 2D466B # 528fcc # 1564B3 # 2D466B # 2D466B
   h5:
-    font_size: round($base_font_size * 1.6)
+    font_size: round($base_font_size * 1.4)
     font_color: 2D466B # 7aa3cc # 0C3966  # 203d4d # 2D466B
   h6:
     font_size: $base_font_size
@@ -125,28 +126,31 @@ heading:
   margin_top: $vertical_rhythm * 0.9
   margin_bottom: $vertical_rhythm * 0.9
 
+# カスタマイズしたライブラリだとChapterタイトルも字下げされてしまう
+# section:
+#   indent: [7mm, 0]
+
 title_page:
   align: center
   background_color: DAF0EA
   title:
     top: 20%
     font_family: $heading_font_family
-    font_size: 20pt # $heading_h1_font_size
+    font_size: 26pt # $heading_h1_font_size
     font_style: bold
     font_color: 2D466B # 592C68  # 999999
     line_height: 1.1  # 0.9
-    margin_bottom: 1.0cm
   subtitle:
-    font_size: 26pt  # $heading_h3_font_size
+    font_size: 20pt  # $heading_h3_font_size
     font_family: $heading_font_family
     font_style: bold
     font_color: 6B522D # 592C68
     line_height: 1.2
-    margin_bottom: 10.0cm
+    margin_top: $base_font_size * 1.5
   authors:
     font_size: 20pt  # $heading_h3_font_size
     font_family: $heading_font_family
-    margin_top: $base_font_size * 1.25
+    margin_top: 12.0cm
   revision:
     font_size: 14pt  # $heading_h3_font_size
     margin_top: $base_font_size * 1.25
@@ -160,9 +164,10 @@ caption:
   margin_outside: 0
 lead:
   font_family: GenShinGothic-P
-  font_size: $base_font_size
+  font_size: $base_font_size * 1.1
   line_height: 1.4
   font_color: 466B2D # 6B522D # 800000
+  background_color: F2F2F2 #  ECF8F5  # eeeeee  
 abstract:
   font_family: GenShinGothic-P
   font-color: 466B2D # 5c6266
@@ -208,7 +213,8 @@ code:
   padding: $code_font_size
   line_height: 1.25
   line_gap: 3.8
-  background_color: EAF5FA  # f5f5f5
+  # highlight-background-color: ffff00 # rouge ではこれらしいが、効き目がない？
+  # background_color: E5F1FA # f5f5f5
   border_color: ADD7EB # cccccc
   border_radius: 8
   border_width: 0.75

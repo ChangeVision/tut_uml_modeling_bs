@@ -7,18 +7,18 @@
 <meta name="generator" content="Asciidoctor 2.0.17">
 <meta name="description" content="この文書は、モデリングツールにastah*を使って、ソフトウェアの開発にUMLを使う方法について学ぶチュートリアルです。">
 <meta name="author" content="株式会社チェンジビジョン">
-<title>モデルを使ってソフトウェアを開発しよう</title>
+<title>モデルを使ってソフトウェアを開発しよう: UMLチュートリアル</title>
 <link rel="stylesheet" href="css/mystyle.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/rouge-custom.css">
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
-<h1>モデルを使ってソフトウェアを開発しよう</h1>
+<h1>モデルを使ってソフトウェアを開発しよう: UMLチュートリアル</h1>
 <div class="details">
 <span id="author" class="author">株式会社チェンジビジョン</span><br>
-<span id="revnumber">バージョン html_0544,</span>
-<span id="revdate">2022-03-21</span>
+<span id="revnumber">バージョン html_0607,</span>
+<span id="revdate">2022-03-22</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">目次</div>
@@ -44,7 +44,7 @@
 <li><a href="#_ボウリングのスコアのつけ方">1.4 ボウリングのスコアのつけ方</a></li>
 </ul>
 </li>
-<li><a href="#_structure_design">2 スコアシートのデータ構造を調べる</a>
+<li><a href="#_structure_design">2 スコアシートの構造を調べる</a>
 <ul class="sectlevel2">
 <li><a href="#_スコアシートの構造をオブジェクト図で表す">2.1 スコアシートの構造をオブジェクト図で表す</a></li>
 <li><a href="#_スコアシートの構造をクラス図で表す">2.2 スコアシートの構造をクラス図で表す</a></li>
@@ -722,7 +722,7 @@ astah* では、複数のモデル図をまとめたモデルファイルを「�
 </div>
 </div>
 <div class="sect1">
-<h2 id="_structure_design"><a class="anchor" href="#_structure_design"></a>2 スコアシートのデータ構造を調べる</h2>
+<h2 id="_structure_design"><a class="anchor" href="#_structure_design"></a>2 スコアシートの構造を調べる</h2>
 <div class="sectionbody">
 <div class="paragraph lead">
 <p>ボウリングのゲームスコアを記録するスコアシートは、どのような要素で構成されているでしょうか。
@@ -4302,13 +4302,13 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <p>残るは、複数名のスコアのセットで構成される「Game」と、複数の「Game」を記録する「ScoreSheet」クラスです。</p>
 </div>
 <div class="sect3">
-<h4 id="_ボウリングのゲーム方式"><a class="anchor" href="#_ボウリングのゲーム方式"></a>4.5.1 ボウリングのゲーム方式</h4>
+<h4 id="_ヨーロピアン方式とアメリカン方式"><a class="anchor" href="#_ヨーロピアン方式とアメリカン方式"></a>4.5.1 ヨーロピアン方式とアメリカン方式</h4>
 <div class="paragraph">
 <p>ボウリングを複数名で楽しむとき、みなさんはたいてい、1組のチームで1つのレーンを使って、1フレームごとにプレーヤーが交代しながらプレイします。
 このようなゲームの方式は、「ヨーロピアン方式」と呼ばれています。</p>
 </div>
 <div class="paragraph">
-<p>別の方式として、ボールラック（ボールが返ってくるラック）をはさんだ2つのレーンを、1フレームごとに交互に使ってプレーする方式があります。
+<p>別の方式として、ボールラック（ボールが返ってくるラック）を挟んだ2つのレーンを、1フレーム交代で使ってプレーする方式があります。
 このようなゲームの方式は「アメリカン方式」と呼ばれています。</p>
 </div>
 <div class="paragraph">
@@ -5477,12 +5477,35 @@ Game(id:zwBxlorJlog) is finished.
 </tr>
 </table>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="注記"></i>
+</td>
+<td class="content">
+下記ファイル名を、提供方法に応じた配布先がわかるリンクに改める。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>動作を確認できるよう、テストプログラムを実行した様子を収めた動画を用意しました。</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">テストプログラムを実行した動画</dt>
+<dd>
+<p><code>score_rb_demo_win_yyyymmdd.mp4</code> 、 <code>score_rb_demo_mac_yyyymmdd.mov</code></p>
+</dd>
+</dl>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_まとめ_4"><a class="anchor" href="#_まとめ_4"></a>5.3 まとめ</h3>
 <div class="paragraph">
 <p>作成したプログラムを、テストコードを使って動かしてみました。
-テストした結果、作成したモデル（クラス図やステートマシン図）に従って動作していることが確認できました。</p>
+テストした結果、作成したプログラムが、モデル（クラス図やステートマシン図）に従って動作していることを確認できました。</p>
 </div>
 </div>
 </div>
@@ -5608,11 +5631,11 @@ UMLには他にも多くの図の記法が提供されています。
 <h2 id="_colophon"><a class="anchor" href="#_colophon"></a>奥付</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>「モデルを使ってソフトウェアを開発しよう」</p>
+<p>「モデルを使ってソフトウェアを開発しよう: UMLチュートリアル」</p>
 </div>
 <div class="paragraph">
-<p>発行日 : 2022-03-21<br>
-バージョン : html_0544<br>
+<p>発行日 : 2022-03-22<br>
+バージョン : html_0607<br>
 作成者 : 株式会社チェンジビジョン<br>
 本書の内容に関する質問等がありましたら、作成者までお知らせください。</p>
 </div>
@@ -5621,8 +5644,8 @@ UMLには他にも多くの図の記法が提供されています。
 </div>
 <div id="footer">
 <div id="footer-text">
-バージョン html_0544<br>
-最終更新 2022-03-04 17:59:55 +0900
+バージョン html_0607<br>
+最終更新 2022-03-22 04:37:21 +0900
 </div>
 </div>
 <script type="text/x-mathjax-config">
