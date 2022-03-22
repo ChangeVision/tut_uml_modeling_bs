@@ -8,7 +8,8 @@
 ## 文書生成に関するメモ
 
 * asciidoctor-pdfを 1.6.2にしたことで、生成されるPDFやオプションが変わった。
-   -  それに伴いカスタマイズのためのasciidoctor-pdf-extensions.rbを使うのをやめた、
+   - それに伴いカスタマイズのためのasciidoctor-pdf-extensions.rbを使うのをやめた、
+   - 段落のインデントが使えるようになったので、本文全体で段落の左側にインデントをつけた。
 * mediaをprepressにして、chapterにnonfacingオプションをつけて生成した（見開きレイアウトだが、空きページなし）。
 * マルチページのHTMLを生成するようになった。
    - その代わり、adocと生成するHTMLが対応しないので、生成時にclobberが必要となる場合が生じている。
