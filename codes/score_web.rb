@@ -21,9 +21,14 @@ class BowlingWeb
   end
 
   def add_handler_procs
-    entry_proc
+    reegister_player_proc
     start_game_proc
     update_score_proc
+  end
+
+  def register_player_proc
+    @server.mount_proc('/register_player') do |req, res|
+    end
   end
 
   def start_game_proc

@@ -2,19 +2,18 @@
 <html lang="ja">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
   <link rel="stylesheet" type="text/css" href="default.css">
   <title>ボウリングスコア</title>
 </head>
 <body>
-  <h1>新しいゲームの開始</h1>
-  <h2>
+  <h1>
     <img src="bowling_ball.png" alt="ボウリングのボール" title="ボウリングのボール" width="32px" valign="middle">
     プレーヤーの登録
-  </h2>
-  <h3>これはH3</h3>
+  </h1>
   <p id="links"><a href="list.erb">履歴一覧の表示</a>｜
     <a href="index.html">メニュー画面に戻る</a></p> 
-  <p id="msg">プレーヤー名を入力して、「ゲームを開始する」を押してください</p>
+  <p id="msg">プレーヤーの氏名、表示名を入力して「プレーヤーを登録するする」を押してください。</p>
   <hr>
   <form method="post" action="start_game" name="new_game_form">
     <table>
@@ -23,7 +22,7 @@
         <td><input type="text" name="name" value="なまえ" />
         </td>
     </table>
-    <button class="exec_btn" type="submit">ゲームを開始する</button>
+    <button class="exec_btn" type="submit">プレーヤーを登録する</button>
   </form>
   <hr>
 </body>
