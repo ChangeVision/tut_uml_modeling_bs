@@ -1,84 +1,101 @@
 body {
-       background-color: honeydew;
-       font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
-}
-
-* {
-  margin-left : 0.5em;
-  margin-right : 0.5em;
+  background-color: #F1FAEE;
+  font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
+  margin-left : 1em;
+  margin-right : 1em;
 }
 
 p {
-  color: gray90;
+  font-size: 1em;
+  color: #564D53;
+  line-height: 1.5;
 }
 
 h1, h2, h3 {
-    border-width : 0 0 0 8px;
-    border-style : solid;
+  border-style : solid;
 }
 
 h1 {
-    margin: 0.5em 0em 0em 0em;
-    font-size : 1.4em;
-    color : #b7106c; /* maroon; white; */
-    border-color : #fff8dc;
-    background-color : #b5cccc; /* #9cb4b4; #c8ad86; #49dd5a; maroon; */
-    border-width: 0.1em 0em 0.1em 0.1em;
-    padding-top : 0.3em;
-    padding-bottom : 0.3em;
+  font-size: 1.8em;
+  border-width: 0 0 0 0;
+  color: #F1FAEE;
+  background-color: #294B7A;
+  padding-left: 0.3em;
+  padding-top: 0.1em;
+  padding-bottom: 0.1em;
 }
 
 h2 {
-    border-width : 0 0 0 0px; /* for bowling icon */
-    font-size : 1.2em;
-    color: navy;
-    border-color : navy;
-    padding-top : 0.4em;
-    padding-bottom : 0.4em;
-    display: inline-block;
+  font-size : 1.4em;
+  border-width: 0 0 0 0;
+  color: #325971;
+  padding-top : 0.2em;
+  padding-bottom : 0.2em;
+  display: inline-block;
 }
 
 h2.alert {
-    background: darksalmon;
+  background: darksalmon;
 }
 
 h3 {
-    font-size : 1em;
-    color : darkgreen;
-    border-color : darkgreen
+  border-width : 0 0 0 0.5em;
+  font-size : 1.2em;
+  color : #348183;
+  border-color : #348183;
+  padding-top : 0.1em;
+  padding-bottom : 0.1em;
+  padding-left : 0.5em;
 }
 
 table {
-    border-width : 1px,2px,2px,1px;
-    border-type : solid;
-    border-color : gray;
-    padding : 0;
-    background-color : gray;
+  border-width : 1px,2px,2px,1px;
+  border-type : solid;
+  border-color : gray;
+  padding : 0;
+  background-color : gray;
 }
 
 .report {
-    width: 80%;
-    margin-bottom: 16px;
+  width: 80%;
+  margin-bottom: 16px;
 }
 
 th, td {
-    border-width : 1px,0px,0px,1px;
-    border-type : solid;
-    border-color : gray;
-    padding : 4px;
-    background-color : #ffffef;
+  color: #564D53;
+  border-width : 1px,0px,0px,1px;
+  border-type : solid;
+  border-color : gray;
+  padding : 4px;
+  background-color : #ffffef;
 }
 
 th {
-    text-align : center;
-    font-weight : bold;
-    background-color : #a0b8c8;
+  text-align : center;
+  font-weight : normal;
+  background-color : #a0b8c8;
 }
+
+td.alert {
+  background-color: darksalmon;
+}
+
+button, input, select, textarea {
+  font-family : inherit;
+  font-size   : 100%;
+  color: #564D53;
+}
+
+/*}
 
 .itemname {
-   width: 80px;
+  font-size: 1em;
+  width: 80px;
 }
+*/
 
 .exec_btn {
-  margin: 5px;
+  width: auto;
+  margin: 10px;
 }
+

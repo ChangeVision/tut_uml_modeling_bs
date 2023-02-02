@@ -3,6 +3,7 @@
 require 'webrick'
 require 'erb'
 require 'open3'
+require 'bcrypt'
 require_relative 'score'
 
 # Web Server for Bowling Scoring.
@@ -21,13 +22,54 @@ class BowlingWeb
   end
 
   def add_handler_procs
-    reegister_player_proc
+    register_player_proc
     start_game_proc
     update_score_proc
   end
 
+  def validate_username(name)
+    ret = name.empty? ||
+          name.length < 4 || name.length > 16 ||
+          name !~ /\A[a-z0-9]+\z/ || !name.start_with?(/[a-z]/)
+    !ret
+  end
+
+  def validate_player_name(name)
+    ret = name.empty? || name.length < 4 || name.length > 16
+    !ret
+  end
+
+  def validate_password(pwd)
+    ret = pwd.empty? ||
+          pwd.length < 6 || pwd.length > 16 ||
+          pwd !~ /\A[a-z0-9]+\z/
+    !ret
+  end
+
   def register_player_proc
     @server.mount_proc('/register_player') do |req, res|
+      msg = {
+        'username' => 'ユーザー名は半角で英小文字から始まり英小文字数字の組み合わせで4文字以上16文字までです。',
+        'player_name' => 'プレーヤー名は4文字上16文字までです。',
+        'password' => 'パスワードは半角6文字以上16文字以内です。'
+      }
+      p req.query
+      username = req.query['username'].force_encoding('UTF-8')
+      msg['username'] = 'OK.' if validate_username(username)
+      player_name = req.query['player_name'].force_encoding('UTF-8')
+      msg['player_name'] = 'OK.' if validate_player_name(player_name)
+      password = req.query['password'].force_encoding('UTF-8')
+      msg['password'] = 'OK.' if validate_password(password)
+      admin = req.query['amdin']
+      p msg
+      if msg.count('OK.') < 3
+        erb = 'register_player_error.erb'
+      else
+        erb = 'registered_player.erb'
+        hashed_password = BCrypt::Password.create(password)
+      end
+      template = ERB.new(File.read(erb))
+      res.body << template.result(binding)
     end
   end
 

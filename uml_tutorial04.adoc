@@ -181,7 +181,7 @@ image::frame_stm03.png[{full-width}]
 
 [[frame_stm04]]
 .「Frame」クラスのステートマシン図に2投目の後の状態遷移とイベントを追加する
-image::frame_stm04.png[{full-width}]
+image::frame_stm04_proc_marked.png[{full-width}]
 
 これで、フレームのステートマシン図が作成できました。
 
@@ -907,4 +907,3 @@ image::GSW-20220224-174042.png[{full-width}]
 
 この記事では、モデル変換の繰り返しによる開発方法であることや、その実施例を紹介しています。
 ****
-

@@ -597,7 +597,7 @@ div.unbreakable { page-break-inside: avoid; }
 
 .aqua { color: #00bfbf; }
 
-.aqua-background { background-color: #00fafa; }
+.aqua-background { background-color: ##00fafa; }
 
 .black { color: black; }
 
@@ -701,7 +701,8 @@ li.L5, li.L6, li.L7, li.L8
 
 h1 { font-weight: bold; }
 
-code { font-size: 1.2em }
+pre, pre > code { font-size: 1.2em; font-family: "RictyDiminished", "Ubuntu Mono", "Inconsolata", monospace; font-weight: 400; color: #703f1c; aqua-background }
+
 lineno { font-size: 1.2em }
 table.linenotable { margin: 0 }
 pre.rouge.highlight {  padding: 0 }
