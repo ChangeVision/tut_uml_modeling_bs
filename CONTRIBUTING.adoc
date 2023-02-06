@@ -40,7 +40,21 @@ Asciidoctor Documentation Site:: https://docs.asciidoctor.org/
 .このリポジトリのディレクトリ構成
 [source,text]
 ----
-include::./tree.txt[]
+├── _xxxxx.html # <1>
+├── appendix-01.adoc # <2>
+├── bibliography.adoc # <3>
+├── codes # <4>
+├── css # <5>
+├── glossary.adoc # <6>
+├── images # <7>
+├── models # <8>
+├── preface.adoc # <9>
+├── theme # <10>
+├── uml_tutorial.adoc # <11>
+├── uml_tutorial.html # <12>
+├── uml_tutorial.pdf  # <13>
+├── uml_xxxxxxxx.adoc # <14>
+└── uml_tutorial_full.html # <15>
 ----
 <1> `_` から始まるHTMLファイルは、分割生成された形式のテキストのHTMLファイル
 <2> 付録（コードや動画へのリンクなど）
