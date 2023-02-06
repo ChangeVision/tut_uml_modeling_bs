@@ -2,7 +2,7 @@
 :lang: ja
 :doctype: book
 :media: prepress
-:doctitle: モデルを使ってソフトウェアを開発しよう: UMLチュートリアル
+:doctitle: モデルを使ってソフトウェアを開発しよう: UML初学者向けチュートリアル
 :author: 株式会社チェンジビジョン
 :description: この文書は、モデリングツールにastah*を使って、ソフトウェアの開発にUMLを使う方法について学ぶチュートリアルです。
 // revnumberは別途、文書に応じて revnumber.adocを読み込む
