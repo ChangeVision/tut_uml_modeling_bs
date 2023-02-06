@@ -15,7 +15,7 @@ CSS_FILE_PATH = "#{CSS_DIR}/#{CSS_FILE}"
 
 # htmlやpdfを作成したいadocファイルのリスト（ALL_IMAGE_DIRS のように列挙したり、要素を追加してもよい）
 ADOCS = FileList['**/*.adoc'].exclude(/^vendor/).exclude(/^lib/)
-TARGET_ADOCS = ['uml_tutorial.adoc'].freeze
+TARGET_ADOCS = ['tut_uml_modeling_bs.adoc'].freeze
 
 # マルチページで生成される（そのためadocと対応しない）HTMLのリスト
 MULTI_HTMLS = FileList['**/_*.html']
@@ -46,13 +46,13 @@ desc 'Build multi/full HTML and PDF file'
 task :default => [:html_full, :html, :pdf]
 
 desc 'Build full(one file) HTML files'
-task :html_full => "uml_tutorial_full.html"
+task :html_full => "tut_uml_modeling_bs_full.html"
 
 desc 'Build multi part HTML files'
-task :html => "uml_tutorial.html"
+task :html => "tut_uml_modeling_bs.html"
 
 desc 'Build main PDF files'
-task :pdf => "uml_tutorial.pdf"
+task :pdf => "tut_uml_modeling_bs.pdf"
 
 # rule ".html" => ".adoc" do |t|  # このルールでは対応するadocの更新しか認識できない
 #   make_html( t.source, t.name )

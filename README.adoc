@@ -6,10 +6,12 @@
 
 == チュートリアルの文書の取得
 
-PDF版やHTML版（HTMLと付随の画像等をまとめたもの）は、link:releases[リリースページ] から取得できます。
+PDF版やHTML版（HTMLと付随の画像等をまとめたもの）は、リリースページから取得できます。
 
-PDF:: tut-uml-modeling-bs.pdf
-HTML:: tut-uml-modeling-bs.zip
+* https://github.com/ChangeVision/tutorial-bowling-score-modeling/releases[リリースページ]
+
+PDF:: tut_uml_modeling_bs.pdf
+HTML:: tut_uml_modeling_bs.zip
 
 HTMLについては、zipファイルを取得後、展開したフォルダ内のファイルをウェブブラウザを使って参照してください。
 
