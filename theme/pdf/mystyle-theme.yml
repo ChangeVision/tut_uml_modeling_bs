@@ -167,7 +167,7 @@ lead:
   font_size: $base_font_size * 1.1
   line_height: 1.4
   font_color: 466B2D # 6B522D # 800000
-  background_color: F2F2F2 #  ECF8F5  # eeeeee  
+  background_color: F2F2F2 #  ECF8F5  # eeeeee
 abstract:
   font_family: GenShinGothic-P
   font-color: 466B2D # 5c6266
@@ -281,19 +281,19 @@ header:
   vertical_align: bottom
   recto:
     left:
+      content: image:ChangeVision_Logo.png[width=88]  # theme/pdf に置く
       # content: '{section-or-chapter-title} | {page-number}'
       # content: '{section-or-chapter-title}'
-      content: '{section-title}'
     right:
-      content: image:ChangeVision_Logo.png[width=88]  # theme/pdf に置く
+      content: '{section-title}'
   verso:
     left:
+      content: '{chapter-title}'
+    right:
       content: image:ChangeVision_Logo.png[width=88]  # theme/pdf に置く
-      right:
       # content: $header_recto_right_content
       # content: '{section-or-chapter-title}'
       # content: '{document-title}'
-      content: '{chapter-title}'
 footer:
   font_size: $base_font_size_small
   font_family: GenShinGothic-P-L
