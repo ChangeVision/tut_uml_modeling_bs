@@ -7,6 +7,7 @@
 // ifdef::backend-html5,
 ifdef::backend-html5,backend-multipage_html5[]
 :twoinches: width='360'
+:oneinch: width='180'
 :full-width: width='100%'
 :ten-width: width='10%'
 :quarter-width: width='25%'
@@ -17,6 +18,7 @@ ifdef::backend-html5,backend-multipage_html5[]
 endif::[]
 ifdef::backend-pdf[]
 :twoinches: pdfwidth='2in'
+:oneinch:  pdfwidth='1in'
 :full-width: pdfwidth='100%'
 :ten-width: pdfwidth='10%'
 :quarter-width: pdfwidth='25%'
@@ -27,6 +29,7 @@ ifdef::backend-pdf[]
 endif::[]
 ifdef::backend-docbook5[]
 :twoinches: width='50mm'
+:oneinch:  width='25mm'
 :full-width: scaledwidth='100%'
 :ten-width: scaledwidth='10%'
 :quarter-width: scaledwidth='25%'
