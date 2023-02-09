@@ -709,3 +709,6 @@ pre.rouge.highlight {  padding: 0 }
 
 .sidebarblock > .content > .title { font-size: 1.0em; font-weight: bold; }
 .olist > .title  { font-size: 1.0em; color: #703f1c;  font-weight: bold; }
+
+.imageblock > .title { color: #703f1c;}
+.listingblock > .title { color: #703f1c;}

@@ -159,7 +159,7 @@ caption:
   align: left
   font_size: $base_font_size
   font_family: GenShinGothic-P
-  font_color: 6B522D # 800000   # $literal_font_color
+  font_color: 703f1c # 466B2D # 6B522D # 800000   # $literal_font_color
   # margin_inside: $vertical_rhythm / 3
   margin_outside: 0
 lead:
@@ -243,6 +243,13 @@ sidebar:
     font_family: $heading_font_family
     font_size: 12pt  # $heading_h5_font_size
     font_style: $heading_font_style
+image:
+  border-color: cccccc
+  border-width: 2.0
+  caption:
+    align: left
+    color: inherit # 466B2D
+
 table:
   font_family: $heading_font_family
   background_color: $page_background_color
