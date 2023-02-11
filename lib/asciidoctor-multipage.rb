@@ -1,5 +1,4 @@
-# coding: utf-8
-
+# frozen_string_literal: true
 
 require 'asciidoctor/converter/html5'
 
@@ -81,7 +80,7 @@ class Asciidoctor::Section
   # Allow the section type (:root, :branch, :leaf) to be saved for each section
   attr_accessor :mplevel
   alias_method :xreftext_org, :xreftext
-  
+
   # Extend sectnum() to use the Document's saved sectnum. Document objects
   # normally do not have sectnums, but here Documents are generated from
   # Sections. The sectnum is saved in section() below.
