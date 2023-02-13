@@ -244,8 +244,8 @@ sidebar:
     font_size: 12pt  # $heading_h5_font_size
     font_style: $heading_font_style
 image:
-  border-color: cccccc
-  border-width: 2.0
+  # border-color: cccccc
+  # border-width: 2.0
   caption:
     align: left
     color: inherit # 466B2D
