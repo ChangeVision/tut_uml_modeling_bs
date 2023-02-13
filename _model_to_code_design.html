@@ -21,8 +21,8 @@
 <h1>モデルを使ってソフトウェアを開発しよう: UML初学者向けチュートリアル</h1>
 <div class="details">
 <span id="author" class="author">株式会社チェンジビジョン</span><br>
-<span id="revnumber">バージョン html_0643,</span>
-<span id="revdate">2023-02-08</span>
+<span id="revnumber">バージョン html_0700,</span>
+<span id="revdate">2023-02-13</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">目次</div>
@@ -84,43 +84,64 @@
 </table>
 </div>
 <div class="paragraph">
-<p>モデルとコードの対応づけを決めてそれを前提にして設計する（モデルを作る）ことは、実装に依存する情報と依存しない情報を分離することを促すため、実装に依存しないモデルを作るのに役立ちます。</p>
+<p>モデルとコードの対応づけを決めてそれを前提にして設計する（モデルを作る）ことは、実装に依存する情報と依存しない情報の分離を促します。
+また、このような考え方は、実装に依存しないモデルを作る上でとても重要で、実務的なモデルを作成する際にも大いに役立ちます。</p>
 </div>
 <div class="sect2">
 <h3 id="_対応づけ検討用モデルの作成"><a class="anchor" href="#_対応づけ検討用モデルの作成"></a>3.1 対応づけ検討用モデルの作成</h3>
 <div class="paragraph">
 <p>このチュートリアルでは実装にRubyを使うことにしました。
-そこで、対応づけの方式を検討するために、サンプルモデルとサンプルモデルに対応するRubyプログラムを作ってみましょう。</p>
+サンプルモデルとサンプルモデルに対応するRubyプログラムを作ってみることで、対応づけの方式の基本的な考え方を決めておこうというわけです。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="注記"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>この章で検討したいことは、ボウリングのスコアに関するモデルの問題領域とは直接の関係はありません。
+こういった別の領域の問題を、これまで検討していたボウリングのスコアに関する問題領域と、ここで検討したいことが混在してしまい、說明も受け取り手も混乱してしまうでしょう。
+そんなわけで、別の問題として分けて検討するために、この章を用意してあります。</p>
+</div>
+<div class="paragraph">
+<p>もし、この章の役割がピンとこない、実装についての議論にはあまり関心がないのであれば、最初はこの章を読み飛ばしてみてもかまいません。
+しかし、後の章へ進むと、実装する人がモデルを使う際には、モデルとコードを対応づける必要があり、ここで実装方式を決めておかなければ、実装者がそのことについて考える必要がある（特定の実装者に依存しないよう設計しておくべきことを実装する各人に委ねてしまっている）ことに気づくでしょう。
+そのときは、この章に戻って、どうして実装方式の設計が必要なのか考えてもらえたらと思います。</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="sect3">
 <h4 id="_対応づけ検討用プロジェクトを用意する"><a class="anchor" href="#_対応づけ検討用プロジェクトを用意する"></a>3.1.1 対応づけ検討用プロジェクトを用意する</h4>
 <div class="paragraph">
-<p>「モデルとコードの対応づけ」の検討用に、astah* で別のプロジェクトを作成しましょう。</p>
+<p>「モデルとコードの対応づけ」の検討用に astah* で別のプロジェクトを作成しましょう。</p>
 </div>
-<div class="olist arabic">
-<div class="title">対応づけ検討用プロジェクトを作成する</div>
-<ol class="arabic">
+<div class="sect4">
+<h5 id="_対応づけ検討用プロジェクトを作成する"><a class="anchor" href="#_対応づけ検討用プロジェクトを作成する"></a>対応づけ検討用プロジェクトを作成する</h5>
+<div class="ulist">
+<ul>
 <li>
 <p>astah* で新規プロジェクトを作成する。</p>
 </li>
 <li>
 <p>作成したプロジェクトをいったん保存する。</p>
-<div class="ulist">
-<ul>
+</li>
 <li>
 <p>モデルファイルの名前は「stm_sample.asta」とする。</p>
 </li>
 </ul>
 </div>
-</li>
-</ol>
 </div>
+<div class="sect4">
+<h5 id="add_stm_sample_class_diag"><a class="anchor" href="#add_stm_sample_class_diag"></a>検討用プロジェクトにクラス図を追加する</h5>
 <div class="paragraph">
 <p>プロジェクトが保存できたら、プロジェクトにクラス図を追加しましょう。</p>
 </div>
-<div id="add_stm_sample_class_diag" class="olist arabic">
-<div class="title">対応づけ検討用プロジェクトにクラス図を用意する</div>
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
 <p>構造ツリーで、プロジェクト名をクリックしてポップアップメニューを開く。</p>
 </li>
@@ -130,7 +151,7 @@
 <li>
 <p>プロパティーから、クラス図の名前を「クラス図」に変更する。</p>
 </li>
-</ol>
+</ul>
 </div>
 <div id="add_stm_sample00" class="imageblock">
 <div class="content">
@@ -138,21 +159,22 @@
 </div>
 <div class="title">図 3.1 対応づけの説明に使うプロジェクトにクラス図を追加した</div>
 </div>
+</div>
+<div class="sect4">
+<h5 id="add_sample_class00"><a class="anchor" href="#add_sample_class00"></a>クラス図に「Sample」クラスを追加する</h5>
 <div class="paragraph">
 <p>対応づけの説明用に、簡単なクラス「Sample」の定義から始めましょう。
 このクラスは、操作「Play」と属性「attr_a」「attr_b」を持つクラスとします。
 これをUMLのクラスとして表してみましょう。</p>
 </div>
-<div id="add_sample_class00" class="olist arabic">
-<div class="title">クラス図に「Sample」クラスを追加する</div>
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
 <p>パレットからクラスを選択し、クラス図に追加する。</p>
 </li>
 <li>
 <p>クラス名を「Sample」にする（ <a href="_model_to_code_design.html#sample_class01">図 3.2</a> ）。</p>
-<div class="ulist">
-<ul>
+</li>
 <li>
 <p>クラスに操作「play」を追加する。</p>
 </li>
@@ -161,30 +183,51 @@
 </li>
 </ul>
 </div>
-</li>
-</ol>
-</div>
 <div id="sample_class01" class="imageblock">
 <div class="content">
 <img src="images/GSW-20220212-220754.png" alt="GSW 20220212 220754" width="75%">
 </div>
 <div class="title">図 3.2 クラス図に「Sample」クラスを追加した</div>
 </div>
+</div>
+<div class="sect4">
+<h5 id="_sampleクラスの最初のサンプルコード"><a class="anchor" href="#_sampleクラスの最初のサンプルコード"></a>Sampleクラスの最初のサンプルコード</h5>
 <div class="paragraph">
-<p>これをRubyのコードで表すと <a href="_model_to_code_design.html#ruby_sample01">リスト 3.1</a> のようになります。</p>
+<p>対応づけルールの1つ目として、 <a href="_model_to_code_design.html#sample_class01">図 3.2</a> を表したRubyのコードは <a href="_model_to_code_design.html#ruby_sample01">リスト 3.1</a> のように書きたいと決めることにします。</p>
 </div>
 <div id="ruby_sample01" class="listingblock">
 <div class="title">リスト 3.1 【Ruby】「Sample」クラスを表すRubyのコード</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="ruby"><span class="k">class</span> <span class="nc">Sample</span>
-  <span class="k">def</span> <span class="nf">initialize</span>
-    <span class="vi">@attr_a</span> <span class="o">=</span> <span class="kp">true</span>
-    <span class="vi">@attr_b</span> <span class="o">=</span> <span class="kp">true</span>
+<pre class="rouge highlight"><code data-lang="ruby"><span class="k">class</span> <span class="nc">Sample</span> <i class="conum" data-value="1"></i><b>(1)</b>
+  <span class="k">def</span> <span class="nf">initialize</span> <i class="conum" data-value="2"></i><b>(2)</b>
+    <span class="vi">@attr_a</span> <span class="o">=</span> <span class="kp">true</span> <i class="conum" data-value="3"></i><b>(3)</b>
+    <span class="vi">@attr_b</span> <span class="o">=</span> <span class="kp">true</span> <i class="conum" data-value="3"></i><b>(3)</b>
   <span class="k">end</span>
 
-  <span class="k">def</span> <span class="nf">play</span>
+  <span class="k">def</span> <span class="nf">play</span> <i class="conum" data-value="4"></i><b>(4)</b>
   <span class="k">end</span>
 <span class="k">end</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>クラス「Sample」の定義の始まり</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>初期化メソッド（コンストラクタにあたるメソッド）</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>このクラスのインスタンス変数</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>メソッド「Play」の定義の始まり</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -199,13 +242,23 @@
 <p>そこで、「Sample」クラスに対して、操作「play」の振る舞いを表すステートマシン図を追加します。
 ここで、図を追加する対象を「Sample」クラスにしているのは、このステートマシン図が「Sample」クラスの振る舞いのモデル図であるとわかるようにするためです。</p>
 </div>
-<div id="add_stm_sample01" class="olist arabic">
-<div class="title">「Sample」クラスにステートマシン図を追加する</div>
-<ol class="arabic">
+<div class="sect4">
+<h5 id="add_stm_sample01"><a class="anchor" href="#add_stm_sample01"></a>クラスにステートマシン図を追加する</h5>
+<div class="paragraph">
+<p>「Sample」クラスにステートマシン図を追加します。</p>
+</div>
+<div class="ulist">
+<ul>
 <li>
-<p>構造ツリーから「Sample」クラスを選択し、右クリックしてポップアップメニューを表示する（ <a href="_model_to_code_design.html#add_stm_sample02">図 3.3</a> ）。</p>
+<p>構造ツリーから「Sample」クラスを選択する。</p>
 </li>
-</ol>
+<li>
+<p>右クリックしてポップアップメニューを表示する（ <a href="_model_to_code_design.html#add_stm_sample02">図 3.3</a> ）。</p>
+</li>
+<li>
+<p>「図の追加＞ステートマシン図」を選択すると、ステートマシン図が追加される。</p>
+</li>
+</ul>
 </div>
 <div id="add_stm_sample02" class="imageblock">
 <div class="content">
@@ -213,22 +266,15 @@
 </div>
 <div class="title">図 3.3 「Sample」クラスにステートマシン図を追加する</div>
 </div>
-<div class="olist arabic">
-<ol class="arabic" start="2">
-<li>
-<p>「図の追加＞ステートマシン図」でステートマシン図が追加される。</p>
 <div class="ulist">
 <ul>
 <li>
 <p>プロパティーから図の名前を編集し、「Sampleのplayのステートマシン図」とする（ <a href="_model_to_code_design.html#add_stm_sample03">図 3.4</a> ）。</p>
 </li>
 <li>
-<p>ダイアグラムエディタのタイトルやタブにも反映される。</p>
+<p>ダイアグラムエディタのタイトルやタブにも図の名前が反映される。</p>
 </li>
 </ul>
-</div>
-</li>
-</ol>
 </div>
 <div id="add_stm_sample03" class="imageblock">
 <div class="content">
@@ -251,6 +297,25 @@
 </dd>
 </dl>
 </div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="注記"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><a href="_model_to_code_design.html#add_stm_sample02">図 3.3</a> では、Sampleクラスの振舞いを表すステートマシン図とわかるようにと考えて、クラスに対してステートマシン図を割り当てました。
+この他、 astah* では、メソッドに対してステートマシン図を割り当てることもできます。
+任意のメソッドの処理を示すステートマシン図の割当てとしては、後者のほうが好ましいでしょう。
+ここでは、クラスの振舞いということを意識して、クラス図に割当ててみています。
+どちらの方法を使うにしても、クラスの振舞いを担当するメソッドを対応づけすることは必要になるでしょう。</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -1407,7 +1472,7 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 </div>
 <div id="footer">
 <div id="footer-text">
-バージョン html_0643<br>
+バージョン html_0700<br>
 最終更新 2023-02-06 13:59:37 +0900
 </div>
 </div>

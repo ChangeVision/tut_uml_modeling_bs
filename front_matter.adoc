@@ -27,6 +27,7 @@
 :toclevels: 2
 :toc: left
 :pagenums:
+// :sectnumlevels: 4
 
 include::image_size_matter.adoc[]
 include::attributes.adoc[]

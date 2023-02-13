@@ -20,8 +20,8 @@
 <h1>モデルを使ってソフトウェアを開発しよう: UML初学者向けチュートリアル</h1>
 <div class="details">
 <span id="author" class="author">株式会社チェンジビジョン</span><br>
-<span id="revnumber">バージョン html_0643,</span>
-<span id="revdate">2023-02-08</span>
+<span id="revnumber">バージョン html_0700,</span>
+<span id="revdate">2023-02-13</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">目次</div>
@@ -149,68 +149,74 @@ Rubyになじみがない人は、公式サイトにある次のようなペー�
 <div class="sect2">
 <h3 id="_演習用のプロジェクトを用意する"><a class="anchor" href="#_演習用のプロジェクトを用意する"></a>1.3 演習用のプロジェクトを用意する</h3>
 <div class="paragraph">
-<p>業務やシステムを分析（あるいは設計）するときは、たいてい複数のモデル図を作成します。
-それは、大きな問題ならば分割して小さな問題として捉えるほうが整理しやすいからです。
-また、関心事によって表すもの（モデルに残すものや削るもの）が変わるからです。
-astah* では、複数のモデル図をまとめたモデルファイルを「プロジェクト」と呼んでいます。</p>
+<p>業務やシステムを分析（あるいは設計）するときにUMLのモデル図を使う場合、モデリングの対象のいくつかの側面について、それぞれに向いた図を作成することが一般的です。</p>
 </div>
 <div class="paragraph">
-<p>それでは、演習用のプロジェクトを用意しましょう。</p>
+<p>複数の図で表すのは、大きな問題ならば分割して小さな問題として捉えるほうが整理しやすいからです。
+たとえば、システム全体の構造と、その内部のある構成要素の内部の構造を別の図に分けることができるでしょう。
+また、関心事によって表すもの（モデルに残すものや削るもの）が変わるからです。
+たとえば、あるシステムを設計するのに、構造を表すためにクラス図を使い、振舞いを表すのにシーケンス図やステートマシン図使うといったことです。</p>
 </div>
-<div id="create_proj01" class="olist arabic">
-<div class="title">演習で使うプロジェクトを作成する</div>
-<ol class="arabic">
+<div class="paragraph">
+<p>astah* でも、モデリングの対象に関連した複数の図をまとめて扱えるよう、ひとまとまりのファイルに保存します。astah* では、この複数の図のまとまりのことを「プロジェクト」と呼んでいます。</p>
+</div>
+<div class="sect3">
+<h4 id="create_proj01"><a class="anchor" href="#create_proj01"></a>1.3.1 astah* のプロジェクトを作成する</h4>
+<div class="paragraph">
+<p>それでは、演習用に astah* のプロジェクトを用意しましょう。</p>
+</div>
+<div class="ulist">
+<ul>
 <li>
 <p>astah* を起動する。</p>
 </li>
 <li>
 <p>「ファイル」メニューから「プロジェクトの新規作成」を選択する（ <a href="_preparation.html#create_project01">図 1.1</a> ）。</p>
 </li>
-</ol>
+</ul>
 </div>
-<div id="create_project01" class="imageblock">
+<div id="create_project01" class="imageblock right">
 <div class="content">
 <img src="images/GSW-20220206-131611.png" alt="GSW 20220206 131611" width="75%">
 </div>
 <div class="title">図 1.1 新しいプロジェクトを作成する</div>
 </div>
-<div class="olist arabic">
-<ol class="arabic" start="3">
+<div class="ulist">
+<ul>
 <li>
 <p>「no_title」という名前で新しいプロジェクトが作成される（ <a href="_preparation.html#create_project02">図 1.2</a> ）。</p>
 </li>
-</ol>
+</ul>
 </div>
-<div id="create_project02" class="imageblock">
+<div id="create_project02" class="imageblock right">
 <div class="content">
 <img src="images/GSW-20220206-131639.png" alt="GSW 20220206 131639" width="75%">
 </div>
 <div class="title">図 1.2 新しいプロジェクトが作成された</div>
 </div>
-<div class="olist arabic">
-<ol class="arabic" start="4">
-<li>
-<p>「ファイル」メニューから「プロジェクトを保存」を選択する（ <a href="_preparation.html#create_project03">図 1.3</a> ）。</p>
+</div>
+<div class="sect3">
+<h4 id="create_proj02"><a class="anchor" href="#create_proj02"></a>1.3.2 作成したプロジェクトを保存する</h4>
+<div class="paragraph">
+<p>新規プロジェクトを作成したら、最初に保存しておき、それからモデルの作成に入るようにするとよいでしょう。</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>「保存」ダイアログが開く。</p>
+<p>「ファイル」メニューから「プロジェクトを保存」を選択する（ <a href="_preparation.html#create_project03">図 1.3</a> ）。</p>
 </li>
 </ul>
 </div>
-</li>
-</ol>
-</div>
-<div id="create_project03" class="imageblock">
+<div id="create_project03" class="imageblock right">
 <div class="content">
 <img src="images/GSW-20220206-131657.png" alt="GSW 20220206 131657" width="75%">
 </div>
 <div class="title">図 1.3 新しいプロジェクトを保存する</div>
 </div>
-<div class="olist arabic">
-<ol class="arabic" start="5">
+<div class="ulist">
+<ul>
 <li>
-<p>プロジェクトの保存場所と保存するファイル名を指定する。</p>
+<p>「保存」ダイアログが開くので、プロジェクトの保存場所と保存するファイル名を指定する。</p>
 <div class="ulist">
 <ul>
 <li>
@@ -222,34 +228,22 @@ astah* では、複数のモデル図をまとめたモデルファイルを「�
 </ul>
 </div>
 </li>
-</ol>
+</ul>
 </div>
-<div id="create_project04" class="imageblock">
+<div id="create_project04" class="imageblock right">
 <div class="content">
 <img src="images/GSW-20220206-131840.png" alt="GSW 20220206 131840" width="75%">
 </div>
 <div class="title">図 1.4 ダイアログを操作してプロジェクトを保存する場所とプロジェクトファイル名を指定する</div>
 </div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="ヒント"></i>
-</td>
-<td class="content">
-新規プロジェクトを作成したら、このように、モデルを作成する前に名前をつけて保存しておくとよいでしょう。
-</td>
-</tr>
-</table>
-</div>
-<div class="olist arabic">
-<ol class="arabic" start="6">
+<div class="ulist">
+<ul>
 <li>
 <p>保存すると、プロジェクトファイルにつけた名前が「構造ツリー」に反映される（ <a href="_preparation.html#create_project05">図 1.5</a> ）。</p>
 </li>
-</ol>
+</ul>
 </div>
-<div id="create_project05" class="imageblock">
+<div id="create_project05" class="imageblock right">
 <div class="content">
 <img src="images/GSW-20220206-131907.png" alt="GSW 20220206 131907" width="75%">
 </div>
@@ -276,6 +270,7 @@ astah* では、複数のモデル図をまとめたモデルファイルを「�
 </td>
 </tr>
 </table>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -542,7 +537,7 @@ astah* では、複数のモデル図をまとめたモデルファイルを「�
 </div>
 <div id="footer">
 <div id="footer-text">
-バージョン html_0643<br>
+バージョン html_0700<br>
 最終更新 2023-02-06 13:59:37 +0900
 </div>
 </div>
