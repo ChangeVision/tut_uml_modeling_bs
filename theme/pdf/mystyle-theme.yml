@@ -116,7 +116,7 @@ heading:
     font_size: round($base_font_size * 1.6)  # $base_font_size_large
     font_color: 2D466B # 528fcc # 1564B3 # 2D466B # 2D466B
   h5:
-    font_size: round($base_font_size * 1.4)
+    font_size: round($base_font_size * 1.2)
     font_color: 2D466B # 7aa3cc # 0C3966  # 203d4d # 2D466B
   h6:
     font_size: $base_font_size
