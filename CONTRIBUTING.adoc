@@ -25,9 +25,9 @@ Asciidoctor Documentation Site:: https://docs.asciidoctor.org/
 * サンプルモデル図、サンプルコードについての質問、報告
 * 上記に関する修正や改善の提案
 
-=== Dsicassions
+=== Discussion
 
-誤りかどうかわからない、指摘はあるが良い考えがないなど、相談したいことや議論したほうが良さそうと考えた場合は、 link:discassions[Discassions] に投稿してください。
+誤りかどうかわからない、指摘はあるが良い考えがないなど、相談したいことや議論したほうが良さそうと考えた場合は、 link:discussions[Discussions] に投稿してください。
 
 
 === ディレクトリ構成
