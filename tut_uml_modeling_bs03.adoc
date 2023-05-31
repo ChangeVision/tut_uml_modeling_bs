@@ -345,7 +345,9 @@ end
 [source,ruby]
 ----
 class Sample
-  # 略
+  def initialize
+    # 略
+  end
 
   def play(evt, param)
     puts "#{@state} ->" # <1>
@@ -361,8 +363,6 @@ class Sample
     puts "       -> #{@state}" # <5>
     puts 'finished.' if @state == :ST2 # <6>
   end
-
-  # 略
 end
 ----
 <1> 遷移前の状態を表示する。
@@ -387,7 +387,13 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 [source,ruby]
 ----
 class Sample
-  # 略
+  def initialize
+    # 略
+  end
+
+  def play
+    # 略
+  end
 
   def gd1? # <1>
     @attr_a && @attr_b # <2>
@@ -396,8 +402,6 @@ class Sample
   def gd2? # <3>
     !@attr_a || @attr_b
   end
-
-  # 略
 end
 ----
 <1> 「gd1」用のメソッド。真偽値を返すメソッドに「?」をつけるRubyの習慣に倣った。
@@ -419,7 +423,13 @@ end
 [source,ruby]
 ----
 class Sample
-  # 略
+  def initialize
+    # 略
+  end
+
+  def play
+    # 略
+  end
 
   def st0_proc(evt, param)
     case evt # <1>
@@ -437,7 +447,7 @@ class Sample
     end
   end
 
-  # 略
+  # gd1?, gd2? が続く
 end
 ----
 <1> イベントで場合分けする。
@@ -477,7 +487,17 @@ image::ruby_sample05.png[{full-width}]
 [source,ruby]
 ----
 class Sample
-  # 略
+  def initialize
+    # 略
+  end
+
+  def play
+    # 略
+  end
+
+  def st0_proc(evt, param)
+    # 略
+  end
 
   def st1_proc(evt, param)
     case evt
@@ -496,7 +516,7 @@ class Sample
     end
   end
 
-  # 略
+  # gd1?, gd2? が続く
 end
 ----
 <1> イベントが「ev2」の場合。
@@ -527,7 +547,7 @@ image::ruby_sample08.png[{full-width}]
 --
 
 このサンプルでは、アクション「act1」、「act2」、「act3」は、定めたルールを確認しやすいメソッドにしておきます（ <<ruby_sample09>> ）。
-また、アクションとガード条件は、「Sample」クラス内部で使うメソッドなので、Rubyのコードでも「private」なメソッドにしておきます。
+これらのアクションと、先に挙げたガード条件をチェックするメソッドは、「Sample」クラス内部のメソッドだけが使います。そこで、Rubyのコードでもこれらのメソッドのスコープを「private」にしましょう。Rubyでは、「private」キーワードを追加してその後にメソッドを配置します。
 
 [[ruby_sample09]]
 .【Ruby】「ST1」の状態遷移のメソッドを作成する
@@ -536,7 +556,7 @@ image::ruby_sample08.png[{full-width}]
 [source,ruby]
 ----
 class Sample
-  # 略
+  # initialize、play、st0_proc、st1_proc の定義を省略
 
   praivate # <1>
 
@@ -622,7 +642,7 @@ Java、enumの設定:: `http://astah-users.change-vision.com/ja/modules/xhnewbb/
 
 作成したプログラムの全体を <<ruby_sample_code01>>  に示します。
 このプログラムのコードには、「SampleTest」のインスタンスを作成して、テストを起動する処理や、テストメソッドの具体例が含まれています。
-
+テストクラスやテスト用メソッドの細かい説明は省きます。
 
 [[ruby_sample_code01]]
 .【Ruby】stm_sample.rb
@@ -632,6 +652,10 @@ Java、enumの設定:: `http://astah-users.change-vision.com/ja/modules/xhnewbb/
 ----
 include::{sourcesdir}/stm_sample.rb[]
 ----
+<1> 文字列の破壊的変更の検出を指示するマジックコメント。
+<2> 簡便にテストするために、アクセサーを追加した（あくまでこのサンプルにおける便宜として）。
+<3> Sampleクラスのメソッドを呼び出すテストを定義したテスト用のクラスの定義。
+<4> テスト用クラスを実行するコード。このブロックはファイル名と実行プログラム名が一致するときに有効になる（そのときだけ実行される）。
 //--
 
 ==== 検討用モデルに対応したRubyプログラムを動かす

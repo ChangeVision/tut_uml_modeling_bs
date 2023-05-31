@@ -126,17 +126,21 @@ module AsciidoctorPdfExtensions
   end
 
   def layout_chapter_title node, title, opts = {}
+    warn "title: #{title}, #{node.sectname}"
     numbered = node.numbered
     sectnum = node.sectnum
     sectname = node.sectname
-    if sectname == 'dedication' or sectname == 'acknowledgments'
+    if %w[dedication acknowledgments].include?(sectname)
       layout_heading_custom_1 node, title, align: :center
-    elsif sectname == 'colophon' or sectname == 'discrete'
+    elsif sectname == 'discrete'
       layout_heading_custom_2 node, title, align: :left
+    elsif sectname == 'colophon'
+      layout_heading_custom_4 node, title, align: :left
     elsif sectname == 'chapter'
       start_new_page if verso_page?
       if numbered
-        layout_heading_custom_3 node, title, align: :right
+        super
+        # layout_heading_custom_3 node, title, align: :right
       else
         super
       end
@@ -169,17 +173,25 @@ module AsciidoctorPdfExtensions
     layout_heading subtitle, size: @theme.base_font_size * 2.0
   end
 
+  def layout_heading_custom_4 node, title, opts = {}
+    sep = ':'
+    main, _, subtitle = title.rpartition sep
+    move_down 600
+    layout_heading main, size: @theme.base_font_size * 2.6
+    move_up 20
+    layout_heading subtitle, size: @theme.base_font_size * 1.6
+  end
+
   def layout_heading_custom_3 node, title, opts = {}
     sectnum = node.sectnum
     move_down 20 # 80
-
     if sectnum
       # title.gsub!(/#{sectnum}\s*/, "")
       if @ppbook
         # layout_heading node.sectnum, align: :right, size: 36, style: :bold_italic
         move_up 10 # 20
-        # layout_heading title, align: :right, style: :bold_italic, size: 36
-        layout_heading title, align: :left, style: :bold_italic, size: 28
+        layout_heading title, align: :left, size: 24
+      # layout_heading title, align: :left, style: :bold_italic, size: 28
       elsif node.document.attr? 'media', 'screen'  # for slide chapter title page
         # layout_heading node.sectnum, align: :center, size: 36, color: @font_color, style: :bold_italic
         move_up 10 # 20
@@ -198,7 +210,6 @@ module AsciidoctorPdfExtensions
     end
     move_down 20 # 120
   end
-
 end
 
 Asciidoctor::Pdf::Converter.prepend AsciidoctorPdfExtensions

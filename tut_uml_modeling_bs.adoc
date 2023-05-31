@@ -81,9 +81,7 @@ include::bibliography.adoc[]
 ifdef::backend-html5,backend-multipage_html5[]
 [colophon]
 [[_colophon]]
-== 奥付
-
-「{doctitle}」
+== {doctitle}
 
 発行日 : {revdate} +
 バージョン : {revnumber} +
@@ -95,9 +93,7 @@ endif::[]
 
 ifdef::backend-pdf[]
 [colophon]
-== 奥付
-
-「{doctitle}」
+== {doctitle}
 
 　 +
 発行日 : {revdate} +

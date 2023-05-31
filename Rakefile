@@ -116,7 +116,7 @@ def make_pdf(source, target)
   tag_lines = find_tag_lines('codes/score.rb',['main', 'test'])
   # `bundle exec asciidoctor-pdf -r asciidoctor-pdf-cjk  -a revdate='#{revdate}'  -r #{CODE_STYLE} -r #{LIB_EXT} -r #{LIB_EXT2} -r  #{LIB_EXT3} -a pdf-stylesdir=#{THEME_DIR} -a pdf-style=#{THEME_FILE} -a pdf-fontsdir=#{FONTS_DIR} #{source} --out=#{target}` #  2>/dev/null`
   # `bundle exec asciidoctor-pdf -a scripts=cjk -a score_main_start=#{tag_lines[0]} -a score_test_start=#{tag_lines[1]} -a revdate='#{revdate}'  -r #{CODE_STYLE} -r #{LIB_EXT} -r #{LIB_EXT2} -r  #{LIB_EXT3} -a pdf-stylesdir=#{THEME_DIR} -a pdf-style=#{THEME_FILE} -a pdf-fontsdir=#{FONTS_DIR} #{source} --out=#{target}` #  2>/dev/null`
-  `bundle exec asciidoctor-pdf -a scripts=cjk -a score_main_start=#{tag_lines[0]} -a score_test_start=#{tag_lines[1]} -a revdate='#{revdate}'  -r #{CODE_STYLE} -r #{LIB_EXT} -r #{LIB_EXT2} -a pdf-stylesdir=#{THEME_DIR} -a pdf-style=#{THEME_FILE} -a pdf-fontsdir=#{FONTS_DIR} #{source} --out=#{target}` #  2>/dev/null`
+  `bundle exec asciidoctor-pdf -a scripts=cjk -a score_main_start=#{tag_lines[0]} -a score_test_start=#{tag_lines[1]} -a revdate='#{revdate}'  -r #{CODE_STYLE} -r #{LIB_EXT} -r #{LIB_EXT2} -r #{LIB_EXT3} -a pdf-stylesdir=#{THEME_DIR} -a pdf-style=#{THEME_FILE} -a pdf-fontsdir=#{FONTS_DIR} #{source} --out=#{target}` #  2>/dev/null`
 end
 
 # コードのtagの（次の）行番号を返す

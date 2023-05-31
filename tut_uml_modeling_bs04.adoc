@@ -249,8 +249,6 @@ class Frame
       puts 'fixed.'
     end
   end
-
-  # 略
 end
 ----
 <1> フレームの初期状態は「RESERVED」とする。状態はRubyのシンボルを使って表現する。
@@ -271,8 +269,13 @@ end
 //--
 [source,ruby]
 ----
+# frozen_string_literal: true
+
+require 'securerandom'
+
+# Frameは1フレーム分のピン数やボーナスを記録する
 class Frame
-  # 略
+  # initialize、actionの定義がここにある
 
   def frame_score # <1>
     @first + @second + @spare_bonus + @strike_bonus
@@ -309,9 +312,9 @@ class Frame
            @spare_bonus, @strike_bonus, @state
   end
 
-  private
+  private # <5>
 
-  def before_1st_porc(evt, pins) # <5>
+  def before_1st_porc(evt, pins) # <6>
     case evt
     when :PINS
       puts "invalid pins: #{pins}" if pins.negative? || pins > 10
@@ -327,7 +330,7 @@ class Frame
     end
   end
 
-  def before_2nd_proc(evt, pins) # <6>
+  def before_2nd_proc(evt, pins) # <7>
     case evt
     when :PINS
       puts "invalid pins: #{pins}" if pins.negative? || pins > (10 - @first)
@@ -347,8 +350,9 @@ end
 <2> ストライクかどうか判定するガード条件用のメソッド。
 <3> フレームのスコアが確定したか調べるメソッド。
 <4> 「Frame」クラスのインスタンスを文字列化するメソッド。呼び出し時点の「Frame」クラスが保持するインスタン変数の値を出力するのに使う。
-<5> 「1投目の投球を待っている」状態を担当するメソッド。イベント「PINS」を受け取り、1投目のピン数に保存する。その後ストライクかどうか調べ、次の状態へ遷移する。
-<6> 「2投目の投球を待っている」状態を担当するメソッド。イベント「PINS」を受け取り、2投目のピン数に保存する。その後スペアかどうか調べ、次の状態へ遷移する。
+<5> これ以降のメソッドはプライベート。
+<6> 「1投目の投球を待っている」状態を担当するメソッド。イベント「PINS」を受け取り、1投目のピン数に保存する。その後ストライクかどうか調べ、次の状態へ遷移する。
+<7> 「2投目の投球を待っている」状態を担当するメソッド。イベント「PINS」を受け取り、2投目のピン数に保存する。その後スペアかどうか調べ、次の状態へ遷移する。
 //--
 
 
@@ -515,9 +519,7 @@ TIP: ノート内の文章を編集するときは、ノートを選択した状
 
 require 'securerandom' # <1>
 
-class Frame
-  # 略
-end
+# Frameクラスの定義がここにある
 
 # スコアは各人の10フレーム分のスコアを記録する
 class Score # <2>
@@ -551,8 +553,6 @@ class Score # <2>
   def current # <9>
     frame(@fno)
   end
-
-  # 略
 end
 ----
 <1> 安全なIDを生成するためのライブラリをインポートした。
@@ -574,12 +574,12 @@ end
 //--
 [source,ruby]
 ----
-# 略
+# Frameクラスの定義やそれ以前のコードがここにある
 
 # スコアは各人の10フレーム分のスコアを記録する
 class Score
-
-  # 略
+  # アクセサーの定義がここにある
+  # initialize、fno2idx、frame、go_next_frame、currentメソッドの定義がここにある
 
   def prev # <1>
     frame(@fno - 1)
@@ -619,8 +619,6 @@ class Score
   def finished? # <7>
     frame(10).fixed?
   end
-
-  # 略
 end
 ----
 <1> ボーナス計算で使う、「前のフレーム」を得るメソッド。
@@ -640,12 +638,12 @@ end
 //--
 [source,ruby]
 ----
-# 略
+# Frameクラスの定義やそれ以前のコードがここにある
 
 # スコアは各人の10フレーム分のスコアを記録する
 class Score
-
-  # 略
+  # アクセサーの定義がここにある
+  # initializeからfinished?までのメソッドの定義がここにある
 
   def wait_for_1st_proc(pins) # <1>
     current.action(:PINS, pins) # <2>
@@ -747,7 +745,8 @@ end
 //--
 [source,ruby]
 ----
-# 略
+# FrameクラスとScoreクラスの定義やそれ以前のコードがここにある
+
 # Gameクラスは複数名の1ゲーム分のスコアのセットを構成する
 class Game
   attr_reader :id, :turn, :scores
@@ -820,7 +819,8 @@ image::GSW-20220224-172836.png[{full-width}]
 //--
 [source,ruby]
 ----
-# 略
+# FrameクラスとScoreクラスとGameクラスの定義やそれ以前のコードがここにある
+
 # ScoreSheetは、複数名の複数回のGameを記録する
 class ScoreSheet
   attr_accessor :id, :time, :games

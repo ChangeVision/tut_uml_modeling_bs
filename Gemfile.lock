@@ -1,0 +1,101 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    Ascii85 (1.1.0)
+    addressable (2.8.0)
+      public_suffix (>= 2.0.2, < 5.0)
+    afm (0.2.2)
+    asciidoctor (2.0.17)
+    asciidoctor-pdf (1.6.2)
+      asciidoctor (~> 2.0)
+      concurrent-ruby (~> 1.1)
+      prawn (~> 2.4.0)
+      prawn-icon (~> 3.0.0)
+      prawn-svg (~> 0.32.0)
+      prawn-table (~> 0.2.0)
+      prawn-templates (~> 0.1.0)
+      safe_yaml (~> 1.0.0)
+      treetop (~> 1.6.0)
+    ast (2.4.2)
+    awesome_print (1.9.2)
+    coderay (1.1.3)
+    concurrent-ruby (1.1.9)
+    css_parser (1.11.0)
+      addressable
+    hashery (2.1.2)
+    json (2.6.1)
+    parallel (1.21.0)
+    parser (3.1.1.0)
+      ast (~> 2.4.1)
+    pdf-core (0.9.0)
+    pdf-reader (2.9.2)
+      Ascii85 (~> 1.0)
+      afm (~> 0.2.1)
+      hashery (~> 2.0)
+      ruby-rc4
+      ttfunk
+    polyglot (0.3.5)
+    prawn (2.4.0)
+      pdf-core (~> 0.9.0)
+      ttfunk (~> 1.7)
+    prawn-icon (3.0.0)
+      prawn (>= 1.1.0, < 3.0.0)
+    prawn-svg (0.32.0)
+      css_parser (~> 1.6)
+      prawn (>= 0.11.1, < 3)
+      rexml (~> 3.2)
+    prawn-table (0.2.2)
+      prawn (>= 1.3.0, < 3.0.0)
+    prawn-templates (0.1.2)
+      pdf-reader (~> 2.0)
+      prawn (~> 2.2)
+    public_suffix (4.0.6)
+    pygments.rb (2.3.0)
+    rainbow (3.1.1)
+    rake (13.0.6)
+    regexp_parser (2.2.1)
+    rexml (3.2.5)
+    rouge (3.28.0)
+    rubocop (1.25.1)
+      parallel (~> 1.10)
+      parser (>= 3.1.0.0)
+      rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 1.8, < 3.0)
+      rexml
+      rubocop-ast (>= 1.15.1, < 2.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 1.4.0, < 3.0)
+    rubocop-ast (1.16.0)
+      parser (>= 3.1.1.0)
+    ruby-progressbar (1.11.0)
+    ruby-rc4 (0.1.5)
+    safe_yaml (1.0.5)
+    thor (1.2.1)
+    thread_safe (0.3.6)
+    treetop (1.6.11)
+      polyglot (~> 0.3)
+    ttfunk (1.7.0)
+    unicode (0.4.4.4)
+    unicode-display_width (2.1.0)
+
+PLATFORMS
+  arm64-darwin-20
+  x86_64-darwin-20
+
+DEPENDENCIES
+  asciidoctor
+  asciidoctor-pdf
+  awesome_print
+  coderay
+  json
+  pygments.rb
+  rake
+  rouge
+  rubocop
+  thor
+  thread_safe
+  unicode
+  unicode-display_width
+
+BUNDLED WITH
+   2.3.22

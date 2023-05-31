@@ -1,8 +1,8 @@
-# frozen_string_literal: true
+# frozen_string_literal: true # <1>
 
 # ステートマシン図とコードの対応づけルールの検討用クラス
 class Sample
-  attr_accessor :attr_a, :attr_b
+  attr_accessor :attr_a, :attr_b # <2>
 
   def initialize
     @state = :ST0
@@ -82,7 +82,7 @@ class Sample
 end
 
 # 検討用クラスのテストケースを提供するクラス
-class SampleTest
+class SampleTest # <3>
   def test_base(events, data)
     samp01 = Sample.new
     samp01.attr_a = data[0]
@@ -112,7 +112,7 @@ class SampleTest
   end
 end
 
-if $PROGRAM_NAME == __FILE__
+if $PROGRAM_NAME == __FILE__ # <4>
   test = SampleTest.new
   test.run
 end
