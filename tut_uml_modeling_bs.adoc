@@ -79,9 +79,11 @@ include::bibliography.adoc[]
 <<<
 
 ifdef::backend-html5,backend-multipage_html5[]
+[discrete]
 [colophon]
 [[_colophon]]
-== {doctitle}
+'''
+「{doctitle}」
 
 発行日 : {revdate} +
 バージョン : {revnumber} +
@@ -92,10 +94,10 @@ ifdef::backend-html5,backend-multipage_html5[]
 endif::[]
 
 ifdef::backend-pdf[]
+[discrete]
 [colophon]
 == {doctitle}
-
-　 +
+'''
 発行日 : {revdate} +
 バージョン : {revnumber} +
 作成者 : {author} +

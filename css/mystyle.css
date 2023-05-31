@@ -204,7 +204,7 @@ h5 { font-size: 1.125em; }
 
 h6 { font-size: 1em; }
 
-hr { border: solid rgba(145, 135, 84, 0.15); border-width: 1px 0 0; clear: both; margin: 1.25em 0 1.1875em; height: 0; }
+hr { border: solid rgba(145, 135, 84, 0.15); border-width: 10px 0 0; clear: both; margin: 1.25em 0 1.1875em; height: 0; }
 
 /* Helpful Typography Defaults */
 em, i { font-style: italic; line-height: inherit; }

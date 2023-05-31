@@ -176,8 +176,8 @@ module AsciidoctorPdfExtensions
   def layout_heading_custom_4 node, title, opts = {}
     sep = ':'
     main, _, subtitle = title.rpartition sep
-    move_down 600
-    layout_heading main, size: @theme.base_font_size * 2.6
+    move_down 550
+    layout_heading main, size: @theme.base_font_size * 2.0
     move_up 20
     layout_heading subtitle, size: @theme.base_font_size * 1.6
   end
