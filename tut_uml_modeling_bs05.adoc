@@ -182,11 +182,13 @@ C:\Users\kuboaki\Desktop\BowlingScore>
 <8> ここは2投目の投球前の状態だが、第10フレームの状態が「FIXED」なのでゲームは終了。
 
 
-NOTE: 下記ファイル名を、提供方法に応じた配布先がわかるリンクに改める。
-
 動作を確認できるよう、テストプログラムを実行した様子を収めた動画を用意しました。
+このテキストと一緒に配布している資料として `videos` フォルダに次のファイルを置いてあります。
 
-テストプログラムを実行した動画:: `score_rb_demo_win_yyyymmdd.mp4` 、 `score_rb_demo_mac_yyyymmdd.mov`
+.実行の様子を収めたビデオ（ `videos` フォルダにあります）
+* `score_rb_demo_win.mp4`
+* `score_rb_demo_mac.mov`
+
 
 === まとめ
 

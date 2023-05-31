@@ -3,10 +3,12 @@
 == モデルやプログラムの作成例
 
 
-ボウリングのゲームスコアのモデル図:: `bowling_score.asta`
+.ボウリングのゲームスコアのモデル図（ `models` フォルダにあります）
+* `bowling_score.asta`
 
-Rubyで実装したプログラム:: `score.rb`
+.Rubyで実装したプログラム（ `codes` フォルダにあります）
+* `score.rb`
 
-実行結果の動画:: `score_rb_demo_win.mp4` 、 `score_rb_demo_mac.mov`
-
-// NOTE: 上記ファイル名を、提供方法に応じた配布先がわかるリンクに改める。
+.実行している様子の動画（ `videos` フォルダにあります）
+* `score_rb_demo_win.mp4`
+* `score_rb_demo_mac.mov`
