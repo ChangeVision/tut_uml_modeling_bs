@@ -1,24 +1,18 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
-gem 'rake'
 gem 'asciidoctor'
-
-gem 'json'
-gem 'awesome_print'
-
 gem 'asciidoctor-pdf'
-# gem 'asciidoctor-pdf-cjk'
-# gem 'asciidoctor-epub3', '1.5.0.alpha.7'
-
-# gem 'asciidoctor-multipage'
-
-gem 'thor'
-gem 'rouge'
+gem 'awesome_print'
 gem 'coderay'
+gem 'json'
 gem 'pygments.rb'
+gem 'rake'
+gem 'rouge'
+gem 'rubocop'
+gem 'rubyzip'
+gem 'thor'
 gem 'thread_safe'
-# gem 'epubcheck'
-# gem 'kindlegen'
 gem 'unicode'
 gem 'unicode-display_width'
-gem 'rubocop'
