@@ -12,4 +12,5 @@
 ├── tut_uml_modeling_bs.html # <12>
 ├── tut_uml_modeling_bs.pdf  # <13>
 ├── tut_uml_modeling_bsxx.adoc # <14>
-└── tut_uml_modeling_bs_full.html # <15>
+├── tut_uml_modeling_bs_full.html # <15>
+└── videos # <16>
