@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require 'csv'
 require 'rake/clean'
+require 'fileutils'
+# require 'hashids'
+require 'csv'
 
 Encoding.default_external = 'utf-8'
 
 SOURCE_DIR = 'codes'
-
-# 現状、snap画像のディレクトリはadocごとに異なるので、imagesdirは、各adoc中で個別に変更しているので注意
 IMAGES_DIR = 'images'
 CSS_DIR = 'css'
 CSS_FILE = 'mystyle.css'
@@ -45,14 +45,14 @@ desc 'Build multi/full HTML and PDF file'
 # task :default => [:html, :pdf]
 task :default => [:html_full, :html, :pdf]
 
-desc 'Build full(one file) HTML files'
-task :html_full => "tut_uml_modeling_bs_full.html"
+# # desc 'Build full(one file) HTML files'
+# task :html_full => "tut_uml_modeling_bs_full.html"
 
-desc 'Build multi part HTML files'
-task :html => "tut_uml_modeling_bs.html"
+# # desc 'Build multi part HTML files'
+# task :html => "tut_uml_modeling_bs.html"
 
-desc 'Build main PDF files'
-task :pdf => "tut_uml_modeling_bs.pdf"
+# # desc 'Build main PDF files'
+# task :pdf => "tut_uml_modeling_bs.pdf"
 
 # rule ".html" => ".adoc" do |t|  # このルールでは対応するadocの更新しか認識できない
 #   make_html( t.source, t.name )
@@ -113,10 +113,18 @@ def make_pdf(source, target)
   revno = update_revnumber(source, target)
   revdate = `date "+%Y-%m-%d"`
   puts "Converting #{source} to #{target} (#{revno}). (this one takes a while)"
-  tag_lines = find_tag_lines('codes/score.rb',['main', 'test'])
-  # `bundle exec asciidoctor-pdf -r asciidoctor-pdf-cjk  -a revdate='#{revdate}'  -r #{CODE_STYLE} -r #{LIB_EXT} -r #{LIB_EXT2} -r  #{LIB_EXT3} -a pdf-stylesdir=#{THEME_DIR} -a pdf-style=#{THEME_FILE} -a pdf-fontsdir=#{FONTS_DIR} #{source} --out=#{target}` #  2>/dev/null`
-  # `bundle exec asciidoctor-pdf -a scripts=cjk -a score_main_start=#{tag_lines[0]} -a score_test_start=#{tag_lines[1]} -a revdate='#{revdate}'  -r #{CODE_STYLE} -r #{LIB_EXT} -r #{LIB_EXT2} -r  #{LIB_EXT3} -a pdf-stylesdir=#{THEME_DIR} -a pdf-style=#{THEME_FILE} -a pdf-fontsdir=#{FONTS_DIR} #{source} --out=#{target}` #  2>/dev/null`
-  `bundle exec asciidoctor-pdf -a scripts=cjk -a score_main_start=#{tag_lines[0]} -a score_test_start=#{tag_lines[1]} -a revdate='#{revdate}'  -r #{CODE_STYLE} -r #{LIB_EXT} -r #{LIB_EXT2} -r #{LIB_EXT3} -a pdf-stylesdir=#{THEME_DIR} -a pdf-style=#{THEME_FILE} -a pdf-fontsdir=#{FONTS_DIR} #{source} --out=#{target}` #  2>/dev/null`
+  tag_lines = find_tag_lines('codes/score.rb', %w[main test])
+
+  # `bundle exec asciidoctor-pdf -a scripts=cjk -a score_main_start=#{tag_lines[0]} -a score_test_start=#{tag_lines[1]} -a revdate='#{revdate}'  -r #{CODE_STYLE} -r #{LIB_EXT} -r #{LIB_EXT2} -r #{LIB_EXT3} -a pdf-stylesdir=#{THEME_DIR} -a pdf-style=#{THEME_FILE} -a pdf-fontsdir=#{FONTS_DIR} #{source} --out=#{target}` #  2>/dev/null`
+
+  `bundle exec asciidoctor-pdf -r #{CODE_STYLE} \
+      -a score_main_start=#{tag_lines[0]} -a score_test_start=#{tag_lines[1]} \
+      -a revdate='#{revdate}' \
+      -a pdf-stylesdir=#{THEME_DIR} \
+      -a pdf-style=#{THEME_FILE} \
+      -a pdf-fontsdir=#{FONTS_DIR} \
+      -r #{LIB_EXT} -r #{LIB_EXT2} -r #{LIB_EXT3} \
+      #{source} --out=#{target}`
 end
 
 # コードのtagの（次の）行番号を返す
@@ -145,17 +153,17 @@ def make_rule_for_each_adoc
     depends_for_pdf  = deps.push("#{THEME_DIR}/#{THEME_FILE}", LIB_EXT, LIB_EXT2, LIB_EXT3)
 
     desc "Build #{html_full}"
-    file html_full => depends_for_html do
+    file 'html_full' => depends_for_html do
       make_html_full(adoc, html_full)
     end
 
     desc "Build #{html}"
-    file html => depends_for_html do
+    file 'html' => depends_for_html do
       make_html_multi(adoc, html)
     end
 
-    # desc "Build #{pdf}"
-    file pdf => depends_for_pdf do
+    desc "Build #{pdf}"
+    file 'pdf' => depends_for_pdf do
       make_pdf(adoc, pdf)
     end
 
