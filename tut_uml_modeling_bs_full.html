@@ -4,21 +4,21 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <meta name="description" content="この文書は、モデリングツールにastah*を使って、ソフトウェアの開発にUMLを使う方法について学ぶチュートリアルです。">
 <meta name="author" content="株式会社チェンジビジョン">
 <title>モデルを使ってソフトウェアを開発しよう: UML初学者向けチュートリアル</title>
 <link rel="stylesheet" href="css/mystyle.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="css/rouge-custom.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
 <h1>モデルを使ってソフトウェアを開発しよう: UML初学者向けチュートリアル</h1>
 <div class="details">
 <span id="author" class="author">株式会社チェンジビジョン</span><br>
-<span id="revnumber">バージョン html_0743,</span>
-<span id="revdate">2023-05-31</span>
+<span id="revnumber">バージョン html_0752,</span>
+<span id="revdate">2023-06-04</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">目次</div>
@@ -37,7 +37,7 @@
 <li><a href="#_商標等について">商標等について</a></li>
 </ul>
 </li>
-<li><a href="#_preparation">1 準備</a>
+<li><a href="#_preparation">第1章 準備</a>
 <ul class="sectlevel2">
 <li><a href="#_モデリングツールを用意する">1.1 モデリングツールを用意する</a></li>
 <li><a href="#_実装環境を用意する">1.2 実装環境を用意する</a></li>
@@ -45,7 +45,7 @@
 <li><a href="#_ボウリングのスコアのつけ方">1.4 ボウリングのスコアのつけ方</a></li>
 </ul>
 </li>
-<li><a href="#_structure_design">2 スコアシートの構造を調べる</a>
+<li><a href="#_structure_design">第2章 スコアシートの構造を調べる</a>
 <ul class="sectlevel2">
 <li><a href="#_スコアシートの例">2.1 スコアシートの例</a></li>
 <li><a href="#score_sheet_struct_with_objects">2.2 スコアシートの構造をオブジェクト図で表す</a></li>
@@ -53,14 +53,14 @@
 <li><a href="#_まとめ">2.4 まとめ</a></li>
 </ul>
 </li>
-<li><a href="#_model_to_code_design">3 モデルとコードの対応づけ</a>
+<li><a href="#_model_to_code_design">第3章 モデルとコードの対応づけ</a>
 <ul class="sectlevel2">
 <li><a href="#_対応づけ検討用モデルの作成">3.1 対応づけ検討用モデルの作成</a></li>
 <li><a href="#_変換ルールを使ったコードを確認する">3.2 変換ルールを使ったコードを確認する</a></li>
 <li><a href="#_まとめ_2">3.3 まとめ</a></li>
 </ul>
 </li>
-<li><a href="#_behavior_design">4 スコアやフレームの状態を調べる</a>
+<li><a href="#_behavior_design">第4章 スコアやフレームの状態を調べる</a>
 <ul class="sectlevel2">
 <li><a href="#_フレームの状態について検討する">4.1 フレームの状態について検討する</a></li>
 <li><a href="#_フレームの状態をステートマシン図で表す">4.2 フレームの状態をステートマシン図で表す</a></li>
@@ -70,15 +70,15 @@
 <li><a href="#_まとめ_3">4.6 まとめ</a></li>
 </ul>
 </li>
-<li><a href="#_program_test">5 できあがったプログラムを試す</a>
+<li><a href="#_program_test">第5章 できあがったプログラムを試す</a>
 <ul class="sectlevel2">
 <li><a href="#_プログラムを完成させる">5.1 プログラムを完成させる</a></li>
 <li><a href="#_プログラムをテストする">5.2 プログラムをテストする</a></li>
 <li><a href="#_まとめ_4">5.3 まとめ</a></li>
 </ul>
 </li>
-<li><a href="#_summary">6 まとめ</a></li>
-<li><a href="#_other_diagrams">7 他の図、他の機能など</a></li>
+<li><a href="#_summary">第6章 まとめ</a></li>
+<li><a href="#_other_diagrams">第7章 他の図、他の機能など</a></li>
 <li><a href="#_appendix-01">付録 A: モデルやプログラムの作成例</a></li>
 <li><a href="#_bibliography">参考文献</a></li>
 </ul>
@@ -305,7 +305,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_preparation"><a class="anchor" href="#_preparation"></a>1 準備</h2>
+<h2 id="_preparation"><a class="anchor" href="#_preparation"></a>第1章 準備</h2>
 <div class="sectionbody">
 <div class="paragraph lead">
 <p>このチュートリアルでは、モデリングツールとして astah* Professional を、実装にはRubyを使います。
@@ -730,7 +730,7 @@ Rubyになじみがない人は、公式サイトにある次のようなペー�
 </div>
 </div>
 <div class="sect1">
-<h2 id="_structure_design"><a class="anchor" href="#_structure_design"></a>2 スコアシートの構造を調べる</h2>
+<h2 id="_structure_design"><a class="anchor" href="#_structure_design"></a>第2章 スコアシートの構造を調べる</h2>
 <div class="sectionbody">
 <div class="paragraph lead">
 <p>ボウリングのゲームスコアを記録するスコアシートは、どのような要素で構成されているでしょうか。
@@ -1859,7 +1859,7 @@ astah* でオブジェクト図を作成するときは、「クラス図」を�
 </div>
 </div>
 <div class="sect1">
-<h2 id="_model_to_code_design"><a class="anchor" href="#_model_to_code_design"></a>3 モデルとコードの対応づけ</h2>
+<h2 id="_model_to_code_design"><a class="anchor" href="#_model_to_code_design"></a>第3章 モデルとコードの対応づけ</h2>
 <div class="sectionbody">
 <div class="paragraph lead">
 <p>プログラムがどのように動作するのか検討するときには、振る舞いのモデルを使います。
@@ -1993,15 +1993,15 @@ astah* でオブジェクト図を作成するときは、「クラス図」を�
 <div id="ruby_sample01" class="listingblock">
 <div class="title">リスト 3.1 【Ruby】「Sample」クラスを表すRubyのコード</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="ruby"><span class="k">class</span> <span class="nc">Sample</span> <i class="conum" data-value="1"></i><b>(1)</b>
-  <span class="k">def</span> <span class="nf">initialize</span> <i class="conum" data-value="2"></i><b>(2)</b>
-    <span class="vi">@attr_a</span> <span class="o">=</span> <span class="kp">true</span> <i class="conum" data-value="3"></i><b>(3)</b>
-    <span class="vi">@attr_b</span> <span class="o">=</span> <span class="kp">true</span> <i class="conum" data-value="3"></i><b>(3)</b>
-  <span class="k">end</span>
+<pre class="prettyprint highlight"><code data-lang="ruby">class Sample <i class="conum" data-value="1"></i><b>(1)</b>
+  def initialize <i class="conum" data-value="2"></i><b>(2)</b>
+    @attr_a = true <i class="conum" data-value="3"></i><b>(3)</b>
+    @attr_b = true <i class="conum" data-value="3"></i><b>(3)</b>
+  end
 
-  <span class="k">def</span> <span class="nf">play</span> <i class="conum" data-value="4"></i><b>(4)</b>
-  <span class="k">end</span>
-<span class="k">end</span></code></pre>
+  def play <i class="conum" data-value="4"></i><b>(4)</b>
+  end
+end</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -2433,16 +2433,16 @@ astah* でオブジェクト図を作成するときは、「クラス図」を�
 <div id="ruby_sample02" class="listingblock">
 <div class="title">リスト 3.2 【Ruby】状態を保持するインスタンス変数を追加する</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="ruby"><span class="k">class</span> <span class="nc">Sample</span>
-  <span class="k">def</span> <span class="nf">initialize</span>
-    <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST0</span> <i class="conum" data-value="1"></i><b>(1)</b>
-    <span class="vi">@attr_a</span> <span class="o">=</span> <span class="kp">true</span>
-    <span class="vi">@attr_b</span> <span class="o">=</span> <span class="kp">true</span>
-  <span class="k">end</span>
+<pre class="prettyprint highlight"><code data-lang="ruby">class Sample
+  def initialize
+    @state = :ST0 <i class="conum" data-value="1"></i><b>(1)</b>
+    @attr_a = true
+    @attr_b = true
+  end
 
-  <span class="c1"># 略</span>
+  # 略
 
-<span class="k">end</span></code></pre>
+end</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -2463,26 +2463,26 @@ astah* でオブジェクト図を作成するときは、「クラス図」を�
 <div id="ruby_sample03" class="listingblock">
 <div class="title">リスト 3.3 【Ruby】状態遷移を担当するメソッドを作成する</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="ruby"><span class="k">class</span> <span class="nc">Sample</span>
-  <span class="k">def</span> <span class="nf">initialize</span>
-    <span class="c1"># 略</span>
-  <span class="k">end</span>
+<pre class="prettyprint highlight"><code data-lang="ruby">class Sample
+  def initialize
+    # 略
+  end
 
-  <span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
-    <span class="nb">puts</span> <span class="s2">"</span><span class="si">#{</span><span class="vi">@state</span><span class="si">}</span><span class="s2"> -&gt;"</span> <i class="conum" data-value="1"></i><b>(1)</b>
-    <span class="nb">puts</span> <span class="s2">"  event:</span><span class="si">#{</span><span class="n">evt</span><span class="si">}</span><span class="s2">, param: </span><span class="si">#{</span><span class="n">param</span><span class="si">}</span><span class="s2">"</span> <i class="conum" data-value="2"></i><b>(2)</b>
-    <span class="k">case</span> <span class="vi">@state</span> <i class="conum" data-value="3"></i><b>(3)</b>
-    <span class="k">when</span> <span class="ss">:ST0</span>
-      <span class="n">st0_proc</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span> <i class="conum" data-value="4"></i><b>(4)</b>
-    <span class="k">when</span> <span class="ss">:ST1</span>
-      <span class="n">st1_proc</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
-    <span class="k">when</span> <span class="ss">:ST2</span>
-      <span class="c1"># none</span>
-    <span class="k">end</span>
-    <span class="nb">puts</span> <span class="s2">"       -&gt; </span><span class="si">#{</span><span class="vi">@state</span><span class="si">}</span><span class="s2">"</span> <i class="conum" data-value="5"></i><b>(5)</b>
-    <span class="nb">puts</span> <span class="s1">'finished.'</span> <span class="k">if</span> <span class="vi">@state</span> <span class="o">==</span> <span class="ss">:ST2</span> <i class="conum" data-value="6"></i><b>(6)</b>
-  <span class="k">end</span>
-<span class="k">end</span></code></pre>
+  def play(evt, param)
+    puts "#{@state} -&gt;" <i class="conum" data-value="1"></i><b>(1)</b>
+    puts "  event:#{evt}, param: #{param}" <i class="conum" data-value="2"></i><b>(2)</b>
+    case @state <i class="conum" data-value="3"></i><b>(3)</b>
+    when :ST0
+      st0_proc(evt, param) <i class="conum" data-value="4"></i><b>(4)</b>
+    when :ST1
+      st1_proc(evt, param)
+    when :ST2
+      # none
+    end
+    puts "       -&gt; #{@state}" <i class="conum" data-value="5"></i><b>(5)</b>
+    puts 'finished.' if @state == :ST2 <i class="conum" data-value="6"></i><b>(6)</b>
+  end
+end</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -2525,23 +2525,23 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div id="ruby_sample04" class="listingblock">
 <div class="title">リスト 3.4 【Ruby】ガード条件のメソッドを作成する</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="ruby"><span class="k">class</span> <span class="nc">Sample</span>
-  <span class="k">def</span> <span class="nf">initialize</span>
-    <span class="c1"># 略</span>
-  <span class="k">end</span>
+<pre class="prettyprint highlight"><code data-lang="ruby">class Sample
+  def initialize
+    # 略
+  end
 
-  <span class="k">def</span> <span class="nf">play</span>
-    <span class="c1"># 略</span>
-  <span class="k">end</span>
+  def play
+    # 略
+  end
 
-  <span class="k">def</span> <span class="nf">gd1?</span> <i class="conum" data-value="1"></i><b>(1)</b>
-    <span class="vi">@attr_a</span> <span class="o">&amp;&amp;</span> <span class="vi">@attr_b</span> <i class="conum" data-value="2"></i><b>(2)</b>
-  <span class="k">end</span>
+  def gd1? <i class="conum" data-value="1"></i><b>(1)</b>
+    @attr_a &amp;&amp; @attr_b <i class="conum" data-value="2"></i><b>(2)</b>
+  end
 
-  <span class="k">def</span> <span class="nf">gd2?</span> <i class="conum" data-value="3"></i><b>(3)</b>
-    <span class="o">!</span><span class="vi">@attr_a</span> <span class="o">||</span> <span class="vi">@attr_b</span>
-  <span class="k">end</span>
-<span class="k">end</span></code></pre>
+  def gd2? <i class="conum" data-value="3"></i><b>(3)</b>
+    !@attr_a || @attr_b
+  end
+end</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -2571,33 +2571,33 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div id="ruby_sample05" class="listingblock">
 <div class="title">リスト 3.5 【Ruby】「ST0」の状態遷移のメソッドを作成する</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="ruby"><span class="k">class</span> <span class="nc">Sample</span>
-  <span class="k">def</span> <span class="nf">initialize</span>
-    <span class="c1"># 略</span>
-  <span class="k">end</span>
+<pre class="prettyprint highlight"><code data-lang="ruby">class Sample
+  def initialize
+    # 略
+  end
 
-  <span class="k">def</span> <span class="nf">play</span>
-    <span class="c1"># 略</span>
-  <span class="k">end</span>
+  def play
+    # 略
+  end
 
-  <span class="k">def</span> <span class="nf">st0_proc</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
-    <span class="k">case</span> <span class="n">evt</span> <i class="conum" data-value="1"></i><b>(1)</b>
-    <span class="k">when</span> <span class="ss">:ev1</span> <i class="conum" data-value="2"></i><b>(2)</b>
-      <span class="k">if</span> <span class="n">gd1?</span> <i class="conum" data-value="3"></i><b>(3)</b>
-        <span class="nb">puts</span> <span class="s2">"    gd1: </span><span class="si">#{</span><span class="n">gd1?</span><span class="si">}</span><span class="s2">"</span>
-        <span class="n">act1</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span> <i class="conum" data-value="4"></i><b>(4)</b>
-        <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST1</span> <i class="conum" data-value="5"></i><b>(5)</b>
-      <span class="k">else</span> <i class="conum" data-value="6"></i><b>(6)</b>
-        <span class="nb">puts</span> <span class="s2">"    &lt;&lt;&lt; gd1: </span><span class="si">#{</span><span class="n">gd1?</span><span class="si">}</span><span class="s2">, transition is ignored. &gt;&gt;&gt;"</span>
-      <span class="k">end</span>
-    <span class="k">when</span> <span class="ss">:ev3</span> <i class="conum" data-value="7"></i><b>(7)</b>
-      <span class="n">act3</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
-      <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST2</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
+  def st0_proc(evt, param)
+    case evt <i class="conum" data-value="1"></i><b>(1)</b>
+    when :ev1 <i class="conum" data-value="2"></i><b>(2)</b>
+      if gd1? <i class="conum" data-value="3"></i><b>(3)</b>
+        puts "    gd1: #{gd1?}"
+        act1(evt, param) <i class="conum" data-value="4"></i><b>(4)</b>
+        @state = :ST1 <i class="conum" data-value="5"></i><b>(5)</b>
+      else <i class="conum" data-value="6"></i><b>(6)</b>
+        puts "    &lt;&lt;&lt; gd1: #{gd1?}, transition is ignored. &gt;&gt;&gt;"
+      end
+    when :ev3 <i class="conum" data-value="7"></i><b>(7)</b>
+      act3(evt, param)
+      @state = :ST2
+    end
+  end
 
-  <span class="c1"># gd1?, gd2? が続く</span>
-<span class="k">end</span></code></pre>
+  # gd1?, gd2? が続く
+end</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -2674,38 +2674,38 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div id="ruby_sample07" class="listingblock">
 <div class="title">リスト 3.6 【Ruby】「ST1」の状態遷移のメソッドを作成する</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="ruby"><span class="k">class</span> <span class="nc">Sample</span>
-  <span class="k">def</span> <span class="nf">initialize</span>
-    <span class="c1"># 略</span>
-  <span class="k">end</span>
+<pre class="prettyprint highlight"><code data-lang="ruby">class Sample
+  def initialize
+    # 略
+  end
 
-  <span class="k">def</span> <span class="nf">play</span>
-    <span class="c1"># 略</span>
-  <span class="k">end</span>
+  def play
+    # 略
+  end
 
-  <span class="k">def</span> <span class="nf">st0_proc</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
-    <span class="c1"># 略</span>
-  <span class="k">end</span>
+  def st0_proc(evt, param)
+    # 略
+  end
 
-  <span class="k">def</span> <span class="nf">st1_proc</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
-    <span class="k">case</span> <span class="n">evt</span>
-    <span class="k">when</span> <span class="ss">:ev2</span> <i class="conum" data-value="1"></i><b>(1)</b>
-      <span class="n">act2</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span> <i class="conum" data-value="2"></i><b>(2)</b>
-      <span class="nb">puts</span> <span class="s2">"    gd2: </span><span class="si">#{</span><span class="n">gd2?</span><span class="si">}</span><span class="s2">"</span>
-      <span class="k">if</span> <span class="n">gd2?</span> <i class="conum" data-value="3"></i><b>(3)</b>
-        <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST2</span> <i class="conum" data-value="4"></i><b>(4)</b>
-      <span class="k">else</span>
-        <span class="n">act3</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span> <i class="conum" data-value="5"></i><b>(5)</b>
-        <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST0</span> <i class="conum" data-value="6"></i><b>(6)</b>
-      <span class="k">end</span>
-    <span class="k">when</span> <span class="ss">:ev3</span> <i class="conum" data-value="7"></i><b>(7)</b>
-      <span class="n">act3</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
-      <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST0</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
+  def st1_proc(evt, param)
+    case evt
+    when :ev2 <i class="conum" data-value="1"></i><b>(1)</b>
+      act2(evt, param) <i class="conum" data-value="2"></i><b>(2)</b>
+      puts "    gd2: #{gd2?}"
+      if gd2? <i class="conum" data-value="3"></i><b>(3)</b>
+        @state = :ST2 <i class="conum" data-value="4"></i><b>(4)</b>
+      else
+        act3(evt, param) <i class="conum" data-value="5"></i><b>(5)</b>
+        @state = :ST0 <i class="conum" data-value="6"></i><b>(6)</b>
+      end
+    when :ev3 <i class="conum" data-value="7"></i><b>(7)</b>
+      act3(evt, param)
+      @state = :ST0
+    end
+  end
 
-  <span class="c1"># gd1?, gd2? が続く</span>
-<span class="k">end</span></code></pre>
+  # gd1?, gd2? が続く
+end</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -2780,31 +2780,31 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div id="ruby_sample09" class="listingblock">
 <div class="title">リスト 3.7 【Ruby】「ST1」の状態遷移のメソッドを作成する</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="ruby"><span class="k">class</span> <span class="nc">Sample</span>
-  <span class="c1"># initialize、play、st0_proc、st1_proc の定義を省略</span>
+<pre class="prettyprint highlight"><code data-lang="ruby">class Sample
+  # initialize、play、st0_proc、st1_proc の定義を省略
 
-  <span class="n">praivate</span> <i class="conum" data-value="1"></i><b>(1)</b>
+  praivate <i class="conum" data-value="1"></i><b>(1)</b>
 
-  <span class="k">def</span> <span class="nf">act1</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">prm</span><span class="p">)</span>
-    <span class="nb">puts</span> <span class="s2">"     act1: event:</span><span class="si">#{</span><span class="n">evt</span><span class="si">}</span><span class="s2">, param: </span><span class="si">#{</span><span class="n">prm</span><span class="si">}</span><span class="s2">"</span>
-  <span class="k">end</span>
+  def act1(evt, prm)
+    puts "     act1: event:#{evt}, param: #{prm}"
+  end
 
-  <span class="k">def</span> <span class="nf">act2</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">prm</span><span class="p">)</span>
-    <span class="nb">puts</span> <span class="s2">"     act2: event:</span><span class="si">#{</span><span class="n">evt</span><span class="si">}</span><span class="s2">, param: </span><span class="si">#{</span><span class="n">prm</span><span class="si">}</span><span class="s2">"</span>
-  <span class="k">end</span>
+  def act2(evt, prm)
+    puts "     act2: event:#{evt}, param: #{prm}"
+  end
 
-  <span class="k">def</span> <span class="nf">act3</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">prm</span><span class="p">)</span>
-    <span class="nb">puts</span> <span class="s2">"     act3: event:</span><span class="si">#{</span><span class="n">evt</span><span class="si">}</span><span class="s2">, param: </span><span class="si">#{</span><span class="n">prm</span><span class="si">}</span><span class="s2">"</span>
-  <span class="k">end</span>
+  def act3(evt, prm)
+    puts "     act3: event:#{evt}, param: #{prm}"
+  end
 
-  <span class="k">def</span> <span class="nf">gd1?</span> <i class="conum" data-value="2"></i><b>(2)</b>
-    <span class="vi">@attr_a</span> <span class="o">&amp;&amp;</span> <span class="vi">@attr_b</span>
-  <span class="k">end</span>
+  def gd1? <i class="conum" data-value="2"></i><b>(2)</b>
+    @attr_a &amp;&amp; @attr_b
+  end
 
-  <span class="k">def</span> <span class="nf">gd2?</span>
-    <span class="o">!</span><span class="vi">@attr_a</span> <span class="o">||</span> <span class="vi">@attr_b</span>
-  <span class="k">end</span>
-<span class="k">end</span></code></pre>
+  def gd2?
+    !@attr_a || @attr_b
+  end
+end</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -2929,243 +2929,124 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div id="ruby_sample_code01" class="listingblock">
 <div class="title">リスト 3.8 【Ruby】stm_sample.rb</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="ruby"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">  1
-  2
-  3
-  4
-  5
-  6
-  7
-  8
-  9
- 10
- 11
- 12
- 13
- 14
- 15
- 16
- 17
- 18
- 19
- 20
- 21
- 22
- 23
- 24
- 25
- 26
- 27
- 28
- 29
- 30
- 31
- 32
- 33
- 34
- 35
- 36
- 37
- 38
- 39
- 40
- 41
- 42
- 43
- 44
- 45
- 46
- 47
- 48
- 49
- 50
- 51
- 52
- 53
- 54
- 55
- 56
- 57
- 58
- 59
- 60
- 61
- 62
- 63
- 64
- 65
- 66
- 67
- 68
- 69
- 70
- 71
- 72
- 73
- 74
- 75
- 76
- 77
- 78
- 79
- 80
- 81
- 82
- 83
- 84
- 85
- 86
- 87
- 88
- 89
- 90
- 91
- 92
- 93
- 94
- 95
- 96
- 97
- 98
- 99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-</pre></td><td class="code"><pre><span class="c1"># frozen_string_literal: true </span><i class="conum" data-value="1"></i><b>(1)</b>
+<pre class="prettyprint highlight linenums"><code data-lang="ruby"># frozen_string_literal: true <i class="conum" data-value="1"></i><b>(1)</b>
 
-<span class="c1"># ステートマシン図とコードの対応づけルールの検討用クラス</span>
-<span class="k">class</span> <span class="nc">Sample</span>
-  <span class="nb">attr_accessor</span> <span class="ss">:attr_a</span><span class="p">,</span> <span class="ss">:attr_b</span> <i class="conum" data-value="2"></i><b>(2)</b>
+# ステートマシン図とコードの対応づけルールの検討用クラス
+class Sample
+  attr_accessor :attr_a, :attr_b <i class="conum" data-value="2"></i><b>(2)</b>
 
-  <span class="k">def</span> <span class="nf">initialize</span>
-    <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST0</span>
-    <span class="vi">@attr_a</span> <span class="o">=</span> <span class="kp">true</span>
-    <span class="vi">@attr_b</span> <span class="o">=</span> <span class="kp">true</span>
-  <span class="k">end</span>
+  def initialize
+    @state = :ST0
+    @attr_a = true
+    @attr_b = true
+  end
 
-  <span class="k">def</span> <span class="nf">st0_proc</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
-    <span class="k">case</span> <span class="n">evt</span>
-    <span class="k">when</span> <span class="ss">:ev1</span>
-      <span class="k">if</span> <span class="n">gd1?</span> <span class="c1"># guard</span>
-        <span class="nb">puts</span> <span class="s2">"    gd1: </span><span class="si">#{</span><span class="n">gd1?</span><span class="si">}</span><span class="s2">"</span>
-        <span class="n">act1</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
-        <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST1</span>
-      <span class="k">else</span>
-        <span class="nb">puts</span> <span class="s2">"    &lt;&lt;&lt; gd1: </span><span class="si">#{</span><span class="n">gd1?</span><span class="si">}</span><span class="s2">, transition is ignored. &gt;&gt;&gt;"</span>
-      <span class="k">end</span>
-    <span class="k">when</span> <span class="ss">:ev3</span>
-      <span class="n">act3</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
-      <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST2</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
+  def st0_proc(evt, param)
+    case evt
+    when :ev1
+      if gd1? # guard
+        puts "    gd1: #{gd1?}"
+        act1(evt, param)
+        @state = :ST1
+      else
+        puts "    &lt;&lt;&lt; gd1: #{gd1?}, transition is ignored. &gt;&gt;&gt;"
+      end
+    when :ev3
+      act3(evt, param)
+      @state = :ST2
+    end
+  end
 
-  <span class="k">def</span> <span class="nf">st1_proc</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
-    <span class="k">case</span> <span class="n">evt</span>
-    <span class="k">when</span> <span class="ss">:ev2</span>
-      <span class="n">act2</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
-      <span class="nb">puts</span> <span class="s2">"    gd2: </span><span class="si">#{</span><span class="n">gd2?</span><span class="si">}</span><span class="s2">"</span>
-      <span class="k">if</span> <span class="n">gd2?</span> <span class="c1"># guard on choice.</span>
-        <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST2</span>
-      <span class="k">else</span>
-        <span class="n">act3</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
-        <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST0</span>
-      <span class="k">end</span>
-    <span class="k">when</span> <span class="ss">:ev3</span>
-      <span class="n">act3</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
-      <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST0</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
+  def st1_proc(evt, param)
+    case evt
+    when :ev2
+      act2(evt, param)
+      puts "    gd2: #{gd2?}"
+      if gd2? # guard on choice.
+        @state = :ST2
+      else
+        act3(evt, param)
+        @state = :ST0
+      end
+    when :ev3
+      act3(evt, param)
+      @state = :ST0
+    end
+  end
 
-  <span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
-    <span class="nb">puts</span> <span class="s2">"</span><span class="si">#{</span><span class="vi">@state</span><span class="si">}</span><span class="s2"> -&gt;"</span>
-    <span class="nb">puts</span> <span class="s2">"  event:</span><span class="si">#{</span><span class="n">evt</span><span class="si">}</span><span class="s2">, param: </span><span class="si">#{</span><span class="n">param</span><span class="si">}</span><span class="s2">"</span>
-    <span class="k">case</span> <span class="vi">@state</span>
-    <span class="k">when</span> <span class="ss">:ST0</span>
-      <span class="n">st0_proc</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
-    <span class="k">when</span> <span class="ss">:ST1</span>
-      <span class="n">st1_proc</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
-    <span class="k">when</span> <span class="ss">:ST2</span>
-      <span class="c1"># none</span>
-    <span class="k">end</span>
-    <span class="nb">puts</span> <span class="s2">"       -&gt; </span><span class="si">#{</span><span class="vi">@state</span><span class="si">}</span><span class="s2">"</span>
-    <span class="nb">puts</span> <span class="s1">'finished.'</span> <span class="k">if</span> <span class="vi">@state</span> <span class="o">==</span> <span class="ss">:ST2</span>
-  <span class="k">end</span>
+  def play(evt, param)
+    puts "#{@state} -&gt;"
+    puts "  event:#{evt}, param: #{param}"
+    case @state
+    when :ST0
+      st0_proc(evt, param)
+    when :ST1
+      st1_proc(evt, param)
+    when :ST2
+      # none
+    end
+    puts "       -&gt; #{@state}"
+    puts 'finished.' if @state == :ST2
+  end
 
-  <span class="kp">private</span>
+  private
 
-  <span class="k">def</span> <span class="nf">act1</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">prm</span><span class="p">)</span>
-    <span class="nb">puts</span> <span class="s2">"     act1: event:</span><span class="si">#{</span><span class="n">evt</span><span class="si">}</span><span class="s2">, param: </span><span class="si">#{</span><span class="n">prm</span><span class="si">}</span><span class="s2">"</span>
-  <span class="k">end</span>
+  def act1(evt, prm)
+    puts "     act1: event:#{evt}, param: #{prm}"
+  end
 
-  <span class="k">def</span> <span class="nf">act2</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">prm</span><span class="p">)</span>
-    <span class="nb">puts</span> <span class="s2">"     act2: event:</span><span class="si">#{</span><span class="n">evt</span><span class="si">}</span><span class="s2">, param: </span><span class="si">#{</span><span class="n">prm</span><span class="si">}</span><span class="s2">"</span>
-  <span class="k">end</span>
+  def act2(evt, prm)
+    puts "     act2: event:#{evt}, param: #{prm}"
+  end
 
-  <span class="k">def</span> <span class="nf">act3</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">prm</span><span class="p">)</span>
-    <span class="nb">puts</span> <span class="s2">"     act3: event:</span><span class="si">#{</span><span class="n">evt</span><span class="si">}</span><span class="s2">, param: </span><span class="si">#{</span><span class="n">prm</span><span class="si">}</span><span class="s2">"</span>
-  <span class="k">end</span>
+  def act3(evt, prm)
+    puts "     act3: event:#{evt}, param: #{prm}"
+  end
 
-  <span class="k">def</span> <span class="nf">gd1?</span>
-    <span class="vi">@attr_a</span> <span class="o">&amp;&amp;</span> <span class="vi">@attr_b</span>
-  <span class="k">end</span>
+  def gd1?
+    @attr_a &amp;&amp; @attr_b
+  end
 
-  <span class="k">def</span> <span class="nf">gd2?</span>
-    <span class="o">!</span><span class="vi">@attr_a</span> <span class="o">||</span> <span class="vi">@attr_b</span>
-  <span class="k">end</span>
-<span class="k">end</span>
+  def gd2?
+    !@attr_a || @attr_b
+  end
+end
 
-<span class="c1"># 検討用クラスのテストケースを提供するクラス</span>
-<span class="k">class</span> <span class="nc">SampleTest</span> <i class="conum" data-value="3"></i><b>(3)</b>
-  <span class="k">def</span> <span class="nf">test_base</span><span class="p">(</span><span class="n">events</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-    <span class="n">samp01</span> <span class="o">=</span> <span class="no">Sample</span><span class="p">.</span><span class="nf">new</span>
-    <span class="n">samp01</span><span class="p">.</span><span class="nf">attr_a</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">samp01</span><span class="p">.</span><span class="nf">attr_b</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">events</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">evt</span><span class="o">|</span>
-      <span class="n">samp01</span><span class="p">.</span><span class="nf">play</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">.</span><span class="nf">usec</span><span class="p">)</span>
-    <span class="k">end</span>
-    <span class="nb">puts</span> <span class="s1">'================'</span>
-  <span class="k">end</span>
+# 検討用クラスのテストケースを提供するクラス
+class SampleTest <i class="conum" data-value="3"></i><b>(3)</b>
+  def test_base(events, data)
+    samp01 = Sample.new
+    samp01.attr_a = data[0]
+    samp01.attr_b = data[1]
+    events.each do |evt|
+      samp01.play(evt, Time.now.usec)
+    end
+    puts '================'
+  end
 
-  <span class="k">def</span> <span class="nf">test01</span>
-    <span class="n">test_base</span><span class="p">(</span><span class="sx">%i[ev1 ev2]</span><span class="p">,</span> <span class="p">[</span><span class="kp">true</span><span class="p">,</span> <span class="kp">true</span><span class="p">])</span>
-  <span class="k">end</span>
+  def test01
+    test_base(%i[ev1 ev2], [true, true])
+  end
 
-  <span class="k">def</span> <span class="nf">test02</span>
-    <span class="n">test_base</span><span class="p">(</span><span class="sx">%i[ev1 ev3]</span><span class="p">,</span> <span class="p">[</span><span class="kp">false</span><span class="p">,</span> <span class="kp">false</span><span class="p">])</span> <span class="c1"># :ev1 will be ignored.</span>
-  <span class="k">end</span>
+  def test02
+    test_base(%i[ev1 ev3], [false, false]) # :ev1 will be ignored.
+  end
 
-  <span class="k">def</span> <span class="nf">test03</span>
-    <span class="n">test_base</span><span class="p">(</span><span class="sx">%i[ev1 ev2 ev3]</span><span class="p">,</span> <span class="p">[</span><span class="kp">true</span><span class="p">,</span> <span class="kp">false</span><span class="p">])</span>
-  <span class="k">end</span>
+  def test03
+    test_base(%i[ev1 ev2 ev3], [true, false])
+  end
 
-  <span class="k">def</span> <span class="nf">run</span>
-    <span class="n">test01</span>
-    <span class="n">test02</span>
-    <span class="n">test03</span>
-  <span class="k">end</span>
-<span class="k">end</span>
+  def run
+    test01
+    test02
+    test03
+  end
+end
 
-<span class="k">if</span> <span class="vg">$PROGRAM_NAME</span> <span class="o">==</span> <span class="kp">__FILE__</span> <i class="conum" data-value="4"></i><b>(4)</b>
-  <span class="nb">test</span> <span class="o">=</span> <span class="no">SampleTest</span><span class="p">.</span><span class="nf">new</span>
-  <span class="nb">test</span><span class="p">.</span><span class="nf">run</span>
-<span class="k">end</span>
-</pre></td></tr></tbody></table></code></pre>
+if $PROGRAM_NAME == __FILE__ <i class="conum" data-value="4"></i><b>(4)</b>
+  test = SampleTest.new
+  test.run
+end</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -3201,46 +3082,46 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div id="ruby_sample_code02" class="listingblock">
 <div class="title">リスト 3.9 【端末】stm_sample.rb を実行する</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="console"><span class="gp">C:\Users\kuboaki&gt;</span><span class="nb">cd </span>Desktop<span class="se">\B</span>owlingScore
-<span class="go">
-</span><span class="gp">C:\Users\kuboaki\Desktop\BowlingScore&gt;</span>ruby stm_sample.rb
-<span class="gp">ST0 -&gt;</span><span class="w">
-</span><span class="go">  event:ev1, param: 676481
+<pre class="prettyprint highlight"><code data-lang="console">C:\Users\kuboaki&gt;cd Desktop\BowlingScore
+
+C:\Users\kuboaki\Desktop\BowlingScore&gt;ruby stm_sample.rb
+ST0 -&gt;
+  event:ev1, param: 676481
     gd1: true
      act1: event:ev1, param: 676481
-</span><span class="gp">       -&gt;</span><span class="w"> </span>ST1
-<span class="gp">ST1 -&gt;</span><span class="w">
-</span><span class="go">  event:ev2, param: 678623
+       -&gt; ST1
+ST1 -&gt;
+  event:ev2, param: 678623
      act2: event:ev2, param: 678623
     gd2: true
-</span><span class="gp">       -&gt;</span><span class="w"> </span>ST2
-<span class="go">finished.
+       -&gt; ST2
+finished.
 ================
-</span><span class="gp">ST0 -&gt;</span><span class="w">
-</span><span class="go">  event:ev1, param: 680596
-</span><span class="gp">    &lt;&lt;&lt; gd1: false, transition is ignored. &gt;</span><span class="o">&gt;&gt;</span>
-<span class="gp">       -&gt;</span><span class="w"> </span>ST0
-<span class="gp">ST0 -&gt;</span><span class="w">
-</span><span class="go">  event:ev3, param: 681783
+ST0 -&gt;
+  event:ev1, param: 680596
+    &lt;&lt;&lt; gd1: false, transition is ignored. &gt;&gt;&gt;
+       -&gt; ST0
+ST0 -&gt;
+  event:ev3, param: 681783
      act3: event:ev3, param: 681783
-</span><span class="gp">       -&gt;</span><span class="w"> </span>ST2
-<span class="go">finished.
+       -&gt; ST2
+finished.
 ================
-</span><span class="gp">ST0 -&gt;</span><span class="w">
-</span><span class="go">  event:ev1, param: 683477
-</span><span class="gp">    &lt;&lt;&lt; gd1: false, transition is ignored. &gt;</span><span class="o">&gt;&gt;</span>
-<span class="gp">       -&gt;</span><span class="w"> </span>ST0
-<span class="gp">ST0 -&gt;</span><span class="w">
-</span><span class="go">  event:ev2, param: 685784
-</span><span class="gp">       -&gt;</span><span class="w"> </span>ST0
-<span class="gp">ST0 -&gt;</span><span class="w">
-</span><span class="go">  event:ev3, param: 708214
+ST0 -&gt;
+  event:ev1, param: 683477
+    &lt;&lt;&lt; gd1: false, transition is ignored. &gt;&gt;&gt;
+       -&gt; ST0
+ST0 -&gt;
+  event:ev2, param: 685784
+       -&gt; ST0
+ST0 -&gt;
+  event:ev3, param: 708214
      act3: event:ev3, param: 708214
-</span><span class="gp">       -&gt;</span><span class="w"> </span>ST2
-<span class="go">finished.
+       -&gt; ST2
+finished.
 ================
 
-</span><span class="gp">C:\Users\kuboaki\Desktop\BowlingScore&gt;</span></code></pre>
+C:\Users\kuboaki\Desktop\BowlingScore&gt;</code></pre>
 </div>
 </div>
 </div>
@@ -3303,7 +3184,7 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 </div>
 </div>
 <div class="sect1">
-<h2 id="_behavior_design"><a class="anchor" href="#_behavior_design"></a>4 スコアやフレームの状態を調べる</h2>
+<h2 id="_behavior_design"><a class="anchor" href="#_behavior_design"></a>第4章 スコアやフレームの状態を調べる</h2>
 <div class="sectionbody">
 <div class="paragraph lead">
 <p>設計で作成するモデルと実装に使うプログラムの対応づけができたました。
@@ -3675,7 +3556,7 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <h4 id="_フレームの処理をプログラムに変換する"><a class="anchor" href="#_フレームの処理をプログラムに変換する"></a>4.2.4 フレームの処理をプログラムに変換する</h4>
 <div class="paragraph">
 <p>フレームのクラスとステートマシン図が作成できたので、Rubyのプログラムに変換してみましょう。
-「<a href="#_model_to_code_design">3</a>」で決めたルールにしたがって、モデルからコードへ変換します。</p>
+「<a href="#_model_to_code_design">第3章</a>」で決めたルールにしたがって、モデルからコードへ変換します。</p>
 </div>
 <div class="paragraph">
 <p>まず、プログラムの初期化とアクションの部分は、 <a href="#ruby_frame_code01">リスト 4.1</a> のようになるでしょう。</p>
@@ -3683,48 +3564,48 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div id="ruby_frame_code01" class="listingblock">
 <div class="title">リスト 4.1 【Ruby】score.rb(1)</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="ruby"><span class="c1"># frozen_string_literal: true</span>
+<pre class="prettyprint highlight"><code data-lang="ruby"># frozen_string_literal: true
 
-<span class="nb">require</span> <span class="s1">'securerandom'</span>
+require 'securerandom'
 
-<span class="c1"># Frameは1フレーム分のピン数やボーナスを記録する</span>
-<span class="k">class</span> <span class="nc">Frame</span>
-  <span class="nb">attr_reader</span> <span class="ss">:frame_no</span>
-  <span class="nb">attr_accessor</span> <span class="ss">:first</span><span class="p">,</span> <span class="ss">:second</span><span class="p">,</span> <span class="ss">:spare_bonus</span><span class="p">,</span> <span class="ss">:strike_bonus</span><span class="p">,</span> <span class="ss">:total</span><span class="p">,</span> <span class="ss">:state</span>
+# Frameは1フレーム分のピン数やボーナスを記録する
+class Frame
+  attr_reader :frame_no
+  attr_accessor :first, :second, :spare_bonus, :strike_bonus, :total, :state
 
-  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">frame_no</span><span class="p">)</span>
-    <span class="vi">@frame_no</span> <span class="o">=</span> <span class="n">frame_no</span>
-    <span class="vi">@first</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="vi">@second</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="vi">@spare_bonus</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="vi">@strike_bonus</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="vi">@total</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:RESERVED</span> <i class="conum" data-value="1"></i><b>(1)</b>
-  <span class="k">end</span>
+  def initialize(frame_no)
+    @frame_no = frame_no
+    @first = 0
+    @second = 0
+    @spare_bonus = 0
+    @strike_bonus = 0
+    @total = 0
+    @state = :RESERVED <i class="conum" data-value="1"></i><b>(1)</b>
+  end
 
-  <span class="k">def</span> <span class="nf">action</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">pins</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">case</span> <span class="vi">@state</span> <i class="conum" data-value="2"></i><b>(2)</b>
-    <span class="k">when</span> <span class="ss">:RESERVED</span>
-      <span class="k">case</span> <span class="n">event</span>
-      <span class="k">when</span> <span class="ss">:SETUP</span> <i class="conum" data-value="3"></i><b>(3)</b>
-        <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:BEFORE_1ST</span>
-      <span class="k">else</span>
-        <span class="nb">puts</span> <span class="s2">"invalid event: </span><span class="si">#{</span><span class="n">event</span><span class="si">}</span><span class="s2"> is ignored."</span>
-      <span class="k">end</span>
-    <span class="k">when</span> <span class="ss">:BEFORE_1ST</span>
-      <span class="n">before_1st_porc</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">pins</span><span class="p">)</span> <i class="conum" data-value="4"></i><b>(4)</b>
-    <span class="k">when</span> <span class="ss">:BEFORE_2ND</span>
-      <span class="n">before_2nd_proc</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">pins</span><span class="p">)</span> <i class="conum" data-value="5"></i><b>(5)</b>
-    <span class="k">when</span> <span class="ss">:PENDING</span>
-      <span class="k">case</span> <span class="n">event</span>
-      <span class="k">when</span> <span class="ss">:DETERMINE</span> <i class="conum" data-value="6"></i><b>(6)</b>
-        <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:FIXED</span>
-      <span class="k">end</span>
-    <span class="k">when</span> <span class="ss">:FIXED</span>
-      <span class="nb">puts</span> <span class="s1">'fixed.'</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
-<span class="k">end</span></code></pre>
+  def action(event, pins=0)
+    case @state <i class="conum" data-value="2"></i><b>(2)</b>
+    when :RESERVED
+      case event
+      when :SETUP <i class="conum" data-value="3"></i><b>(3)</b>
+        @state = :BEFORE_1ST
+      else
+        puts "invalid event: #{event} is ignored."
+      end
+    when :BEFORE_1ST
+      before_1st_porc(event, pins) <i class="conum" data-value="4"></i><b>(4)</b>
+    when :BEFORE_2ND
+      before_2nd_proc(event, pins) <i class="conum" data-value="5"></i><b>(5)</b>
+    when :PENDING
+      case event
+      when :DETERMINE <i class="conum" data-value="6"></i><b>(6)</b>
+        @state = :FIXED
+      end
+    when :FIXED
+      puts 'fixed.'
+    end
+  end
+end</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -3761,82 +3642,82 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div id="ruby_frame_code02" class="listingblock">
 <div class="title">リスト 4.2 【Ruby】score.rb(2)</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="ruby"><span class="c1"># frozen_string_literal: true</span>
+<pre class="prettyprint highlight"><code data-lang="ruby"># frozen_string_literal: true
 
-<span class="nb">require</span> <span class="s1">'securerandom'</span>
+require 'securerandom'
 
-<span class="c1"># Frameは1フレーム分のピン数やボーナスを記録する</span>
-<span class="k">class</span> <span class="nc">Frame</span>
-  <span class="c1"># initialize、actionの定義がここにある</span>
+# Frameは1フレーム分のピン数やボーナスを記録する
+class Frame
+  # initialize、actionの定義がここにある
 
-  <span class="k">def</span> <span class="nf">frame_score</span> <i class="conum" data-value="1"></i><b>(1)</b>
-    <span class="vi">@first</span> <span class="o">+</span> <span class="vi">@second</span> <span class="o">+</span> <span class="vi">@spare_bonus</span> <span class="o">+</span> <span class="vi">@strike_bonus</span>
-  <span class="k">end</span>
+  def frame_score <i class="conum" data-value="1"></i><b>(1)</b>
+    @first + @second + @spare_bonus + @strike_bonus
+  end
 
-  <span class="k">def</span> <span class="nf">strike?</span> <i class="conum" data-value="2"></i><b>(2)</b>
-    <span class="vi">@first</span> <span class="o">==</span> <span class="mi">10</span>
-  <span class="k">end</span>
+  def strike? <i class="conum" data-value="2"></i><b>(2)</b>
+    @first == 10
+  end
 
-  <span class="k">def</span> <span class="nf">spare?</span>
-    <span class="vi">@first</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="vi">@first</span> <span class="o">+</span> <span class="vi">@second</span><span class="p">)</span> <span class="o">==</span> <span class="mi">10</span>
-  <span class="k">end</span>
+  def spare?
+    @first &lt; 10 &amp;&amp; (@first + @second) == 10
+  end
 
-  <span class="k">def</span> <span class="nf">miss?</span>
-    <span class="vi">@first</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="o">&amp;&amp;</span> <span class="vi">@second</span><span class="p">.</span><span class="nf">zero</span> <span class="o">&amp;&amp;</span> <span class="vi">@state</span> <span class="o">==</span> <span class="ss">:FIXED</span>
-  <span class="k">end</span>
+  def miss?
+    @first &lt; 10 &amp;&amp; @second.zero &amp;&amp; @state == :FIXED
+  end
 
-  <span class="k">def</span> <span class="nf">gutter?</span>
-    <span class="vi">@first</span><span class="p">.</span><span class="nf">zero</span>
-  <span class="k">end</span>
+  def gutter?
+    @first.zero
+  end
 
-  <span class="k">def</span> <span class="nf">fixed?</span> <i class="conum" data-value="3"></i><b>(3)</b>
-    <span class="vi">@state</span> <span class="o">==</span> <span class="ss">:FIXED</span>
-  <span class="k">end</span>
+  def fixed? <i class="conum" data-value="3"></i><b>(3)</b>
+    @state == :FIXED
+  end
 
-  <span class="k">def</span> <span class="nf">to_s</span> <i class="conum" data-value="4"></i><b>(4)</b>
-    <span class="n">total</span> <span class="o">=</span> <span class="k">if</span> <span class="vi">@state</span> <span class="o">==</span> <span class="ss">:FIXED</span>
-              <span class="vi">@total</span>
-            <span class="k">else</span>
-              <span class="s1">'   .'</span>
-            <span class="k">end</span>
-    <span class="nb">format</span> <span class="s1">'|%2d|%3s|%3s|%5s|%11d|%11d|%12d|%11s|'</span><span class="p">,</span>
-           <span class="vi">@frame_no</span><span class="p">,</span> <span class="vi">@first</span><span class="p">,</span> <span class="vi">@second</span><span class="p">,</span> <span class="n">total</span><span class="p">,</span> <span class="n">frame_score</span><span class="p">,</span>
-           <span class="vi">@spare_bonus</span><span class="p">,</span> <span class="vi">@strike_bonus</span><span class="p">,</span> <span class="vi">@state</span>
-  <span class="k">end</span>
+  def to_s <i class="conum" data-value="4"></i><b>(4)</b>
+    total = if @state == :FIXED
+              @total
+            else
+              '   .'
+            end
+    format '|%2d|%3s|%3s|%5s|%11d|%11d|%12d|%11s|',
+           @frame_no, @first, @second, total, frame_score,
+           @spare_bonus, @strike_bonus, @state
+  end
 
-  <span class="kp">private</span> <i class="conum" data-value="5"></i><b>(5)</b>
+  private <i class="conum" data-value="5"></i><b>(5)</b>
 
-  <span class="k">def</span> <span class="nf">before_1st_porc</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">pins</span><span class="p">)</span> <i class="conum" data-value="6"></i><b>(6)</b>
-    <span class="k">case</span> <span class="n">evt</span>
-    <span class="k">when</span> <span class="ss">:PINS</span>
-      <span class="nb">puts</span> <span class="s2">"invalid pins: </span><span class="si">#{</span><span class="n">pins</span><span class="si">}</span><span class="s2">"</span> <span class="k">if</span> <span class="n">pins</span><span class="p">.</span><span class="nf">negative?</span> <span class="o">||</span> <span class="n">pins</span> <span class="o">&gt;</span> <span class="mi">10</span>
-      <span class="vi">@first</span> <span class="o">=</span> <span class="n">pins</span>
-      <span class="vi">@state</span> <span class="o">=</span> <span class="k">if</span> <span class="n">strike?</span>
-                 <span class="vi">@second</span> <span class="o">=</span> <span class="mi">0</span>
-                 <span class="ss">:PENDING</span>
-               <span class="k">else</span>
-                 <span class="ss">:BEFORE_2ND</span>
-               <span class="k">end</span>
-    <span class="k">else</span>
-      <span class="nb">puts</span> <span class="s2">"invalid event: </span><span class="si">#{</span><span class="n">evt</span><span class="si">}</span><span class="s2"> on </span><span class="si">#{</span><span class="vi">@state</span><span class="si">}</span><span class="s2">."</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
+  def before_1st_porc(evt, pins) <i class="conum" data-value="6"></i><b>(6)</b>
+    case evt
+    when :PINS
+      puts "invalid pins: #{pins}" if pins.negative? || pins &gt; 10
+      @first = pins
+      @state = if strike?
+                 @second = 0
+                 :PENDING
+               else
+                 :BEFORE_2ND
+               end
+    else
+      puts "invalid event: #{evt} on #{@state}."
+    end
+  end
 
-  <span class="k">def</span> <span class="nf">before_2nd_proc</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">pins</span><span class="p">)</span> <i class="conum" data-value="7"></i><b>(7)</b>
-    <span class="k">case</span> <span class="n">evt</span>
-    <span class="k">when</span> <span class="ss">:PINS</span>
-      <span class="nb">puts</span> <span class="s2">"invalid pins: </span><span class="si">#{</span><span class="n">pins</span><span class="si">}</span><span class="s2">"</span> <span class="k">if</span> <span class="n">pins</span><span class="p">.</span><span class="nf">negative?</span> <span class="o">||</span> <span class="n">pins</span> <span class="o">&gt;</span> <span class="p">(</span><span class="mi">10</span> <span class="o">-</span> <span class="vi">@first</span><span class="p">)</span>
-      <span class="vi">@second</span> <span class="o">=</span> <span class="n">pins</span>
-      <span class="vi">@state</span> <span class="o">=</span> <span class="k">if</span> <span class="n">spare?</span>
-                 <span class="ss">:PENDING</span>
-               <span class="k">else</span>
-                 <span class="ss">:FIXED</span>
-               <span class="k">end</span>
-    <span class="k">else</span>
-      <span class="nb">puts</span> <span class="s2">"invalid event: </span><span class="si">#{</span><span class="n">evt</span><span class="si">}</span><span class="s2"> on </span><span class="si">#{</span><span class="vi">@state</span><span class="si">}</span><span class="s2">."</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
-<span class="k">end</span></code></pre>
+  def before_2nd_proc(evt, pins) <i class="conum" data-value="7"></i><b>(7)</b>
+    case evt
+    when :PINS
+      puts "invalid pins: #{pins}" if pins.negative? || pins &gt; (10 - @first)
+      @second = pins
+      @state = if spare?
+                 :PENDING
+               else
+                 :FIXED
+               end
+    else
+      puts "invalid event: #{evt} on #{@state}."
+    end
+  end
+end</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -4177,45 +4058,45 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div id="ruby_score_code01" class="listingblock">
 <div class="title">リスト 4.3 【Ruby】score.rb(3)</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="ruby"><span class="c1"># frozen_string_literal: true</span>
+<pre class="prettyprint highlight"><code data-lang="ruby"># frozen_string_literal: true
 
-<span class="nb">require</span> <span class="s1">'securerandom'</span> <i class="conum" data-value="1"></i><b>(1)</b>
+require 'securerandom' <i class="conum" data-value="1"></i><b>(1)</b>
 
-<span class="c1"># Frameクラスの定義がここにある</span>
+# Frameクラスの定義がここにある
 
-<span class="c1"># スコアは各人の10フレーム分のスコアを記録する</span>
-<span class="k">class</span> <span class="nc">Score</span> <i class="conum" data-value="2"></i><b>(2)</b>
-  <span class="nb">attr_accessor</span> <span class="ss">:id</span><span class="p">,</span> <span class="ss">:player</span><span class="p">,</span> <span class="ss">:fno</span><span class="p">,</span> <span class="ss">:frames</span><span class="p">,</span> <span class="ss">:state</span>
+# スコアは各人の10フレーム分のスコアを記録する
+class Score <i class="conum" data-value="2"></i><b>(2)</b>
+  attr_accessor :id, :player, :fno, :frames, :state
 
-  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
-    <span class="vi">@id</span> <span class="o">=</span> <span class="no">SecureRandom</span><span class="p">.</span><span class="nf">urlsafe_base64</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <i class="conum" data-value="3"></i><b>(3)</b>
-    <span class="vi">@player</span> <span class="o">=</span> <span class="nb">name</span>
-    <span class="vi">@fno</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="vi">@frames</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">..</span><span class="mi">13</span><span class="p">).</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">fno</span><span class="o">|</span> <span class="c1"># (-1, 0) are dummy frame </span><i class="conum" data-value="4"></i><b>(4)</b>
-      <span class="vi">@frames</span><span class="p">.</span><span class="nf">append</span> <span class="no">Frame</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">fno</span><span class="p">)</span>
-    <span class="k">end</span>
-    <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:WAIT_FOR_1ST</span> <i class="conum" data-value="5"></i><b>(5)</b>
-    <span class="vi">@frames</span><span class="p">[</span><span class="n">fno2idx</span><span class="p">(</span><span class="vi">@fno</span><span class="p">)].</span><span class="nf">action</span><span class="p">(</span><span class="ss">:SETUP</span><span class="p">)</span> <i class="conum" data-value="6"></i><b>(6)</b>
-  <span class="k">end</span>
+  def initialize(name)
+    @id = SecureRandom.urlsafe_base64(8) <i class="conum" data-value="3"></i><b>(3)</b>
+    @player = name
+    @fno = 1
+    @frames = []
+    (-1..13).each do |fno| # (-1, 0) are dummy frame <i class="conum" data-value="4"></i><b>(4)</b>
+      @frames.append Frame.new(fno)
+    end
+    @state = :WAIT_FOR_1ST <i class="conum" data-value="5"></i><b>(5)</b>
+    @frames[fno2idx(@fno)].action(:SETUP) <i class="conum" data-value="6"></i><b>(6)</b>
+  end
 
-  <span class="k">def</span> <span class="nf">fno2idx</span><span class="p">(</span><span class="n">fno</span><span class="p">)</span> <i class="conum" data-value="7"></i><b>(7)</b>
-    <span class="n">fno</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1"># frame number 1 =&gt; array index 3 (0 origin).</span>
-  <span class="k">end</span>
+  def fno2idx(fno) <i class="conum" data-value="7"></i><b>(7)</b>
+    fno + 1 # frame number 1 =&gt; array index 3 (0 origin).
+  end
 
-  <span class="k">def</span> <span class="nf">frame</span><span class="p">(</span><span class="n">fno</span><span class="p">)</span>
-    <span class="vi">@frames</span><span class="p">[</span><span class="n">fno2idx</span><span class="p">(</span><span class="n">fno</span><span class="p">)]</span> <span class="c1"># return index on @frams at frame number.</span>
-  <span class="k">end</span>
+  def frame(fno)
+    @frames[fno2idx(fno)] # return index on @frams at frame number.
+  end
 
-  <span class="k">def</span> <span class="nf">go_next_frame</span> <i class="conum" data-value="8"></i><b>(8)</b>
-    <span class="vi">@fno</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="vi">@frames</span><span class="p">[</span><span class="n">fno2idx</span><span class="p">(</span><span class="n">fno</span><span class="p">)].</span><span class="nf">action</span><span class="p">(</span><span class="ss">:SETUP</span><span class="p">)</span>
-  <span class="k">end</span>
+  def go_next_frame <i class="conum" data-value="8"></i><b>(8)</b>
+    @fno += 1
+    @frames[fno2idx(fno)].action(:SETUP)
+  end
 
-  <span class="k">def</span> <span class="nf">current</span> <i class="conum" data-value="9"></i><b>(9)</b>
-    <span class="n">frame</span><span class="p">(</span><span class="vi">@fno</span><span class="p">)</span>
-  <span class="k">end</span>
-<span class="k">end</span></code></pre>
+  def current <i class="conum" data-value="9"></i><b>(9)</b>
+    frame(@fno)
+  end
+end</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -4264,52 +4145,52 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div id="ruby_score_code02" class="listingblock">
 <div class="title">リスト 4.4 【Ruby】score.rb(4)</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="ruby"><span class="c1"># Frameクラスの定義やそれ以前のコードがここにある</span>
+<pre class="prettyprint highlight"><code data-lang="ruby"># Frameクラスの定義やそれ以前のコードがここにある
 
-<span class="c1"># スコアは各人の10フレーム分のスコアを記録する</span>
-<span class="k">class</span> <span class="nc">Score</span>
-  <span class="c1"># アクセサーの定義がここにある</span>
-  <span class="c1"># initialize、fno2idx、frame、go_next_frame、currentメソッドの定義がここにある</span>
+# スコアは各人の10フレーム分のスコアを記録する
+class Score
+  # アクセサーの定義がここにある
+  # initialize、fno2idx、frame、go_next_frame、currentメソッドの定義がここにある
 
-  <span class="k">def</span> <span class="nf">prev</span> <i class="conum" data-value="1"></i><b>(1)</b>
-    <span class="n">frame</span><span class="p">(</span><span class="vi">@fno</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-  <span class="k">end</span>
+  def prev <i class="conum" data-value="1"></i><b>(1)</b>
+    frame(@fno - 1)
+  end
 
-  <span class="k">def</span> <span class="nf">pprev</span> <i class="conum" data-value="2"></i><b>(2)</b>
-    <span class="n">frame</span><span class="p">(</span><span class="vi">@fno</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
-  <span class="k">end</span>
+  def pprev <i class="conum" data-value="2"></i><b>(2)</b>
+    frame(@fno - 2)
+  end
 
-  <span class="k">def</span> <span class="nf">calc_spare_bonus_after_1st</span> <i class="conum" data-value="3"></i><b>(3)</b>
-    <span class="k">return</span> <span class="k">unless</span> <span class="n">prev</span><span class="p">.</span><span class="nf">spare?</span>
+  def calc_spare_bonus_after_1st <i class="conum" data-value="3"></i><b>(3)</b>
+    return unless prev.spare?
 
-    <span class="n">prev</span><span class="p">.</span><span class="nf">spare_bonus</span> <span class="o">=</span> <span class="n">current</span><span class="p">.</span><span class="nf">first</span>
-    <span class="n">prev</span><span class="p">.</span><span class="nf">action</span><span class="p">(</span><span class="ss">:DETERMINE</span><span class="p">)</span>
-  <span class="k">end</span>
+    prev.spare_bonus = current.first
+    prev.action(:DETERMINE)
+  end
 
-  <span class="k">def</span> <span class="nf">calc_strike_bonus_after_1st</span> <i class="conum" data-value="4"></i><b>(4)</b>
-    <span class="k">return</span> <span class="k">unless</span> <span class="n">prev</span><span class="p">.</span><span class="nf">strike?</span> <span class="o">&amp;&amp;</span> <span class="n">pprev</span><span class="p">.</span><span class="nf">strike?</span>
+  def calc_strike_bonus_after_1st <i class="conum" data-value="4"></i><b>(4)</b>
+    return unless prev.strike? &amp;&amp; pprev.strike?
 
-    <span class="n">pprev</span><span class="p">.</span><span class="nf">strike_bonus</span> <span class="o">=</span> <span class="n">prev</span><span class="p">.</span><span class="nf">first</span> <span class="o">+</span> <span class="n">current</span><span class="p">.</span><span class="nf">first</span>
-    <span class="n">pprev</span><span class="p">.</span><span class="nf">action</span><span class="p">(</span><span class="ss">:DETERMINE</span><span class="p">)</span>
-  <span class="k">end</span>
+    pprev.strike_bonus = prev.first + current.first
+    pprev.action(:DETERMINE)
+  end
 
-  <span class="k">def</span> <span class="nf">calc_strike_bonus_after_2nd</span> <i class="conum" data-value="5"></i><b>(5)</b>
-    <span class="k">return</span> <span class="k">unless</span> <span class="n">prev</span><span class="p">.</span><span class="nf">strike?</span>
+  def calc_strike_bonus_after_2nd <i class="conum" data-value="5"></i><b>(5)</b>
+    return unless prev.strike?
 
-    <span class="n">prev</span><span class="p">.</span><span class="nf">strike_bonus</span> <span class="o">=</span> <span class="n">current</span><span class="p">.</span><span class="nf">first</span> <span class="o">+</span> <span class="n">current</span><span class="p">.</span><span class="nf">second</span>
-    <span class="n">prev</span><span class="p">.</span><span class="nf">action</span><span class="p">(</span><span class="ss">:DETERMINE</span><span class="p">)</span>
-  <span class="k">end</span>
+    prev.strike_bonus = current.first + current.second
+    prev.action(:DETERMINE)
+  end
 
-  <span class="k">def</span> <span class="nf">update_total</span> <i class="conum" data-value="6"></i><b>(6)</b>
-    <span class="vi">@frames</span><span class="p">.</span><span class="nf">each_cons</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">prev</span><span class="p">,</span> <span class="n">cur</span><span class="o">|</span>
-      <span class="n">cur</span><span class="p">.</span><span class="nf">total</span> <span class="o">=</span> <span class="n">prev</span><span class="p">.</span><span class="nf">total</span> <span class="o">+</span> <span class="n">cur</span><span class="p">.</span><span class="nf">frame_score</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
+  def update_total <i class="conum" data-value="6"></i><b>(6)</b>
+    @frames.each_cons(2) do |prev, cur|
+      cur.total = prev.total + cur.frame_score
+    end
+  end
 
-  <span class="k">def</span> <span class="nf">finished?</span> <i class="conum" data-value="7"></i><b>(7)</b>
-    <span class="n">frame</span><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="nf">fixed?</span>
-  <span class="k">end</span>
-<span class="k">end</span></code></pre>
+  def finished? <i class="conum" data-value="7"></i><b>(7)</b>
+    frame(10).fixed?
+  end
+end</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -4350,57 +4231,57 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div id="ruby_score_code03" class="listingblock">
 <div class="title">リスト 4.5 【Ruby】score.rb(5)</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="ruby"><span class="c1"># Frameクラスの定義やそれ以前のコードがここにある</span>
+<pre class="prettyprint highlight"><code data-lang="ruby"># Frameクラスの定義やそれ以前のコードがここにある
 
-<span class="c1"># スコアは各人の10フレーム分のスコアを記録する</span>
-<span class="k">class</span> <span class="nc">Score</span>
-  <span class="c1"># アクセサーの定義がここにある</span>
-  <span class="c1"># initializeからfinished?までのメソッドの定義がここにある</span>
+# スコアは各人の10フレーム分のスコアを記録する
+class Score
+  # アクセサーの定義がここにある
+  # initializeからfinished?までのメソッドの定義がここにある
 
-  <span class="k">def</span> <span class="nf">wait_for_1st_proc</span><span class="p">(</span><span class="n">pins</span><span class="p">)</span> <i class="conum" data-value="1"></i><b>(1)</b>
-    <span class="n">current</span><span class="p">.</span><span class="nf">action</span><span class="p">(</span><span class="ss">:PINS</span><span class="p">,</span> <span class="n">pins</span><span class="p">)</span> <i class="conum" data-value="2"></i><b>(2)</b>
-    <span class="n">calc_spare_bonus_after_1st</span>
-    <span class="n">calc_strike_bonus_after_1st</span>
-    <span class="n">update_total</span>
-    <span class="k">if</span> <span class="n">finished?</span> <i class="conum" data-value="3"></i><b>(3)</b>
-      <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:FINISHED</span>
-    <span class="k">elsif</span> <span class="n">current</span><span class="p">.</span><span class="nf">strike?</span> <i class="conum" data-value="4"></i><b>(4)</b>
-      <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:WAIT_FOR_1ST</span>
-      <span class="n">go_next_frame</span>
-    <span class="k">else</span> <i class="conum" data-value="5"></i><b>(5)</b>
-      <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:WAIT_FOR_2ND</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
+  def wait_for_1st_proc(pins) <i class="conum" data-value="1"></i><b>(1)</b>
+    current.action(:PINS, pins) <i class="conum" data-value="2"></i><b>(2)</b>
+    calc_spare_bonus_after_1st
+    calc_strike_bonus_after_1st
+    update_total
+    if finished? <i class="conum" data-value="3"></i><b>(3)</b>
+      @state = :FINISHED
+    elsif current.strike? <i class="conum" data-value="4"></i><b>(4)</b>
+      @state = :WAIT_FOR_1ST
+      go_next_frame
+    else <i class="conum" data-value="5"></i><b>(5)</b>
+      @state = :WAIT_FOR_2ND
+    end
+  end
 
-  <span class="k">def</span> <span class="nf">wait_for_2nd_proc</span><span class="p">(</span><span class="n">pins</span><span class="p">)</span> <i class="conum" data-value="6"></i><b>(6)</b>
-    <span class="n">current</span><span class="p">.</span><span class="nf">action</span><span class="p">(</span><span class="ss">:PINS</span><span class="p">,</span> <span class="n">pins</span><span class="p">)</span> <i class="conum" data-value="7"></i><b>(7)</b>
-    <span class="n">calc_strike_bonus_after_2nd</span>
-    <span class="n">update_total</span>
-    <span class="k">if</span> <span class="n">finished?</span> <i class="conum" data-value="8"></i><b>(8)</b>
-      <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:FINISHED</span>
-    <span class="k">else</span> <i class="conum" data-value="9"></i><b>(9)</b>
-      <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:WAIT_FOR_1ST</span>
-      <span class="n">go_next_frame</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
+  def wait_for_2nd_proc(pins) <i class="conum" data-value="6"></i><b>(6)</b>
+    current.action(:PINS, pins) <i class="conum" data-value="7"></i><b>(7)</b>
+    calc_strike_bonus_after_2nd
+    update_total
+    if finished? <i class="conum" data-value="8"></i><b>(8)</b>
+      @state = :FINISHED
+    else <i class="conum" data-value="9"></i><b>(9)</b>
+      @state = :WAIT_FOR_1ST
+      go_next_frame
+    end
+  end
 
-  <span class="k">def</span> <span class="nf">scoring</span><span class="p">(</span><span class="n">pins</span><span class="p">)</span> <i class="conum" data-value="10"></i><b>(10)</b>
-    <span class="k">case</span> <span class="vi">@state</span>
-    <span class="k">when</span> <span class="ss">:WAIT_FOR_1ST</span>
-      <span class="n">wait_for_1st_proc</span><span class="p">(</span><span class="n">pins</span><span class="p">)</span>
-    <span class="k">when</span> <span class="ss">:WAIT_FOR_2ND</span>
-      <span class="n">wait_for_2nd_proc</span><span class="p">(</span><span class="n">pins</span><span class="p">)</span>
-    <span class="k">when</span> <span class="ss">:FINISHED</span>
-      <span class="nb">puts</span> <span class="s1">'finished'</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
+  def scoring(pins) <i class="conum" data-value="10"></i><b>(10)</b>
+    case @state
+    when :WAIT_FOR_1ST
+      wait_for_1st_proc(pins)
+    when :WAIT_FOR_2ND
+      wait_for_2nd_proc(pins)
+    when :FINISHED
+      puts 'finished'
+    end
+  end
 
-  <span class="k">def</span> <span class="nf">to_s</span> <i class="conum" data-value="11"></i><b>(11)</b>
-    <span class="s2">"Player:</span><span class="si">#{</span><span class="vi">@player</span><span class="si">}</span><span class="s2">, Score(id: </span><span class="si">#{</span><span class="vi">@id</span><span class="si">}</span><span class="s2">), Frame:</span><span class="si">#{</span><span class="vi">@fno</span><span class="si">}</span><span class="s2">,
+  def to_s <i class="conum" data-value="11"></i><b>(11)</b>
+    "Player:#{@player}, Score(id: #{@id}), Frame:#{@fno},
 |No|1st|2nd|Total|Frame Score|Spare Bonus|Strike Bonus|Frame State|
-</span><span class="si">#{</span><span class="vi">@frames</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
-  <span class="k">end</span>
-<span class="k">end</span></code></pre>
+#{@frames.join("\n")}"
+  end
+end</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -4508,47 +4389,47 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div id="ruby_game_code01" class="listingblock">
 <div class="title">リスト 4.6 【Ruby】score.rb(6)</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="ruby"><span class="c1"># FrameクラスとScoreクラスの定義やそれ以前のコードがここにある</span>
+<pre class="prettyprint highlight"><code data-lang="ruby"># FrameクラスとScoreクラスの定義やそれ以前のコードがここにある
 
-<span class="c1"># Gameクラスは複数名の1ゲーム分のスコアのセットを構成する</span>
-<span class="k">class</span> <span class="nc">Game</span>
-  <span class="nb">attr_reader</span> <span class="ss">:id</span><span class="p">,</span> <span class="ss">:turn</span><span class="p">,</span> <span class="ss">:scores</span>
+# Gameクラスは複数名の1ゲーム分のスコアのセットを構成する
+class Game
+  attr_reader :id, :turn, :scores
 
-  <span class="k">def</span> <span class="nf">initialize</span>
-    <span class="vi">@id</span> <span class="o">=</span> <span class="no">SecureRandom</span><span class="p">.</span><span class="nf">urlsafe_base64</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <i class="conum" data-value="1"></i><b>(1)</b>
-    <span class="vi">@turn</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="vi">@scores</span> <span class="o">=</span> <span class="p">[]</span>
-  <span class="k">end</span>
+  def initialize
+    @id = SecureRandom.urlsafe_base64(8) <i class="conum" data-value="1"></i><b>(1)</b>
+    @turn = 0
+    @scores = []
+  end
 
-  <span class="k">def</span> <span class="nf">entry</span><span class="p">(</span><span class="nb">name</span> <span class="o">=</span> <span class="s1">'unknown'</span><span class="p">)</span> <i class="conum" data-value="2"></i><b>(2)</b>
-    <span class="vi">@scores</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="no">Score</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="nb">name</span><span class="p">))</span>
-  <span class="k">end</span>
+  def entry(name = 'unknown') <i class="conum" data-value="2"></i><b>(2)</b>
+    @scores.append(Score.new(name))
+  end
 
-  <span class="k">def</span> <span class="nf">turn_player_name</span> <i class="conum" data-value="3"></i><b>(3)</b>
-    <span class="vi">@scores</span><span class="p">[</span><span class="vi">@turn</span><span class="p">].</span><span class="nf">player</span>
-  <span class="k">end</span>
+  def turn_player_name <i class="conum" data-value="3"></i><b>(3)</b>
+    @scores[@turn].player
+  end
 
-  <span class="k">def</span> <span class="nf">go_next_turn</span> <i class="conum" data-value="4"></i><b>(4)</b>
-    <span class="vi">@turn</span> <span class="o">=</span> <span class="p">(</span><span class="vi">@turn</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="vi">@scores</span><span class="p">.</span><span class="nf">size</span>
-  <span class="k">end</span>
+  def go_next_turn <i class="conum" data-value="4"></i><b>(4)</b>
+    @turn = (@turn + 1) % @scores.size
+  end
 
-  <span class="k">def</span> <span class="nf">playing</span><span class="p">(</span><span class="n">score_index</span><span class="p">,</span> <span class="n">pins</span><span class="p">)</span> <i class="conum" data-value="5"></i><b>(5)</b>
-    <span class="vi">@scores</span><span class="p">[</span><span class="n">score_index</span><span class="p">].</span><span class="nf">scoring</span><span class="p">(</span><span class="n">pins</span><span class="p">)</span>
-    <span class="k">if</span> <span class="vi">@scores</span><span class="p">[</span><span class="n">score_index</span><span class="p">].</span><span class="nf">fno</span> <span class="o">&gt;</span> <span class="mi">10</span> <i class="conum" data-value="6"></i><b>(6)</b>
-      <span class="n">go_next_turn</span> <span class="k">if</span> <span class="vi">@scores</span><span class="p">[</span><span class="n">score_index</span><span class="p">].</span><span class="nf">finished?</span>
-    <span class="k">elsif</span> <span class="vi">@scores</span><span class="p">[</span><span class="n">score_index</span><span class="p">].</span><span class="nf">current</span><span class="p">.</span><span class="nf">state</span> <span class="o">==</span> <span class="ss">:BEFORE_1ST</span> <i class="conum" data-value="7"></i><b>(7)</b>
-      <span class="n">go_next_turn</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
+  def playing(score_index, pins) <i class="conum" data-value="5"></i><b>(5)</b>
+    @scores[score_index].scoring(pins)
+    if @scores[score_index].fno &gt; 10 <i class="conum" data-value="6"></i><b>(6)</b>
+      go_next_turn if @scores[score_index].finished?
+    elsif @scores[score_index].current.state == :BEFORE_1ST <i class="conum" data-value="7"></i><b>(7)</b>
+      go_next_turn
+    end
+  end
 
-  <span class="k">def</span> <span class="nf">finished?</span> <i class="conum" data-value="8"></i><b>(8)</b>
-    <span class="vi">@scores</span><span class="p">.</span><span class="nf">reject</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:finished?</span><span class="p">)</span> <span class="o">==</span> <span class="p">[]</span>
-  <span class="k">end</span>
+  def finished? <i class="conum" data-value="8"></i><b>(8)</b>
+    @scores.reject(&amp;:finished?) == []
+  end
 
-  <span class="k">def</span> <span class="nf">to_s</span> <i class="conum" data-value="9"></i><b>(9)</b>
-    <span class="s2">"Game(id:</span><span class="si">#{</span><span class="vi">@id</span><span class="si">}</span><span class="s2">),</span><span class="se">\n</span><span class="si">#{</span><span class="vi">@scores</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
-  <span class="k">end</span>
-<span class="k">end</span></code></pre>
+  def to_s <i class="conum" data-value="9"></i><b>(9)</b>
+    "Game(id:#{@id}),\n#{@scores.join("\n")}"
+  end
+end</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -4614,28 +4495,28 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div id="ruby_scoresheet_code01" class="listingblock">
 <div class="title">リスト 4.7 【Ruby】score.rb(7)</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="ruby"><span class="c1"># FrameクラスとScoreクラスとGameクラスの定義やそれ以前のコードがここにある</span>
+<pre class="prettyprint highlight"><code data-lang="ruby"># FrameクラスとScoreクラスとGameクラスの定義やそれ以前のコードがここにある
 
-<span class="c1"># ScoreSheetは、複数名の複数回のGameを記録する</span>
-<span class="k">class</span> <span class="nc">ScoreSheet</span>
-  <span class="nb">attr_accessor</span> <span class="ss">:id</span><span class="p">,</span> <span class="ss">:time</span><span class="p">,</span> <span class="ss">:games</span>
+# ScoreSheetは、複数名の複数回のGameを記録する
+class ScoreSheet
+  attr_accessor :id, :time, :games
 
-  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">date</span><span class="p">)</span> <i class="conum" data-value="1"></i><b>(1)</b>
-    <span class="vi">@id</span> <span class="o">=</span> <span class="no">SecureRandom</span><span class="p">.</span><span class="nf">urlsafe_base64</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <i class="conum" data-value="2"></i><b>(2)</b>
-    <span class="vi">@play_date</span> <span class="o">=</span> <span class="n">date</span>
-    <span class="vi">@games</span> <span class="o">=</span> <span class="p">[]</span>
-  <span class="k">end</span>
+  def initialize(date) <i class="conum" data-value="1"></i><b>(1)</b>
+    @id = SecureRandom.urlsafe_base64(8) <i class="conum" data-value="2"></i><b>(2)</b>
+    @play_date = date
+    @games = []
+  end
 
-  <span class="k">def</span> <span class="nf">add_game</span><span class="p">(</span><span class="n">games</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <i class="conum" data-value="3"></i><b>(3)</b>
-    <span class="n">games</span><span class="p">.</span><span class="nf">times</span> <span class="k">do</span>
-      <span class="vi">@games</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="no">Game</span><span class="p">.</span><span class="nf">new</span><span class="p">)</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
+  def add_game(games = 1) <i class="conum" data-value="3"></i><b>(3)</b>
+    games.times do
+      @games.append(Game.new)
+    end
+  end
 
-  <span class="k">def</span> <span class="nf">to_s</span> <i class="conum" data-value="4"></i><b>(4)</b>
-    <span class="s2">"Score Sheet Date: </span><span class="si">#{</span><span class="vi">@time</span><span class="si">}</span><span class="s2">(id:</span><span class="si">#{</span><span class="vi">@id</span><span class="si">}</span><span class="s2">)"</span>
-  <span class="k">end</span>
-<span class="k">end</span></code></pre>
+  def to_s <i class="conum" data-value="4"></i><b>(4)</b>
+    "Score Sheet Date: #{@time}(id:#{@id})"
+  end
+end</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -4777,7 +4658,7 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 </div>
 </div>
 <div class="sect1">
-<h2 id="_program_test"><a class="anchor" href="#_program_test"></a>5 できあがったプログラムを試す</h2>
+<h2 id="_program_test"><a class="anchor" href="#_program_test"></a>第5章 できあがったプログラムを試す</h2>
 <div class="sectionbody">
 <div class="paragraph lead">
 <p>対応づけルールを使って、モデルから変換して作成したプログラムができあがりました。
@@ -4797,583 +4678,294 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div id="ruby_all_code01" class="listingblock">
 <div class="title">リスト 5.1 【Ruby】score.rb</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="ruby"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">  2
-  3
-  4
-  5
-  6
-  7
-  8
-  9
- 10
- 11
- 12
- 13
- 14
- 15
- 16
- 17
- 18
- 19
- 20
- 21
- 22
- 23
- 24
- 25
- 26
- 27
- 28
- 29
- 30
- 31
- 32
- 33
- 34
- 35
- 36
- 37
- 38
- 39
- 40
- 41
- 42
- 43
- 44
- 45
- 46
- 47
- 48
- 49
- 50
- 51
- 52
- 53
- 54
- 55
- 56
- 57
- 58
- 59
- 60
- 61
- 62
- 63
- 64
- 65
- 66
- 67
- 68
- 69
- 70
- 71
- 72
- 73
- 74
- 75
- 76
- 77
- 78
- 79
- 80
- 81
- 82
- 83
- 84
- 85
- 86
- 87
- 88
- 89
- 90
- 91
- 92
- 93
- 94
- 95
- 96
- 97
- 98
- 99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
-127
-128
-129
-130
-131
-132
-133
-134
-135
-136
-137
-138
-139
-140
-141
-142
-143
-144
-145
-146
-147
-148
-149
-150
-151
-152
-153
-154
-155
-156
-157
-158
-159
-160
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187
-188
-189
-190
-191
-192
-193
-194
-195
-196
-197
-198
-199
-200
-201
-202
-203
-204
-205
-206
-207
-208
-209
-210
-211
-212
-213
-214
-215
-216
-217
-218
-219
-220
-221
-222
-223
-224
-225
-226
-227
-228
-229
-230
-231
-232
-233
-234
-235
-236
-237
-238
-239
-240
-241
-242
-243
-244
-245
-246
-247
-248
-249
-250
-251
-252
-253
-254
-255
-256
-257
-258
-259
-260
-261
-262
-263
-264
-265
-266
-267
-268
-269
-270
-271
-272
-273
-274
-275
-276
-277
-278
-279
-280
-281
-282
-283
-284
-285
-286
-287
-288
-289
-</pre></td><td class="code"><pre><span class="c1"># frozen_string_literal: true</span>
+<pre class="prettyprint highlight linenums:2"><code data-lang="ruby"># frozen_string_literal: true
 
-<span class="nb">require</span> <span class="s1">'securerandom'</span>
+require 'securerandom'
 
-<span class="c1"># Frameは1フレーム分のピン数やボーナスを記録する</span>
-<span class="k">class</span> <span class="nc">Frame</span>
-  <span class="nb">attr_reader</span> <span class="ss">:frame_no</span>
-  <span class="nb">attr_accessor</span> <span class="ss">:first</span><span class="p">,</span> <span class="ss">:second</span><span class="p">,</span> <span class="ss">:spare_bonus</span><span class="p">,</span> <span class="ss">:strike_bonus</span><span class="p">,</span> <span class="ss">:total</span><span class="p">,</span> <span class="ss">:state</span>
+# Frameは1フレーム分のピン数やボーナスを記録する
+class Frame
+  attr_reader :frame_no
+  attr_accessor :first, :second, :spare_bonus, :strike_bonus, :total, :state
 
-  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">frame_no</span><span class="p">)</span>
-    <span class="vi">@frame_no</span> <span class="o">=</span> <span class="n">frame_no</span>
-    <span class="vi">@first</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="vi">@second</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="vi">@spare_bonus</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="vi">@strike_bonus</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="vi">@total</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:RESERVED</span>
-  <span class="k">end</span>
+  def initialize(frame_no)
+    @frame_no = frame_no
+    @first = 0
+    @second = 0
+    @spare_bonus = 0
+    @strike_bonus = 0
+    @total = 0
+    @state = :RESERVED
+  end
 
-  <span class="k">def</span> <span class="nf">action</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">pins</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">case</span> <span class="vi">@state</span>
-    <span class="k">when</span> <span class="ss">:RESERVED</span>
-      <span class="k">case</span> <span class="n">event</span>
-      <span class="k">when</span> <span class="ss">:SETUP</span>
-        <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:BEFORE_1ST</span>
-      <span class="k">else</span>
-        <span class="nb">puts</span> <span class="s2">"invalid event: </span><span class="si">#{</span><span class="n">event</span><span class="si">}</span><span class="s2"> is ignored."</span>
-      <span class="k">end</span>
-    <span class="k">when</span> <span class="ss">:BEFORE_1ST</span>
-      <span class="n">before_1st_porc</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">pins</span><span class="p">)</span>
-    <span class="k">when</span> <span class="ss">:BEFORE_2ND</span>
-      <span class="n">before_2nd_proc</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">pins</span><span class="p">)</span>
-    <span class="k">when</span> <span class="ss">:PENDING</span>
-      <span class="k">case</span> <span class="n">event</span>
-      <span class="k">when</span> <span class="ss">:DETERMINE</span>
-        <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:FIXED</span>
-      <span class="k">end</span>
-    <span class="k">when</span> <span class="ss">:FIXED</span>
-      <span class="nb">puts</span> <span class="s1">'fixed.'</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
+  def action(event, pins=0)
+    case @state
+    when :RESERVED
+      case event
+      when :SETUP
+        @state = :BEFORE_1ST
+      else
+        puts "invalid event: #{event} is ignored."
+      end
+    when :BEFORE_1ST
+      before_1st_porc(event, pins)
+    when :BEFORE_2ND
+      before_2nd_proc(event, pins)
+    when :PENDING
+      case event
+      when :DETERMINE
+        @state = :FIXED
+      end
+    when :FIXED
+      puts 'fixed.'
+    end
+  end
 
-  <span class="k">def</span> <span class="nf">frame_score</span>
-    <span class="vi">@first</span> <span class="o">+</span> <span class="vi">@second</span> <span class="o">+</span> <span class="vi">@spare_bonus</span> <span class="o">+</span> <span class="vi">@strike_bonus</span>
-  <span class="k">end</span>
+  def frame_score
+    @first + @second + @spare_bonus + @strike_bonus
+  end
 
-  <span class="k">def</span> <span class="nf">strike?</span>
-    <span class="vi">@first</span> <span class="o">==</span> <span class="mi">10</span>
-  <span class="k">end</span>
+  def strike?
+    @first == 10
+  end
 
-  <span class="k">def</span> <span class="nf">spare?</span>
-    <span class="vi">@first</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="vi">@first</span> <span class="o">+</span> <span class="vi">@second</span><span class="p">)</span> <span class="o">==</span> <span class="mi">10</span>
-  <span class="k">end</span>
+  def spare?
+    @first &lt; 10 &amp;&amp; (@first + @second) == 10
+  end
 
-  <span class="k">def</span> <span class="nf">miss?</span>
-    <span class="vi">@first</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="o">&amp;&amp;</span> <span class="vi">@second</span><span class="p">.</span><span class="nf">zero</span> <span class="o">&amp;&amp;</span> <span class="vi">@state</span> <span class="o">==</span> <span class="ss">:FIXED</span>
-  <span class="k">end</span>
+  def miss?
+    @first &lt; 10 &amp;&amp; @second.zero &amp;&amp; @state == :FIXED
+  end
 
-  <span class="k">def</span> <span class="nf">gutter?</span>
-    <span class="vi">@first</span><span class="p">.</span><span class="nf">zero</span>
-  <span class="k">end</span>
+  def gutter?
+    @first.zero
+  end
 
-  <span class="k">def</span> <span class="nf">fixed?</span>
-    <span class="vi">@state</span> <span class="o">==</span> <span class="ss">:FIXED</span>
-  <span class="k">end</span>
+  def fixed?
+    @state == :FIXED
+  end
 
-  <span class="k">def</span> <span class="nf">to_s</span>
-    <span class="n">total</span> <span class="o">=</span> <span class="k">if</span> <span class="vi">@state</span> <span class="o">==</span> <span class="ss">:FIXED</span>
-              <span class="vi">@total</span>
-            <span class="k">else</span>
-              <span class="s1">'   .'</span>
-            <span class="k">end</span>
-    <span class="nb">format</span> <span class="s1">'|%2d|%3s|%3s|%5s|%11d|%11d|%12d|%11s|'</span><span class="p">,</span>
-           <span class="vi">@frame_no</span><span class="p">,</span> <span class="vi">@first</span><span class="p">,</span> <span class="vi">@second</span><span class="p">,</span> <span class="n">total</span><span class="p">,</span> <span class="n">frame_score</span><span class="p">,</span>
-           <span class="vi">@spare_bonus</span><span class="p">,</span> <span class="vi">@strike_bonus</span><span class="p">,</span> <span class="vi">@state</span>
-  <span class="k">end</span>
+  def to_s
+    total = if @state == :FIXED
+              @total
+            else
+              '   .'
+            end
+    format '|%2d|%3s|%3s|%5s|%11d|%11d|%12d|%11s|',
+           @frame_no, @first, @second, total, frame_score,
+           @spare_bonus, @strike_bonus, @state
+  end
 
-  <span class="kp">private</span>
+  private
 
-  <span class="k">def</span> <span class="nf">before_1st_porc</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">pins</span><span class="p">)</span>
-    <span class="k">case</span> <span class="n">evt</span>
-    <span class="k">when</span> <span class="ss">:PINS</span>
-      <span class="nb">puts</span> <span class="s2">"invalid pins: </span><span class="si">#{</span><span class="n">pins</span><span class="si">}</span><span class="s2">"</span> <span class="k">if</span> <span class="n">pins</span><span class="p">.</span><span class="nf">negative?</span> <span class="o">||</span> <span class="n">pins</span> <span class="o">&gt;</span> <span class="mi">10</span>
-      <span class="vi">@first</span> <span class="o">=</span> <span class="n">pins</span>
-      <span class="vi">@state</span> <span class="o">=</span> <span class="k">if</span> <span class="n">strike?</span>
-                 <span class="vi">@second</span> <span class="o">=</span> <span class="mi">0</span>
-                 <span class="ss">:PENDING</span>
-               <span class="k">else</span>
-                 <span class="ss">:BEFORE_2ND</span>
-               <span class="k">end</span>
-    <span class="k">else</span>
-      <span class="nb">puts</span> <span class="s2">"invalid event: </span><span class="si">#{</span><span class="n">evt</span><span class="si">}</span><span class="s2"> on </span><span class="si">#{</span><span class="vi">@state</span><span class="si">}</span><span class="s2">."</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
+  def before_1st_porc(evt, pins)
+    case evt
+    when :PINS
+      puts "invalid pins: #{pins}" if pins.negative? || pins &gt; 10
+      @first = pins
+      @state = if strike?
+                 @second = 0
+                 :PENDING
+               else
+                 :BEFORE_2ND
+               end
+    else
+      puts "invalid event: #{evt} on #{@state}."
+    end
+  end
 
-  <span class="k">def</span> <span class="nf">before_2nd_proc</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">pins</span><span class="p">)</span>
-    <span class="k">case</span> <span class="n">evt</span>
-    <span class="k">when</span> <span class="ss">:PINS</span>
-      <span class="nb">puts</span> <span class="s2">"invalid pins: </span><span class="si">#{</span><span class="n">pins</span><span class="si">}</span><span class="s2">"</span> <span class="k">if</span> <span class="n">pins</span><span class="p">.</span><span class="nf">negative?</span> <span class="o">||</span> <span class="n">pins</span> <span class="o">&gt;</span> <span class="p">(</span><span class="mi">10</span> <span class="o">-</span> <span class="vi">@first</span><span class="p">)</span>
-      <span class="vi">@second</span> <span class="o">=</span> <span class="n">pins</span>
-      <span class="vi">@state</span> <span class="o">=</span> <span class="k">if</span> <span class="n">spare?</span>
-                 <span class="ss">:PENDING</span>
-               <span class="k">else</span>
-                 <span class="ss">:FIXED</span>
-               <span class="k">end</span>
-    <span class="k">else</span>
-      <span class="nb">puts</span> <span class="s2">"invalid event: </span><span class="si">#{</span><span class="n">evt</span><span class="si">}</span><span class="s2"> on </span><span class="si">#{</span><span class="vi">@state</span><span class="si">}</span><span class="s2">."</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
-<span class="k">end</span>
+  def before_2nd_proc(evt, pins)
+    case evt
+    when :PINS
+      puts "invalid pins: #{pins}" if pins.negative? || pins &gt; (10 - @first)
+      @second = pins
+      @state = if spare?
+                 :PENDING
+               else
+                 :FIXED
+               end
+    else
+      puts "invalid event: #{evt} on #{@state}."
+    end
+  end
+end
 
-<span class="c1"># スコアは各人の10フレーム分のスコアを記録する</span>
-<span class="k">class</span> <span class="nc">Score</span>
-  <span class="nb">attr_accessor</span> <span class="ss">:id</span><span class="p">,</span> <span class="ss">:player</span><span class="p">,</span> <span class="ss">:fno</span><span class="p">,</span> <span class="ss">:frames</span><span class="p">,</span> <span class="ss">:state</span>
+# スコアは各人の10フレーム分のスコアを記録する
+class Score
+  attr_accessor :id, :player, :fno, :frames, :state
 
-  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
-    <span class="vi">@id</span> <span class="o">=</span> <span class="no">SecureRandom</span><span class="p">.</span><span class="nf">urlsafe_base64</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
-    <span class="vi">@player</span> <span class="o">=</span> <span class="nb">name</span>
-    <span class="vi">@fno</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="vi">@frames</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">..</span><span class="mi">13</span><span class="p">).</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">fno</span><span class="o">|</span> <span class="c1"># (-1, 0) are dummy frame</span>
-      <span class="vi">@frames</span><span class="p">.</span><span class="nf">append</span> <span class="no">Frame</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">fno</span><span class="p">)</span>
-    <span class="k">end</span>
-    <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:WAIT_FOR_1ST</span>
-    <span class="vi">@frames</span><span class="p">[</span><span class="n">fno2idx</span><span class="p">(</span><span class="vi">@fno</span><span class="p">)].</span><span class="nf">action</span><span class="p">(</span><span class="ss">:SETUP</span><span class="p">)</span>
-  <span class="k">end</span>
+  def initialize(name)
+    @id = SecureRandom.urlsafe_base64(8)
+    @player = name
+    @fno = 1
+    @frames = []
+    (-1..13).each do |fno| # (-1, 0) are dummy frame
+      @frames.append Frame.new(fno)
+    end
+    @state = :WAIT_FOR_1ST
+    @frames[fno2idx(@fno)].action(:SETUP)
+  end
 
-  <span class="k">def</span> <span class="nf">fno2idx</span><span class="p">(</span><span class="n">fno</span><span class="p">)</span>
-    <span class="n">fno</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1"># frame number 1 =&gt; array index 3 (0 origin).</span>
-  <span class="k">end</span>
+  def fno2idx(fno)
+    fno + 1 # frame number 1 =&gt; array index 3 (0 origin).
+  end
 
-  <span class="k">def</span> <span class="nf">frame</span><span class="p">(</span><span class="n">fno</span><span class="p">)</span>
-    <span class="vi">@frames</span><span class="p">[</span><span class="n">fno2idx</span><span class="p">(</span><span class="n">fno</span><span class="p">)]</span> <span class="c1"># return index on @frams at frame number.</span>
-  <span class="k">end</span>
+  def frame(fno)
+    @frames[fno2idx(fno)] # return index on @frams at frame number.
+  end
 
-  <span class="k">def</span> <span class="nf">go_next_frame</span>
-    <span class="vi">@fno</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="vi">@frames</span><span class="p">[</span><span class="n">fno2idx</span><span class="p">(</span><span class="n">fno</span><span class="p">)].</span><span class="nf">action</span><span class="p">(</span><span class="ss">:SETUP</span><span class="p">)</span>
-  <span class="k">end</span>
+  def go_next_frame
+    @fno += 1
+    @frames[fno2idx(fno)].action(:SETUP)
+  end
 
-  <span class="k">def</span> <span class="nf">current</span>
-    <span class="n">frame</span><span class="p">(</span><span class="vi">@fno</span><span class="p">)</span>
-  <span class="k">end</span>
+  def current
+    frame(@fno)
+  end
 
-  <span class="k">def</span> <span class="nf">prev</span>
-    <span class="n">frame</span><span class="p">(</span><span class="vi">@fno</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-  <span class="k">end</span>
+  def prev
+    frame(@fno - 1)
+  end
 
-  <span class="k">def</span> <span class="nf">pprev</span>
-    <span class="n">frame</span><span class="p">(</span><span class="vi">@fno</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
-  <span class="k">end</span>
+  def pprev
+    frame(@fno - 2)
+  end
 
-  <span class="k">def</span> <span class="nf">calc_spare_bonus_after_1st</span>
-    <span class="k">return</span> <span class="k">unless</span> <span class="n">prev</span><span class="p">.</span><span class="nf">spare?</span>
+  def calc_spare_bonus_after_1st
+    return unless prev.spare?
 
-    <span class="n">prev</span><span class="p">.</span><span class="nf">spare_bonus</span> <span class="o">=</span> <span class="n">current</span><span class="p">.</span><span class="nf">first</span>
-    <span class="n">prev</span><span class="p">.</span><span class="nf">action</span><span class="p">(</span><span class="ss">:DETERMINE</span><span class="p">)</span>
-  <span class="k">end</span>
+    prev.spare_bonus = current.first
+    prev.action(:DETERMINE)
+  end
 
-  <span class="k">def</span> <span class="nf">calc_strike_bonus_after_1st</span>
-    <span class="k">return</span> <span class="k">unless</span> <span class="n">prev</span><span class="p">.</span><span class="nf">strike?</span> <span class="o">&amp;&amp;</span> <span class="n">pprev</span><span class="p">.</span><span class="nf">strike?</span>
+  def calc_strike_bonus_after_1st
+    return unless prev.strike? &amp;&amp; pprev.strike?
 
-    <span class="n">pprev</span><span class="p">.</span><span class="nf">strike_bonus</span> <span class="o">=</span> <span class="n">prev</span><span class="p">.</span><span class="nf">first</span> <span class="o">+</span> <span class="n">current</span><span class="p">.</span><span class="nf">first</span>
-    <span class="n">pprev</span><span class="p">.</span><span class="nf">action</span><span class="p">(</span><span class="ss">:DETERMINE</span><span class="p">)</span>
-  <span class="k">end</span>
+    pprev.strike_bonus = prev.first + current.first
+    pprev.action(:DETERMINE)
+  end
 
-  <span class="k">def</span> <span class="nf">calc_strike_bonus_after_2nd</span>
-    <span class="k">return</span> <span class="k">unless</span> <span class="n">prev</span><span class="p">.</span><span class="nf">strike?</span>
+  def calc_strike_bonus_after_2nd
+    return unless prev.strike?
 
-    <span class="n">prev</span><span class="p">.</span><span class="nf">strike_bonus</span> <span class="o">=</span> <span class="n">current</span><span class="p">.</span><span class="nf">first</span> <span class="o">+</span> <span class="n">current</span><span class="p">.</span><span class="nf">second</span>
-    <span class="n">prev</span><span class="p">.</span><span class="nf">action</span><span class="p">(</span><span class="ss">:DETERMINE</span><span class="p">)</span>
-  <span class="k">end</span>
+    prev.strike_bonus = current.first + current.second
+    prev.action(:DETERMINE)
+  end
 
-  <span class="k">def</span> <span class="nf">update_total</span>
-    <span class="vi">@frames</span><span class="p">.</span><span class="nf">each_cons</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">prev</span><span class="p">,</span> <span class="n">cur</span><span class="o">|</span>
-      <span class="n">cur</span><span class="p">.</span><span class="nf">total</span> <span class="o">=</span> <span class="n">prev</span><span class="p">.</span><span class="nf">total</span> <span class="o">+</span> <span class="n">cur</span><span class="p">.</span><span class="nf">frame_score</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
+  def update_total
+    @frames.each_cons(2) do |prev, cur|
+      cur.total = prev.total + cur.frame_score
+    end
+  end
 
-  <span class="k">def</span> <span class="nf">finished?</span>
-    <span class="n">frame</span><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="nf">fixed?</span>
-  <span class="k">end</span>
+  def finished?
+    frame(10).fixed?
+  end
 
-  <span class="k">def</span> <span class="nf">wait_for_1st_proc</span><span class="p">(</span><span class="n">pins</span><span class="p">)</span>
-    <span class="n">current</span><span class="p">.</span><span class="nf">action</span><span class="p">(</span><span class="ss">:PINS</span><span class="p">,</span> <span class="n">pins</span><span class="p">)</span>
-    <span class="n">calc_spare_bonus_after_1st</span>
-    <span class="n">calc_strike_bonus_after_1st</span>
-    <span class="n">update_total</span>
-    <span class="k">if</span> <span class="n">finished?</span>
-      <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:FINISHED</span>
-    <span class="k">elsif</span> <span class="n">current</span><span class="p">.</span><span class="nf">strike?</span>
-      <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:WAIT_FOR_1ST</span>
-      <span class="n">go_next_frame</span>
-    <span class="k">else</span>
-      <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:WAIT_FOR_2ND</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
+  def wait_for_1st_proc(pins)
+    current.action(:PINS, pins)
+    calc_spare_bonus_after_1st
+    calc_strike_bonus_after_1st
+    update_total
+    if finished?
+      @state = :FINISHED
+    elsif current.strike?
+      @state = :WAIT_FOR_1ST
+      go_next_frame
+    else
+      @state = :WAIT_FOR_2ND
+    end
+  end
 
-  <span class="k">def</span> <span class="nf">wait_for_2nd_proc</span><span class="p">(</span><span class="n">pins</span><span class="p">)</span>
-    <span class="n">current</span><span class="p">.</span><span class="nf">action</span><span class="p">(</span><span class="ss">:PINS</span><span class="p">,</span> <span class="n">pins</span><span class="p">)</span>
-    <span class="n">calc_strike_bonus_after_2nd</span>
-    <span class="n">update_total</span>
-    <span class="k">if</span> <span class="n">finished?</span>
-      <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:FINISHED</span>
-    <span class="k">else</span>
-      <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:WAIT_FOR_1ST</span>
-      <span class="n">go_next_frame</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
+  def wait_for_2nd_proc(pins)
+    current.action(:PINS, pins)
+    calc_strike_bonus_after_2nd
+    update_total
+    if finished?
+      @state = :FINISHED
+    else
+      @state = :WAIT_FOR_1ST
+      go_next_frame
+    end
+  end
 
-  <span class="k">def</span> <span class="nf">scoring</span><span class="p">(</span><span class="n">pins</span><span class="p">)</span>
-    <span class="k">case</span> <span class="vi">@state</span>
-    <span class="k">when</span> <span class="ss">:WAIT_FOR_1ST</span>
-      <span class="n">wait_for_1st_proc</span><span class="p">(</span><span class="n">pins</span><span class="p">)</span>
-    <span class="k">when</span> <span class="ss">:WAIT_FOR_2ND</span>
-      <span class="n">wait_for_2nd_proc</span><span class="p">(</span><span class="n">pins</span><span class="p">)</span>
-    <span class="k">when</span> <span class="ss">:FINISHED</span>
-      <span class="nb">puts</span> <span class="s1">'finished'</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
+  def scoring(pins)
+    case @state
+    when :WAIT_FOR_1ST
+      wait_for_1st_proc(pins)
+    when :WAIT_FOR_2ND
+      wait_for_2nd_proc(pins)
+    when :FINISHED
+      puts 'finished'
+    end
+  end
 
-  <span class="k">def</span> <span class="nf">to_s</span>
-    <span class="s2">"Player:</span><span class="si">#{</span><span class="vi">@player</span><span class="si">}</span><span class="s2">, Score(id: </span><span class="si">#{</span><span class="vi">@id</span><span class="si">}</span><span class="s2">), Frame:</span><span class="si">#{</span><span class="vi">@fno</span><span class="si">}</span><span class="s2">,
+  def to_s
+    "Player:#{@player}, Score(id: #{@id}), Frame:#{@fno},
 |No|1st|2nd|Total|Frame Score|Spare Bonus|Strike Bonus|Frame State|
-</span><span class="si">#{</span><span class="vi">@frames</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
-  <span class="k">end</span>
-<span class="k">end</span>
+#{@frames.join("\n")}"
+  end
+end
 
-<span class="c1"># Gameクラスは複数名の1ゲーム分のスコアのセットを構成する</span>
-<span class="k">class</span> <span class="nc">Game</span>
-  <span class="nb">attr_reader</span> <span class="ss">:id</span><span class="p">,</span> <span class="ss">:turn</span><span class="p">,</span> <span class="ss">:scores</span>
+# Gameクラスは複数名の1ゲーム分のスコアのセットを構成する
+class Game
+  attr_reader :id, :turn, :scores
 
-  <span class="k">def</span> <span class="nf">initialize</span>
-    <span class="vi">@id</span> <span class="o">=</span> <span class="no">SecureRandom</span><span class="p">.</span><span class="nf">urlsafe_base64</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
-    <span class="vi">@turn</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="vi">@scores</span> <span class="o">=</span> <span class="p">[]</span>
-  <span class="k">end</span>
+  def initialize
+    @id = SecureRandom.urlsafe_base64(8)
+    @turn = 0
+    @scores = []
+  end
 
-  <span class="k">def</span> <span class="nf">entry</span><span class="p">(</span><span class="nb">name</span> <span class="o">=</span> <span class="s1">'unknown'</span><span class="p">)</span>
-    <span class="vi">@scores</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="no">Score</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="nb">name</span><span class="p">))</span>
-  <span class="k">end</span>
+  def entry(name = 'unknown')
+    @scores.append(Score.new(name))
+  end
 
-  <span class="k">def</span> <span class="nf">turn_player_name</span>
-    <span class="vi">@scores</span><span class="p">[</span><span class="vi">@turn</span><span class="p">].</span><span class="nf">player</span>
-  <span class="k">end</span>
+  def turn_player_name
+    @scores[@turn].player
+  end
 
-  <span class="k">def</span> <span class="nf">go_next_turn</span>
-    <span class="vi">@turn</span> <span class="o">=</span> <span class="p">(</span><span class="vi">@turn</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="vi">@scores</span><span class="p">.</span><span class="nf">size</span>
-  <span class="k">end</span>
+  def go_next_turn
+    @turn = (@turn + 1) % @scores.size
+  end
 
-  <span class="k">def</span> <span class="nf">playing</span><span class="p">(</span><span class="n">score_index</span><span class="p">,</span> <span class="n">pins</span><span class="p">)</span>
-    <span class="vi">@scores</span><span class="p">[</span><span class="n">score_index</span><span class="p">].</span><span class="nf">scoring</span><span class="p">(</span><span class="n">pins</span><span class="p">)</span>
-    <span class="k">if</span> <span class="vi">@scores</span><span class="p">[</span><span class="n">score_index</span><span class="p">].</span><span class="nf">fno</span> <span class="o">&gt;</span> <span class="mi">10</span>
-      <span class="n">go_next_turn</span> <span class="k">if</span> <span class="vi">@scores</span><span class="p">[</span><span class="n">score_index</span><span class="p">].</span><span class="nf">finished?</span>
-    <span class="k">elsif</span> <span class="vi">@scores</span><span class="p">[</span><span class="n">score_index</span><span class="p">].</span><span class="nf">current</span><span class="p">.</span><span class="nf">state</span> <span class="o">==</span> <span class="ss">:BEFORE_1ST</span>
-      <span class="n">go_next_turn</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
+  def playing(score_index, pins)
+    @scores[score_index].scoring(pins)
+    if @scores[score_index].fno &gt; 10
+      go_next_turn if @scores[score_index].finished?
+    elsif @scores[score_index].current.state == :BEFORE_1ST
+      go_next_turn
+    end
+  end
 
-  <span class="k">def</span> <span class="nf">finished?</span>
-    <span class="vi">@scores</span><span class="p">.</span><span class="nf">reject</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:finished?</span><span class="p">)</span> <span class="o">==</span> <span class="p">[]</span>
-  <span class="k">end</span>
+  def finished?
+    @scores.reject(&amp;:finished?) == []
+  end
 
-  <span class="k">def</span> <span class="nf">to_s</span>
-    <span class="s2">"Game(id:</span><span class="si">#{</span><span class="vi">@id</span><span class="si">}</span><span class="s2">),</span><span class="se">\n</span><span class="si">#{</span><span class="vi">@scores</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
-  <span class="k">end</span>
-<span class="k">end</span>
+  def to_s
+    "Game(id:#{@id}),\n#{@scores.join("\n")}"
+  end
+end
 
-<span class="c1"># ScoreSheetは、複数名の複数回のGameを記録する</span>
-<span class="k">class</span> <span class="nc">ScoreSheet</span>
-  <span class="nb">attr_accessor</span> <span class="ss">:id</span><span class="p">,</span> <span class="ss">:time</span><span class="p">,</span> <span class="ss">:games</span>
+# ScoreSheetは、複数名の複数回のGameを記録する
+class ScoreSheet
+  attr_accessor :id, :time, :games
 
-  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
-    <span class="vi">@id</span> <span class="o">=</span> <span class="no">SecureRandom</span><span class="p">.</span><span class="nf">urlsafe_base64</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
-    <span class="vi">@play_date</span> <span class="o">=</span> <span class="n">date</span>
-    <span class="vi">@games</span> <span class="o">=</span> <span class="p">[]</span>
-  <span class="k">end</span>
+  def initialize(date)
+    @id = SecureRandom.urlsafe_base64(8)
+    @play_date = date
+    @games = []
+  end
 
-  <span class="k">def</span> <span class="nf">add_game</span><span class="p">(</span><span class="n">games</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">games</span><span class="p">.</span><span class="nf">times</span> <span class="k">do</span>
-      <span class="vi">@games</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="no">Game</span><span class="p">.</span><span class="nf">new</span><span class="p">)</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
+  def add_game(games = 1)
+    games.times do
+      @games.append(Game.new)
+    end
+  end
 
-  <span class="k">def</span> <span class="nf">to_s</span>
-    <span class="s2">"Score Sheet Date: </span><span class="si">#{</span><span class="vi">@play_date</span><span class="si">}</span><span class="s2">(id:</span><span class="si">#{</span><span class="vi">@id</span><span class="si">}</span><span class="s2">)"</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</pre></td></tr></tbody></table></code></pre>
+  def to_s
+    "Score Sheet Date: #{@play_date}(id:#{@id})"
+  end
+end</code></pre>
 </div>
 </div>
 </div>
@@ -5388,63 +4980,34 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div id="ruby_all_code02" class="listingblock">
 <div class="title">リスト 5.2 【Ruby】score.rb（ファイル末尾に追加したテストコード部分）</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="ruby"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">292
-293
-294
-295
-296
-297
-298
-299
-300
-301
-302
-303
-304
-305
-306
-307
-308
-309
-310
-311
-312
-313
-314
-315
-316
-317
-318
-319
-</pre></td><td class="code"><pre><span class="k">if</span> <span class="vg">$PROGRAM_NAME</span> <span class="o">==</span> <span class="kp">__FILE__</span> <i class="conum" data-value="1"></i><b>(1)</b>
-  <span class="n">sheet</span> <span class="o">=</span> <span class="no">ScoreSheet</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">)</span> <i class="conum" data-value="2"></i><b>(2)</b>
-  <span class="n">sheet</span><span class="p">.</span><span class="nf">add_game</span> <i class="conum" data-value="3"></i><b>(3)</b>
-  <span class="n">game</span> <span class="o">=</span> <span class="n">sheet</span><span class="p">.</span><span class="nf">games</span><span class="p">.</span><span class="nf">last</span> <i class="conum" data-value="4"></i><b>(4)</b>
-  <span class="n">game</span><span class="p">.</span><span class="nf">entry</span><span class="p">(</span><span class="s1">'くぼあき'</span><span class="p">)</span> <i class="conum" data-value="5"></i><b>(5)</b>
-  <span class="n">game</span><span class="p">.</span><span class="nf">entry</span><span class="p">(</span><span class="s1">'うえはら'</span><span class="p">)</span>
-  <span class="nb">puts</span> <span class="n">sheet</span> <i class="conum" data-value="6"></i><b>(6)</b>
+<pre class="prettyprint highlight linenums:292"><code data-lang="ruby">if $PROGRAM_NAME == __FILE__ <i class="conum" data-value="1"></i><b>(1)</b>
+  sheet = ScoreSheet.new(Time.now) <i class="conum" data-value="2"></i><b>(2)</b>
+  sheet.add_game <i class="conum" data-value="3"></i><b>(3)</b>
+  game = sheet.games.last <i class="conum" data-value="4"></i><b>(4)</b>
+  game.entry('くぼあき') <i class="conum" data-value="5"></i><b>(5)</b>
+  game.entry('うえはら')
+  puts sheet <i class="conum" data-value="6"></i><b>(6)</b>
 
-  <span class="n">game_records</span> <span class="o">=</span> <span class="p">[</span> <i class="conum" data-value="7"></i><b>(7)</b>
-    <span class="c1"># [6, 3, 9, 0, 0, 3, 8, 2, 7, 3, 10, 9, 1, 8, 0, 10, 10, 6, 4],</span>
-    <span class="c1"># [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 5, 3],</span>
-    <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
-    <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-  <span class="p">]</span>
+  game_records = [ <i class="conum" data-value="7"></i><b>(7)</b>
+    # [6, 3, 9, 0, 0, 3, 8, 2, 7, 3, 10, 9, 1, 8, 0, 10, 10, 6, 4],
+    # [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 5, 3],
+    [7, 0, 5, 5, 10, 10, 5, 4, 10, 7, 3, 5, 4, 7, 3, 7, 3, 4],
+    [6, 3, 9, 0, 0, 3, 8, 2, 7, 3, 10, 9, 1, 8, 0, 10, 6, 3]
+  ]
 
-  <span class="k">until</span> <span class="n">game</span><span class="p">.</span><span class="nf">finished?</span> <i class="conum" data-value="8"></i><b>(8)</b>
-    <span class="nb">puts</span> <span class="s1">'----------------------------------------'</span>
-    <span class="nb">puts</span> <span class="s2">"turn: </span><span class="si">#{</span><span class="n">game</span><span class="p">.</span><span class="nf">turn_player_name</span><span class="si">}</span><span class="s2">"</span>
-    <span class="n">score_index</span> <span class="o">=</span> <span class="n">game</span><span class="p">.</span><span class="nf">turn</span> <i class="conum" data-value="9"></i><b>(9)</b>
-    <span class="n">pins</span> <span class="o">=</span> <span class="n">game_records</span><span class="p">[</span><span class="n">score_index</span><span class="p">].</span><span class="nf">shift</span> <i class="conum" data-value="10"></i><b>(10)</b>
-    <span class="nb">puts</span> <span class="s2">"input pins: </span><span class="si">#{</span><span class="n">pins</span><span class="si">}</span><span class="s2">"</span>
-    <span class="n">game</span><span class="p">.</span><span class="nf">playing</span><span class="p">(</span><span class="n">score_index</span><span class="p">,</span> <span class="n">pins</span><span class="p">)</span> <i class="conum" data-value="11"></i><b>(11)</b>
-    <span class="nb">puts</span> <span class="n">game</span><span class="p">.</span><span class="nf">to_s</span> <i class="conum" data-value="12"></i><b>(12)</b>
-    <span class="nb">gets</span> <i class="conum" data-value="13"></i><b>(13)</b>
-  <span class="k">end</span>
+  until game.finished? <i class="conum" data-value="8"></i><b>(8)</b>
+    puts '----------------------------------------'
+    puts "turn: #{game.turn_player_name}"
+    score_index = game.turn <i class="conum" data-value="9"></i><b>(9)</b>
+    pins = game_records[score_index].shift <i class="conum" data-value="10"></i><b>(10)</b>
+    puts "input pins: #{pins}"
+    game.playing(score_index, pins) <i class="conum" data-value="11"></i><b>(11)</b>
+    puts game.to_s <i class="conum" data-value="12"></i><b>(12)</b>
+    gets <i class="conum" data-value="13"></i><b>(13)</b>
+  end
 
-  <span class="nb">puts</span> <span class="s2">"Game(id:</span><span class="si">#{</span><span class="n">game</span><span class="p">.</span><span class="nf">id</span><span class="si">}</span><span class="s2">) is finished."</span>
-<span class="k">end</span>
-</pre></td></tr></tbody></table></code></pre>
+  puts "Game(id:#{game.id}) is finished."
+end</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -5522,10 +5085,10 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div id="ruby_all_code03" class="listingblock">
 <div class="title">リスト 5.3 【端末】score.rb を実行する</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="console"><span class="gp">C:\Users\kuboaki&gt;</span><span class="nb">cd </span>Desktop<span class="se">\B</span>owlingScore
-<span class="go">
-</span><span class="gp">C:\Users\kuboaki\Desktop\BowlingScore&gt;</span>ruby score.rb
-<span class="go">Score Sheet Date: 2022-02-26 02:08:21 +0900(id:0GG70gNRWtk) <i class="conum" data-value="1"></i><b>(1)</b>
+<pre class="prettyprint highlight"><code data-lang="console">C:\Users\kuboaki&gt;cd Desktop\BowlingScore
+
+C:\Users\kuboaki\Desktop\BowlingScore&gt;ruby score.rb
+Score Sheet Date: 2022-02-26 02:08:21 +0900(id:0GG70gNRWtk) <i class="conum" data-value="1"></i><b>(1)</b>
 ----------------------------------------
 turn: くぼあき <i class="conum" data-value="2"></i><b>(2)</b>
 input pins: 7 <i class="conum" data-value="3"></i><b>(3)</b>
@@ -5607,7 +5170,7 @@ Player:うえはら, Score(id: plq9pFD6nSA), Frame:10,
 |13|  0|  0|    .|          0|          0|           0|   RESERVED|
 
 Game(id:zwBxlorJlog) is finished.
-</span><span class="gp">C:\Users\kuboaki\Desktop\BowlingScore&gt;</span></code></pre>
+C:\Users\kuboaki\Desktop\BowlingScore&gt;</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -5672,7 +5235,7 @@ Game(id:zwBxlorJlog) is finished.
 </div>
 </div>
 <div class="sect1">
-<h2 id="_summary"><a class="anchor" href="#_summary"></a>6 まとめ</h2>
+<h2 id="_summary"><a class="anchor" href="#_summary"></a>第6章 まとめ</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>このチュートリアルでは、ボーリングスコアのモデルを作ることを通して、ソフトウェアの開発にモデルを使うことについて学びました。また、UMLが、そのようなときに役立つ記法であることも実感できたのではないでしょうか。
@@ -5696,7 +5259,7 @@ Game(id:zwBxlorJlog) is finished.
 </div>
 </div>
 <div class="sect1">
-<h2 id="_other_diagrams"><a class="anchor" href="#_other_diagrams"></a>7 他の図、他の機能など</h2>
+<h2 id="_other_diagrams"><a class="anchor" href="#_other_diagrams"></a>第7章 他の図、他の機能など</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>この演習で作成したのは、クラス図（オブジェクト図も含む）とステートマシン図でした。
@@ -5790,8 +5353,8 @@ UMLには他にも多くの図の記法が提供されています。
 <p>「モデルを使ってソフトウェアを開発しよう: UML初学者向けチュートリアル」</p>
 </div>
 <div class="paragraph">
-<p>発行日 : 2023-05-31<br>
-バージョン : html_0743<br>
+<p>発行日 : 2023-06-04<br>
+バージョン : html_0752<br>
 作成者 : 株式会社チェンジビジョン<br>
 本書の内容に関する質問等がありましたら、作成者までお知らせください。</p>
 </div>
@@ -5800,10 +5363,11 @@ UMLには他にも多くの図の記法が提供されています。
 </div>
 <div id="footer">
 <div id="footer-text">
-バージョン html_0743<br>
+バージョン html_0752<br>
 最終更新 2023-05-31 13:19:10 +0900
 </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/run_prettify.min.js"></script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   messageStyle: "none",

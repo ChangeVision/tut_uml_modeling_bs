@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'asciidoctor-pdf' unless defined? ::Asciidoctor::Pdf
+require 'asciidoctor-pdf' unless defined? ::Asciidoctor::PDF
 
 module AsciidoctorPdfExtensions
 
@@ -77,12 +77,11 @@ module AsciidoctorPdfExtensions
 #    end  # pad_box
   end
 
-
-  def layout_toc_level sections, num_levels, line_metrics, dot_leader, num_front_matter_pages = 0
-    # sections.each { |key, val| p key }
-    sect = sections.select { |sect| sect.sectname == 'colophon'}
-    # p sect[0].sectname
-    sections.delete(sect[0])
+  # colphon はsectionの仲間扱いになっているが、目次にはいらないのでとり除く
+  # ちゃんとやるなら、discreteで修飾したセクションを除去するようにして、colophonに追加して修飾すべき
+  def ink_toc_level entries, num_levels, dot_leader, num_front_matter_pages
+    entry = entries.select { |ent| ent.sectname == 'colophon' }
+    entries.delete(entry[0])
     super
   end
 
@@ -212,4 +211,4 @@ module AsciidoctorPdfExtensions
   end
 end
 
-Asciidoctor::Pdf::Converter.prepend AsciidoctorPdfExtensions
+Asciidoctor::PDF::Converter.prepend AsciidoctorPdfExtensions

@@ -1,5 +1,6 @@
 :encoding: utf-8
 :lang: ja
+:scripts: cjk
 :doctype: book
 :media: prepress
 :doctitle: モデルを使ってソフトウェアを開発しよう: UML初学者向けチュートリアル
@@ -17,6 +18,16 @@
 :imagesdir: images
 :sourcesdir: codes
 :title-logo-image: image::ChangeVision_Logo.svg[pdfwidth=2.0in,align=left,top=3%]
+
+:pdf-theme: ./theme/pdf/mystyle-theme.yml
+// :pdf-theme: ./theme/pdf/prepress-theme.ymlg
+// :pdf-theme: ./theme/pdf/default-for-print-with-font-fallbacks-theme.yml
+// :pdf-theme: ./theme/pdf/default-with-font-fallbacks-theme.yml
+// :pdf-theme: ./theme/pdf/cjk-theme.yml
+:pdf-fontsdir: ./fonts;GEM_FONTS_DIR
+:imagesdir: images
+:sourcesdir: codes
+
 :stem:
 :sectanchors:
 :autofit-option:
@@ -24,6 +35,7 @@
 :support-uri:
 :original-support-uri:
 :icons: font
+
 :toclevels: 2
 :toc: left
 :pagenums:
@@ -36,8 +48,15 @@ include::attributes.adoc[]
 :section-refsig:
 :chapter-refsig:
 
+ifdef::backend-html5[]
+:source-highlighter: prettify
+endif::[]
+
+ifdef::backend-pdf[]
 :source-highlighter: rouge
 :rouge-style: custom
+endif::[]
+
 
 // user defined.
 :astah: astah*
@@ -47,8 +66,8 @@ include::attributes.adoc[]
 // 部、章の体裁を変更 lib/heading-treeprocessor.rb を使う
 :part-label: 第%s部
 // :part-label: Part %s
-// :chapter-label: 第%s章
-:chapter-label: %s
+:chapter-label: 第%s章
+// :chapter-label: %s
 // :section-label: %s節  // これはやめておく
 
 // autoxref settings lib/autoxref-treeprocessor.rb を使う

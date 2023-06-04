@@ -4,13 +4,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <meta name="description" content="この文書は、モデリングツールにastah*を使って、ソフトウェアの開発にUMLを使う方法について学ぶチュートリアルです。">
 <meta name="author" content="株式会社チェンジビジョン">
 <title>モデルを使ってソフトウェアを開発しよう: UML初学者向けチュートリアル</title>
 <link rel="stylesheet" href="css/mystyle.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="css/rouge-custom.css">
 <style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
                        font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
              .nav-footer{text-align: center; margin-top: auto;}
@@ -21,8 +20,8 @@
 <h1>モデルを使ってソフトウェアを開発しよう: UML初学者向けチュートリアル</h1>
 <div class="details">
 <span id="author" class="author">株式会社チェンジビジョン</span><br>
-<span id="revnumber">バージョン html_0744,</span>
-<span id="revdate">2023-05-31</span>
+<span id="revnumber">バージョン html_0753,</span>
+<span id="revdate">2023-06-04</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">目次</div>
@@ -62,7 +61,7 @@
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_model_to_code_design"><a class="anchor" href="#_model_to_code_design"></a>3 モデルとコードの対応づけ</h2>
+<h2 id="_model_to_code_design"><a class="anchor" href="#_model_to_code_design"></a>第3章 モデルとコードの対応づけ</h2>
 <div class="sectionbody">
 <div class="paragraph lead">
 <p>プログラムがどのように動作するのか検討するときには、振る舞いのモデルを使います。
@@ -196,15 +195,15 @@
 <div id="ruby_sample01" class="listingblock">
 <div class="title">リスト 3.1 【Ruby】「Sample」クラスを表すRubyのコード</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="ruby"><span class="k">class</span> <span class="nc">Sample</span> <i class="conum" data-value="1"></i><b>(1)</b>
-  <span class="k">def</span> <span class="nf">initialize</span> <i class="conum" data-value="2"></i><b>(2)</b>
-    <span class="vi">@attr_a</span> <span class="o">=</span> <span class="kp">true</span> <i class="conum" data-value="3"></i><b>(3)</b>
-    <span class="vi">@attr_b</span> <span class="o">=</span> <span class="kp">true</span> <i class="conum" data-value="3"></i><b>(3)</b>
-  <span class="k">end</span>
+<pre class="highlight"><code class="language-ruby" data-lang="ruby">class Sample <i class="conum" data-value="1"></i><b>(1)</b>
+  def initialize <i class="conum" data-value="2"></i><b>(2)</b>
+    @attr_a = true <i class="conum" data-value="3"></i><b>(3)</b>
+    @attr_b = true <i class="conum" data-value="3"></i><b>(3)</b>
+  end
 
-  <span class="k">def</span> <span class="nf">play</span> <i class="conum" data-value="4"></i><b>(4)</b>
-  <span class="k">end</span>
-<span class="k">end</span></code></pre>
+  def play <i class="conum" data-value="4"></i><b>(4)</b>
+  end
+end</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -636,16 +635,16 @@
 <div id="ruby_sample02" class="listingblock">
 <div class="title">リスト 3.2 【Ruby】状態を保持するインスタンス変数を追加する</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="ruby"><span class="k">class</span> <span class="nc">Sample</span>
-  <span class="k">def</span> <span class="nf">initialize</span>
-    <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST0</span> <i class="conum" data-value="1"></i><b>(1)</b>
-    <span class="vi">@attr_a</span> <span class="o">=</span> <span class="kp">true</span>
-    <span class="vi">@attr_b</span> <span class="o">=</span> <span class="kp">true</span>
-  <span class="k">end</span>
+<pre class="highlight"><code class="language-ruby" data-lang="ruby">class Sample
+  def initialize
+    @state = :ST0 <i class="conum" data-value="1"></i><b>(1)</b>
+    @attr_a = true
+    @attr_b = true
+  end
 
-  <span class="c1"># 略</span>
+  # 略
 
-<span class="k">end</span></code></pre>
+end</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -666,26 +665,26 @@
 <div id="ruby_sample03" class="listingblock">
 <div class="title">リスト 3.3 【Ruby】状態遷移を担当するメソッドを作成する</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="ruby"><span class="k">class</span> <span class="nc">Sample</span>
-  <span class="k">def</span> <span class="nf">initialize</span>
-    <span class="c1"># 略</span>
-  <span class="k">end</span>
+<pre class="highlight"><code class="language-ruby" data-lang="ruby">class Sample
+  def initialize
+    # 略
+  end
 
-  <span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
-    <span class="nb">puts</span> <span class="s2">"</span><span class="si">#{</span><span class="vi">@state</span><span class="si">}</span><span class="s2"> -&gt;"</span> <i class="conum" data-value="1"></i><b>(1)</b>
-    <span class="nb">puts</span> <span class="s2">"  event:</span><span class="si">#{</span><span class="n">evt</span><span class="si">}</span><span class="s2">, param: </span><span class="si">#{</span><span class="n">param</span><span class="si">}</span><span class="s2">"</span> <i class="conum" data-value="2"></i><b>(2)</b>
-    <span class="k">case</span> <span class="vi">@state</span> <i class="conum" data-value="3"></i><b>(3)</b>
-    <span class="k">when</span> <span class="ss">:ST0</span>
-      <span class="n">st0_proc</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span> <i class="conum" data-value="4"></i><b>(4)</b>
-    <span class="k">when</span> <span class="ss">:ST1</span>
-      <span class="n">st1_proc</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
-    <span class="k">when</span> <span class="ss">:ST2</span>
-      <span class="c1"># none</span>
-    <span class="k">end</span>
-    <span class="nb">puts</span> <span class="s2">"       -&gt; </span><span class="si">#{</span><span class="vi">@state</span><span class="si">}</span><span class="s2">"</span> <i class="conum" data-value="5"></i><b>(5)</b>
-    <span class="nb">puts</span> <span class="s1">'finished.'</span> <span class="k">if</span> <span class="vi">@state</span> <span class="o">==</span> <span class="ss">:ST2</span> <i class="conum" data-value="6"></i><b>(6)</b>
-  <span class="k">end</span>
-<span class="k">end</span></code></pre>
+  def play(evt, param)
+    puts "#{@state} -&gt;" <i class="conum" data-value="1"></i><b>(1)</b>
+    puts "  event:#{evt}, param: #{param}" <i class="conum" data-value="2"></i><b>(2)</b>
+    case @state <i class="conum" data-value="3"></i><b>(3)</b>
+    when :ST0
+      st0_proc(evt, param) <i class="conum" data-value="4"></i><b>(4)</b>
+    when :ST1
+      st1_proc(evt, param)
+    when :ST2
+      # none
+    end
+    puts "       -&gt; #{@state}" <i class="conum" data-value="5"></i><b>(5)</b>
+    puts 'finished.' if @state == :ST2 <i class="conum" data-value="6"></i><b>(6)</b>
+  end
+end</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -728,23 +727,23 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div id="ruby_sample04" class="listingblock">
 <div class="title">リスト 3.4 【Ruby】ガード条件のメソッドを作成する</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="ruby"><span class="k">class</span> <span class="nc">Sample</span>
-  <span class="k">def</span> <span class="nf">initialize</span>
-    <span class="c1"># 略</span>
-  <span class="k">end</span>
+<pre class="highlight"><code class="language-ruby" data-lang="ruby">class Sample
+  def initialize
+    # 略
+  end
 
-  <span class="k">def</span> <span class="nf">play</span>
-    <span class="c1"># 略</span>
-  <span class="k">end</span>
+  def play
+    # 略
+  end
 
-  <span class="k">def</span> <span class="nf">gd1?</span> <i class="conum" data-value="1"></i><b>(1)</b>
-    <span class="vi">@attr_a</span> <span class="o">&amp;&amp;</span> <span class="vi">@attr_b</span> <i class="conum" data-value="2"></i><b>(2)</b>
-  <span class="k">end</span>
+  def gd1? <i class="conum" data-value="1"></i><b>(1)</b>
+    @attr_a &amp;&amp; @attr_b <i class="conum" data-value="2"></i><b>(2)</b>
+  end
 
-  <span class="k">def</span> <span class="nf">gd2?</span> <i class="conum" data-value="3"></i><b>(3)</b>
-    <span class="o">!</span><span class="vi">@attr_a</span> <span class="o">||</span> <span class="vi">@attr_b</span>
-  <span class="k">end</span>
-<span class="k">end</span></code></pre>
+  def gd2? <i class="conum" data-value="3"></i><b>(3)</b>
+    !@attr_a || @attr_b
+  end
+end</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -774,33 +773,33 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div id="ruby_sample05" class="listingblock">
 <div class="title">リスト 3.5 【Ruby】「ST0」の状態遷移のメソッドを作成する</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="ruby"><span class="k">class</span> <span class="nc">Sample</span>
-  <span class="k">def</span> <span class="nf">initialize</span>
-    <span class="c1"># 略</span>
-  <span class="k">end</span>
+<pre class="highlight"><code class="language-ruby" data-lang="ruby">class Sample
+  def initialize
+    # 略
+  end
 
-  <span class="k">def</span> <span class="nf">play</span>
-    <span class="c1"># 略</span>
-  <span class="k">end</span>
+  def play
+    # 略
+  end
 
-  <span class="k">def</span> <span class="nf">st0_proc</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
-    <span class="k">case</span> <span class="n">evt</span> <i class="conum" data-value="1"></i><b>(1)</b>
-    <span class="k">when</span> <span class="ss">:ev1</span> <i class="conum" data-value="2"></i><b>(2)</b>
-      <span class="k">if</span> <span class="n">gd1?</span> <i class="conum" data-value="3"></i><b>(3)</b>
-        <span class="nb">puts</span> <span class="s2">"    gd1: </span><span class="si">#{</span><span class="n">gd1?</span><span class="si">}</span><span class="s2">"</span>
-        <span class="n">act1</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span> <i class="conum" data-value="4"></i><b>(4)</b>
-        <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST1</span> <i class="conum" data-value="5"></i><b>(5)</b>
-      <span class="k">else</span> <i class="conum" data-value="6"></i><b>(6)</b>
-        <span class="nb">puts</span> <span class="s2">"    &lt;&lt;&lt; gd1: </span><span class="si">#{</span><span class="n">gd1?</span><span class="si">}</span><span class="s2">, transition is ignored. &gt;&gt;&gt;"</span>
-      <span class="k">end</span>
-    <span class="k">when</span> <span class="ss">:ev3</span> <i class="conum" data-value="7"></i><b>(7)</b>
-      <span class="n">act3</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
-      <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST2</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
+  def st0_proc(evt, param)
+    case evt <i class="conum" data-value="1"></i><b>(1)</b>
+    when :ev1 <i class="conum" data-value="2"></i><b>(2)</b>
+      if gd1? <i class="conum" data-value="3"></i><b>(3)</b>
+        puts "    gd1: #{gd1?}"
+        act1(evt, param) <i class="conum" data-value="4"></i><b>(4)</b>
+        @state = :ST1 <i class="conum" data-value="5"></i><b>(5)</b>
+      else <i class="conum" data-value="6"></i><b>(6)</b>
+        puts "    &lt;&lt;&lt; gd1: #{gd1?}, transition is ignored. &gt;&gt;&gt;"
+      end
+    when :ev3 <i class="conum" data-value="7"></i><b>(7)</b>
+      act3(evt, param)
+      @state = :ST2
+    end
+  end
 
-  <span class="c1"># gd1?, gd2? が続く</span>
-<span class="k">end</span></code></pre>
+  # gd1?, gd2? が続く
+end</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -877,38 +876,38 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div id="ruby_sample07" class="listingblock">
 <div class="title">リスト 3.6 【Ruby】「ST1」の状態遷移のメソッドを作成する</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="ruby"><span class="k">class</span> <span class="nc">Sample</span>
-  <span class="k">def</span> <span class="nf">initialize</span>
-    <span class="c1"># 略</span>
-  <span class="k">end</span>
+<pre class="highlight"><code class="language-ruby" data-lang="ruby">class Sample
+  def initialize
+    # 略
+  end
 
-  <span class="k">def</span> <span class="nf">play</span>
-    <span class="c1"># 略</span>
-  <span class="k">end</span>
+  def play
+    # 略
+  end
 
-  <span class="k">def</span> <span class="nf">st0_proc</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
-    <span class="c1"># 略</span>
-  <span class="k">end</span>
+  def st0_proc(evt, param)
+    # 略
+  end
 
-  <span class="k">def</span> <span class="nf">st1_proc</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
-    <span class="k">case</span> <span class="n">evt</span>
-    <span class="k">when</span> <span class="ss">:ev2</span> <i class="conum" data-value="1"></i><b>(1)</b>
-      <span class="n">act2</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span> <i class="conum" data-value="2"></i><b>(2)</b>
-      <span class="nb">puts</span> <span class="s2">"    gd2: </span><span class="si">#{</span><span class="n">gd2?</span><span class="si">}</span><span class="s2">"</span>
-      <span class="k">if</span> <span class="n">gd2?</span> <i class="conum" data-value="3"></i><b>(3)</b>
-        <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST2</span> <i class="conum" data-value="4"></i><b>(4)</b>
-      <span class="k">else</span>
-        <span class="n">act3</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span> <i class="conum" data-value="5"></i><b>(5)</b>
-        <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST0</span> <i class="conum" data-value="6"></i><b>(6)</b>
-      <span class="k">end</span>
-    <span class="k">when</span> <span class="ss">:ev3</span> <i class="conum" data-value="7"></i><b>(7)</b>
-      <span class="n">act3</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
-      <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST0</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
+  def st1_proc(evt, param)
+    case evt
+    when :ev2 <i class="conum" data-value="1"></i><b>(1)</b>
+      act2(evt, param) <i class="conum" data-value="2"></i><b>(2)</b>
+      puts "    gd2: #{gd2?}"
+      if gd2? <i class="conum" data-value="3"></i><b>(3)</b>
+        @state = :ST2 <i class="conum" data-value="4"></i><b>(4)</b>
+      else
+        act3(evt, param) <i class="conum" data-value="5"></i><b>(5)</b>
+        @state = :ST0 <i class="conum" data-value="6"></i><b>(6)</b>
+      end
+    when :ev3 <i class="conum" data-value="7"></i><b>(7)</b>
+      act3(evt, param)
+      @state = :ST0
+    end
+  end
 
-  <span class="c1"># gd1?, gd2? が続く</span>
-<span class="k">end</span></code></pre>
+  # gd1?, gd2? が続く
+end</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -983,31 +982,31 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div id="ruby_sample09" class="listingblock">
 <div class="title">リスト 3.7 【Ruby】「ST1」の状態遷移のメソッドを作成する</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="ruby"><span class="k">class</span> <span class="nc">Sample</span>
-  <span class="c1"># initialize、play、st0_proc、st1_proc の定義を省略</span>
+<pre class="highlight"><code class="language-ruby" data-lang="ruby">class Sample
+  # initialize、play、st0_proc、st1_proc の定義を省略
 
-  <span class="n">praivate</span> <i class="conum" data-value="1"></i><b>(1)</b>
+  praivate <i class="conum" data-value="1"></i><b>(1)</b>
 
-  <span class="k">def</span> <span class="nf">act1</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">prm</span><span class="p">)</span>
-    <span class="nb">puts</span> <span class="s2">"     act1: event:</span><span class="si">#{</span><span class="n">evt</span><span class="si">}</span><span class="s2">, param: </span><span class="si">#{</span><span class="n">prm</span><span class="si">}</span><span class="s2">"</span>
-  <span class="k">end</span>
+  def act1(evt, prm)
+    puts "     act1: event:#{evt}, param: #{prm}"
+  end
 
-  <span class="k">def</span> <span class="nf">act2</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">prm</span><span class="p">)</span>
-    <span class="nb">puts</span> <span class="s2">"     act2: event:</span><span class="si">#{</span><span class="n">evt</span><span class="si">}</span><span class="s2">, param: </span><span class="si">#{</span><span class="n">prm</span><span class="si">}</span><span class="s2">"</span>
-  <span class="k">end</span>
+  def act2(evt, prm)
+    puts "     act2: event:#{evt}, param: #{prm}"
+  end
 
-  <span class="k">def</span> <span class="nf">act3</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">prm</span><span class="p">)</span>
-    <span class="nb">puts</span> <span class="s2">"     act3: event:</span><span class="si">#{</span><span class="n">evt</span><span class="si">}</span><span class="s2">, param: </span><span class="si">#{</span><span class="n">prm</span><span class="si">}</span><span class="s2">"</span>
-  <span class="k">end</span>
+  def act3(evt, prm)
+    puts "     act3: event:#{evt}, param: #{prm}"
+  end
 
-  <span class="k">def</span> <span class="nf">gd1?</span> <i class="conum" data-value="2"></i><b>(2)</b>
-    <span class="vi">@attr_a</span> <span class="o">&amp;&amp;</span> <span class="vi">@attr_b</span>
-  <span class="k">end</span>
+  def gd1? <i class="conum" data-value="2"></i><b>(2)</b>
+    @attr_a &amp;&amp; @attr_b
+  end
 
-  <span class="k">def</span> <span class="nf">gd2?</span>
-    <span class="o">!</span><span class="vi">@attr_a</span> <span class="o">||</span> <span class="vi">@attr_b</span>
-  <span class="k">end</span>
-<span class="k">end</span></code></pre>
+  def gd2?
+    !@attr_a || @attr_b
+  end
+end</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -1132,243 +1131,124 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div id="ruby_sample_code01" class="listingblock">
 <div class="title">リスト 3.8 【Ruby】stm_sample.rb</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="ruby"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">  1
-  2
-  3
-  4
-  5
-  6
-  7
-  8
-  9
- 10
- 11
- 12
- 13
- 14
- 15
- 16
- 17
- 18
- 19
- 20
- 21
- 22
- 23
- 24
- 25
- 26
- 27
- 28
- 29
- 30
- 31
- 32
- 33
- 34
- 35
- 36
- 37
- 38
- 39
- 40
- 41
- 42
- 43
- 44
- 45
- 46
- 47
- 48
- 49
- 50
- 51
- 52
- 53
- 54
- 55
- 56
- 57
- 58
- 59
- 60
- 61
- 62
- 63
- 64
- 65
- 66
- 67
- 68
- 69
- 70
- 71
- 72
- 73
- 74
- 75
- 76
- 77
- 78
- 79
- 80
- 81
- 82
- 83
- 84
- 85
- 86
- 87
- 88
- 89
- 90
- 91
- 92
- 93
- 94
- 95
- 96
- 97
- 98
- 99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-</pre></td><td class="code"><pre><span class="c1"># frozen_string_literal: true </span><i class="conum" data-value="1"></i><b>(1)</b>
+<pre class="highlight"><code class="language-ruby" data-lang="ruby"># frozen_string_literal: true <i class="conum" data-value="1"></i><b>(1)</b>
 
-<span class="c1"># ステートマシン図とコードの対応づけルールの検討用クラス</span>
-<span class="k">class</span> <span class="nc">Sample</span>
-  <span class="nb">attr_accessor</span> <span class="ss">:attr_a</span><span class="p">,</span> <span class="ss">:attr_b</span> <i class="conum" data-value="2"></i><b>(2)</b>
+# ステートマシン図とコードの対応づけルールの検討用クラス
+class Sample
+  attr_accessor :attr_a, :attr_b <i class="conum" data-value="2"></i><b>(2)</b>
 
-  <span class="k">def</span> <span class="nf">initialize</span>
-    <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST0</span>
-    <span class="vi">@attr_a</span> <span class="o">=</span> <span class="kp">true</span>
-    <span class="vi">@attr_b</span> <span class="o">=</span> <span class="kp">true</span>
-  <span class="k">end</span>
+  def initialize
+    @state = :ST0
+    @attr_a = true
+    @attr_b = true
+  end
 
-  <span class="k">def</span> <span class="nf">st0_proc</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
-    <span class="k">case</span> <span class="n">evt</span>
-    <span class="k">when</span> <span class="ss">:ev1</span>
-      <span class="k">if</span> <span class="n">gd1?</span> <span class="c1"># guard</span>
-        <span class="nb">puts</span> <span class="s2">"    gd1: </span><span class="si">#{</span><span class="n">gd1?</span><span class="si">}</span><span class="s2">"</span>
-        <span class="n">act1</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
-        <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST1</span>
-      <span class="k">else</span>
-        <span class="nb">puts</span> <span class="s2">"    &lt;&lt;&lt; gd1: </span><span class="si">#{</span><span class="n">gd1?</span><span class="si">}</span><span class="s2">, transition is ignored. &gt;&gt;&gt;"</span>
-      <span class="k">end</span>
-    <span class="k">when</span> <span class="ss">:ev3</span>
-      <span class="n">act3</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
-      <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST2</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
+  def st0_proc(evt, param)
+    case evt
+    when :ev1
+      if gd1? # guard
+        puts "    gd1: #{gd1?}"
+        act1(evt, param)
+        @state = :ST1
+      else
+        puts "    &lt;&lt;&lt; gd1: #{gd1?}, transition is ignored. &gt;&gt;&gt;"
+      end
+    when :ev3
+      act3(evt, param)
+      @state = :ST2
+    end
+  end
 
-  <span class="k">def</span> <span class="nf">st1_proc</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
-    <span class="k">case</span> <span class="n">evt</span>
-    <span class="k">when</span> <span class="ss">:ev2</span>
-      <span class="n">act2</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
-      <span class="nb">puts</span> <span class="s2">"    gd2: </span><span class="si">#{</span><span class="n">gd2?</span><span class="si">}</span><span class="s2">"</span>
-      <span class="k">if</span> <span class="n">gd2?</span> <span class="c1"># guard on choice.</span>
-        <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST2</span>
-      <span class="k">else</span>
-        <span class="n">act3</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
-        <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST0</span>
-      <span class="k">end</span>
-    <span class="k">when</span> <span class="ss">:ev3</span>
-      <span class="n">act3</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
-      <span class="vi">@state</span> <span class="o">=</span> <span class="ss">:ST0</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
+  def st1_proc(evt, param)
+    case evt
+    when :ev2
+      act2(evt, param)
+      puts "    gd2: #{gd2?}"
+      if gd2? # guard on choice.
+        @state = :ST2
+      else
+        act3(evt, param)
+        @state = :ST0
+      end
+    when :ev3
+      act3(evt, param)
+      @state = :ST0
+    end
+  end
 
-  <span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
-    <span class="nb">puts</span> <span class="s2">"</span><span class="si">#{</span><span class="vi">@state</span><span class="si">}</span><span class="s2"> -&gt;"</span>
-    <span class="nb">puts</span> <span class="s2">"  event:</span><span class="si">#{</span><span class="n">evt</span><span class="si">}</span><span class="s2">, param: </span><span class="si">#{</span><span class="n">param</span><span class="si">}</span><span class="s2">"</span>
-    <span class="k">case</span> <span class="vi">@state</span>
-    <span class="k">when</span> <span class="ss">:ST0</span>
-      <span class="n">st0_proc</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
-    <span class="k">when</span> <span class="ss">:ST1</span>
-      <span class="n">st1_proc</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">param</span><span class="p">)</span>
-    <span class="k">when</span> <span class="ss">:ST2</span>
-      <span class="c1"># none</span>
-    <span class="k">end</span>
-    <span class="nb">puts</span> <span class="s2">"       -&gt; </span><span class="si">#{</span><span class="vi">@state</span><span class="si">}</span><span class="s2">"</span>
-    <span class="nb">puts</span> <span class="s1">'finished.'</span> <span class="k">if</span> <span class="vi">@state</span> <span class="o">==</span> <span class="ss">:ST2</span>
-  <span class="k">end</span>
+  def play(evt, param)
+    puts "#{@state} -&gt;"
+    puts "  event:#{evt}, param: #{param}"
+    case @state
+    when :ST0
+      st0_proc(evt, param)
+    when :ST1
+      st1_proc(evt, param)
+    when :ST2
+      # none
+    end
+    puts "       -&gt; #{@state}"
+    puts 'finished.' if @state == :ST2
+  end
 
-  <span class="kp">private</span>
+  private
 
-  <span class="k">def</span> <span class="nf">act1</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">prm</span><span class="p">)</span>
-    <span class="nb">puts</span> <span class="s2">"     act1: event:</span><span class="si">#{</span><span class="n">evt</span><span class="si">}</span><span class="s2">, param: </span><span class="si">#{</span><span class="n">prm</span><span class="si">}</span><span class="s2">"</span>
-  <span class="k">end</span>
+  def act1(evt, prm)
+    puts "     act1: event:#{evt}, param: #{prm}"
+  end
 
-  <span class="k">def</span> <span class="nf">act2</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">prm</span><span class="p">)</span>
-    <span class="nb">puts</span> <span class="s2">"     act2: event:</span><span class="si">#{</span><span class="n">evt</span><span class="si">}</span><span class="s2">, param: </span><span class="si">#{</span><span class="n">prm</span><span class="si">}</span><span class="s2">"</span>
-  <span class="k">end</span>
+  def act2(evt, prm)
+    puts "     act2: event:#{evt}, param: #{prm}"
+  end
 
-  <span class="k">def</span> <span class="nf">act3</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="n">prm</span><span class="p">)</span>
-    <span class="nb">puts</span> <span class="s2">"     act3: event:</span><span class="si">#{</span><span class="n">evt</span><span class="si">}</span><span class="s2">, param: </span><span class="si">#{</span><span class="n">prm</span><span class="si">}</span><span class="s2">"</span>
-  <span class="k">end</span>
+  def act3(evt, prm)
+    puts "     act3: event:#{evt}, param: #{prm}"
+  end
 
-  <span class="k">def</span> <span class="nf">gd1?</span>
-    <span class="vi">@attr_a</span> <span class="o">&amp;&amp;</span> <span class="vi">@attr_b</span>
-  <span class="k">end</span>
+  def gd1?
+    @attr_a &amp;&amp; @attr_b
+  end
 
-  <span class="k">def</span> <span class="nf">gd2?</span>
-    <span class="o">!</span><span class="vi">@attr_a</span> <span class="o">||</span> <span class="vi">@attr_b</span>
-  <span class="k">end</span>
-<span class="k">end</span>
+  def gd2?
+    !@attr_a || @attr_b
+  end
+end
 
-<span class="c1"># 検討用クラスのテストケースを提供するクラス</span>
-<span class="k">class</span> <span class="nc">SampleTest</span> <i class="conum" data-value="3"></i><b>(3)</b>
-  <span class="k">def</span> <span class="nf">test_base</span><span class="p">(</span><span class="n">events</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-    <span class="n">samp01</span> <span class="o">=</span> <span class="no">Sample</span><span class="p">.</span><span class="nf">new</span>
-    <span class="n">samp01</span><span class="p">.</span><span class="nf">attr_a</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">samp01</span><span class="p">.</span><span class="nf">attr_b</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">events</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">evt</span><span class="o">|</span>
-      <span class="n">samp01</span><span class="p">.</span><span class="nf">play</span><span class="p">(</span><span class="n">evt</span><span class="p">,</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">.</span><span class="nf">usec</span><span class="p">)</span>
-    <span class="k">end</span>
-    <span class="nb">puts</span> <span class="s1">'================'</span>
-  <span class="k">end</span>
+# 検討用クラスのテストケースを提供するクラス
+class SampleTest <i class="conum" data-value="3"></i><b>(3)</b>
+  def test_base(events, data)
+    samp01 = Sample.new
+    samp01.attr_a = data[0]
+    samp01.attr_b = data[1]
+    events.each do |evt|
+      samp01.play(evt, Time.now.usec)
+    end
+    puts '================'
+  end
 
-  <span class="k">def</span> <span class="nf">test01</span>
-    <span class="n">test_base</span><span class="p">(</span><span class="sx">%i[ev1 ev2]</span><span class="p">,</span> <span class="p">[</span><span class="kp">true</span><span class="p">,</span> <span class="kp">true</span><span class="p">])</span>
-  <span class="k">end</span>
+  def test01
+    test_base(%i[ev1 ev2], [true, true])
+  end
 
-  <span class="k">def</span> <span class="nf">test02</span>
-    <span class="n">test_base</span><span class="p">(</span><span class="sx">%i[ev1 ev3]</span><span class="p">,</span> <span class="p">[</span><span class="kp">false</span><span class="p">,</span> <span class="kp">false</span><span class="p">])</span> <span class="c1"># :ev1 will be ignored.</span>
-  <span class="k">end</span>
+  def test02
+    test_base(%i[ev1 ev3], [false, false]) # :ev1 will be ignored.
+  end
 
-  <span class="k">def</span> <span class="nf">test03</span>
-    <span class="n">test_base</span><span class="p">(</span><span class="sx">%i[ev1 ev2 ev3]</span><span class="p">,</span> <span class="p">[</span><span class="kp">true</span><span class="p">,</span> <span class="kp">false</span><span class="p">])</span>
-  <span class="k">end</span>
+  def test03
+    test_base(%i[ev1 ev2 ev3], [true, false])
+  end
 
-  <span class="k">def</span> <span class="nf">run</span>
-    <span class="n">test01</span>
-    <span class="n">test02</span>
-    <span class="n">test03</span>
-  <span class="k">end</span>
-<span class="k">end</span>
+  def run
+    test01
+    test02
+    test03
+  end
+end
 
-<span class="k">if</span> <span class="vg">$PROGRAM_NAME</span> <span class="o">==</span> <span class="kp">__FILE__</span> <i class="conum" data-value="4"></i><b>(4)</b>
-  <span class="nb">test</span> <span class="o">=</span> <span class="no">SampleTest</span><span class="p">.</span><span class="nf">new</span>
-  <span class="nb">test</span><span class="p">.</span><span class="nf">run</span>
-<span class="k">end</span>
-</pre></td></tr></tbody></table></code></pre>
+if $PROGRAM_NAME == __FILE__ <i class="conum" data-value="4"></i><b>(4)</b>
+  test = SampleTest.new
+  test.run
+end</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -1404,46 +1284,46 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 <div id="ruby_sample_code02" class="listingblock">
 <div class="title">リスト 3.9 【端末】stm_sample.rb を実行する</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="console"><span class="gp">C:\Users\kuboaki&gt;</span><span class="nb">cd </span>Desktop<span class="se">\B</span>owlingScore
-<span class="go">
-</span><span class="gp">C:\Users\kuboaki\Desktop\BowlingScore&gt;</span>ruby stm_sample.rb
-<span class="gp">ST0 -&gt;</span><span class="w">
-</span><span class="go">  event:ev1, param: 676481
+<pre class="highlight"><code class="language-console" data-lang="console">C:\Users\kuboaki&gt;cd Desktop\BowlingScore
+
+C:\Users\kuboaki\Desktop\BowlingScore&gt;ruby stm_sample.rb
+ST0 -&gt;
+  event:ev1, param: 676481
     gd1: true
      act1: event:ev1, param: 676481
-</span><span class="gp">       -&gt;</span><span class="w"> </span>ST1
-<span class="gp">ST1 -&gt;</span><span class="w">
-</span><span class="go">  event:ev2, param: 678623
+       -&gt; ST1
+ST1 -&gt;
+  event:ev2, param: 678623
      act2: event:ev2, param: 678623
     gd2: true
-</span><span class="gp">       -&gt;</span><span class="w"> </span>ST2
-<span class="go">finished.
+       -&gt; ST2
+finished.
 ================
-</span><span class="gp">ST0 -&gt;</span><span class="w">
-</span><span class="go">  event:ev1, param: 680596
-</span><span class="gp">    &lt;&lt;&lt; gd1: false, transition is ignored. &gt;</span><span class="o">&gt;&gt;</span>
-<span class="gp">       -&gt;</span><span class="w"> </span>ST0
-<span class="gp">ST0 -&gt;</span><span class="w">
-</span><span class="go">  event:ev3, param: 681783
+ST0 -&gt;
+  event:ev1, param: 680596
+    &lt;&lt;&lt; gd1: false, transition is ignored. &gt;&gt;&gt;
+       -&gt; ST0
+ST0 -&gt;
+  event:ev3, param: 681783
      act3: event:ev3, param: 681783
-</span><span class="gp">       -&gt;</span><span class="w"> </span>ST2
-<span class="go">finished.
+       -&gt; ST2
+finished.
 ================
-</span><span class="gp">ST0 -&gt;</span><span class="w">
-</span><span class="go">  event:ev1, param: 683477
-</span><span class="gp">    &lt;&lt;&lt; gd1: false, transition is ignored. &gt;</span><span class="o">&gt;&gt;</span>
-<span class="gp">       -&gt;</span><span class="w"> </span>ST0
-<span class="gp">ST0 -&gt;</span><span class="w">
-</span><span class="go">  event:ev2, param: 685784
-</span><span class="gp">       -&gt;</span><span class="w"> </span>ST0
-<span class="gp">ST0 -&gt;</span><span class="w">
-</span><span class="go">  event:ev3, param: 708214
+ST0 -&gt;
+  event:ev1, param: 683477
+    &lt;&lt;&lt; gd1: false, transition is ignored. &gt;&gt;&gt;
+       -&gt; ST0
+ST0 -&gt;
+  event:ev2, param: 685784
+       -&gt; ST0
+ST0 -&gt;
+  event:ev3, param: 708214
      act3: event:ev3, param: 708214
-</span><span class="gp">       -&gt;</span><span class="w"> </span>ST2
-<span class="go">finished.
+       -&gt; ST2
+finished.
 ================
 
-</span><span class="gp">C:\Users\kuboaki\Desktop\BowlingScore&gt;</span></code></pre>
+C:\Users\kuboaki\Desktop\BowlingScore&gt;</code></pre>
 </div>
 </div>
 </div>
@@ -1506,12 +1386,12 @@ rubyでは、真偽値を返すメソッドには「?」をつける習慣があ
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_structure_design.html">2</a> | ↑ Up: <a href="tut_uml_modeling_bs.html">モデルを使ってソフトウェアを開発しよう: UML初学者向けチュートリアル</a> | Next: <a href="_behavior_design.html">4</a> →</p>
+<p>← Previous: <a href="_structure_design.html">第2章</a> | ↑ Up: <a href="tut_uml_modeling_bs.html">モデルを使ってソフトウェアを開発しよう: UML初学者向けチュートリアル</a> | Next: <a href="_behavior_design.html">第4章</a> →</p>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-バージョン html_0744<br>
+バージョン html_0753<br>
 最終更新 2023-05-31 13:19:10 +0900
 </div>
 </div>
