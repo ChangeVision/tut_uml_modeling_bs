@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*- #
-
+extends: default
 font:
   catalog:
     GenYoMinJP:
@@ -66,33 +66,40 @@ base:
   border_color: 7F7F7F
   border_width: 1.0
 
-vertical_rhythm: $base_line_height_length
-horizontal_rhythm: $base_line_height_length
+# vertical_rhythm: $base_line_height_length
+# horizontal_rhythm: $base_line_height_length
+
+link:
+  font_color: 2D466B  # 800000  # $literal_font_color # 483D8B # 153C77  # 428bca
+  font_family: Migu 1m # GenShinGothic-P  # Migu 1m # RictyDiminished  #M+ 1mn
+  font_size: $base_font_size * 0.9
+  # font-style:
+  # text-decoration:
+codespan: #literal:
+  font_color: 004953 # 556B2F # 008080 # 2C528B # 253A59  # b12146
+  font_family: Migu 1m # RictyDiminished  #M+ 1mn
+  font-size: ceil($base_font_size * 0.9)
+
+image:
+  # border-color: cccccc
+  # border-width: 2.0
+  caption:
+    align: left
+    color: inherit # 466B2D
 
 prose:
-  text_indent: $base_font_size
-  # margin_inner: $base_font_size * 4
-  offset_left: $base_font_size * 4
+  margin-bottom: 10
+  margin-inner: 10
+  text-indent: 0
+  text-indent-inner: 0
+# prose:
+#   text_indent: $base_font_size
+#   # margin_inner: $base_font_size * 4
+#   offset_left: $base_font_size * 4
 
 block:
   margin_top: 12
   margin_bottom: 12
-
-link:
-  font_color: 2D466B  # 800000  # $literal_font_color # 483D8B # 153C77  # 428bca
-  font_family: GenShinGothic-P  # Migu 1m # RictyDiminished  #M+ 1mn
-  font_size: $base_font_size * 0.9
-  # font-style:
-  # text-decoration:
-literal:
-  font_color: 004953 # 556B2F # 008080 # 2C528B # 253A59  # b12146
-  font_family: RictyDiminished  #M+ 1mn # Migu 1m
-  font-size: ceil($base_font_size * 0.9)
-  # font-style:
-  # background-color: f5f5f5
-  # border-color:
-  # border-offset:
-  # border-radius:
 
 heading:
   align: left
@@ -194,7 +201,7 @@ admonition:
   label:
     font_style: $heading_font_style
 
-blockquote:
+quote: # blockquote:
   font_family: GenShinGothic-P-L
   font_color: $literal_font_color
   font_size: $base_font_size
@@ -243,12 +250,6 @@ sidebar:
     font_family: $heading_font_family
     font_size: 12pt  # $heading_h5_font_size
     font_style: $heading_font_style
-image:
-  # border-color: cccccc
-  # border-width: 2.0
-  caption:
-    align: left
-    color: inherit # 466B2D
 
 table:
   font_family: $heading_font_family
@@ -263,19 +264,22 @@ table:
   border_width: $base_border_width
   cell_padding: 5
 toc:
-  indent: $horizontal_rhythm * 1.6
-  line_height: 1.7
+  indent: 15  # $horizontal_rhythm * 1.6
+  line_height: 1.5 # 1.7
   margin_top: 10pt
+  # h1 is used for part titles (book doctype only)
   h1_font_family: GenShinGothic-P
   h1_font_size: floor($base_font_size * 1.8)
   h1_font_color: $heading_h1_font_color
   h2_font_style: bold
   h2_font_family: GenShinGothic-P-L
-  h2_font_size: floor($base_font_size * 1.6)
+  h2_font_size: floor($base_font_size * 1.4)
+  # h2_font_size: floor($base_font_size * 1.6)
   h2_font_color: $heading_h2_font_color
   h2_font_style: bold
   h3_font_family: $base_font_family
-  h3_font_size: floor($base_font_size * 1.2)
+  h3_font_size: $base_font_size   # ceil($base_font_size * 0.8)
+  # h3_font_size: floor($base_font_size * 1.2)
   h3_font_color: $heading_h3_font_color
 header:
   font_size: $base_font_size_small
