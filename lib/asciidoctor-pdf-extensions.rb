@@ -77,6 +77,7 @@ module AsciidoctorPdfExtensions
 #    end  # pad_box
   end
 
+  # discreteが有効ならこれはいらない（そのためには修飾の最後に置く必要がある）
   # colphon はsectionの仲間扱いになっているが、目次にはいらないのでとり除く
   # ちゃんとやるなら、discreteで修飾したセクションを除去するようにして、colophonに追加して修飾すべき
   def ink_toc_level entries, num_levels, dot_leader, num_front_matter_pages
@@ -125,13 +126,12 @@ module AsciidoctorPdfExtensions
   end
 
   def layout_chapter_title node, title, opts = {}
-    warn "title: #{title}, #{node.sectname}"
     numbered = node.numbered
     sectnum = node.sectnum
     sectname = node.sectname
     if %w[dedication acknowledgments].include?(sectname)
       layout_heading_custom_1 node, title, align: :center
-    elsif sectname == 'discrete'
+    elsif sectname == 'discrete'  # discreteが有効だとそもそもここには来ない！
       layout_heading_custom_2 node, title, align: :left
     elsif sectname == 'colophon'
       layout_heading_custom_4 node, title, align: :left
