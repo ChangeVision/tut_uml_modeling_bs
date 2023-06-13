@@ -131,18 +131,19 @@ module AsciidoctorPdfExtensions
     sectname = node.sectname
     if %w[dedication acknowledgments].include?(sectname)
       layout_heading_custom_1 node, title, align: :center
-    elsif sectname == 'discrete'  # discreteが有効だとそもそもここには来ない！
+    elsif sectname == 'discrete' # discreteが有効だとそもそもここには来ない！
       layout_heading_custom_2 node, title, align: :left
     elsif sectname == 'colophon'
       layout_heading_custom_4 node, title, align: :left
     elsif sectname == 'chapter'
       start_new_page if verso_page?
-      if numbered
-        super
-        # layout_heading_custom_3 node, title, align: :right
-      else
-        super
-      end
+      # if numbered
+      #   super
+      #   # layout_heading_custom_3 node, title, align: :right
+      # else
+      #   super
+      # end
+      super
     else
       super # delegate to default implementation
     end

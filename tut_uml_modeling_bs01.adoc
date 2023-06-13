@@ -66,18 +66,19 @@ Rubyになじみがない人は、公式サイトにある次のようなペー�
 
 それでは、演習用に {astah} のプロジェクトを用意しましょう。
 
-* {astah} を起動する。
-* 「ファイル」メニューから「プロジェクトの新規作成」を選択する（ <<create_project01>> ）。
+. {astah} を起動する。
+. 「ファイル」メニューから「プロジェクトの新規作成」を選択する（ <<create_project01>> ）。
 
 [[create_project01]]
 .新しいプロジェクトを作成する
-image::GSW-20220206-131611.png[{three-quarters-width}, float="right"]
+image::GSW-20220206-131611.png[{three-quarters-width}, float="left"]
 
-* 「no_title」という名前で新しいプロジェクトが作成される（ <<create_project02>> ）。
+[start=3]
+. 「no_title」という名前で新しいプロジェクトが作成される（ <<create_project02>> ）。
 
 [[create_project02]]
 .新しいプロジェクトが作成された
-image::GSW-20220206-131639.png[{three-quarters-width}, float="right"]
+image::GSW-20220206-131639.png[{three-quarters-width}, float="left"]
 
 
 [[create_proj02]]
@@ -85,26 +86,28 @@ image::GSW-20220206-131639.png[{three-quarters-width}, float="right"]
 
 新規プロジェクトを作成したら、最初に保存しておき、それからモデルの作成に入るようにするとよいでしょう。
 
-* 「ファイル」メニューから「プロジェクトを保存」を選択する（ <<create_project03>> ）。
+. 「ファイル」メニューから「プロジェクトを保存」を選択する（ <<create_project03>> ）。
 
 
 [[create_project03]]
 .新しいプロジェクトを保存する
-image::GSW-20220206-131657.png[{three-quarters-width}, float="right"]
+image::GSW-20220206-131657.png[{three-quarters-width}, float="left"]
 
-* 「保存」ダイアログが開くので、プロジェクトの保存場所と保存するファイル名を指定する。
+[start=2]
+. 「保存」ダイアログが開くので、プロジェクトの保存場所と保存するファイル名を指定する。
 ** ここでは、保存場所として「デスクトップ」に「BowlingScore」フォルダーを作成した。
 ** ファイル名に「bowling_score」を指定して保存した（ <<create_project04>> ）。
 
 [[create_project04]]
 .ダイアログを操作してプロジェクトを保存する場所とプロジェクトファイル名を指定する
-image::GSW-20220206-131840.png[{three-quarters-width}, float="right"]
+image::GSW-20220206-131840.png[{three-quarters-width}, float="left"]
 
-* 保存すると、プロジェクトファイルにつけた名前が「構造ツリー」に反映される（ <<create_project05>> ）。
+[start=3]
+. 保存すると、プロジェクトファイルにつけた名前が「構造ツリー」に反映される（ <<create_project05>> ）。
 
 [[create_project05]]
 .プロジェクトファイル名が、プロジェクト名に反映された
-image::GSW-20220206-131907.png[{three-quarters-width}, float="right"]
+image::GSW-20220206-131907.png[{three-quarters-width}, float="left"]
 
 
 [NOTE]

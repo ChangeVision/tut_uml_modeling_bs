@@ -117,7 +117,7 @@ image::GSW-20220206-132154.png[{three-quarters-width}]
 
 [[object00]]
 .モデルにクラス図を追加する
-image::GSW-20220206-132218.png[{three-quarters-width}, float="right"]
+image::GSW-20220206-132218.png[{three-quarters-width}, float="left"]
 
 
 ===== オブジェクト図に名前をつける
@@ -131,7 +131,7 @@ image::GSW-20220206-132218.png[{three-quarters-width}, float="right"]
 
 [[object01]]
 .図の名前を「ゲームスコアのオブジェクト図」にする
-image::GSW-20220206-133044.png[{three-quarters-width}, float="right"]
+image::GSW-20220206-133044.png[{three-quarters-width}, float="left"]
 
 
 ==== オブジェクト図にスコアシートを追加する
@@ -164,7 +164,7 @@ image::GSW-20220206-133142.png[{three-quarters-width}, float="left"]
 
 [[obj_scoresheet01]]
 .名前を「scoresheet01」に変更する
-image::GSW-20220206-133218.png[{three-quarters-width, float="right"]]
+image::GSW-20220206-133218.png[{three-quarters-width, float="left"]]
 
 TIP: 個々のオブジェクトを識別するためにつける名前のことを、オブジェクト名（またはインスタンス名）と呼びます。
 
