@@ -48,9 +48,11 @@ include::attributes.adoc[]
 :section-refsig:
 :chapter-refsig:
 
-ifdef::backend-html5[]
+//ifdef::backend-html5[]
+//:source-highlighter: rouge
+//:rouge-style: custom
 :source-highlighter: prettify
-endif::[]
+//endif::[]
 
 ifdef::backend-pdf[]
 :source-highlighter: rouge
