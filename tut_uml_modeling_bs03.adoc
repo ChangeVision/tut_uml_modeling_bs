@@ -715,7 +715,7 @@ C:\Users\kuboaki\Desktop\BowlingScore>
 ----
 //--
 
-
+<<<<
 
 === まとめ
 
