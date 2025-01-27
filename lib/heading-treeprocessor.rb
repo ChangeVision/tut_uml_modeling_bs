@@ -25,8 +25,9 @@ Extensions.register do
   treeprocessor HeadingTreeprocessor
 end
 
+module Asciidoctor
 class AbstractBlock
-  alias_method :xreftext_org, :xreftext
+  alias xreftext_org xreftext
 
   # asciidoctor-pdfでの参照リンク整形のため
   def xreftext xrefstyle = nil
@@ -148,9 +149,7 @@ class Section
       title
     end
   end
-
 end
-
 
 class HeadingTreeprocessor < Extensions::Treeprocessor
   def process document
@@ -161,4 +160,5 @@ class HeadingTreeprocessor < Extensions::Treeprocessor
       end
     end
   end
+end
 end
