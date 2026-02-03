@@ -1,0 +1,84 @@
+== Contribution Guide
+
+このチュートリアルに貢献するときに参考となる情報を記載しています。
+
+=== Asciidoctor
+
+このチュートリアルの文書は、Asciidoctor形式で記述しています。
+Asciidoctorは、AsciiDoc形式の文書の一種です。AsciiDoc形式は、もともとはPythonのライブラリを書いていた人たちがHTML形式のオンラインマニュアルを作成するために使っていたものです。
+Asciidoctor形式は、AsciiDoc形式に対して、より一般的な技術文書にとって有用な独自の拡張を加えたものになっています。
+
+HTML形式に変換するトランスレータも `asciitdoctor` という名前です。トランスレータはRubyを使って書かれています。
+PDFに変換するトランスレータは、 `asciidoctor-pdf` という名前です。
+
+Asciidoctorについては開発元のウェブページを参照してください。
+
+Asciidoctor:: https://asciidoctor.org/
+Asciidoctor Documentation Site:: https://docs.asciidoctor.org/
+
+=== Issues, Pull Requests
+
+問題や慰問が生じた場合には、このリポジトリの Issue, Pull Request を使ってください。
+
+* 本文、モデル図、コード中の誤字、スペルミス等の指摘、報告
+* チュートリアルの文章についての質問、報告
+* サンプルモデル図、サンプルコードについての質問、報告
+* 上記に関する修正や改善の提案
+
+=== Discussion
+
+誤りかどうかわからない、指摘はあるが良い考えがないなど、相談したいことや議論したほうが良さそうと考えた場合は、 link:discussions[Discussions] に投稿してください。
+
+
+=== ディレクトリ構成
+
+このリポジトリのディレクトリ構成を <<tree_txt>> に示します。
+このリストには、主に、原稿ファイル、サンプルモデル、サンプルコード、画像等を示してあます。
+変換のためのしくみや設定に使うファイル（RakefileやGemfileなど）は割愛しています。
+
+[[tree_txt]]
+.このリポジトリのディレクトリ構成
+[source,text]
+----
+├── _xxxxx.html # <1>
+├── appendix-01.adoc # <2>
+├── bibliography.adoc # <3>
+├── codes # <4>
+├── css # <5>
+├── glossary.adoc # <6>
+├── images # <7>
+├── models # <8>
+├── preface.adoc # <9>
+├── theme # <10>
+├── tut_uml_modeling_bs.adoc # <11>
+├── tut_uml_modeling_bs.html # <12>
+├── tut_uml_modeling_bs.pdf  # <13>
+├── tut_uml_modeling_bs01.adoc # <14>
+└── tut_uml_modeling_bs_full.html # <15>
+----
+<1> `_` から始まるHTMLファイルは、分割生成された形式のテキストのHTMLファイル
+<2> 付録（コードや動画へのリンクなど）
+<3> 参考文献
+<4> サンプルコード
+<5> HTML用のスタイルシート
+<6> 用語集
+<7> モデル図や操作画面などの画像
+<8> サンプルモデルの astah* のモデルデータファイル
+<9> はじめに
+<10> PDF用のスタイルシート
+<11> 原稿のルート文書
+<12> 分割版HTMLファイルのルート文書
+<13> PDF版の文書
+<14> チュートリアル本文の各章の原稿
+<15> 分割していないHTML版のルート文書
+
+=== 文書生成に関するメモ
+
+* 文書は、Asciidoctor形式で記述して、`asciidoctor` コマンドでHTML形式に、 `asciidoctor-pdf` コマンドでPDFに変換しています。
+* asciidoctor-pdfを 1.6.2にした際に、生成されるPDFやオプションが変わっています。
+** それに伴いカスタマイズのための `asciidoctor-pdf-extensions.rb` を使うのをやめました（使う必要がなくなりました）。
+** PDFのスタイルで段落のインデントが使えるようになったので、PDFでは、本文全体で段落の左側に一定のマージンをつけています。
+** `media` パラメータを `prepress` にして、`chapter` に `nonfacing` オプションをつけて生成しています（見開きレイアウトで、空きページなしのPDFになっています）。
+* フルページのHTMLとマルチページのHTMLを生成しています。
+** ただし、 原稿の `adoc` ファイルと生成する HTML ファイルが1対1に対応してない事情から、生成時に `clobber` を使うなどして都合のよいところで分割した HTML ファイルを生成しています。
+* includeしているソースコードの行番号についての指示をつけても、どうも取り除いて挿入してしまうようで、挿入したファイルの実際の行番号とずれてしまう問題が生じます。このに対応するために、 `Rakefile` 中の設定で、挿入するファイルの行番号を調べ、生成時のパラメータに渡して調整しています。

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="default.css">
+  <title>ボウリングスコア</title>
+</head>
+<body>
+  <h1>
+    <img src="bowling_ball.png" alt="ボール" title="ボール" width="48" style="vertical-align:middle;">
+    プレーヤーの登録
+  </h1>
+  <h2 class="alert">プレーヤーの登録に失敗しました。</h2>
+  <p id="links"><a href="register_player.erb">プレーヤーの登録へ戻る</a>｜
+    <a href="player_list.erb">登録済みプレーヤーの一覧</a>｜
+    <a href="index.html">メニュー画面に戻る</a></p> 
+  <hr>
+    <table>
+      <tr>
+        <th>ユーザー名</th>
+        <td><%= username %></td>
+        <% if msg['username'] == 'OK.' %>
+          <td><%= msg['username'] %></td>
+        <% else %>
+          <td class="alert"><%= msg['username'] %></td>
+        <% end %>
+      </tr>
+      <tr>
+        <th>プレーヤー名</th>
+        <td><%= player_name %></td>
+        <% if msg['player_name'] == 'OK.' %>
+          <td><%= msg['player_name'] %></td>
+        <% else %>
+          <td class="alert"><%= msg['player_name'] %></td>
+        <% end %>
+      </tr>
+      <tr>
+        <th>パスワード</th>
+        <td>************</td>
+        <% if msg['password'] == 'OK.' %>
+          <td><%= msg['password'] %></td>
+        <% else %>
+          <td class="alert"><%= msg['password'] %></td>
+        <% end %>
+      </tr>
+      <tr>
+        <th>管理者権限</th>
+        <td>
+          <% if admin == "1" %>
+            管理者
+          <% else %>
+            一般
+          <% end %>
+        </td>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
+  <hr>
+</body>
+</html>

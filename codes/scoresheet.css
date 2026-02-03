@@ -1,0 +1,179 @@
+body {
+    background-color: honeydew;
+}
+
+p {
+    color: gray90;
+}
+
+h1, h2, h3 {
+    border-width : 0 0 0 8px;
+    border-style : solid;
+    padding-left : 0.3em;
+    padding-right : 0.5em;
+}
+
+h1 {
+    margin: 0em 0em 0em 0em;
+    font-size : 1.2em;
+    color : white;
+    border-color : #fff8dc;
+    background-color : maroon;
+    border-width: 0.1em 0em 0.1em 0.1em;
+    padding-top : 0.2em;
+    padding-bottom : 0.2em;
+}
+
+h2 {
+    font-size : 1.2em;
+    color: navy;
+    border-color : navy;
+    padding-top : 0.4em;
+    padding-bottom : 0.4em;
+    display: inline-block;
+}
+
+h2.alert {
+    background: darksalmon;
+}
+
+h3 {
+    font-size : 1em;
+    color : darkgreen;
+    border-color : darkgreen
+}
+
+table {
+    table-layout:fixed;
+    width: 1120px;
+    border-collapse:separate;
+    border-spacing: 0;
+    border-right: 2px solid gray;
+    border-bottom: 2px solid gray;
+}
+
+table th{
+    width: 40px;
+    font-weight : bold;
+    text-align: center;
+    color:white;
+    background: linear-gradient(#829ebc,#225588);
+    border-left: 2px solid #3c6690;
+    border-top: 2px solid #3c6690;
+    border-bottom: 2px solid #3c6690;
+    box-shadow: 0px 1px 1px rgba(255,255,255,0.3) inset;
+    padding: 5px 0;
+}
+
+table th.ten{
+    width: 60px;
+}
+
+.current{
+    width: 40px;
+    color:yellow;
+    background: linear-gradient(#babb81,#878722);
+}
+
+.current-ten{
+    width: 60px;
+    color:yellow;
+    background: linear-gradient(#babb81,#878722);
+}
+
+table td{
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    font-size : 1.1em;
+    font-weight : bold;
+    border-left: 2px solid gray;
+    border-bottom: 2px solid gray;
+    border-top:none;
+    padding: 0;
+    margin: 0;
+    background-color : #ffffef;
+}
+
+.img-size {
+    width: 2em;
+    padding: 0px;
+}
+
+.username {
+    width: 60px; /* 6em; */
+    text-align: center;
+}
+
+.total {
+    width: 60px; /* 6em; */
+    text-align: center;
+}
+
+.current-total{
+    width: 60px;
+    color:yellow;
+    text-align: center;
+    background: linear-gradient(#babb81,#878722);
+}
+
+
+.score {
+    width: 6em;
+    padding: 7px 0;
+    text-align: center;
+}
+
+.first-ten {
+    width: 40px;
+    text-align: center;
+    padding: 0px;
+}
+
+.first {
+    width: 40px;
+    border-bottom: none;
+    text-align: center;
+    padding: 0px;
+}
+
+.second {
+    width: 40px;
+    text-align: center;
+    padding: 0px;
+    border-left: 1px solid gray;
+    border-bottom: 1px solid gray;
+}
+
+.itemname {
+    width: 80px;
+}
+
+.exec_btn {
+    margin: 5px;
+}
+
+.spare {
+    border-style: solid;
+    border-width: 0 0 40px 40px;
+    border-color: transparent transparent #555555 #dcf5f1;
+}
+
+.strike {
+    border-style: solid;
+    border-width: 20px 20px 20px 20px;
+    border-color: #dcf5f1 #555555 #dcf5f1 #555555;
+}
+
+.split {
+    background: transparent;
+    border-style: solid;
+    border-color: #555555;
+    border-radius: 50%;
+    width: 27px;
+    height: 27px;
+    font-size: 1.1em;
+    text-align: center;
+    line-height: 30px;
+    margin: 0 0 0 3px;
+}

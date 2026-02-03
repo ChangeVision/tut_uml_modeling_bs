@@ -1,0 +1,28 @@
+= UML初学者向けチュートリアル: モデルを使ってソフトウェアを開発しよう
+
+
+このリポジトリが提要しているのは、ソフトウェアの開発にモデリングツールを使う方法などについて独習するためのチュートリアルの文書、サンプルモデル、サンプルコードなどです。
+モデリングツールとして、チェンジビジョンが開発・販売している link:https://astah.change-vision.com/ja/product/astah-professional.html[astah* Professional] を使っています。
+
+== チュートリアルの文書の取得
+
+PDF版やHTML版（HTMLと付随の画像等をまとめたもの）は、リリースページから取得できます。
+
+* https://github.com/ChangeVision/tutorial-bowling-score-modeling/releases[リリースページ]
+
+tut_uml_modeling_bs.pdf:: 電子ブックの体裁のPDF版です。
+tut_uml_modeling_bs.zip:: ブラウザで閲覧するHTML版です。Zipファイルを展開すると、`tut_uml_modeling_bs_html` フォルダにファイルが展開されます。ウェブブラウザから `tut_uml_modeling_bs_full.html` か `tut_uml_modeling_bs.html` を参照します。前者は全体を1つのページとしてまとめた形式、後者は章ごとに別ページに分割した形式です。
+
+
+より直近のものを参照したい場合には、このリポジトリをクローンして、リポジトリ中にある PDF や HTML ファイルを直接参照してください。
+
+
+== Contributing
+
+小さなtypo や不文明な文章への指摘でも Issue や Pull Requestを歓迎します。
+
+コントリビュートの方法は link:CONTRIBUTING.adoc[] を参照してください。
+
+== License
+
+提供するチュートリアルの文書を含むやリポジトリ全体について、link:https://creativecommons.org/licenses/by-nc-nd/4.0[クリエイティブ・コモンズ CC-BY-NC-ND 4.0] に従います。

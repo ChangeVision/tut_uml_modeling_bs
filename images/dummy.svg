@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="504" height="270" overflow="hidden" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="clip0">
+      <rect x="710" y="238" width="504" height="270"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#clip0)" transform="translate(-710 -238)">
+    <rect x="716.5" y="244.5" width="494" height="260" stroke="#2F528F" stroke-width="4.58333" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="8" stroke-opacity="1" fill="#D9D9D9" fill-opacity="1"/>
+  </g>
+  <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 104px;" x="87.973" y="165.623">dummy</text>
+</svg>

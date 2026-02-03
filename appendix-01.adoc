@@ -1,0 +1,14 @@
+[appendix]
+[[_appendix-01]]
+== モデルやプログラムの作成例
+
+
+.ボウリングのゲームスコアのモデル図（ `models` フォルダにあります）
+* `bowling_score.asta`
+
+.Rubyで実装したプログラム（ `codes` フォルダにあります）
+* `score.rb`
+
+.実行している様子の動画（ `videos` フォルダにあります）
+* `score_rb_demo_win.mp4`
+* `score_rb_demo_mac.mov`

@@ -1,0 +1,8 @@
+\#*\#
+\.\#*
+*~
+*.tmp
+output
+.DS_Store
+vendor/bundle
+log

@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.23">
+<meta name="description" content="この文書は、モデリングツールにastah*を使って、ソフトウェアの開発にUMLを使う方法について学ぶチュートリアルです。">
+<meta name="author" content="株式会社チェンジビジョン">
+<title>モデルを使ってソフトウェアを開発しよう: UML初学者向けチュートリアル</title>
+<link rel="stylesheet" href="css/mystyle.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
+<style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
+                       font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
+             .nav-footer{text-align: center; margin-top: auto;}
+             .nav-footer > p > a {white-space: nowrap;}</style>
+</head>
+<body id="_structure_design" class="book toc2 toc-left">
+<div id="header">
+<h1>モデルを使ってソフトウェアを開発しよう: UML初学者向けチュートリアル</h1>
+<div class="details">
+<span id="author" class="author">株式会社チェンジビジョン</span><br>
+<span id="revnumber">バージョン html_0780,</span>
+<span id="revdate">2025-03-25</span>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">目次</div>
+<p><span class="toc-root"><a href="tut_uml_modeling_bs.html">モデルを使ってソフトウェアを開発しよう: UML初学者向けチュートリアル</a></span></p><ul class="sectlevel1">
+<li><a href="_preface.html">はじめに</a>
+</li>
+<li><a href="_copyright.html">注意事項</a>
+</li>
+<li><a href="_preparation.html">1 準備</a>
+</li>
+<li><a href="_structure_design.html"><span class="toc-current">2 スコアシートの構造を調べる</span></a>
+<ul class="sectlevel2">
+<li><a href="_structure_design.html#_スコアシートの例">2.1 スコアシートの例</a>
+</li>
+<li><a href="_structure_design.html#score_sheet_struct_with_objects">2.2 スコアシートの構造をオブジェクト図で表す</a>
+</li>
+<li><a href="_structure_design.html#_スコアシートの構造をクラス図で表す">2.3 スコアシートの構造をクラス図で表す</a>
+</li>
+<li><a href="_structure_design.html#_まとめ">2.4 まとめ</a>
+</li>
+</ul>
+</li>
+<li><a href="_model_to_code_design.html">3 モデルとコードの対応づけ</a>
+</li>
+<li><a href="_behavior_design.html">4 スコアやフレームの状態を調べる</a>
+</li>
+<li><a href="_program_test.html">5 できあがったプログラムを試す</a>
+</li>
+<li><a href="_summary.html">6 まとめ</a>
+</li>
+<li><a href="_other_diagrams.html">7 他の図、他の機能など</a>
+</li>
+<li><a href="_appendix-01.html">付録 A: モデルやプログラムの作成例</a>
+</li>
+<li><a href="_bibliography.html">参考文献</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_structure_design"><a class="anchor" href="#_structure_design"></a>第2章 スコアシートの構造を調べる</h2>
+<div class="sectionbody">
+<div class="paragraph lead">
+<p>ボウリングのゲームスコアを記録するスコアシートは、どのような要素で構成されているでしょうか。
+また、それらの構成要素の間にはどのような関係があるのでしょうか。
+構成要素や構成要素の関係を表すには「構造のモデル」を使います。
+構造のモデルを使って、スコアシートの構成要素や、構成要素間の関係を検討してみましょう。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="注記"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>このチュートリアルでは、クラッシックスコアリング（ <a href="_preparation.html#classic_scoring">1.4.2</a> ）の場合について考えることにします。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_スコアシートの例"><a class="anchor" href="#_スコアシートの例"></a>2.1 スコアシートの例</h3>
+<div class="paragraph">
+<p>ゲーム中のスコアシートの例を <a href="_structure_design.html#scoresheet01">図 2.1</a> に示します。
+この例では、2人でプレーしています。
+いまは、2ゲーム目のプレー中で、1人目の6フレーム目の第1投目までゲームが進んでいます。
+また、彼らは1フレームずつ交代で投球していることがわかります。
+もし、彼らがもう1ゲーム分プレーする場合には、このスコアの下にもう一度2人分のスコアが追加されるでしょう。</p>
+</div>
+<div id="scoresheet01" class="imageblock">
+<div class="content">
+<img src="images/scoresheet02.png" alt="scoresheet02" width="100%">
+</div>
+<div class="title">図 2.1 スコアシートの例</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="注記"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>ボウリングでは、「ゲーム」が、各自が10フレーム分プレーした結果を指す場合と、複数名で10フレーム分プレーしたひと組の結果を指す場合があるようです。
+これらを呼び分ける方法がわからなかったので、このチュートリアルでは、前者を「スコア」、後者を「ゲーム」と呼ぶことにします。</p>
+</div>
+<div class="paragraph">
+<p>実際のボウリング競技において、これらの呼び分方をご存じの方は、その呼び分け方を使うとよいでしょう。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>スコアシートを観察してわかることをまとめました。</p>
+</div>
+<div id="scoresheet02" class="sidebarblock">
+<div class="content">
+<div class="title">スコアシートを観察してわかること（決めたこと）</div>
+<div class="ulist">
+<ul>
+<li>
+<p>スコアシートには、プレー開始日時が記載されている。</p>
+</li>
+<li>
+<p>スコアシートには、プレーヤー名とその人の10フレーム分の投球を記録する欄がある。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>これを <strong>「スコア」</strong> と呼ぶことにする。</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1つのゲームの進行中は、1フレームごとにプレーヤーが交代して投球する。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>この方式は <strong>「ベーカー方式」</strong> と呼ばれている。</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>スコアシートには、複数人のスコアが記録されている。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>同時に進行している複数名のスコアのまとまりを <strong>「ゲーム」</strong> と呼ぶことにする。</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>プレーヤーの組を単位として複数回ゲームをプレーできる。</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>これらを元に、スコアシートの構成要素や構成要素の間の関係をモデル図で表してみましょう。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="score_sheet_struct_with_objects"><a class="anchor" href="#score_sheet_struct_with_objects"></a>2.2 スコアシートの構造をオブジェクト図で表す</h3>
+<div class="paragraph">
+<p>スコアシートの構造を調べるには、まず実際のスコアシートがどうなっているかを調べるのがよいでしょう。
+スコアシートに記入されている具体的なデータを使って図を作成するには、オブジェクト図が向いています。</p>
+</div>
+<div class="paragraph">
+<p>それでは、スコアシートの例を参照しながら、スコアシートのオブジェクト図を作成してみましょう。</p>
+</div>
+<div class="sect3">
+<h4 id="_プロジェクトに設計モデルを追加する"><a class="anchor" href="#_プロジェクトに設計モデルを追加する"></a>2.2.1 プロジェクトに設計モデルを追加する</h4>
+<div class="paragraph">
+<p>まず、 astah* で作成したプロジェクトに設計モデルを追加しましょう。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="ヒント"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>「設計モデル」ということばが表すものは、開発に使用する手法や分野によって少しずつ異なっています。このチュートリアルでは、次の2つの側面について表したものを設計モデルと呼ぶことにします。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>対象とする業務やサービスに必要となる構成要素やその関係を「構造のモデル」（静的モデル）として表したもの。</p>
+</li>
+<li>
+<p>業務やサービスを実現するために必要となる動作を「振る舞いのモデル」（動的モデル）として表したもの。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>設計に関わる構成要素は、対象とする業務やサービスを分析して得られることもあれば、開発に採用する資源や方式から得られることもあります。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_プロジェクトに設計モデルを追加する_2"><a class="anchor" href="#_プロジェクトに設計モデルを追加する_2"></a>プロジェクトに設計モデルを追加する</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>構造ツリー上で、プロジェクトを選択する。</p>
+</li>
+<li>
+<p>右クリックしてポップアップメニューを開き、「モデルの追加＞モデル」を選択する（ <a href="_structure_design.html#add_design_model01">図 2.2</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="add_design_model01" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220206-132000.png" alt="GSW 20220206 132000" width="75%">
+</div>
+<div class="title">図 2.2 プロジェクトにモデルを追加した</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_追加したモデルに名前をつける"><a class="anchor" href="#_追加したモデルに名前をつける"></a>追加したモデルに名前をつける</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>構造ツリー上で、追加したモデルを選択した状態で、プロパティーの「ベース」タブを選択する。</p>
+</li>
+<li>
+<p>「名前」を編集して「設計モデル」とする（ <a href="_structure_design.html#add_design_model02">図 2.3</a> ）。</p>
+</li>
+<li>
+<p>入力が確定すると、構造ツリーの表示にも反映される。</p>
+</li>
+</ul>
+</div>
+<div id="add_design_model02" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220206-132154.png" alt="GSW 20220206 132154" width="75%">
+</div>
+<div class="title">図 2.3 モデルに設計用のモデルとして名前をつけた</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_設計モデルにオブジェクト図を追加する"><a class="anchor" href="#_設計モデルにオブジェクト図を追加する"></a>2.2.2 設計モデルにオブジェクト図を追加する</h4>
+<div class="paragraph">
+<p>「オブジェクト図（インスタンス図と呼ぶこともあります）」を使ってスコアシートに登場するオブジェクトを表してみましょう。
+astah* でオブジェクト図を作成するときは、「クラス図」を使います。</p>
+</div>
+<div class="paragraph">
+<p>それでは、プロジェクトにクラス図を追加して、オブジェクト図を描いてみましょう。</p>
+</div>
+<div class="sect4">
+<h5 id="_設計モデルにオブジェクト図を追加する_2"><a class="anchor" href="#_設計モデルにオブジェクト図を追加する_2"></a>設計モデルにオブジェクト図を追加する</h5>
+<div class="paragraph">
+<p>まず、プロジェクトにオブジェクト図を描くのに使うクラス図を追加します。</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>構造ツリーから設計モデルを選択し、右クリックしてポップアップメニューを開く（ <a href="_structure_design.html#object00">図 2.4</a> ）。</p>
+</li>
+<li>
+<p>「図の追加＞クラス図」でクラス図が追加される。</p>
+</li>
+</ol>
+</div>
+<div id="object00" class="imageblock left">
+<div class="content">
+<img src="images/GSW-20220206-132218.png" alt="GSW 20220206 132218" width="75%">
+</div>
+<div class="title">図 2.4 モデルにクラス図を追加する</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_オブジェクト図に名前をつける"><a class="anchor" href="#_オブジェクト図に名前をつける"></a>オブジェクト図に名前をつける</h5>
+<div class="paragraph">
+<p>追加したオブジェクト図に、図の名前を設定します。
+描こうとしているのはオブジェクト図ですので、それがわかるような名前をつけます。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>追加したクラス図のプロパティーの「ベース」タブを開く。</p>
+</li>
+<li>
+<p>名前を編集して「ゲームスコアのオブジェクト図」とする（  <a href="_structure_design.html#object01">図 2.5</a> ）。</p>
+</li>
+<li>
+<p>ダイアグラムエディタのタイトルやタブにも反映される。</p>
+</li>
+</ul>
+</div>
+<div id="object01" class="imageblock left">
+<div class="content">
+<img src="images/GSW-20220206-133044.png" alt="GSW 20220206 133044" width="75%">
+</div>
+<div class="title">図 2.5 図の名前を「ゲームスコアのオブジェクト図」にする</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_オブジェクト図にスコアシートを追加する"><a class="anchor" href="#_オブジェクト図にスコアシートを追加する"></a>2.2.3 オブジェクト図にスコアシートを追加する</h4>
+<div class="paragraph">
+<p><a href="_structure_design.html#scoresheet01">図 2.1</a> や「<a href="_structure_design.html#scoresheet02">スコアシートを観察してわかること（決めたこと）</a> 」を観察しながら、スコアシートに記載されている要素をオブジェクト図に追加してみましょう。
+まず、「スコアシート」オブジェクトを追加します。</p>
+</div>
+<div class="sect4">
+<h5 id="add_scoresheet01"><a class="anchor" href="#add_scoresheet01"></a>スコアシートを表すオブジェクトを追加する</h5>
+<div class="paragraph">
+<p>こんどは、図にスコアシートを表すオブジェクトを追加してみましょう。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>パレットから「インスタンス仕様」を選択して、図に配置する（ <a href="_structure_design.html#add_instance01">図 2.6</a> ）。</p>
+</li>
+<li>
+<p>「インスタンス仕様0」という名前のオブジェクトが配置される（末尾の数字は作るたびに新しいものに変わる）。</p>
+</li>
+</ul>
+</div>
+<div id="add_instance01" class="imageblock left">
+<div class="content">
+<img src="images/GSW-20220206-133142.png" alt="GSW 20220206 133142" width="75%">
+</div>
+<div class="title">図 2.6 インスタンス仕様を追加する</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_オブジェクト名を個別のスコアシート名に変える"><a class="anchor" href="#_オブジェクト名を個別のスコアシート名に変える"></a>オブジェクト名を個別のスコアシート名に変える</h5>
+<div class="paragraph">
+<p>実際のスコアシートでは、個々のスコアシートを区別するようなはっきりとした名前はついていないこともあるでしょう。スコアシート番号みたいな通番をつけている場合もあるかもしれません。</p>
+</div>
+<div class="paragraph">
+<p>ここでは、追加したオブジェクトが特定のスコアシートを表すことがわかるよう、他のシートと区別できるような名前（オブジェクト名）をつけましょう。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>追加したオブジェクトを選択し、プロパティーから名前の編集欄を選択する（ <a href="_structure_design.html#obj_scoresheet01">図 2.7</a> ）。</p>
+</li>
+<li>
+<p>オブジェクトの名前に、 <a href="_structure_design.html#scoresheet01">図 2.1</a> のスコアシートを示す固有の入力する。ここでは「scoresheet01」とした。</p>
+</li>
+<li>
+<p>オブジェクトの名前の入力を確定すると、ダイアグラムエディタ中のオブジェクトの名前にも反映される。</p>
+</li>
+</ul>
+</div>
+<div id="obj_scoresheet01" class="imageblock left">
+<div class="content">
+<img src="images/GSW-20220206-133218.png" alt="{three-quarters-width" height="]">
+</div>
+<div class="title">図 2.7 名前を「scoresheet01」に変更する</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="ヒント"></i>
+</td>
+<td class="content">
+個々のオブジェクトを識別するためにつける名前のことを、オブジェクト名（またはインスタンス名）と呼びます。
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_スコアシートオブジェクトにクラスを割り当てる"><a class="anchor" href="#_スコアシートオブジェクトにクラスを割り当てる"></a>2.2.4 スコアシートオブジェクトにクラスを割り当てる</h4>
+<div class="paragraph">
+<p>追加したオブジェクトは、名前はつけたものの、たくさんあるスコアシートの仲間であるとみなす方法がありません。
+それは、このオブジェクトがどんなクラスに属するか決まっていないからです。
+それが分かるよう「スコアシート」を表すクラスを定義して割り当てておきましょう。</p>
+</div>
+<div class="sect4">
+<h5 id="add_class_and_apply"><a class="anchor" href="#add_class_and_apply"></a>スコアシートクラスを追加してオブジェクトに割り当てる</h5>
+<div class="paragraph">
+<p>まず、図中のオブジェクトに割り当てるクラスを用意します。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>オブジェクト「scoresheet01」を選択した状態で、プロパティーから「新規作成」ボタンをクリックする（ <a href="_structure_design.html#class_def_dialog00">図 2.8</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="class_def_dialog00" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220206-133232.png" alt="GSW 20220206 133232" width="75%">
+</div>
+<div class="title">図 2.8 オブジェクトを選択してクラスを「新規作成」する</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>クラスを定義するダイアログが表示される（ <a href="_structure_design.html#class_def_dialog01">図 2.9</a> ）。</p>
+</li>
+<li>
+<p>「ベース」タブを選択し、名前に「ScoreSheet」を入力する。</p>
+</li>
+</ul>
+</div>
+<div id="class_def_dialog01" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220206-133247.png" alt="GSW 20220206 133247" width="50%">
+</div>
+<div class="title">図 2.9 クラス「ScoreSheet」を定義する</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_スコアシートに属性を追加する"><a class="anchor" href="#_スコアシートに属性を追加する"></a>スコアシートに属性を追加する</h5>
+<div class="paragraph">
+<p>スコアシートクラスがどのような情報を保持するのかはまだ検討が必要ですが、ひとますプレー開始日時を保持することは必要そうです。
+そこで、プレー開始日時を表す属性を追加しましょう。
+ここでは、プレー開始日時を表す属性の名前を「play_date」とします。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>スコアシートクラスの「属性」タブを選択する。</p>
+</li>
+<li>
+<p>「＋」ボタンを押すと属性が追加されるので、名前に「play_date」を入力する（ <a href="_structure_design.html#add_attr_play_time">図 2.10</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="add_attr_play_time" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220206-133548.png" alt="GSW 20220206 133548" width="50%">
+</div>
+<div class="title">図 2.10 属性「play_date」を追加する</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_追加した属性の型を定義する"><a class="anchor" href="#_追加した属性の型を定義する"></a>追加した属性の型を定義する</h5>
+<div class="paragraph">
+<p>追加した属性も、どんな型なのかを設定しておきましょう。
+プレー開始日時を表す属性の型の名前を「Time」とします。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="注記"></i>
+</td>
+<td class="content">
+「Time」は、Rubyのクラスライブラリのクラスのひとつで、日付と時刻を操作するためのクラスです。このクラスに対応づけする見込みで割当ててみます。
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>追加した属性の「型」欄を選択する。</p>
+</li>
+<li>
+<p>「型」欄を編集状態にして「Time」を入力すると、ダイアログに「型になるTimeを新規作成しますか？」というメッセージが表示される（ <a href="_structure_design.html#dialog_add_class_time">図 2.11</a> ）。</p>
+</li>
+<li>
+<p>「はい」をクリックしてダイアログを閉じる。</p>
+</li>
+<li>
+<p>クラス「Time」が作成される。（ <a href="_structure_design.html#class_time_added">図 2.12</a> ）。</p>
+</li>
+<li>
+<p>構造ツリーにも追加されたことを確認する。</p>
+</li>
+</ul>
+</div>
+<div id="dialog_add_class_time" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220206-173841.png" alt="GSW 20220206 173841" width="50%">
+</div>
+<div class="title">図 2.11 クラス「Time」の追加を促すダイアログ</div>
+</div>
+<div id="class_time_added" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220206-172618.png" alt="GSW 20220206 172618" width="50%">
+</div>
+<div class="title">図 2.12 クラス「Time」が追加された</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_オブジェクト図や構造ツリーを確認する"><a class="anchor" href="#_オブジェクト図や構造ツリーを確認する"></a>オブジェクト図や構造ツリーを確認する</h5>
+<div class="paragraph">
+<p>オブジェクト図においても、構造ツリーにおいても、追加したオブジェクトの名前が変わっているを確認します。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>「閉じる」をクリックして、クラス定義のダイアログを閉じる。</p>
+</li>
+<li>
+<p>オブジェクトの表示が「scoresheet01 : ScoreSheet」に変わっている。</p>
+</li>
+<li>
+<p>属性「play_date」の属性値を保持する欄（スロットと呼ぶ）も追加されている。</p>
+</li>
+<li>
+<p>構造ツリーにもTimeクラスが追加されている（ <a href="_structure_design.html#instance03">図 2.13</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="instance03" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220206-133959.png" alt="GSW 20220206 133959" width="100%">
+</div>
+<div class="title">図 2.13 オブジェクトにクラスやスロットが割当てられた</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_追加したスロットに属性値を設定する"><a class="anchor" href="#_追加したスロットに属性値を設定する"></a>追加したスロットに属性値を設定する</h5>
+<div class="paragraph">
+<p>追加した属性「play_date」のインスタンス（スロットと呼びます）に、属性値として具体的な日付データを設定します。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>オブジェクト「scoresheet01」を選択して、プロパティーから「ベース」タブを開く。</p>
+</li>
+<li>
+<p>属性「play_date」の値に日時、たとえば「2022/02/04 16:18」などと入力する（ <a href="_structure_design.html#instance04">図 2.14</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="instance04" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220206-181040.png" alt="GSW 20220206 181040" width="100%">
+</div>
+<div class="title">図 2.14 オブジェクトのスロットに属性値が追加された</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_オブジェクト図にゲームを追加する"><a class="anchor" href="#_オブジェクト図にゲームを追加する"></a>2.2.5 オブジェクト図にゲームを追加する</h4>
+<div class="paragraph">
+<p>次に、「スコアシート」を追加したのと同じ手順で「ゲーム」オブジェクトを追加します。
+<a href="_structure_design.html#scoresheet01">図 2.1</a> の場合ゲームが2組あるので、ゲームのオブジェクトを「game01」、「game02」としましょう。
+クラス名は「Game」としましょう。</p>
+</div>
+<div class="sect4">
+<h5 id="add_game00"><a class="anchor" href="#add_game00"></a>ゲームを表すオブジェクトを追加する</h5>
+<div class="paragraph">
+<p>最初の（1組目の）ゲームを追加してみましょう。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>パレットから「インスタンス仕様」を選択して図に配置する。</p>
+</li>
+<li>
+<p>オブジェクト名を「game01」とする。</p>
+</li>
+<li>
+<p>クラスを追加して「Game」とする（ <a href="_structure_design.html#add_game01">図 2.15</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="add_game01" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-000330.png" alt="GSW 20220207 000330" width="100%">
+</div>
+<div class="title">図 2.15 ゲームを表すオブジェクト「game01」とクラス「Game」を追加した</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_次のゲームのオブジェクトを追加する"><a class="anchor" href="#_次のゲームのオブジェクトを追加する"></a>次のゲームのオブジェクトを追加する</h5>
+<div class="paragraph">
+<p>次のゲーム（つまり、2組目）のオブジェクトも追加してみましょう。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>同様の手順で「game02」を追加する。</p>
+</li>
+<li>
+<p>プロパティーから既存のクラスをプルダウンし、「Game」クラスを選択する（ <a href="_structure_design.html#add_game02">図 2.16</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="add_game02" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-001520.png" alt="GSW 20220207 001520" width="100%">
+</div>
+<div class="title">図 2.16 ゲームを表すオブジェクトを追加し、既存のクラスを割当てた</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_オブジェクト図にスコアを追加する"><a class="anchor" href="#_オブジェクト図にスコアを追加する"></a>2.2.6 オブジェクト図にスコアを追加する</h4>
+<div class="paragraph">
+<p>こんどは、プレーヤーひとり分のスコアを記録しているスコア部分を追加しましょう。
+<a href="_structure_design.html#scoresheet01">図 2.1</a> の場合、スコアは4つあります。</p>
+</div>
+<div class="paragraph">
+<p>このチュートリアルでは、プレーヤー名はスコアの属性と考えることにしておきます。
+（もちろん、プレーヤーを独立したクラスと考え、複数のスコアとを関連づけた方がもっとよいでしょう）</p>
+</div>
+<div class="sect4">
+<h5 id="add_screr00"><a class="anchor" href="#add_screr00"></a>それぞれのプレーヤーのスコアを表すオブジェクトを追加する</h5>
+<div class="paragraph">
+<p>それぞれのプレーヤーごとにスコアがありますので、まず、プレーヤーごとのスコアのオブジェクトを追加します。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>パレットから「インスタンス仕様」を選択して図に配置して「score01」とする。</p>
+</li>
+<li>
+<p>「Score」クラスを追加して、「score01」に割当てる（ <a href="_structure_design.html#add_score01">図 2.17</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="add_score01" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-012006.png" alt="GSW 20220207 012006" width="100%">
+</div>
+<div class="title">図 2.17 スコアを表すオブジェクト「score01」を追加した</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>「Score」クラスに属性「player」を追加し、「String」クラスを追加して割当てる（ <a href="_structure_design.html#add_string_class">図 2.18</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="add_string_class" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-011349.png" alt="GSW 20220207 011349" width="50%">
+</div>
+<div class="title">図 2.18 属性「Player」を追加し、クラス「String」を追加して割当てる。</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="add_screr01"><a class="anchor" href="#add_screr01"></a>追加したオブジェクトのスロットに値を設定する</h5>
+<div class="paragraph">
+<p>追加したオブジェクトの「player」スロット（スコアクラスの属性playerの、このオブジェクトにおける属性値）を設定します。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>「score01」のスロット「player」の値に「くぼあき」を設定する（ <a href="_structure_design.html#add_score02">図 2.19</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="add_score02" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-014911.png" alt="GSW 20220207 014911" width="100%">
+</div>
+<div class="title">図 2.19 「player」のスロットの値にプレーヤー名を設定した</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>ほかのスコアのオブジェクトも作成する（ <a href="_structure_design.html#add_score03">図 2.20</a> ）</p>
+</li>
+</ul>
+</div>
+<div id="add_score03" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-024336.png" alt="GSW 20220207 024336" width="100%">
+</div>
+<div class="title">図 2.20 残りのスコアのオブジェクトを作成した</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_オブジェクト図にフレームを追加する"><a class="anchor" href="#_オブジェクト図にフレームを追加する"></a>2.2.7 オブジェクト図にフレームを追加する</h4>
+<div class="paragraph">
+<p>次に、各スコアに記載されているフレームを追加しましょう。
+やはり、<a href="_structure_design.html#scoresheet01">図 2.1</a> や「<a href="_structure_design.html#scoresheet02">スコアシートを観察してわかること（決めたこと）</a> 」を観察しながら、作成します。
+ですが、フレームのオブジェクトの数が多いので、この場で作成してみるのは一部だけにします。</p>
+</div>
+<div class="sect4">
+<h5 id="add_frame00"><a class="anchor" href="#add_frame00"></a>それぞれのスコアのフレームを表すオブジェクトを追加する</h5>
+<div class="paragraph">
+<p>それぞれのスコアは、フレームを持っていますので、これを表すオブジェクトを追加します。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>パレットから「インスタンス仕様」を選択して図に配置して「frame0101」とする。</p>
+</li>
+<li>
+<p>「Frame」クラスを追加して、「frame0101」に割当てる（ <a href="_structure_design.html#add_frame01">図 2.21</a> ）。</p>
+</li>
+<li>
+<p>「Frame」クラスの属性に「frame_no」、「first」、「second」、「spare_bonus」、「strike_bonus」、「total」を追加する。</p>
+</li>
+</ul>
+</div>
+<div id="add_frame01" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-030417.png" alt="GSW 20220207 030417" width="100%">
+</div>
+<div class="title">図 2.21 フレームを表すオブジェクト「frame0101」を追加した</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="add_frame02"><a class="anchor" href="#add_frame02"></a>追加したオブジェクトのスロットに値を設定する</h5>
+<div class="paragraph">
+<p>オブジェクト「frame0101」の各スロットに値を設定します。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1組目のゲームの「くぼあき」さんの第1フレームは、1投目7ピン、2投目ミス（0ピン）。</p>
+</li>
+<li>
+<p>第1フレームのトータルは7ピン。ボーナスはなし（ <a href="_structure_design.html#add_frame02">2.2.7.2</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="add_frame03" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-031606.png" alt="GSW 20220207 031606" width="100%">
+</div>
+<div class="title">図 2.22 オブジェクト「frame0101」の各スロットの値を設定した</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>同様にして、ほかのフレームのオブジェクトも作成する（ <a href="_structure_design.html#add_frame03">図 2.22</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="add_frame04" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-042412.png" alt="GSW 20220207 042412" width="100%">
+</div>
+<div class="title">図 2.23 残りのフレームのオブジェクトを作成した（一部だけ）</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_オブジェクトのつながりを整理する"><a class="anchor" href="#_オブジェクトのつながりを整理する"></a>2.2.8 オブジェクトのつながりを整理する</h4>
+<div class="paragraph">
+<p>オブジェクト図に、スコアシート、ゲーム、スコアのオブジェクトが追加できました。
+<a href="_structure_design.html#scoresheet01">図 2.1</a> を見ながら、これらの間にはどのようなつながりがあるか考えてみましょう。</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">オブジェクト同士のつながりを考える</div>
+<div class="ulist">
+<ul>
+<li>
+<p>スコアシートは複数のゲームを記録できるので、スコアシートとゲームにはつながりがありそうです。</p>
+</li>
+<li>
+<p>ゲームでは、複数のプレーヤーのスコアを記録するので、ゲームとスコアにはつながりがありそうです。</p>
+</li>
+<li>
+<p>スコアにはフレームごとのピン数などを記録するので、スコアとフレームにはつながりがありそうです。</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>つながりがありそうなオブジェクトをリンクを引いてつないでみましょう。</p>
+</div>
+<div class="paragraph">
+<p>オブジェクト図では、オブジェクト間のつながりを表すには、「リンク」と呼ぶ線でつないで表します。
+これは、クラス図におけるクラス間のつながりを表す「関連」のインスタンスにあたるものです（クラス図は、オブジェクト図を元に作成します）。</p>
+</div>
+<div class="paragraph">
+<p>まず、スコアシートとゲームの間にリンクを引きましょう。</p>
+</div>
+<div class="sect4">
+<h5 id="add_link00"><a class="anchor" href="#add_link00"></a>作成したオブジェクトの間にリンクを引く</h5>
+<div class="paragraph">
+<p>まず、「scoresheet01」から「game01」へリンクを引いてみましょう。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>パレットから「リンク」を選択する。</p>
+</li>
+<li>
+<p>「scoresheet01」の内部へマウスカーソルを移動し、青枠が表示されるのを待つ（ <a href="_structure_design.html#add_link01">図 2.24</a> ）</p>
+</li>
+</ul>
+</div>
+<div id="add_link01" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-054611.png" alt="GSW 20220207 054611" width="100%">
+</div>
+<div class="title">図 2.24 リンクの引き始めのオブジェクトで青枠を表示させる</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>青枠が表示されたら、マウスのボタンを押したまま「game01」の内部へマウスカーソルを移動する（ <a href="_structure_design.html#add_link02">図 2.25</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="add_link02" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-061048.png" alt="GSW 20220207 061048" width="100%">
+</div>
+<div class="title">図 2.25 青枠が表示されたらマウスのボタンを押したままマウスカーソルをドラッグする</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>「game01」にも青枠が表示されたら、マウスのボタンを離すとリンクが引かれる（ <a href="_structure_design.html#add_link03">図 2.26</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="add_link03" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-061016.png" alt="GSW 20220207 061016" width="100%">
+</div>
+<div class="title">図 2.26 リンク先のオブジェクトにも青枠が表示されたらマウスのボタンを離す</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="add_link04"><a class="anchor" href="#add_link04"></a>ほかのオブジェクトの間にもリンクを引く</h5>
+<div class="paragraph">
+<p>「game02」へも <a href="_structure_design.html#add_link00">2.2.8.1</a> と同様の手順でリンクを引きましょう（ <a href="_structure_design.html#add_link05">図 2.27</a> ）。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1ゲーム目のスコアは、1つ目のゲームにリンクを引く。</p>
+</li>
+<li>
+<p>2ゲーム目のスコアは、1つ目のゲームにリンクを引く。</p>
+</li>
+</ul>
+</div>
+<div id="add_link05" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-063524.png" alt="GSW 20220207 063524" width="100%">
+</div>
+<div class="title">図 2.27 ゲームからスコアへリンクを引く</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>スコアからフレームへもリンクを引きます（ <a href="_structure_design.html#add_link06">図 2.28</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="add_link06" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-065042.png" alt="GSW 20220207 065042" width="100%">
+</div>
+<div class="title">図 2.28 残りのつながりについてリンクを引く</div>
+</div>
+<div class="paragraph">
+<p>これで、 <a href="_structure_design.html#scoresheet01">図 2.1</a> の要素を反映したオブジェクト図が作成できました。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_スコアシートの構造をクラス図で表す"><a class="anchor" href="#_スコアシートの構造をクラス図で表す"></a>2.3 スコアシートの構造をクラス図で表す</h3>
+<div class="paragraph">
+<p>「<a href="_structure_design.html#score_sheet_struct_with_objects">2.2</a> 」では、実際のスコアシートがどうなっているかを調べるために、スコアシートに記載された内容を使ってオブジェクト図を作成しました。
+しかし、特定のスコアを記載した図では、プログラムで扱うような、より一般的なスコアシートを扱えません。
+代わりに、オブジェクト図の作成時に考えたクラスを使って、クラス図を使います。
+そこで、作成したオブジェクト図 <a href="_structure_design.html#add_link06">図 2.28</a> を元に、ゲームスコアのクラス図を作成してみましょう。</p>
+</div>
+<div class="sect3">
+<h4 id="_クラス図とスコアシートクラスを追加する"><a class="anchor" href="#_クラス図とスコアシートクラスを追加する"></a>2.3.1 クラス図とスコアシートクラスを追加する</h4>
+<div class="paragraph">
+<p>設計モデルに、「ゲームスコアのクラス図」と「スコアシートクラス」を追加しましょう。</p>
+</div>
+<div class="sect4">
+<h5 id="class00"><a class="anchor" href="#class00"></a>スコアシートのクラス図を追加する</h5>
+<div class="paragraph">
+<p>まず、「ゲームスコアのクラス図」を追加します。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>構造ツリーで、「設計モデル」でポップアップメニューを開き、「図の追加＞クラス図」でモデルにクラス図を追加する（ <a href="_structure_design.html#class01">図 2.29</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="class01" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-065747.png" alt="GSW 20220207 065747" width="50%">
+</div>
+<div class="title">図 2.29 モデルにクラス図を追加する</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>追加した図を「ゲームスコアのクラス図」とする（ <a href="_structure_design.html#class02">図 2.30</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="class02" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-065801.png" alt="GSW 20220207 065801" width="50%">
+</div>
+<div class="title">図 2.30 追加した図を「ゲームスコアのクラス図」とした</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_クラス図にクラスを追加する"><a class="anchor" href="#_クラス図にクラスを追加する"></a>クラス図にクラスを追加する</h5>
+<div class="paragraph">
+<p>追加したクラス図に、ゲームスコアクラスを追加します。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>構造ツリーから、オブジェクト図を作成したとき登録した「ScoreSheet」クラスをさがし、選択する。</p>
+</li>
+<li>
+<p>選択したクラスをドラッグ＆ドロップして、クラス図に追加する（ <a href="_structure_design.html#class03">図 2.31</a>  ）。</p>
+</li>
+<li>
+<p>構造ツリーから、「Game」クラスを選択する。</p>
+</li>
+<li>
+<p>選択したクラスをドラッグ＆ドロップして、クラス図に追加する（ <a href="_structure_design.html#class03">図 2.31</a>  ）。</p>
+</li>
+</ul>
+</div>
+<div id="class03" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-070838.png" alt="GSW 20220207 070838" width="100%">
+</div>
+<div class="title">図 2.31 既存のクラスを構造ツリーからクラス図に追加する</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_クラス間の関連を追加する１"><a class="anchor" href="#_クラス間の関連を追加する１"></a>2.3.2 クラス間の関連を追加する（１）</h4>
+<div class="paragraph">
+<p>作成したオブジェクト図（ <a href="_structure_design.html#add_link05">図 2.27</a> ）に記載されているリンクを参照して、リンクでつながっているオブジェクトが属するクラスの間に関連を引きます。</p>
+</div>
+<div class="sect4">
+<h5 id="add_relation00"><a class="anchor" href="#add_relation00"></a>スコアシートとゲームの間に関連を追加する</h5>
+<div class="paragraph">
+<p>まず、「ScoreSheet」クラスから「Game」クラスへ関連を引きます。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>パレットから矢印付きの関連を選択する。</p>
+</li>
+<li>
+<p>「ScoreSheet」クラスから「Game」クラスへ向かって関連を引く（ <a href="_structure_design.html#class04">図 2.32</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="class04" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-082944.png" alt="GSW 20220207 082944" width="75%">
+</div>
+<div class="title">図 2.32 「ScoreSheet」クラスから「Game」クラスへ関連を引いた</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_スコアシートからみたゲームの多重度を設定する"><a class="anchor" href="#_スコアシートからみたゲームの多重度を設定する"></a>スコアシートからみたゲームの多重度を設定する</h5>
+<div class="paragraph">
+<p>スコアシートには1ゲーム以上の複数のゲームを記録できます。
+クラス間の関連において、このことを表には多重度を使います。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="_structure_design.html#class04">図 2.32</a> で引いた関連を選択した状態で、プロパティーからターゲットが「Game」の関連端のタブを開く。</p>
+</li>
+<li>
+<p>「多重度」を「1..*」に設定する（ <a href="_structure_design.html#class05">図 2.33</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="class05" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-083800.png" alt="GSW 20220207 083800" width="50%">
+</div>
+<div class="title">図 2.33 「ScoreSheet」からみた「Game」の多重度を「 1..* 」に設定した</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_スコアシートからみたゲームの関連端名を設定する"><a class="anchor" href="#_スコアシートからみたゲームの関連端名を設定する"></a>スコアシートからみたゲームの関連端名を設定する</h5>
+<div class="paragraph">
+<p>スコアシートがゲームを参照するときに使う名前を決めるために、関連端名を設定します。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="_structure_design.html#class04">図 2.32</a> で引いた関連を選択した状態で、プロパティーからターゲットが「Game」の関連端のタブを開く。</p>
+</li>
+<li>
+<p>ゲームを複数回記録できることを反映して、「名前」を「games」に設定する（ <a href="_structure_design.html#class06">図 2.34</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="class06" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-084200.png" alt="GSW 20220207 084200" width="50%">
+</div>
+<div class="title">図 2.34 「ScoreSheet」からみた「Game」の関連端名を「games」に設定した</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_スコアシートとゲームの集約関係を設定する"><a class="anchor" href="#_スコアシートとゲームの集約関係を設定する"></a>スコアシートとゲームの集約関係を設定する</h5>
+<div class="paragraph">
+<p>スコアシートには、複数のゲームを追加できます。
+このことをクラス図に反映する方法がほしいところです。</p>
+</div>
+<div class="paragraph">
+<p>まず、スコアシートが複数のゲームをとりまとめていること表すのに、「スコアシートには複数のゲームを集約する」役割があるというように捉えてみましょう。
+このような役割を表すために、クラスの関連端には「集約」を表すための記法が用意されています。</p>
+</div>
+<div class="paragraph">
+<p>さらに、同じスコアシートで追加でゲームをやりたいときは、新しいゲームを始めた時点で新しいゲームの記録を始めます。
+つまり、スコアシートが作成される時点と、あるゲームが開始される時点が同時とは限らないわけです。
+このように、集約する側（ここではスコアシート）のインスタンスと、集約される側（ここではゲーム）のインスタンスが作成される時点が同じではないことを「スコアシートとゲームはライフサイクルが異なる」といいます。
+一方で、集約する側とされる側が同時に作成され、同時に破棄されるなら、「ライフサイクルが同じ」と考えます。
+集約の記法には、ライフサイクルが異なる場合の「aggregate」、ライフサイクルが同じ場合の「composit」を表すオプションが用意されています。</p>
+</div>
+<div class="paragraph">
+<p>ここでは、スコアシートが複数のゲームをとりまとめていて、スコアシートとゲームのライフサイクルが異なることを反映して、スコアシート側の関連端に「aggregate」オプションを指定した集約を設定しましょう。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="_structure_design.html#class04">図 2.32</a> で引いた関連を選択した状態で、プロパティーからターゲットが「ScoreSheet」の関連端のタブを開く（描画時の順序によって該当する関連端がAの場合とBの場合がある）。</p>
+</li>
+<li>
+<p>「集約」のプルダウンメニューから「aggregate」を選択する（ <a href="_structure_design.html#class07">図 2.35</a>）。</p>
+</li>
+</ul>
+</div>
+<div id="class07" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-085154.png" alt="GSW 20220207 085154" width="50%">
+</div>
+<div class="title">図 2.35 「ScoreSheet」が「Game」を集約していることを示した</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>「ScoreSheet」から「Game」への関連が引けた（ <a href="_structure_design.html#class08">図 2.36</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="class08" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-090055.png" alt="GSW 20220207 090055" width="75%">
+</div>
+<div class="title">図 2.36 「ScoreSheet」から「Game」への関連が引けた</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_クラス間の関連を追加する２"><a class="anchor" href="#_クラス間の関連を追加する２"></a>2.3.3 クラス間の関連を追加する（２）</h4>
+<div class="paragraph">
+<p>ゲームとスコア、スコアとフレームの間にも関連を引いて、関連端も設定してみましょう。</p>
+</div>
+<div class="sect4">
+<h5 id="add_relation02"><a class="anchor" href="#add_relation02"></a>ゲームとスコアの間に関連を追加する</h5>
+<div class="paragraph">
+<p>こんどは、「Game」クラスから「Score」クラスへ向かって関連を引きましょう。
+1組のゲームには、複数プレーヤーのスコアが記録できます。
+つまり、ここにも、スコアシートとゲームの間と同じような関連が引けそうですね。</p>
+</div>
+<div class="paragraph">
+<p>＊ 「Score」クラスと「Game」クラスの間に関連を引く。
+＊ 「Score」クラス側の関連の多重度を「1..*」に設定する。
+＊ 「Score」クラス側の関連端には関連端名として「scores」を設定する（複数のスコアが記録できることを反映した）。
+＊ 「Game」クラス側の「集約」のプルダウンメニューから「aggregate」を選択する（ <a href="_structure_design.html#add_relation03">図 2.37</a> ）。</p>
+</div>
+<div id="add_relation03" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-094813.png" alt="GSW 20220207 094813" width="100%">
+</div>
+<div class="title">図 2.37 ゲームとスコアの間に関連を引いた</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="add_relation04"><a class="anchor" href="#add_relation04"></a>スコアとフレームの間に関連を追加する</h5>
+<div class="paragraph">
+<p>最後に、「Score」クラスから「Frame」クラスへ向かって関連を引きましょう。
+フレームのオブジェクトをいつ用意するのかには、いくつか選択肢があります。
+たとえば、ゲームを用意したときに全フレーム分用意すると決めることもできるでしょう。
+あるいは、ゲームのい進行に合わせて、その都度フレームを追加すると決めることもできるでしょう。
+いくつかの選択肢があるとき、それらからいずれを選択するのかを決定するのは、多くの場合設計時の決定事項です（このこと設計事項、設計項目、設計事由などと呼ぶ人たちもいます）。</p>
+</div>
+<div class="paragraph">
+<p>このチュートリアルでは、スコアのオブジェクトを用意したときは、常に10フレーム分のフレームのオブジェクトも一緒に用意することとします。
+この考えを選択したのは、表示や出力の際に、未投球のフレームについても、それらのフレームのオブジェクトを参照すれば、未投球の処理で特別な扱いが減られると考えたからです。
+この場合、フレームとスコアは同時に作成されるので（ライフサイクルが同じなので）、集約の設定もコンポジションにしておきます。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>「Game」クラスと「Frame」クラスの間に関連を引く。</p>
+</li>
+<li>
+<p>「Frame」クラス側の関連端の多重度を「10」に設定する。</p>
+</li>
+<li>
+<p>「Frame」クラス側の関連端には関連端名として「frames」を設定する（複数のフレームが記録できることを意識した名前にした）。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>集約のプルダウンメニューの中から「composite」を選択する（ <a href="_structure_design.html#add_relation05">図 2.38</a> ）。</p>
+</li>
+<li>
+<p>「Score」クラス側の関連端の表示が、黒塗りのダイアモンド（コンポジションのシンボル）に変わる。</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div id="add_relation05" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-122557.png" alt="GSW 20220207 122557" width="100%">
+</div>
+<div class="title">図 2.38 スコアとフレームの間に関連を引いた</div>
+</div>
+<div class="paragraph">
+<p>これで、いったん、ボウリングのゲームスコアを表した構造のモデルができました。</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_まとめ"><a class="anchor" href="#_まとめ"></a>2.4 まとめ</h3>
+<div class="paragraph">
+<p>ボウリングのゲームスコアを記録するスコアシートの構造を検討しました。</p>
+</div>
+<div class="sect3">
+<h4 id="_構造のモデルを作成した手順"><a class="anchor" href="#_構造のモデルを作成した手順"></a>2.4.1 構造のモデルを作成した手順</h4>
+<div class="paragraph">
+<p>構造のモデルに登場する構成要素や要素間の関連を見つけ出すために、 <a href="_structure_design.html#step_for_structure_model">スコアシートの構造のモデルを作成した手順</a> のような手順を使いました。</p>
+</div>
+<div id="step_for_structure_model" class="sidebarblock">
+<div class="content">
+<div class="title">スコアシートの構造のモデルを作成した手順</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>スコアシートを観察して、どのような要素で構成されているか洗い出した。</p>
+</li>
+<li>
+<p>スコアシートの実例をそのまま使ってオブジェクト図で表した。</p>
+</li>
+<li>
+<p>オブジェクト図の要素や要素間のつながりを観察して、クラス図を作成した。</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>まず、オブジェクト図をつくることで、オブジェクトを洗い出し、オブジェクト同士のつながり（リンク）を発見しました。
+そして、オブジェクト図を参照しながら、クラス図を作成しました。
+クラス間の関連の関連端名や多重度を検討する際は、オブジェクト図におけるリンクの数などを判断材料にしました。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_この段階の構造のモデルはまだ未完成"><a class="anchor" href="#_この段階の構造のモデルはまだ未完成"></a>2.4.2 この段階の構造のモデルはまだ未完成</h4>
+<div class="paragraph">
+<p>ここで作成したクラス図には、検討の余地が残っています。
+たとえば、いずれのクラスにも操作が定義できていません。
+これは、プレーするのに従ってスコアをつけるときの動作（振る舞い）を検討していないからです。
+また、動作を検討する中で、属性や関連についても追加や修正が必要になる場合があります。</p>
+</div>
+<div class="paragraph">
+<p>そこで、続いて振る舞いのモデルを検討します。
+振る舞いのモデルの作成が進むにつれて、構造のモデルも追加・修正されることになるでしょう。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph nav-footer">
+<p>← Previous: <a href="_preparation.html">第1章</a> | ↑ Up: <a href="tut_uml_modeling_bs.html">モデルを使ってソフトウェアを開発しよう: UML初学者向けチュートリアル</a> | Next: <a href="_model_to_code_design.html">第3章</a> →</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+バージョン html_0780<br>
+最終更新 2023-06-09 17:35:10 +0900
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/run_prettify.min.js"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>

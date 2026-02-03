@@ -1,0 +1,107 @@
+include::revnumber.adoc[]
+:doctype: book // textlint のエラー対策（実際には front_matter.adoc に記載してある）
+include::front_matter.adoc[]
+
+// 開始ページの処理に不具合があることから
+// asciidoctor-pdf-1.5.0.beta.2/lib/asciidoctor-pdf/converter.rb にパッチを当てている
+// （issue resolves #1181 restore media=prepress behavior #1190）
+
+// 下記は、このファイルの場所からではなく、:imagesdir:からの相対ディレクトリであることに注意
+// :front-cover-image: image:cover_page.png[]
+
+
+// 表題をfront_matterに書いておいても、
+// ここで明示しないとPDFのタイトルページが正しく処理されない
+
+
+
+= {doctitle}
+
+:sectnums!:
+
+include::preface.adoc[]
+
+include::copyright.adoc[]
+
+:sectnums:
+
+include::tut_uml_modeling_bs01.adoc[]
+
+include::tut_uml_modeling_bs02.adoc[]
+
+include::tut_uml_modeling_bs03.adoc[]
+
+include::tut_uml_modeling_bs04.adoc[]
+
+include::tut_uml_modeling_bs05.adoc[]
+
+[[_summary]]
+[%nonfacing]
+== まとめ
+
+このチュートリアルでは、ボーリングスコアのモデルを作ることを通して、ソフトウェアの開発にモデルを使うことについて学びました。また、UMLが、そのようなときに役立つ記法であることも実感できたのではないでしょうか。
+ソフトウェアの開発にモデルを活用するときは、記法やツールも欠かせません。このチュートリアルでは、モデル図を描くのに {astah} を使いました。ですが、このチュートリアルをやったみなさんは、記法やツールがあればモデルが作れるわけではないことに気づいたのではないでしょうか。
+
+まず、このチュートリアルでは、ボーリングスコアの構造のモデルや振る舞いのモデルをいきなり作るのではなく、実際のスコアシートを観察してオブジェクト図を作るところから始めました。
+ボーリングスコアのような自明なよく知られた問題であれば、このような手間をかけなくてもモデルを作成できる人もいるでしょう。
+しかし、システム開発案件の多くは、どのように対処すればよいのかわかっていない問題を抱えています（だからこそ、そこが開発案件になるわけですよね）。
+このチュートリアルでは、そのようなときに問題を表すモデルを作るのと同じように、ボーリングスコアの記録に関わる領域をモデルで表すところから始めました。
+
+みなさんのなかには、UMLの考え方や記法に慣れていないだけで、モデル化して考えることには慣れている人もいるでしょう。そのような人は、こんどは自分たちがすでにモデル化している図や文書を、UMLを使って表してみるとよいでしょう。
+
+あるいは、すでに作りたいもの（あるいは解決したい課題）はわかってきているものの、それがどのような課題でどのように解決すればよいのかといったことを、うまく表せずに困っている人もいるでしょう。そのような人は、みなさんの課題（を含む現状）をモデル図で表してみるとよいでしょう。これを「As Isのモデル」と呼びます。そして、浮き彫りになった問題を、そのモデルを出発点として解消したモデルを作ります。これを「To Beのモデル」と呼びます。課題を解決したシステムは、To Be のモデルを元に設計、実装します。このような方法で、問題解決にモデルを活用してみることにチャレンジしてみてください。
+
+みなさんがこれまで以上にモデルを活用できるようになることを期待しています。
+
+[[_other_diagrams]]
+[%nonfacing]
+== 他の図、他の機能など
+
+この演習で作成したのは、クラス図（オブジェクト図も含む）とステートマシン図でした。
+UMLには他にも多くの図の記法が提供されています。
+ほかによく使われる図としては、ユースケース図、シーケンス図、アクティビティ図があります。
+
+
+// 付録
+
+include::appendix-01.adoc[]
+
+// 用語集
+
+// include::glossary.adoc[]
+
+// 参考文献
+
+:sectnums!:
+
+include::bibliography.adoc[]
+
+<<<
+
+ifdef::backend-html5,backend-multipage_html5[]
+[colophon]
+// [discrete]
+[[_colophon]]
+'''
+「{doctitle}」
+
+発行日 : {revdate} +
+バージョン : {revnumber} +
+作成者 : {author} +
+本書の内容に関する質問等がありましたら、作成者までお知らせください。
+
+// v{revnumber}, {revdate}, {revremark}
+endif::[]
+
+ifdef::backend-pdf[]
+[colophon]
+// [discrete]
+== {doctitle}
+'''
+発行日 : {revdate} +
+バージョン : {revnumber} +
+作成者 : {author} +
+本書の内容に関する質問等がありましたら、作成者までお知らせください。
+
+// v{revnumber}, {revdate}, {revremark}
+endif::[]

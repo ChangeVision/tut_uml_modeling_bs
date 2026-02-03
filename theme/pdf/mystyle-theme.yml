@@ -1,0 +1,342 @@
+# -*- coding: utf-8 -*- #
+extends: default
+font:
+  catalog:
+    GenYoMinJP:
+      normal: GenYoMinJP-Medium.ttf  # GenYoMinJP-Regular.ttf
+      italic: GenYoMinJP-Medium.ttf
+      bold:   GenYoMinJP-SemiBold.ttf
+      bold_italic: GenYoMinJP-Bold.ttf
+    AozoraMincho:
+      normal: AozoraMinchoRegular.ttf
+      italic: AozoraMinchoMedium.ttf # Bold 強調を代用 AozoraMinchoRegular.ttf
+      bold: AozoraMinchoMedium.ttf
+      bold_italic: GenShinGothic-P-Medium.ttf  # dlistの用語対応のずるい逃げ方 AozoraMinchoMedium.ttf
+    GenShinGothic-P:
+      normal: GenShinGothic-P-Normal.ttf
+      italic: GenShinGothic-P-Medium.ttf # Bold 強調を代用 GenShinGothic-P-Normal.ttf
+      bold: GenShinGothic-P-Medium.ttf
+      bold_italic: GenShinGothic-P-Bold.ttf
+    GenShinGothic-P-L:
+      normal: GenShinGothic-P-Light.ttf
+      italic: GenShinGothic-P-Normal.ttf # Bold 強調を代用 GenShinGothic-P-Light.ttf
+      bold: GenShinGothic-P-Normal.ttf
+      bold_italic: GenShinGothic-P-Regular.ttf
+    Migu 1m:
+      normal: Migu-1M-Regular-circle-digit-reverse.ttf  # migu-1m-regular.ttf
+      bold: migu-1m-bold.ttf
+      italic: RictyDiminished-Oblique.ttf
+      bold_italic: RictyDiminished-BoldOblique.ttf
+      # italic: migu-1m-regular.ttf    # ほんとはイタリックがほしい
+      # bold_italic: migu-1m-bold.ttf  # ほんとはボールドイタリックがほしい
+    RictyDiminished:
+      normal: RictyDiminished-Regular.ttf
+      bold: RictyDiminished-Bold.ttf
+      italic: RictyDiminished-Oblique.ttf
+      bold_italic: RictyDiminished-BoldOblique.ttf
+    # M+ 1mn:
+    #   normal: mplus1mn-regular-ascii-conums.ttf
+    #   bold: mplus1mn-bold-ascii.ttf
+    #   italic: mplus1mn-italic-ascii.ttf
+    #   bold_italic: mplus1mn-bold_italic-ascii.ttf
+    M+ 1p Fallback:
+      normal: mplus1p-regular-fallback.ttf
+      bold: mplus1p-regular-fallback.ttf
+      italic: mplus1p-regular-fallback.ttf
+      bold_italic: mplus1p-regular-fallback.ttf
+  fallbacks:
+    - M+ 1p Fallback
+
+page:
+  background_color: ffffff
+  layout: portrait
+  # [top,right,bottom,left]
+  margin: [20mm, 20mm, 20mm, 20mm]
+  margin_inner: 3.0cm
+  margin_outer: 2.5cm
+  size: [210mm, 297mm]  # JIS A4
+
+base:
+  align: left
+  font_family: AozoraMincho # GenYoMinJP # AozoraMincho
+  line_height: 1.5
+  font_size: 10
+  line_height_length: 12
+  font_size_small: 9
+  border_color: 7F7F7F
+  border_width: 1.0
+
+# vertical_rhythm: $base_line_height_length
+# horizontal_rhythm: $base_line_height_length
+
+link:
+  font_color: 2D466B  # 800000  # $literal_font_color # 483D8B # 153C77  # 428bca
+  font_family: Migu 1m # GenShinGothic-P  # Migu 1m # RictyDiminished  #M+ 1mn
+  font_size: $base_font_size * 0.9
+  # font-style:
+  # text-decoration:
+codespan: #literal:
+  font_color: 004953 # 556B2F # 008080 # 2C528B # 253A59  # b12146
+  font_family: Migu 1m # RictyDiminished  #M+ 1mn
+  font-size: ceil($base_font_size * 0.9)
+
+image:
+  # border-color: cccccc
+  # border-width: 2.0
+  caption:
+    align: left
+    color: inherit # 466B2D
+
+prose:
+  margin-bottom: 10
+  margin-inner: 10
+  text-indent: 0
+  text-indent-inner: 0
+# prose:
+#   text_indent: $base_font_size
+#   # margin_inner: $base_font_size * 4
+#   offset_left: $base_font_size * 4
+
+block:
+  margin_top: 12
+  margin_bottom: 12
+
+heading:
+  align: left
+  font_color: 2D466B
+  font_family: GenShinGothic-P
+  font_style: bold
+  chapter-break-before: always # auto
+  # h1 is used for part titles (book doctype only)
+  h1:
+    font_size: floor($base_font_size * 3.0)
+    font_color: 466B2D # 1872CC # 5D91DE # 2D466B
+    font_style: bold_italic
+  h2:
+    font_size: floor($base_font_size * 2.2)
+    font_color: 6B522D  # 125699 # 4D78B8 # 2D466B
+    # font_style: bold_italic
+  h3:
+    font_size: round($base_font_size * 2.0)
+    font_color: 2D466B # 297acc # 0F4780   # 3D5F91 #2D466B
+  h4:
+    font_size: round($base_font_size * 1.6)  # $base_font_size_large
+    font_color: 2D466B # 528fcc # 1564B3 # 2D466B # 2D466B
+  h5:
+    font_size: round($base_font_size * 1.2)
+    font_color: 2D466B # 7aa3cc # 0C3966  # 203d4d # 2D466B
+  h6:
+    font_size: $base_font_size
+    font_color: 2D466B # a3b8cc # 2D466B  # 092B4D  # 2D466B
+  # correct line height for Noto Serif metrics (comes with built-in line height)
+  line_height: 1.4
+  margin_top: $vertical_rhythm * 0.9
+  margin_bottom: $vertical_rhythm * 0.9
+
+# カスタマイズしたライブラリだとChapterタイトルも字下げされてしまう
+section:
+  indent: [7mm, 0]
+
+title_page:
+  align: center
+  background_color: DAF0EA
+  title:
+    top: 20%
+    font_family: $heading_font_family
+    font_size: 26pt # $heading_h1_font_size
+    font_style: bold
+    font_color: 2D466B # 592C68  # 999999
+    line_height: 1.1  # 0.9
+  subtitle:
+    font_size: 20pt  # $heading_h3_font_size
+    font_family: $heading_font_family
+    font_style: bold
+    font_color: 6B522D # 592C68
+    line_height: 1.2
+    margin_top: $base_font_size * 1.5
+  authors:
+    font_size: 20pt  # $heading_h3_font_size
+    font_family: $heading_font_family
+    margin_top: 12.0cm
+  revision:
+    font_size: 14pt  # $heading_h3_font_size
+    margin_top: $base_font_size * 1.25
+
+caption:
+  align: left
+  font_size: $base_font_size
+  font_family: GenShinGothic-P
+  font_color: 703f1c # 466B2D # 6B522D # 800000   # $literal_font_color
+  # margin_inside: $vertical_rhythm / 3
+  margin_outside: 0
+lead:
+  font_family: GenShinGothic-P
+  font_size: $base_font_size * 1.1
+  line_height: 1.4
+  font_color: 466B2D # 6B522D # 800000
+  background_color: F2F2F2 #  ECF8F5  # eeeeee
+abstract:
+  font_family: GenShinGothic-P
+  font-color: 466B2D # 5c6266
+  font-size: $base_font_size
+  # font-style: bold
+  line-height: 1.4
+  padding: [0, 12, 0, 12]
+  title:
+    align: left
+    font-color: 6B522D # 333333
+    font-family: GenShinGothic-P-L
+    font-size: $base_font_size
+    font-style: bold
+    # text-transform: uppercase
+description-list:
+  term-font-style: bold_italic
+
+admonition:
+  font_family: GenShinGothic-P-L
+  font_color: $base_font_color
+  column_rule_color: $base_border_color
+  column_rule_width: $base_border_width
+  padding: [0, $horizontal_rhythm, 0, $horizontal_rhythm]
+  label:
+    font_style: $heading_font_style
+
+quote: # blockquote:
+  font_family: GenShinGothic-P-L
+  font_color: $literal_font_color
+  font_size: $base_font_size
+  border_color: B6E2D6 # $base_border_color
+  border_width: 5
+  # FIXME disable negative padding bottom once margin collapsing is implemented
+  padding: [0, $horizontal_rhythm, $block_margin_bottom * -0.75, $horizontal_rhythm + $blockquote_border_width / 2]
+  cite_font_size: $base_font_size_small
+  cite_font_color: 999999
+
+# code is used for source blocks (perhaps change to source or listing?)
+code:
+  font_color: $base_font_color
+  font_family: $literal_font_family
+  font_size: ceil($base_font_size)
+  padding: $code_font_size
+  line_height: 1.25
+  line_gap: 3.8
+  # highlight-background-color: ffff00 # rouge ではこれらしいが、効き目がない？
+  # background_color: E5F1FA # f5f5f5
+  border_color: ADD7EB # cccccc
+  border_radius: 8
+  border_width: 0.75
+conum:
+  font_family: Migu 1m
+  font_color: 416395
+  font_size: $base_font_size * 1.2
+  line_height: 4 / 3
+example:
+  border_color: $base_border_color
+  border_width: 0.75
+  # FIXME reenable padding bottom once margin collapsing is implemented
+  padding: [$vertical_rhythm, $horizontal_rhythm, 0, $horizontal_rhythm]
+sidebar:
+  font_family: GenShinGothic-P-L
+  font_color: $base_font_color
+  background_color: F2F2F2 #  ECF8F5  # eeeeee
+  border_color: $base_border_color  # B6E2D6  # e1e1e1
+  border_radius: 8
+  border_width: 0.75
+  # FIXME reenable padding bottom once margin collapsing is implemented
+  padding: [$vertical_rhythm, $vertical_rhythm * 1.2, 0, $vertical_rhythm * 1.2]
+  title:
+    align: left
+    font_color: $heading_font_color
+    font_family: $heading_font_family
+    font_size: 12pt  # $heading_h5_font_size
+    font_style: $heading_font_style
+
+table:
+  font_family: $heading_font_family
+  background_color: $page_background_color
+  head_background_color: f1eee8
+  head_font_color: $base_font_color
+  head_font_style: bold
+  body_background_color: $page_background_color
+  body_stripe_background_color: fbfaf8
+  foot_background_color: f0f0f0
+  border_color: e0dccd
+  border_width: $base_border_width
+  cell_padding: 5
+toc:
+  indent: 15  # $horizontal_rhythm * 1.6
+  line_height: 1.5 # 1.7
+  margin_top: 10pt
+  # h1 is used for part titles (book doctype only)
+  h1_font_family: GenShinGothic-P
+  h1_font_size: floor($base_font_size * 1.8)
+  h1_font_color: $heading_h1_font_color
+  h2_font_style: bold
+  h2_font_family: GenShinGothic-P-L
+  h2_font_size: floor($base_font_size * 1.4)
+  # h2_font_size: floor($base_font_size * 1.6)
+  h2_font_color: $heading_h2_font_color
+  h2_font_style: bold
+  h3_font_family: $base_font_family
+  h3_font_size: $base_font_size   # ceil($base_font_size * 0.8)
+  # h3_font_size: floor($base_font_size * 1.2)
+  h3_font_color: $heading_h3_font_color
+header:
+  font_size: $base_font_size_small
+  font_family: GenShinGothic-P-L
+  border_color: 7F7F7F
+  # background_color: dddddd
+  border_width: 0.75
+  height: $base_line_height_length * 3.5
+  padding: [$base_line_height_length / 2, 1, 0, 1]
+  vertical_align: bottom
+  recto:
+    left:
+      content: image:ChangeVision_Logo.png[width=88]  # theme/pdf に置く
+      # content: '{section-or-chapter-title} | {page-number}'
+      # content: '{section-or-chapter-title}'
+    right:
+      content: '{section-title}'
+  verso:
+    left:
+      content: '{chapter-title}'
+    right:
+      content: image:ChangeVision_Logo.png[width=88]  # theme/pdf に置く
+      # content: $header_recto_right_content
+      # content: '{section-or-chapter-title}'
+      # content: '{document-title}'
+footer:
+  font_size: $base_font_size_small
+  font_family: GenShinGothic-P-L
+  # NOTE if background_color is set, background and border will span width of page
+  border_color: 7F7F7F  # dddddd
+  border_width: 0.25
+  height: $base_line_height_length * 3.0
+  padding: [$base_line_height_length / 2, 1, 0, 1]
+  vertical_align: top
+  #image_vertical_align: <alignment> or <number>
+  # additional attributes for content:
+  # * {page-count}
+  # * {page-number}
+  # * {document-title}
+  # * {document-subtitle}
+  # * {chapter-title}
+  # * {section-title}
+  # * {section-or-chapter-title}
+  recto:
+    #columns: "<50% =0% >50%"
+    right:
+      # content: '{page-number}'
+      #content: '{section-or-chapter-title} | {page-number}'
+      content: '{document-title}  |  {page-number}'
+    #center:
+    #  content: '{page-number}'
+  verso:
+    #columns: $footer_recto_columns
+    # right:
+    left:
+      content: '{page-number}  |  {document-subtitle}'
+      # content: $footer_recto_right_content
+      #content: '{page-number} | {chapter-title}'
+    #center:
+    #  content: '{page-number}'

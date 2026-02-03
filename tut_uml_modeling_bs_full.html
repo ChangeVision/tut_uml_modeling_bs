@@ -1,0 +1,5400 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.23">
+<meta name="description" content="この文書は、モデリングツールにastah*を使って、ソフトウェアの開発にUMLを使う方法について学ぶチュートリアルです。">
+<meta name="author" content="株式会社チェンジビジョン">
+<title>モデルを使ってソフトウェアを開発しよう: UML初学者向けチュートリアル</title>
+<link rel="stylesheet" href="css/mystyle.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
+</head>
+<body class="book toc2 toc-left">
+<div id="header">
+<h1>モデルを使ってソフトウェアを開発しよう: UML初学者向けチュートリアル</h1>
+<div class="details">
+<span id="author" class="author">株式会社チェンジビジョン</span><br>
+<span id="revnumber">バージョン html_0781,</span>
+<span id="revdate">2025-03-25</span>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">目次</div>
+<ul class="sectlevel1">
+<li><a href="#_preface">はじめに</a>
+<ul class="sectlevel2">
+<li><a href="#_この文書の目的">この文書の目的</a></li>
+<li><a href="#_対象目標">対象・目標</a></li>
+<li><a href="#_アイコンの説明">アイコンの説明</a></li>
+</ul>
+</li>
+<li><a href="#_copyright">注意事項</a>
+<ul class="sectlevel2">
+<li><a href="#_著作権表示">著作権表示</a></li>
+<li><a href="#_諸注意">諸注意</a></li>
+<li><a href="#_商標等について">商標等について</a></li>
+</ul>
+</li>
+<li><a href="#_preparation">第1章 準備</a>
+<ul class="sectlevel2">
+<li><a href="#_モデリングツールを用意する">1.1 モデリングツールを用意する</a></li>
+<li><a href="#_実装環境を用意する">1.2 実装環境を用意する</a></li>
+<li><a href="#_演習用のプロジェクトを用意する">1.3 演習用のプロジェクトを用意する</a></li>
+<li><a href="#_ボウリングのスコアのつけ方">1.4 ボウリングのスコアのつけ方</a></li>
+</ul>
+</li>
+<li><a href="#_structure_design">第2章 スコアシートの構造を調べる</a>
+<ul class="sectlevel2">
+<li><a href="#_スコアシートの例">2.1 スコアシートの例</a></li>
+<li><a href="#score_sheet_struct_with_objects">2.2 スコアシートの構造をオブジェクト図で表す</a></li>
+<li><a href="#_スコアシートの構造をクラス図で表す">2.3 スコアシートの構造をクラス図で表す</a></li>
+<li><a href="#_まとめ">2.4 まとめ</a></li>
+</ul>
+</li>
+<li><a href="#_model_to_code_design">第3章 モデルとコードの対応づけ</a>
+<ul class="sectlevel2">
+<li><a href="#_対応づけ検討用モデルの作成">3.1 対応づけ検討用モデルの作成</a></li>
+<li><a href="#_変換ルールを使ったコードを確認する">3.2 変換ルールを使ったコードを確認する</a></li>
+<li><a href="#_まとめ_2">3.3 まとめ</a></li>
+</ul>
+</li>
+<li><a href="#_behavior_design">第4章 スコアやフレームの状態を調べる</a>
+<ul class="sectlevel2">
+<li><a href="#_フレームの状態について検討する">4.1 フレームの状態について検討する</a></li>
+<li><a href="#_フレームの状態をステートマシン図で表す">4.2 フレームの状態をステートマシン図で表す</a></li>
+<li><a href="#_サービスフレームの扱いについて検討する">4.3 サービスフレームの扱いについて検討する</a></li>
+<li><a href="#_スコアの状態をステートマシン図で表す">4.4 スコアの状態をステートマシン図で表す</a></li>
+<li><a href="#_ゲームの進行について検討する">4.5 ゲームの進行について検討する</a></li>
+<li><a href="#_まとめ_3">4.6 まとめ</a></li>
+</ul>
+</li>
+<li><a href="#_program_test">第5章 できあがったプログラムを試す</a>
+<ul class="sectlevel2">
+<li><a href="#_プログラムを完成させる">5.1 プログラムを完成させる</a></li>
+<li><a href="#_プログラムをテストする">5.2 プログラムをテストする</a></li>
+<li><a href="#_まとめ_4">5.3 まとめ</a></li>
+</ul>
+</li>
+<li><a href="#_summary">第6章 まとめ</a></li>
+<li><a href="#_other_diagrams">第7章 他の図、他の機能など</a></li>
+<li><a href="#_appendix-01">付録 A: モデルやプログラムの作成例</a></li>
+<li><a href="#_bibliography">参考文献</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_preface"><a class="anchor" href="#_preface"></a>はじめに</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_この文書の目的"><a class="anchor" href="#_この文書の目的"></a>この文書の目的</h3>
+<div class="paragraph lead">
+<p>この文書は、ソフトウェアの開発にモデリングツールを使う方法などについて独習するためのチュートリアルです。</p>
+</div>
+<div class="paragraph">
+<p>このチュートリアルは、ソフトウェアの開発に、UMLを使って描いたモデルが役に立つことを実感する機会を提供することを目的としています。
+主に、これからソフトウェア開発にモデル図を使うことについて学ぶみなさんを対象にしています。
+また、モデリングツールを使うことにも慣れてもらえるよう、「astah* Professional 」使って演習します。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_対象目標"><a class="anchor" href="#_対象目標"></a>対象・目標</h3>
+<div class="sect3">
+<h4 id="_チュートリアルの対象者"><a class="anchor" href="#_チュートリアルの対象者"></a>チュートリアルの対象者</h4>
+<div class="paragraph">
+<p>このチュートリアルは、次のような方を対象者と想定しています。</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<div class="title">チュートリアルの対象者</div>
+<ul>
+<li>
+<p>モデリングやUMLについてこれから学ぼうとしているみなさん</p>
+</li>
+<li>
+<p>ソフトウェア開発工程は知っているが、まだモデル図を活用していないみなさん</p>
+</li>
+<li>
+<p>分析・設計・テストなどソフトウェアの開発に携わっているみなさん</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_チュートリアルの目標"><a class="anchor" href="#_チュートリアルの目標"></a>チュートリアルの目標</h4>
+<div class="paragraph">
+<p>みなさんがチュートリアル終了後に次のような人になっていることを、このチュートリアルの目標としています。</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<div class="title">チュートリアルの目標（人物像）</div>
+<ul>
+<li>
+<p>開発工程のどこでどのモデル図を使えばよいか知っている（知っている人になる）。</p>
+</li>
+<li>
+<p>「開発にはモデルがあったほうがいい」と考えている。</p>
+</li>
+<li>
+<p>自分だけでなく他の人にもモデリングを勧めたいと考えている。</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_アイコンの説明"><a class="anchor" href="#_アイコンの説明"></a>アイコンの説明</h3>
+<div class="paragraph">
+<p>本文中では、次のようなアイコンを用いています。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="注記"></i>
+</td>
+<td class="content">
+告知。みなさんが覚えておくとよい追加情報など。
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="ヒント"></i>
+</td>
+<td class="content">
+ティップス。覚えておくと便利なちょっとしたヒントやコツ。
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="重要"></i>
+</td>
+<td class="content">
+重要。間違えたり見落としたりすると期待通りの結果が得られない設定や操作など。
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="注意"></i>
+</td>
+<td class="content">
+注意。気をつけないと問題の発生につながるようなことがら。
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="警告"></i>
+</td>
+<td class="content">
+警告。守らないと破損や怪我などにつながる可能性のあることがら。
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_copyright"><a class="anchor" href="#_copyright"></a>注意事項</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_著作権表示"><a class="anchor" href="#_著作権表示"></a>著作権表示</h3>
+<div class="paragraph">
+<p>©2023 by Change Vision Inc.</p>
+</div>
+<div class="paragraph">
+<p>「モデルを使ってソフトウェアを開発しよう: UML初学者向けチュートリアル」</p>
+</div>
+<div class="paragraph">
+<p>本文書ならびに関連する成果物の著作権は、株式会社チェンジビジョンが保有します。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode.ja"><img src="images/by-nc-nd.png" alt="by nc nd" width="180"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>本文書ならびに関連する成果物は、クリエイティブ・コモンズ ＜表示—非営利—改変禁止 4.0＞ ライセンスに則り提供します。</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">クリエイティブ・コモンズ＜表示—非営利—改変禁止 4.0ライセンス＞</dt>
+<dd>
+<p><a href="https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode.ja" class="bare">https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode.ja</a></p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_諸注意"><a class="anchor" href="#_諸注意"></a>諸注意</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>本文書は、株式会社チェンジビジョン（作成者）が編集したもので、本文書に関する権利、責任は作成者が保有します。</p>
+</li>
+<li>
+<p>本文書に記載されている情報は、本文書を更新した時点のものであり、利用時にはURLなどの各種の情報が変更されている可能性があります。</p>
+</li>
+<li>
+<p>本文書は演習用テキストとしての使用を想定し、内容等は予告なしに変更することがあります。また、作成者がその内容を保証するものではありません。</p>
+</li>
+<li>
+<p>本文書の内容に誤りや不正確な記述がある場合も、作成者は一切の責任を負いません。</p>
+</li>
+<li>
+<p>本文書に記載の内容や実施結果からいかなる損害が生じても、作成者は責任を負いかねますので、あらかじめご了承ください。</p>
+</li>
+<li>
+<p>本文書の複製、保存については、作成者の同意を得てください。</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_商標等について"><a class="anchor" href="#_商標等について"></a>商標等について</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>astahは、株式会社チェンジビジョンの日本、米国、欧州における登録商標です。</p>
+</li>
+<li>
+<p>Windows 並びに同社の各製品名は米国マイクロソフトコーポレーションの米国およびその他の国における登録商標です。</p>
+</li>
+<li>
+<p>Apple、iCloud、iPad、iPhone、Mac、Macintosh、macOSは、米国およびその他の国々で登録されたApple Inc.の商標です。</p>
+</li>
+<li>
+<p>Linuxは Linus Torvalds氏、米国及びその他の国における登録商標 あるいは商標です。</p>
+</li>
+<li>
+<p>UNIXは、X/Open Company Limitedが独占的にライセンスしている米国ならびに他の国における登録商標です。</p>
+</li>
+<li>
+<p>その他、本書に記載されている社名、製品名、ブランド名、システム名などは、一般に商標または登録商標でそれぞれ帰属者の所有物です。</p>
+</li>
+<li>
+<p>本文中では &#169; 、&#174; 、 &#8482; 、は表示していません。</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_preparation"><a class="anchor" href="#_preparation"></a>第1章 準備</h2>
+<div class="sectionbody">
+<div class="paragraph lead">
+<p>このチュートリアルでは、モデリングツールとして astah* Professional を、実装にはRubyを使います。
+最初に、演習に必要な環境を用意しましょう。</p>
+</div>
+<div class="sect2">
+<h3 id="_モデリングツールを用意する"><a class="anchor" href="#_モデリングツールを用意する"></a>1.1 モデリングツールを用意する</h3>
+<div class="paragraph">
+<p>このチュートリアルで使用するモデリングツール astah* Professional を用意しましょう。</p>
+</div>
+<div class="paragraph">
+<p>購入前に試用したい場合は、次のページを参照してください。</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">astah*製品の評価手順</dt>
+<dd>
+<p><code><a href="https://astah.change-vision.com/ja/shopping/evaluate.html" class="bare">https://astah.change-vision.com/ja/shopping/evaluate.html</a></code></p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>購入する場合は、次のページを参照して、自分に合ったライセンスを選択してください。</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">最適なライセンスを見つける</dt>
+<dd>
+<p><code><a href="https://astah.change-vision.com/ja/shopping/price.html" class="bare">https://astah.change-vision.com/ja/shopping/price.html</a></code></p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>いずれかの方法で、 astah* Professional を入手できたら、次のページを参照して、自分に合ったライセンスを登録してください。</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">ライセンス登録方法</dt>
+<dd>
+<p><code><a href="https://astah.change-vision.com/ja/registry.html" class="bare">https://astah.change-vision.com/ja/registry.html</a></code></p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_実装環境を用意する"><a class="anchor" href="#_実装環境を用意する"></a>1.2 実装環境を用意する</h3>
+<div class="paragraph">
+<p>このチュートリアルでは、実装に Ruby を使います。執筆時点では 2.7.2 を使いました。</p>
+</div>
+<div class="paragraph">
+<p>Ruby は、Windows、Mac、Linuxで動作するオープンソースの言語プログラミング言語です。
+インストール方法は利用環境によって異なります。
+詳しくは、Rubyの公式サイトの説明や、関連するウェブサイトの記事を参考にしてください。</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Rubyのインストール</dt>
+<dd>
+<p><code><a href="https://www.ruby-lang.org/ja/documentation/installation/" class="bare">https://www.ruby-lang.org/ja/documentation/installation/</a></code></p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>このチュートリアルでは、Rubyの高度な機能、規模の大きなライブラリやフレームワークは使いません。
+ですが、Rubyについて多少の知識は必要になるでしょう。
+Rubyになじみがない人は、公式サイトにある次のようなページを参考にするとよいでしょう。</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">他言語からのRuby入門</dt>
+<dd>
+<p><code><a href="https://www.ruby-lang.org/ja/documentation/ruby-from-other-languages/" class="bare">https://www.ruby-lang.org/ja/documentation/ruby-from-other-languages/</a></code></p>
+</dd>
+<dt class="hdlist1">20分ではじめるRuby</dt>
+<dd>
+<p><code><a href="https://www.ruby-lang.org/ja/documentation/quickstart/" class="bare">https://www.ruby-lang.org/ja/documentation/quickstart/</a></code></p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_演習用のプロジェクトを用意する"><a class="anchor" href="#_演習用のプロジェクトを用意する"></a>1.3 演習用のプロジェクトを用意する</h3>
+<div class="paragraph">
+<p>業務やシステムを分析（あるいは設計）するときにUMLのモデル図を使う場合、モデリングの対象のいくつかの側面について、それぞれに向いた図を作成することが一般的です。</p>
+</div>
+<div class="paragraph">
+<p>複数の図で表すのは、大きな問題ならば分割して小さな問題として捉えるほうが整理しやすいからです。
+たとえば、システム全体の構造と、その内部のある構成要素の内部の構造を別の図に分けることができるでしょう。
+また、関心事によって表すもの（モデルに残すものや削るもの）が変わるからです。
+たとえば、あるシステムを設計するのに、構造を表すためにクラス図を使い、振舞いを表すのにシーケンス図やステートマシン図使うといったことです。</p>
+</div>
+<div class="paragraph">
+<p>astah* でも、モデリングの対象に関連した複数の図をまとめて扱えるよう、ひとまとまりのファイルに保存します。astah* では、この複数の図のまとまりのことを「プロジェクト」と呼んでいます。</p>
+</div>
+<div class="sect3">
+<h4 id="create_proj01"><a class="anchor" href="#create_proj01"></a>1.3.1 astah* のプロジェクトを作成する</h4>
+<div class="paragraph">
+<p>それでは、演習用に astah* のプロジェクトを用意しましょう。</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>astah* を起動する。</p>
+</li>
+<li>
+<p>「ファイル」メニューから「プロジェクトの新規作成」を選択する（ <a href="#create_project01">図 1.1</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="create_project01" class="imageblock left">
+<div class="content">
+<img src="images/GSW-20220206-131611.png" alt="GSW 20220206 131611" width="75%">
+</div>
+<div class="title">図 1.1 新しいプロジェクトを作成する</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="3">
+<li>
+<p>「no_title」という名前で新しいプロジェクトが作成される（ <a href="#create_project02">図 1.2</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="create_project02" class="imageblock left">
+<div class="content">
+<img src="images/GSW-20220206-131639.png" alt="GSW 20220206 131639" width="75%">
+</div>
+<div class="title">図 1.2 新しいプロジェクトが作成された</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="create_proj02"><a class="anchor" href="#create_proj02"></a>1.3.2 作成したプロジェクトを保存する</h4>
+<div class="paragraph">
+<p>新規プロジェクトを作成したら、最初に保存しておき、それからモデルの作成に入るようにするとよいでしょう。</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>「ファイル」メニューから「プロジェクトを保存」を選択する（ <a href="#create_project03">図 1.3</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="create_project03" class="imageblock left">
+<div class="content">
+<img src="images/GSW-20220206-131657.png" alt="GSW 20220206 131657" width="75%">
+</div>
+<div class="title">図 1.3 新しいプロジェクトを保存する</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>「保存」ダイアログが開くので、プロジェクトの保存場所と保存するファイル名を指定する。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>ここでは、保存場所として「デスクトップ」に「BowlingScore」フォルダーを作成した。</p>
+</li>
+<li>
+<p>ファイル名に「bowling_score」を指定して保存した（ <a href="#create_project04">図 1.4</a> ）。</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="create_project04" class="imageblock left">
+<div class="content">
+<img src="images/GSW-20220206-131840.png" alt="GSW 20220206 131840" width="75%">
+</div>
+<div class="title">図 1.4 ダイアログを操作してプロジェクトを保存する場所とプロジェクトファイル名を指定する</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="3">
+<li>
+<p>保存すると、プロジェクトファイルにつけた名前が「構造ツリー」に反映される（ <a href="#create_project05">図 1.5</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="create_project05" class="imageblock left">
+<div class="content">
+<img src="images/GSW-20220206-131907.png" alt="GSW 20220206 131907" width="75%">
+</div>
+<div class="title">図 1.5 プロジェクトファイル名が、プロジェクト名に反映された</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="注記"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>astah* のプロジェクトの作り方についての詳しい説明は、機能ガイドの「プロジェクトの作成と利用」を参考にしてください。</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">astah*  機能ガイド プロジェクトの作成と利用</dt>
+<dd>
+<p><code><a href="https://astah.change-vision.com/ja/manual/278-project-file.html" class="bare">https://astah.change-vision.com/ja/manual/278-project-file.html</a></code></p>
+</dd>
+</dl>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ボウリングのスコアのつけ方"><a class="anchor" href="#_ボウリングのスコアのつけ方"></a>1.4 ボウリングのスコアのつけ方</h3>
+<div class="paragraph">
+<p>ボウリング場では、だいぶ前（1980年代の終りくらい）から、スコアを自動計算してディスプレイに表示するシステムが使われるようになっています。
+自動化される前は、受付でスコアシートをもらって、自分たちでスコアを計算し、手書きでスコアをつけていました（ <a href="#hand_scoring">図 1.6</a> ）。</p>
+</div>
+<div id="hand_scoring" class="imageblock">
+<div class="content">
+<img src="images/hand_scoring.jpg" alt="hand scoring" width="50%">
+</div>
+<div class="title">図 1.6 手でスコアを記入している様子</div>
+</div>
+<div class="paragraph">
+<p>ボウリングの規則とスコアのつけ方について、公益財団法人「全日本ボウリング協会」の「ボウリング競技規則」を参考に、まとめてみました。</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">公益財団法人「全日本ボウリング協会」のボウリング競技規則</dt>
+<dd>
+<p><code><a href="https://jbc-iwate.com/service/message/201012101.pdf" class="bare">https://jbc-iwate.com/service/message/201012101.pdf</a></code></p>
+</dd>
+</dl>
+</div>
+<div class="sect3">
+<h4 id="_ボウリングスコアに使う記号"><a class="anchor" href="#_ボウリングスコアに使う記号"></a>1.4.1 ボウリングスコアに使う記号</h4>
+<div class="paragraph">
+<p>ボウリングスコアに使う記号と意味を <a href="#scoring_symbols">表 1.1</a> に示します。</p>
+</div>
+<table id="scoring_symbols" class="tableblock frame-all grid-all stretch">
+<caption class="title">表 1.1 ボウリングスコアに使う記号と意味</caption>
+<colgroup>
+<col style="width: 8.8495%;">
+<col style="width: 11.5044%;">
+<col style="width: 79.6461%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-center valign-top">記号</th>
+<th class="tableblock halign-left valign-top">名称</th>
+<th class="tableblock halign-left valign-top">意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top"><div class="content"><div class="imageblock">
+<div class="content">
+<img src="images/strike.png" alt="strike" width="60">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ストライク</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1投目で10本全てを倒した場合。ストライクをだしたフレームの得点は、次の2投分を加算する。2回続いたら3フレーム目の1投目までを加算する。スコア欄は、それまでは空欄にしておく。ストライクが続くことを「ダブル」「トリプル（ターキー）」と呼ぶ。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><div class="content"><div class="imageblock">
+<div class="content">
+<img src="images/spare.png" alt="spare" width="60">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">スペア</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1投目で残ったピンを、2投目で全部倒した場合。次の1投分を加算する。スコア欄は、それまでは空欄にしておく。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><div class="content"><div class="imageblock">
+<div class="content">
+<img src="images/miss.png" alt="miss" width="60">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ミス</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">フレームの2投目でピンを1本も倒せなかった場合。2投目でガターに落ちても「G」の記号は使わずにこの記号を使う。そのフレームの得点は、1投目で倒したピン数になる。なお、1つのフレームで 2 回投球し、10本のピンを全部倒すことができなかった場合をエラーという。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><div class="content"><div class="imageblock">
+<div class="content">
+<img src="images/gutter.png" alt="gutter" width="60">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ガター</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1投目でレーンの両脇にある溝（ガター）にボールが落ちた場合。2投目はガターに落ちた場合も「ミス」として扱う。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><div class="content"><div class="imageblock">
+<div class="content">
+<img src="images/split.png" alt="split" width="60">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">スプリット</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1投目で1番ピン（ヘッドピンともいう）と他のいくつかのピンが倒れ、2 本以上のピンが次のような状態に残った場合。スプリットの場合は、1投目のピン数を○で囲む。
+（残っているピンの中間のピンが少なくとも1本倒れたとき。例えば7と9あるいは3と10。残っているピンのすぐ前のピンが少なくとも1本倒れたとき。例えば5と6。）</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><div class="content"><div class="imageblock">
+<div class="content">
+<img src="images/foul.png" alt="foul" width="60">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ファウル</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ファウルラインを越えて投球されたという記号。1投目でファウルした場合、ピンを倒しても1投目のピン数は0になる。2投目は全ピンを立て直す。2投目でファウルした場合、ピンを倒しても2投目のピン数は0になる。第10フレームの3投目がファウルの場合、ピンを倒しても3投目のピン数は0になる。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="classic_scoring"><a class="anchor" href="#classic_scoring"></a>1.4.2 クラッシックスコアリング</h4>
+<div class="paragraph">
+<p>古くから使われていて、広く普及しているスコア計算方式です。</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">クラッシックスコアリングにおけるスコア計算の規定</div>
+<div class="ulist">
+<ul>
+<li>
+<p>ボウリングの1ゲームは、10 個のフレームをもって構成する。</p>
+</li>
+<li>
+<p>競技者は、ストライクの場合を除き、それぞれのフレームで 2 回ずつ投球する。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>ただし、第10フレームがストライクまたはスペアの場合、サービスフレームが追加される。</p>
+</li>
+<li>
+<p>ストライクの場合は、サービスフレームで2回投球できる。</p>
+</li>
+<li>
+<p>スペアの場合は、サービスフレームで1回投球できる。</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>ゲームの成績は、10個のフレームの合計点によってこれを表す。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>適正な投球によって倒されたピンの数をもって計算する。</p>
+</li>
+<li>
+<p>適正に投球されたボールとは、競技者の持っているボールが、手から放れファウルラインを越えたものをいう。</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/classic_score_sample.jpg" alt="classic score sample" width="100%">
+</div>
+<div class="title">図 1.7 スコアの例（クラッシクスコアリングの場合）</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_カレントフレームスコアリング"><a class="anchor" href="#_カレントフレームスコアリング"></a>1.4.3 カレントフレームスコアリング</h4>
+<div class="paragraph">
+<p>2018年アジア競技大会で採用された新しいスコア計算方式です。</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">クラッシックスコアリングと異なる点</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1投目によって10ピンすべてを倒した場合はストライクとなる。ストライクのとき、そのフレームの得点は30となる。</p>
+</li>
+<li>
+<p>続けて2回ストライクの場合は、それぞれのストライクの得点は30となる。</p>
+</li>
+<li>
+<p>1投目の後、残ったピンを2投目によって全部倒した場合は、スペアとなる。スペアのとき、そのフレームの得点は、1投目のピン数に10を加えた数となる。</p>
+</li>
+<li>
+<p>第10フレームでストライクあるいはスペアをとった場合も、3投目はない。</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/current_frame_score_sample.jpg" alt="current frame score sample" width="100%">
+</div>
+<div class="title">図 1.8 スコアの例（カレントフレームスコアリングの場合）</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">【豆知識】ボウリングの名前の由来</div>
+<div class="verseblock">
+<pre class="content">「ボウリングをすること」などを意味する「bowl」という英語は、ラテン語で「泡」や「瘤」を意味する「bulla」に由来する。一方、同じ綴りで食器や容器（ボウル）を意味する「bowl」や「球」を意味する「ball」は、ゲルマン語に由来し、本質的に異なる。</pre>
+<div class="attribution">
+&#8212; Wikipedia
+</div>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="注記"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>ボーリングのハンディキャップは、参加者が普段プレーしているときのアベレージ（平均スコア）を基に、力量に応じて設定するそうです。
+このチュートリアルでは、ハンディキャップは取り扱わないでおきます。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_structure_design"><a class="anchor" href="#_structure_design"></a>第2章 スコアシートの構造を調べる</h2>
+<div class="sectionbody">
+<div class="paragraph lead">
+<p>ボウリングのゲームスコアを記録するスコアシートは、どのような要素で構成されているでしょうか。
+また、それらの構成要素の間にはどのような関係があるのでしょうか。
+構成要素や構成要素の関係を表すには「構造のモデル」を使います。
+構造のモデルを使って、スコアシートの構成要素や、構成要素間の関係を検討してみましょう。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="注記"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>このチュートリアルでは、クラッシックスコアリング（ <a href="#classic_scoring">1.4.2</a> ）の場合について考えることにします。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_スコアシートの例"><a class="anchor" href="#_スコアシートの例"></a>2.1 スコアシートの例</h3>
+<div class="paragraph">
+<p>ゲーム中のスコアシートの例を <a href="#scoresheet01">図 2.1</a> に示します。
+この例では、2人でプレーしています。
+いまは、2ゲーム目のプレー中で、1人目の6フレーム目の第1投目までゲームが進んでいます。
+また、彼らは1フレームずつ交代で投球していることがわかります。
+もし、彼らがもう1ゲーム分プレーする場合には、このスコアの下にもう一度2人分のスコアが追加されるでしょう。</p>
+</div>
+<div id="scoresheet01" class="imageblock">
+<div class="content">
+<img src="images/scoresheet02.png" alt="scoresheet02" width="100%">
+</div>
+<div class="title">図 2.1 スコアシートの例</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="注記"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>ボウリングでは、「ゲーム」が、各自が10フレーム分プレーした結果を指す場合と、複数名で10フレーム分プレーしたひと組の結果を指す場合があるようです。
+これらを呼び分ける方法がわからなかったので、このチュートリアルでは、前者を「スコア」、後者を「ゲーム」と呼ぶことにします。</p>
+</div>
+<div class="paragraph">
+<p>実際のボウリング競技において、これらの呼び分方をご存じの方は、その呼び分け方を使うとよいでしょう。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>スコアシートを観察してわかることをまとめました。</p>
+</div>
+<div id="scoresheet02" class="sidebarblock">
+<div class="content">
+<div class="title">スコアシートを観察してわかること（決めたこと）</div>
+<div class="ulist">
+<ul>
+<li>
+<p>スコアシートには、プレー開始日時が記載されている。</p>
+</li>
+<li>
+<p>スコアシートには、プレーヤー名とその人の10フレーム分の投球を記録する欄がある。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>これを <strong>「スコア」</strong> と呼ぶことにする。</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1つのゲームの進行中は、1フレームごとにプレーヤーが交代して投球する。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>この方式は <strong>「ベーカー方式」</strong> と呼ばれている。</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>スコアシートには、複数人のスコアが記録されている。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>同時に進行している複数名のスコアのまとまりを <strong>「ゲーム」</strong> と呼ぶことにする。</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>プレーヤーの組を単位として複数回ゲームをプレーできる。</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>これらを元に、スコアシートの構成要素や構成要素の間の関係をモデル図で表してみましょう。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="score_sheet_struct_with_objects"><a class="anchor" href="#score_sheet_struct_with_objects"></a>2.2 スコアシートの構造をオブジェクト図で表す</h3>
+<div class="paragraph">
+<p>スコアシートの構造を調べるには、まず実際のスコアシートがどうなっているかを調べるのがよいでしょう。
+スコアシートに記入されている具体的なデータを使って図を作成するには、オブジェクト図が向いています。</p>
+</div>
+<div class="paragraph">
+<p>それでは、スコアシートの例を参照しながら、スコアシートのオブジェクト図を作成してみましょう。</p>
+</div>
+<div class="sect3">
+<h4 id="_プロジェクトに設計モデルを追加する"><a class="anchor" href="#_プロジェクトに設計モデルを追加する"></a>2.2.1 プロジェクトに設計モデルを追加する</h4>
+<div class="paragraph">
+<p>まず、 astah* で作成したプロジェクトに設計モデルを追加しましょう。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="ヒント"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>「設計モデル」ということばが表すものは、開発に使用する手法や分野によって少しずつ異なっています。このチュートリアルでは、次の2つの側面について表したものを設計モデルと呼ぶことにします。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>対象とする業務やサービスに必要となる構成要素やその関係を「構造のモデル」（静的モデル）として表したもの。</p>
+</li>
+<li>
+<p>業務やサービスを実現するために必要となる動作を「振る舞いのモデル」（動的モデル）として表したもの。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>設計に関わる構成要素は、対象とする業務やサービスを分析して得られることもあれば、開発に採用する資源や方式から得られることもあります。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_プロジェクトに設計モデルを追加する_2"><a class="anchor" href="#_プロジェクトに設計モデルを追加する_2"></a>プロジェクトに設計モデルを追加する</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>構造ツリー上で、プロジェクトを選択する。</p>
+</li>
+<li>
+<p>右クリックしてポップアップメニューを開き、「モデルの追加＞モデル」を選択する（ <a href="#add_design_model01">図 2.2</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="add_design_model01" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220206-132000.png" alt="GSW 20220206 132000" width="75%">
+</div>
+<div class="title">図 2.2 プロジェクトにモデルを追加した</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_追加したモデルに名前をつける"><a class="anchor" href="#_追加したモデルに名前をつける"></a>追加したモデルに名前をつける</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>構造ツリー上で、追加したモデルを選択した状態で、プロパティーの「ベース」タブを選択する。</p>
+</li>
+<li>
+<p>「名前」を編集して「設計モデル」とする（ <a href="#add_design_model02">図 2.3</a> ）。</p>
+</li>
+<li>
+<p>入力が確定すると、構造ツリーの表示にも反映される。</p>
+</li>
+</ul>
+</div>
+<div id="add_design_model02" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220206-132154.png" alt="GSW 20220206 132154" width="75%">
+</div>
+<div class="title">図 2.3 モデルに設計用のモデルとして名前をつけた</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_設計モデルにオブジェクト図を追加する"><a class="anchor" href="#_設計モデルにオブジェクト図を追加する"></a>2.2.2 設計モデルにオブジェクト図を追加する</h4>
+<div class="paragraph">
+<p>「オブジェクト図（インスタンス図と呼ぶこともあります）」を使ってスコアシートに登場するオブジェクトを表してみましょう。
+astah* でオブジェクト図を作成するときは、「クラス図」を使います。</p>
+</div>
+<div class="paragraph">
+<p>それでは、プロジェクトにクラス図を追加して、オブジェクト図を描いてみましょう。</p>
+</div>
+<div class="sect4">
+<h5 id="_設計モデルにオブジェクト図を追加する_2"><a class="anchor" href="#_設計モデルにオブジェクト図を追加する_2"></a>設計モデルにオブジェクト図を追加する</h5>
+<div class="paragraph">
+<p>まず、プロジェクトにオブジェクト図を描くのに使うクラス図を追加します。</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>構造ツリーから設計モデルを選択し、右クリックしてポップアップメニューを開く（ <a href="#object00">図 2.4</a> ）。</p>
+</li>
+<li>
+<p>「図の追加＞クラス図」でクラス図が追加される。</p>
+</li>
+</ol>
+</div>
+<div id="object00" class="imageblock left">
+<div class="content">
+<img src="images/GSW-20220206-132218.png" alt="GSW 20220206 132218" width="75%">
+</div>
+<div class="title">図 2.4 モデルにクラス図を追加する</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_オブジェクト図に名前をつける"><a class="anchor" href="#_オブジェクト図に名前をつける"></a>オブジェクト図に名前をつける</h5>
+<div class="paragraph">
+<p>追加したオブジェクト図に、図の名前を設定します。
+描こうとしているのはオブジェクト図ですので、それがわかるような名前をつけます。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>追加したクラス図のプロパティーの「ベース」タブを開く。</p>
+</li>
+<li>
+<p>名前を編集して「ゲームスコアのオブジェクト図」とする（  <a href="#object01">図 2.5</a> ）。</p>
+</li>
+<li>
+<p>ダイアグラムエディタのタイトルやタブにも反映される。</p>
+</li>
+</ul>
+</div>
+<div id="object01" class="imageblock left">
+<div class="content">
+<img src="images/GSW-20220206-133044.png" alt="GSW 20220206 133044" width="75%">
+</div>
+<div class="title">図 2.5 図の名前を「ゲームスコアのオブジェクト図」にする</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_オブジェクト図にスコアシートを追加する"><a class="anchor" href="#_オブジェクト図にスコアシートを追加する"></a>2.2.3 オブジェクト図にスコアシートを追加する</h4>
+<div class="paragraph">
+<p><a href="#scoresheet01">図 2.1</a> や「<a href="#scoresheet02">スコアシートを観察してわかること（決めたこと）</a> 」を観察しながら、スコアシートに記載されている要素をオブジェクト図に追加してみましょう。
+まず、「スコアシート」オブジェクトを追加します。</p>
+</div>
+<div class="sect4">
+<h5 id="add_scoresheet01"><a class="anchor" href="#add_scoresheet01"></a>スコアシートを表すオブジェクトを追加する</h5>
+<div class="paragraph">
+<p>こんどは、図にスコアシートを表すオブジェクトを追加してみましょう。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>パレットから「インスタンス仕様」を選択して、図に配置する（ <a href="#add_instance01">図 2.6</a> ）。</p>
+</li>
+<li>
+<p>「インスタンス仕様0」という名前のオブジェクトが配置される（末尾の数字は作るたびに新しいものに変わる）。</p>
+</li>
+</ul>
+</div>
+<div id="add_instance01" class="imageblock left">
+<div class="content">
+<img src="images/GSW-20220206-133142.png" alt="GSW 20220206 133142" width="75%">
+</div>
+<div class="title">図 2.6 インスタンス仕様を追加する</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_オブジェクト名を個別のスコアシート名に変える"><a class="anchor" href="#_オブジェクト名を個別のスコアシート名に変える"></a>オブジェクト名を個別のスコアシート名に変える</h5>
+<div class="paragraph">
+<p>実際のスコアシートでは、個々のスコアシートを区別するようなはっきりとした名前はついていないこともあるでしょう。スコアシート番号みたいな通番をつけている場合もあるかもしれません。</p>
+</div>
+<div class="paragraph">
+<p>ここでは、追加したオブジェクトが特定のスコアシートを表すことがわかるよう、他のシートと区別できるような名前（オブジェクト名）をつけましょう。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>追加したオブジェクトを選択し、プロパティーから名前の編集欄を選択する（ <a href="#obj_scoresheet01">図 2.7</a> ）。</p>
+</li>
+<li>
+<p>オブジェクトの名前に、 <a href="#scoresheet01">図 2.1</a> のスコアシートを示す固有の入力する。ここでは「scoresheet01」とした。</p>
+</li>
+<li>
+<p>オブジェクトの名前の入力を確定すると、ダイアグラムエディタ中のオブジェクトの名前にも反映される。</p>
+</li>
+</ul>
+</div>
+<div id="obj_scoresheet01" class="imageblock left">
+<div class="content">
+<img src="images/GSW-20220206-133218.png" alt="{three-quarters-width" height="]">
+</div>
+<div class="title">図 2.7 名前を「scoresheet01」に変更する</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="ヒント"></i>
+</td>
+<td class="content">
+個々のオブジェクトを識別するためにつける名前のことを、オブジェクト名（またはインスタンス名）と呼びます。
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_スコアシートオブジェクトにクラスを割り当てる"><a class="anchor" href="#_スコアシートオブジェクトにクラスを割り当てる"></a>2.2.4 スコアシートオブジェクトにクラスを割り当てる</h4>
+<div class="paragraph">
+<p>追加したオブジェクトは、名前はつけたものの、たくさんあるスコアシートの仲間であるとみなす方法がありません。
+それは、このオブジェクトがどんなクラスに属するか決まっていないからです。
+それが分かるよう「スコアシート」を表すクラスを定義して割り当てておきましょう。</p>
+</div>
+<div class="sect4">
+<h5 id="add_class_and_apply"><a class="anchor" href="#add_class_and_apply"></a>スコアシートクラスを追加してオブジェクトに割り当てる</h5>
+<div class="paragraph">
+<p>まず、図中のオブジェクトに割り当てるクラスを用意します。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>オブジェクト「scoresheet01」を選択した状態で、プロパティーから「新規作成」ボタンをクリックする（ <a href="#class_def_dialog00">図 2.8</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="class_def_dialog00" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220206-133232.png" alt="GSW 20220206 133232" width="75%">
+</div>
+<div class="title">図 2.8 オブジェクトを選択してクラスを「新規作成」する</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>クラスを定義するダイアログが表示される（ <a href="#class_def_dialog01">図 2.9</a> ）。</p>
+</li>
+<li>
+<p>「ベース」タブを選択し、名前に「ScoreSheet」を入力する。</p>
+</li>
+</ul>
+</div>
+<div id="class_def_dialog01" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220206-133247.png" alt="GSW 20220206 133247" width="50%">
+</div>
+<div class="title">図 2.9 クラス「ScoreSheet」を定義する</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_スコアシートに属性を追加する"><a class="anchor" href="#_スコアシートに属性を追加する"></a>スコアシートに属性を追加する</h5>
+<div class="paragraph">
+<p>スコアシートクラスがどのような情報を保持するのかはまだ検討が必要ですが、ひとますプレー開始日時を保持することは必要そうです。
+そこで、プレー開始日時を表す属性を追加しましょう。
+ここでは、プレー開始日時を表す属性の名前を「play_date」とします。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>スコアシートクラスの「属性」タブを選択する。</p>
+</li>
+<li>
+<p>「＋」ボタンを押すと属性が追加されるので、名前に「play_date」を入力する（ <a href="#add_attr_play_time">図 2.10</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="add_attr_play_time" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220206-133548.png" alt="GSW 20220206 133548" width="50%">
+</div>
+<div class="title">図 2.10 属性「play_date」を追加する</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_追加した属性の型を定義する"><a class="anchor" href="#_追加した属性の型を定義する"></a>追加した属性の型を定義する</h5>
+<div class="paragraph">
+<p>追加した属性も、どんな型なのかを設定しておきましょう。
+プレー開始日時を表す属性の型の名前を「Time」とします。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="注記"></i>
+</td>
+<td class="content">
+「Time」は、Rubyのクラスライブラリのクラスのひとつで、日付と時刻を操作するためのクラスです。このクラスに対応づけする見込みで割当ててみます。
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>追加した属性の「型」欄を選択する。</p>
+</li>
+<li>
+<p>「型」欄を編集状態にして「Time」を入力すると、ダイアログに「型になるTimeを新規作成しますか？」というメッセージが表示される（ <a href="#dialog_add_class_time">図 2.11</a> ）。</p>
+</li>
+<li>
+<p>「はい」をクリックしてダイアログを閉じる。</p>
+</li>
+<li>
+<p>クラス「Time」が作成される。（ <a href="#class_time_added">図 2.12</a> ）。</p>
+</li>
+<li>
+<p>構造ツリーにも追加されたことを確認する。</p>
+</li>
+</ul>
+</div>
+<div id="dialog_add_class_time" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220206-173841.png" alt="GSW 20220206 173841" width="50%">
+</div>
+<div class="title">図 2.11 クラス「Time」の追加を促すダイアログ</div>
+</div>
+<div id="class_time_added" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220206-172618.png" alt="GSW 20220206 172618" width="50%">
+</div>
+<div class="title">図 2.12 クラス「Time」が追加された</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_オブジェクト図や構造ツリーを確認する"><a class="anchor" href="#_オブジェクト図や構造ツリーを確認する"></a>オブジェクト図や構造ツリーを確認する</h5>
+<div class="paragraph">
+<p>オブジェクト図においても、構造ツリーにおいても、追加したオブジェクトの名前が変わっているを確認します。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>「閉じる」をクリックして、クラス定義のダイアログを閉じる。</p>
+</li>
+<li>
+<p>オブジェクトの表示が「scoresheet01 : ScoreSheet」に変わっている。</p>
+</li>
+<li>
+<p>属性「play_date」の属性値を保持する欄（スロットと呼ぶ）も追加されている。</p>
+</li>
+<li>
+<p>構造ツリーにもTimeクラスが追加されている（ <a href="#instance03">図 2.13</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="instance03" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220206-133959.png" alt="GSW 20220206 133959" width="100%">
+</div>
+<div class="title">図 2.13 オブジェクトにクラスやスロットが割当てられた</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_追加したスロットに属性値を設定する"><a class="anchor" href="#_追加したスロットに属性値を設定する"></a>追加したスロットに属性値を設定する</h5>
+<div class="paragraph">
+<p>追加した属性「play_date」のインスタンス（スロットと呼びます）に、属性値として具体的な日付データを設定します。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>オブジェクト「scoresheet01」を選択して、プロパティーから「ベース」タブを開く。</p>
+</li>
+<li>
+<p>属性「play_date」の値に日時、たとえば「2022/02/04 16:18」などと入力する（ <a href="#instance04">図 2.14</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="instance04" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220206-181040.png" alt="GSW 20220206 181040" width="100%">
+</div>
+<div class="title">図 2.14 オブジェクトのスロットに属性値が追加された</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_オブジェクト図にゲームを追加する"><a class="anchor" href="#_オブジェクト図にゲームを追加する"></a>2.2.5 オブジェクト図にゲームを追加する</h4>
+<div class="paragraph">
+<p>次に、「スコアシート」を追加したのと同じ手順で「ゲーム」オブジェクトを追加します。
+<a href="#scoresheet01">図 2.1</a> の場合ゲームが2組あるので、ゲームのオブジェクトを「game01」、「game02」としましょう。
+クラス名は「Game」としましょう。</p>
+</div>
+<div class="sect4">
+<h5 id="add_game00"><a class="anchor" href="#add_game00"></a>ゲームを表すオブジェクトを追加する</h5>
+<div class="paragraph">
+<p>最初の（1組目の）ゲームを追加してみましょう。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>パレットから「インスタンス仕様」を選択して図に配置する。</p>
+</li>
+<li>
+<p>オブジェクト名を「game01」とする。</p>
+</li>
+<li>
+<p>クラスを追加して「Game」とする（ <a href="#add_game01">図 2.15</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="add_game01" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-000330.png" alt="GSW 20220207 000330" width="100%">
+</div>
+<div class="title">図 2.15 ゲームを表すオブジェクト「game01」とクラス「Game」を追加した</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_次のゲームのオブジェクトを追加する"><a class="anchor" href="#_次のゲームのオブジェクトを追加する"></a>次のゲームのオブジェクトを追加する</h5>
+<div class="paragraph">
+<p>次のゲーム（つまり、2組目）のオブジェクトも追加してみましょう。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>同様の手順で「game02」を追加する。</p>
+</li>
+<li>
+<p>プロパティーから既存のクラスをプルダウンし、「Game」クラスを選択する（ <a href="#add_game02">図 2.16</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="add_game02" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-001520.png" alt="GSW 20220207 001520" width="100%">
+</div>
+<div class="title">図 2.16 ゲームを表すオブジェクトを追加し、既存のクラスを割当てた</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_オブジェクト図にスコアを追加する"><a class="anchor" href="#_オブジェクト図にスコアを追加する"></a>2.2.6 オブジェクト図にスコアを追加する</h4>
+<div class="paragraph">
+<p>こんどは、プレーヤーひとり分のスコアを記録しているスコア部分を追加しましょう。
+<a href="#scoresheet01">図 2.1</a> の場合、スコアは4つあります。</p>
+</div>
+<div class="paragraph">
+<p>このチュートリアルでは、プレーヤー名はスコアの属性と考えることにしておきます。
+（もちろん、プレーヤーを独立したクラスと考え、複数のスコアとを関連づけた方がもっとよいでしょう）</p>
+</div>
+<div class="sect4">
+<h5 id="add_screr00"><a class="anchor" href="#add_screr00"></a>それぞれのプレーヤーのスコアを表すオブジェクトを追加する</h5>
+<div class="paragraph">
+<p>それぞれのプレーヤーごとにスコアがありますので、まず、プレーヤーごとのスコアのオブジェクトを追加します。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>パレットから「インスタンス仕様」を選択して図に配置して「score01」とする。</p>
+</li>
+<li>
+<p>「Score」クラスを追加して、「score01」に割当てる（ <a href="#add_score01">図 2.17</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="add_score01" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-012006.png" alt="GSW 20220207 012006" width="100%">
+</div>
+<div class="title">図 2.17 スコアを表すオブジェクト「score01」を追加した</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>「Score」クラスに属性「player」を追加し、「String」クラスを追加して割当てる（ <a href="#add_string_class">図 2.18</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="add_string_class" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-011349.png" alt="GSW 20220207 011349" width="50%">
+</div>
+<div class="title">図 2.18 属性「Player」を追加し、クラス「String」を追加して割当てる。</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="add_screr01"><a class="anchor" href="#add_screr01"></a>追加したオブジェクトのスロットに値を設定する</h5>
+<div class="paragraph">
+<p>追加したオブジェクトの「player」スロット（スコアクラスの属性playerの、このオブジェクトにおける属性値）を設定します。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>「score01」のスロット「player」の値に「くぼあき」を設定する（ <a href="#add_score02">図 2.19</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="add_score02" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-014911.png" alt="GSW 20220207 014911" width="100%">
+</div>
+<div class="title">図 2.19 「player」のスロットの値にプレーヤー名を設定した</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>ほかのスコアのオブジェクトも作成する（ <a href="#add_score03">図 2.20</a> ）</p>
+</li>
+</ul>
+</div>
+<div id="add_score03" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-024336.png" alt="GSW 20220207 024336" width="100%">
+</div>
+<div class="title">図 2.20 残りのスコアのオブジェクトを作成した</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_オブジェクト図にフレームを追加する"><a class="anchor" href="#_オブジェクト図にフレームを追加する"></a>2.2.7 オブジェクト図にフレームを追加する</h4>
+<div class="paragraph">
+<p>次に、各スコアに記載されているフレームを追加しましょう。
+やはり、<a href="#scoresheet01">図 2.1</a> や「<a href="#scoresheet02">スコアシートを観察してわかること（決めたこと）</a> 」を観察しながら、作成します。
+ですが、フレームのオブジェクトの数が多いので、この場で作成してみるのは一部だけにします。</p>
+</div>
+<div class="sect4">
+<h5 id="add_frame00"><a class="anchor" href="#add_frame00"></a>それぞれのスコアのフレームを表すオブジェクトを追加する</h5>
+<div class="paragraph">
+<p>それぞれのスコアは、フレームを持っていますので、これを表すオブジェクトを追加します。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>パレットから「インスタンス仕様」を選択して図に配置して「frame0101」とする。</p>
+</li>
+<li>
+<p>「Frame」クラスを追加して、「frame0101」に割当てる（ <a href="#add_frame01">図 2.21</a> ）。</p>
+</li>
+<li>
+<p>「Frame」クラスの属性に「frame_no」、「first」、「second」、「spare_bonus」、「strike_bonus」、「total」を追加する。</p>
+</li>
+</ul>
+</div>
+<div id="add_frame01" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-030417.png" alt="GSW 20220207 030417" width="100%">
+</div>
+<div class="title">図 2.21 フレームを表すオブジェクト「frame0101」を追加した</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="add_frame02"><a class="anchor" href="#add_frame02"></a>追加したオブジェクトのスロットに値を設定する</h5>
+<div class="paragraph">
+<p>オブジェクト「frame0101」の各スロットに値を設定します。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1組目のゲームの「くぼあき」さんの第1フレームは、1投目7ピン、2投目ミス（0ピン）。</p>
+</li>
+<li>
+<p>第1フレームのトータルは7ピン。ボーナスはなし（ <a href="#add_frame02">2.2.7.2</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="add_frame03" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-031606.png" alt="GSW 20220207 031606" width="100%">
+</div>
+<div class="title">図 2.22 オブジェクト「frame0101」の各スロットの値を設定した</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>同様にして、ほかのフレームのオブジェクトも作成する（ <a href="#add_frame03">図 2.22</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="add_frame04" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-042412.png" alt="GSW 20220207 042412" width="100%">
+</div>
+<div class="title">図 2.23 残りのフレームのオブジェクトを作成した（一部だけ）</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_オブジェクトのつながりを整理する"><a class="anchor" href="#_オブジェクトのつながりを整理する"></a>2.2.8 オブジェクトのつながりを整理する</h4>
+<div class="paragraph">
+<p>オブジェクト図に、スコアシート、ゲーム、スコアのオブジェクトが追加できました。
+<a href="#scoresheet01">図 2.1</a> を見ながら、これらの間にはどのようなつながりがあるか考えてみましょう。</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">オブジェクト同士のつながりを考える</div>
+<div class="ulist">
+<ul>
+<li>
+<p>スコアシートは複数のゲームを記録できるので、スコアシートとゲームにはつながりがありそうです。</p>
+</li>
+<li>
+<p>ゲームでは、複数のプレーヤーのスコアを記録するので、ゲームとスコアにはつながりがありそうです。</p>
+</li>
+<li>
+<p>スコアにはフレームごとのピン数などを記録するので、スコアとフレームにはつながりがありそうです。</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>つながりがありそうなオブジェクトをリンクを引いてつないでみましょう。</p>
+</div>
+<div class="paragraph">
+<p>オブジェクト図では、オブジェクト間のつながりを表すには、「リンク」と呼ぶ線でつないで表します。
+これは、クラス図におけるクラス間のつながりを表す「関連」のインスタンスにあたるものです（クラス図は、オブジェクト図を元に作成します）。</p>
+</div>
+<div class="paragraph">
+<p>まず、スコアシートとゲームの間にリンクを引きましょう。</p>
+</div>
+<div class="sect4">
+<h5 id="add_link00"><a class="anchor" href="#add_link00"></a>作成したオブジェクトの間にリンクを引く</h5>
+<div class="paragraph">
+<p>まず、「scoresheet01」から「game01」へリンクを引いてみましょう。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>パレットから「リンク」を選択する。</p>
+</li>
+<li>
+<p>「scoresheet01」の内部へマウスカーソルを移動し、青枠が表示されるのを待つ（ <a href="#add_link01">図 2.24</a> ）</p>
+</li>
+</ul>
+</div>
+<div id="add_link01" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-054611.png" alt="GSW 20220207 054611" width="100%">
+</div>
+<div class="title">図 2.24 リンクの引き始めのオブジェクトで青枠を表示させる</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>青枠が表示されたら、マウスのボタンを押したまま「game01」の内部へマウスカーソルを移動する（ <a href="#add_link02">図 2.25</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="add_link02" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-061048.png" alt="GSW 20220207 061048" width="100%">
+</div>
+<div class="title">図 2.25 青枠が表示されたらマウスのボタンを押したままマウスカーソルをドラッグする</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>「game01」にも青枠が表示されたら、マウスのボタンを離すとリンクが引かれる（ <a href="#add_link03">図 2.26</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="add_link03" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-061016.png" alt="GSW 20220207 061016" width="100%">
+</div>
+<div class="title">図 2.26 リンク先のオブジェクトにも青枠が表示されたらマウスのボタンを離す</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="add_link04"><a class="anchor" href="#add_link04"></a>ほかのオブジェクトの間にもリンクを引く</h5>
+<div class="paragraph">
+<p>「game02」へも <a href="#add_link00">2.2.8.1</a> と同様の手順でリンクを引きましょう（ <a href="#add_link05">図 2.27</a> ）。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1ゲーム目のスコアは、1つ目のゲームにリンクを引く。</p>
+</li>
+<li>
+<p>2ゲーム目のスコアは、1つ目のゲームにリンクを引く。</p>
+</li>
+</ul>
+</div>
+<div id="add_link05" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-063524.png" alt="GSW 20220207 063524" width="100%">
+</div>
+<div class="title">図 2.27 ゲームからスコアへリンクを引く</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>スコアからフレームへもリンクを引きます（ <a href="#add_link06">図 2.28</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="add_link06" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-065042.png" alt="GSW 20220207 065042" width="100%">
+</div>
+<div class="title">図 2.28 残りのつながりについてリンクを引く</div>
+</div>
+<div class="paragraph">
+<p>これで、 <a href="#scoresheet01">図 2.1</a> の要素を反映したオブジェクト図が作成できました。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_スコアシートの構造をクラス図で表す"><a class="anchor" href="#_スコアシートの構造をクラス図で表す"></a>2.3 スコアシートの構造をクラス図で表す</h3>
+<div class="paragraph">
+<p>「<a href="#score_sheet_struct_with_objects">2.2</a> 」では、実際のスコアシートがどうなっているかを調べるために、スコアシートに記載された内容を使ってオブジェクト図を作成しました。
+しかし、特定のスコアを記載した図では、プログラムで扱うような、より一般的なスコアシートを扱えません。
+代わりに、オブジェクト図の作成時に考えたクラスを使って、クラス図を使います。
+そこで、作成したオブジェクト図 <a href="#add_link06">図 2.28</a> を元に、ゲームスコアのクラス図を作成してみましょう。</p>
+</div>
+<div class="sect3">
+<h4 id="_クラス図とスコアシートクラスを追加する"><a class="anchor" href="#_クラス図とスコアシートクラスを追加する"></a>2.3.1 クラス図とスコアシートクラスを追加する</h4>
+<div class="paragraph">
+<p>設計モデルに、「ゲームスコアのクラス図」と「スコアシートクラス」を追加しましょう。</p>
+</div>
+<div class="sect4">
+<h5 id="class00"><a class="anchor" href="#class00"></a>スコアシートのクラス図を追加する</h5>
+<div class="paragraph">
+<p>まず、「ゲームスコアのクラス図」を追加します。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>構造ツリーで、「設計モデル」でポップアップメニューを開き、「図の追加＞クラス図」でモデルにクラス図を追加する（ <a href="#class01">図 2.29</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="class01" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-065747.png" alt="GSW 20220207 065747" width="50%">
+</div>
+<div class="title">図 2.29 モデルにクラス図を追加する</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>追加した図を「ゲームスコアのクラス図」とする（ <a href="#class02">図 2.30</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="class02" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-065801.png" alt="GSW 20220207 065801" width="50%">
+</div>
+<div class="title">図 2.30 追加した図を「ゲームスコアのクラス図」とした</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_クラス図にクラスを追加する"><a class="anchor" href="#_クラス図にクラスを追加する"></a>クラス図にクラスを追加する</h5>
+<div class="paragraph">
+<p>追加したクラス図に、ゲームスコアクラスを追加します。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>構造ツリーから、オブジェクト図を作成したとき登録した「ScoreSheet」クラスをさがし、選択する。</p>
+</li>
+<li>
+<p>選択したクラスをドラッグ＆ドロップして、クラス図に追加する（ <a href="#class03">図 2.31</a>  ）。</p>
+</li>
+<li>
+<p>構造ツリーから、「Game」クラスを選択する。</p>
+</li>
+<li>
+<p>選択したクラスをドラッグ＆ドロップして、クラス図に追加する（ <a href="#class03">図 2.31</a>  ）。</p>
+</li>
+</ul>
+</div>
+<div id="class03" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-070838.png" alt="GSW 20220207 070838" width="100%">
+</div>
+<div class="title">図 2.31 既存のクラスを構造ツリーからクラス図に追加する</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_クラス間の関連を追加する１"><a class="anchor" href="#_クラス間の関連を追加する１"></a>2.3.2 クラス間の関連を追加する（１）</h4>
+<div class="paragraph">
+<p>作成したオブジェクト図（ <a href="#add_link05">図 2.27</a> ）に記載されているリンクを参照して、リンクでつながっているオブジェクトが属するクラスの間に関連を引きます。</p>
+</div>
+<div class="sect4">
+<h5 id="add_relation00"><a class="anchor" href="#add_relation00"></a>スコアシートとゲームの間に関連を追加する</h5>
+<div class="paragraph">
+<p>まず、「ScoreSheet」クラスから「Game」クラスへ関連を引きます。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>パレットから矢印付きの関連を選択する。</p>
+</li>
+<li>
+<p>「ScoreSheet」クラスから「Game」クラスへ向かって関連を引く（ <a href="#class04">図 2.32</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="class04" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-082944.png" alt="GSW 20220207 082944" width="75%">
+</div>
+<div class="title">図 2.32 「ScoreSheet」クラスから「Game」クラスへ関連を引いた</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_スコアシートからみたゲームの多重度を設定する"><a class="anchor" href="#_スコアシートからみたゲームの多重度を設定する"></a>スコアシートからみたゲームの多重度を設定する</h5>
+<div class="paragraph">
+<p>スコアシートには1ゲーム以上の複数のゲームを記録できます。
+クラス間の関連において、このことを表には多重度を使います。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#class04">図 2.32</a> で引いた関連を選択した状態で、プロパティーからターゲットが「Game」の関連端のタブを開く。</p>
+</li>
+<li>
+<p>「多重度」を「1..*」に設定する（ <a href="#class05">図 2.33</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="class05" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-083800.png" alt="GSW 20220207 083800" width="50%">
+</div>
+<div class="title">図 2.33 「ScoreSheet」からみた「Game」の多重度を「 1..* 」に設定した</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_スコアシートからみたゲームの関連端名を設定する"><a class="anchor" href="#_スコアシートからみたゲームの関連端名を設定する"></a>スコアシートからみたゲームの関連端名を設定する</h5>
+<div class="paragraph">
+<p>スコアシートがゲームを参照するときに使う名前を決めるために、関連端名を設定します。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#class04">図 2.32</a> で引いた関連を選択した状態で、プロパティーからターゲットが「Game」の関連端のタブを開く。</p>
+</li>
+<li>
+<p>ゲームを複数回記録できることを反映して、「名前」を「games」に設定する（ <a href="#class06">図 2.34</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="class06" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-084200.png" alt="GSW 20220207 084200" width="50%">
+</div>
+<div class="title">図 2.34 「ScoreSheet」からみた「Game」の関連端名を「games」に設定した</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_スコアシートとゲームの集約関係を設定する"><a class="anchor" href="#_スコアシートとゲームの集約関係を設定する"></a>スコアシートとゲームの集約関係を設定する</h5>
+<div class="paragraph">
+<p>スコアシートには、複数のゲームを追加できます。
+このことをクラス図に反映する方法がほしいところです。</p>
+</div>
+<div class="paragraph">
+<p>まず、スコアシートが複数のゲームをとりまとめていること表すのに、「スコアシートには複数のゲームを集約する」役割があるというように捉えてみましょう。
+このような役割を表すために、クラスの関連端には「集約」を表すための記法が用意されています。</p>
+</div>
+<div class="paragraph">
+<p>さらに、同じスコアシートで追加でゲームをやりたいときは、新しいゲームを始めた時点で新しいゲームの記録を始めます。
+つまり、スコアシートが作成される時点と、あるゲームが開始される時点が同時とは限らないわけです。
+このように、集約する側（ここではスコアシート）のインスタンスと、集約される側（ここではゲーム）のインスタンスが作成される時点が同じではないことを「スコアシートとゲームはライフサイクルが異なる」といいます。
+一方で、集約する側とされる側が同時に作成され、同時に破棄されるなら、「ライフサイクルが同じ」と考えます。
+集約の記法には、ライフサイクルが異なる場合の「aggregate」、ライフサイクルが同じ場合の「composit」を表すオプションが用意されています。</p>
+</div>
+<div class="paragraph">
+<p>ここでは、スコアシートが複数のゲームをとりまとめていて、スコアシートとゲームのライフサイクルが異なることを反映して、スコアシート側の関連端に「aggregate」オプションを指定した集約を設定しましょう。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#class04">図 2.32</a> で引いた関連を選択した状態で、プロパティーからターゲットが「ScoreSheet」の関連端のタブを開く（描画時の順序によって該当する関連端がAの場合とBの場合がある）。</p>
+</li>
+<li>
+<p>「集約」のプルダウンメニューから「aggregate」を選択する（ <a href="#class07">図 2.35</a>）。</p>
+</li>
+</ul>
+</div>
+<div id="class07" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-085154.png" alt="GSW 20220207 085154" width="50%">
+</div>
+<div class="title">図 2.35 「ScoreSheet」が「Game」を集約していることを示した</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>「ScoreSheet」から「Game」への関連が引けた（ <a href="#class08">図 2.36</a> ）。</p>
+</li>
+</ul>
+</div>
+<div id="class08" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-090055.png" alt="GSW 20220207 090055" width="75%">
+</div>
+<div class="title">図 2.36 「ScoreSheet」から「Game」への関連が引けた</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_クラス間の関連を追加する２"><a class="anchor" href="#_クラス間の関連を追加する２"></a>2.3.3 クラス間の関連を追加する（２）</h4>
+<div class="paragraph">
+<p>ゲームとスコア、スコアとフレームの間にも関連を引いて、関連端も設定してみましょう。</p>
+</div>
+<div class="sect4">
+<h5 id="add_relation02"><a class="anchor" href="#add_relation02"></a>ゲームとスコアの間に関連を追加する</h5>
+<div class="paragraph">
+<p>こんどは、「Game」クラスから「Score」クラスへ向かって関連を引きましょう。
+1組のゲームには、複数プレーヤーのスコアが記録できます。
+つまり、ここにも、スコアシートとゲームの間と同じような関連が引けそうですね。</p>
+</div>
+<div class="paragraph">
+<p>＊ 「Score」クラスと「Game」クラスの間に関連を引く。
+＊ 「Score」クラス側の関連の多重度を「1..*」に設定する。
+＊ 「Score」クラス側の関連端には関連端名として「scores」を設定する（複数のスコアが記録できることを反映した）。
+＊ 「Game」クラス側の「集約」のプルダウンメニューから「aggregate」を選択する（ <a href="#add_relation03">図 2.37</a> ）。</p>
+</div>
+<div id="add_relation03" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-094813.png" alt="GSW 20220207 094813" width="100%">
+</div>
+<div class="title">図 2.37 ゲームとスコアの間に関連を引いた</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="add_relation04"><a class="anchor" href="#add_relation04"></a>スコアとフレームの間に関連を追加する</h5>
+<div class="paragraph">
+<p>最後に、「Score」クラスから「Frame」クラスへ向かって関連を引きましょう。
+フレームのオブジェクトをいつ用意するのかには、いくつか選択肢があります。
+たとえば、ゲームを用意したときに全フレーム分用意すると決めることもできるでしょう。
+あるいは、ゲームのい進行に合わせて、その都度フレームを追加すると決めることもできるでしょう。
+いくつかの選択肢があるとき、それらからいずれを選択するのかを決定するのは、多くの場合設計時の決定事項です（このこと設計事項、設計項目、設計事由などと呼ぶ人たちもいます）。</p>
+</div>
+<div class="paragraph">
+<p>このチュートリアルでは、スコアのオブジェクトを用意したときは、常に10フレーム分のフレームのオブジェクトも一緒に用意することとします。
+この考えを選択したのは、表示や出力の際に、未投球のフレームについても、それらのフレームのオブジェクトを参照すれば、未投球の処理で特別な扱いが減られると考えたからです。
+この場合、フレームとスコアは同時に作成されるので（ライフサイクルが同じなので）、集約の設定もコンポジションにしておきます。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>「Game」クラスと「Frame」クラスの間に関連を引く。</p>
+</li>
+<li>
+<p>「Frame」クラス側の関連端の多重度を「10」に設定する。</p>
+</li>
+<li>
+<p>「Frame」クラス側の関連端には関連端名として「frames」を設定する（複数のフレームが記録できることを意識した名前にした）。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>集約のプルダウンメニューの中から「composite」を選択する（ <a href="#add_relation05">図 2.38</a> ）。</p>
+</li>
+<li>
+<p>「Score」クラス側の関連端の表示が、黒塗りのダイアモンド（コンポジションのシンボル）に変わる。</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div id="add_relation05" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-122557.png" alt="GSW 20220207 122557" width="100%">
+</div>
+<div class="title">図 2.38 スコアとフレームの間に関連を引いた</div>
+</div>
+<div class="paragraph">
+<p>これで、いったん、ボウリングのゲームスコアを表した構造のモデルができました。</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_まとめ"><a class="anchor" href="#_まとめ"></a>2.4 まとめ</h3>
+<div class="paragraph">
+<p>ボウリングのゲームスコアを記録するスコアシートの構造を検討しました。</p>
+</div>
+<div class="sect3">
+<h4 id="_構造のモデルを作成した手順"><a class="anchor" href="#_構造のモデルを作成した手順"></a>2.4.1 構造のモデルを作成した手順</h4>
+<div class="paragraph">
+<p>構造のモデルに登場する構成要素や要素間の関連を見つけ出すために、 <a href="#step_for_structure_model">スコアシートの構造のモデルを作成した手順</a> のような手順を使いました。</p>
+</div>
+<div id="step_for_structure_model" class="sidebarblock">
+<div class="content">
+<div class="title">スコアシートの構造のモデルを作成した手順</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>スコアシートを観察して、どのような要素で構成されているか洗い出した。</p>
+</li>
+<li>
+<p>スコアシートの実例をそのまま使ってオブジェクト図で表した。</p>
+</li>
+<li>
+<p>オブジェクト図の要素や要素間のつながりを観察して、クラス図を作成した。</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>まず、オブジェクト図をつくることで、オブジェクトを洗い出し、オブジェクト同士のつながり（リンク）を発見しました。
+そして、オブジェクト図を参照しながら、クラス図を作成しました。
+クラス間の関連の関連端名や多重度を検討する際は、オブジェクト図におけるリンクの数などを判断材料にしました。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_この段階の構造のモデルはまだ未完成"><a class="anchor" href="#_この段階の構造のモデルはまだ未完成"></a>2.4.2 この段階の構造のモデルはまだ未完成</h4>
+<div class="paragraph">
+<p>ここで作成したクラス図には、検討の余地が残っています。
+たとえば、いずれのクラスにも操作が定義できていません。
+これは、プレーするのに従ってスコアをつけるときの動作（振る舞い）を検討していないからです。
+また、動作を検討する中で、属性や関連についても追加や修正が必要になる場合があります。</p>
+</div>
+<div class="paragraph">
+<p>そこで、続いて振る舞いのモデルを検討します。
+振る舞いのモデルの作成が進むにつれて、構造のモデルも追加・修正されることになるでしょう。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_model_to_code_design"><a class="anchor" href="#_model_to_code_design"></a>第3章 モデルとコードの対応づけ</h2>
+<div class="sectionbody">
+<div class="paragraph lead">
+<p>プログラムがどのように動作するのか検討するときには、振る舞いのモデルを使います。
+振る舞いのモデルを作成する前に、構造のモデルと振る舞いのモデルがどのようなコードとして実現されるのかについて、このチュートリアルで用いる方式を決めておきましょう。
+このことを「モデルとコードの対応づけ」と呼ぶことにします。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="ヒント"></i>
+</td>
+<td class="content">
+このような対応づけを「モデル変換ルール」と呼ぶこともあります。また、開発プロセスのなかでこの対応づけを検討する工程を「方式設計」と呼ぶ人もいます。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>モデルとコードの対応づけを決めてそれを前提にして設計する（モデルを作る）ことは、実装に依存する情報と依存しない情報の分離を促します。
+また、このような考え方は、実装に依存しないモデルを作る上でとても重要で、実務的なモデルを作成する際にも大いに役立ちます。</p>
+</div>
+<div class="sect2">
+<h3 id="_対応づけ検討用モデルの作成"><a class="anchor" href="#_対応づけ検討用モデルの作成"></a>3.1 対応づけ検討用モデルの作成</h3>
+<div class="paragraph">
+<p>このチュートリアルでは実装にRubyを使うことにしました。
+サンプルモデルとサンプルモデルに対応するRubyプログラムを作ってみることで、対応づけの方式の基本的な考え方を決めておこうというわけです。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="注記"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>この章で検討したいことは、ボウリングのスコアに関するモデルの問題領域とは直接の関係はありません。
+こういった別の領域の問題を、これまで検討していたボウリングのスコアに関する問題領域と、ここで検討したいことが混在してしまい、說明も受け取り手も混乱してしまうでしょう。
+そんなわけで、別の問題として分けて検討するために、この章を用意してあります。</p>
+</div>
+<div class="paragraph">
+<p>もし、この章の役割がピンとこない、実装についての議論にはあまり関心がないのであれば、最初はこの章を読み飛ばしてみてもかまいません。
+しかし、後の章へ進むと、実装する人がモデルを使う際には、モデルとコードを対応づける必要があり、ここで実装方式を決めておかなければ、実装者がそのことについて考える必要がある（特定の実装者に依存しないよう設計しておくべきことを実装する各人に委ねてしまっている）ことに気づくでしょう。
+そのときは、この章に戻って、どうして実装方式の設計が必要なのか考えてもらえたらと思います。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_対応づけ検討用プロジェクトを用意する"><a class="anchor" href="#_対応づけ検討用プロジェクトを用意する"></a>3.1.1 対応づけ検討用プロジェクトを用意する</h4>
+<div class="paragraph">
+<p>「モデルとコードの対応づけ」の検討用に astah* で別のプロジェクトを作成しましょう。</p>
+</div>
+<div class="sect4">
+<h5 id="_対応づけ検討用プロジェクトを作成する"><a class="anchor" href="#_対応づけ検討用プロジェクトを作成する"></a>対応づけ検討用プロジェクトを作成する</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>astah* で新規プロジェクトを作成する。</p>
+</li>
+<li>
+<p>作成したプロジェクトをいったん保存する。</p>
+</li>
+<li>
+<p>モデルファイルの名前は「stm_sample.asta」とする。</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="add_stm_sample_class_diag"><a class="anchor" href="#add_stm_sample_class_diag"></a>検討用プロジェクトにクラス図を追加する</h5>
+<div class="paragraph">
+<p>プロジェクトが保存できたら、プロジェクトにクラス図を追加しましょう。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>構造ツリーで、プロジェクト名をクリックしてポップアップメニューを開く。</p>
+</li>
+<li>
+<p>「図の追加＞クラス図」でクラス図を追加する。</p>
+</li>
+<li>
+<p>プロパティーから、クラス図の名前を「クラス図」に変更する。</p>
+</li>
+</ul>
+</div>
+<div id="add_stm_sample00" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220213-005309.png" alt="GSW 20220213 005309" width="50%">
+</div>
+<div class="title">図 3.1 対応づけの説明に使うプロジェクトにクラス図を追加した</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="add_sample_class00"><a class="anchor" href="#add_sample_class00"></a>クラス図に「Sample」クラスを追加する</h5>
+<div class="paragraph">
+<p>対応づけの説明用に、簡単なクラス「Sample」の定義から始めましょう。
+このクラスは、操作「Play」と属性「attr_a」「attr_b」を持つクラスとします。
+これをUMLのクラスとして表してみましょう。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>パレットからクラスを選択し、クラス図に追加する。</p>
+</li>
+<li>
+<p>クラス名を「Sample」にする（ <a href="#sample_class01">図 3.2</a> ）。</p>
+</li>
+<li>
+<p>クラスに操作「play」を追加する。</p>
+</li>
+<li>
+<p>クラスに属性「attr_a」「attr_b」を追加する。</p>
+</li>
+</ul>
+</div>
+<div id="sample_class01" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220212-220754.png" alt="GSW 20220212 220754" width="75%">
+</div>
+<div class="title">図 3.2 クラス図に「Sample」クラスを追加した</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_sampleクラスの最初のサンプルコード"><a class="anchor" href="#_sampleクラスの最初のサンプルコード"></a>Sampleクラスの最初のサンプルコード</h5>
+<div class="paragraph">
+<p>対応づけルールの1つ目として、 <a href="#sample_class01">図 3.2</a> を表したRubyのコードは <a href="#ruby_sample01">リスト 3.1</a> のように書きたいと決めることにします。</p>
+</div>
+<div id="ruby_sample01" class="listingblock">
+<div class="title">リスト 3.1 【Ruby】「Sample」クラスを表すRubyのコード</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="ruby">class Sample <i class="conum" data-value="1"></i><b>(1)</b>
+  def initialize <i class="conum" data-value="2"></i><b>(2)</b>
+    @attr_a = true <i class="conum" data-value="3"></i><b>(3)</b>
+    @attr_b = true <i class="conum" data-value="3"></i><b>(3)</b>
+  end
+
+  def play <i class="conum" data-value="4"></i><b>(4)</b>
+  end
+end</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>クラス「Sample」の定義の始まり</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>初期化メソッド（コンストラクタにあたるメソッド）</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>このクラスのインスタンス変数</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>メソッド「Play」の定義の始まり</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_クラスにステートマシン図を追加する"><a class="anchor" href="#_クラスにステートマシン図を追加する"></a>3.1.2 クラスにステートマシン図を追加する</h4>
+<div class="paragraph">
+<p>このサンプルにおいては、いま追加した操作「play」が、「Sample」クラスの振る舞いを提供しているとします。
+しかし、クラス図に描いた「Sample」クラスに操作「play」を追加しただけでは、その処理内容はわかりません。
+どこかに「play」の処理内容を表した図が必要です。</p>
+</div>
+<div class="paragraph">
+<p>そこで、「Sample」クラスに対して、操作「play」の振る舞いを表すステートマシン図を追加します。
+ここで、図を追加する対象を「Sample」クラスにしているのは、このステートマシン図が「Sample」クラスの振る舞いのモデル図であるとわかるようにするためです。</p>
+</div>
+<div class="sect4">
+<h5 id="add_stm_sample01"><a class="anchor" href="#add_stm_sample01"></a>クラスにステートマシン図を追加する</h5>
+<div class="paragraph">
+<p>「Sample」クラスにステートマシン図を追加します。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>構造ツリーから「Sample」クラスを選択する。</p>
+</li>
+<li>
+<p>右クリックしてポップアップメニューを表示する（ <a href="#add_stm_sample02">図 3.3</a> ）。</p>
+</li>
+<li>
+<p>「図の追加＞ステートマシン図」を選択すると、ステートマシン図が追加される。</p>
+</li>
+</ul>
+</div>
+<div id="add_stm_sample02" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220213-020944.png" alt="GSW 20220213 020944" width="75%">
+</div>
+<div class="title">図 3.3 「Sample」クラスにステートマシン図を追加する</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>プロパティーから図の名前を編集し、「Sampleのplayのステートマシン図」とする（ <a href="#add_stm_sample03">図 3.4</a> ）。</p>
+</li>
+<li>
+<p>ダイアグラムエディタのタイトルやタブにも図の名前が反映される。</p>
+</li>
+</ul>
+</div>
+<div id="add_stm_sample03" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220213-013034.png" alt="GSW 20220213 013034" width="75%">
+</div>
+<div class="title">図 3.4 追加したステートマシン図に名前をつける</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">【参考】ステートマシン図を学ぶチュートリアル</div>
+<div class="paragraph">
+<p>ここでは、モデルとコードの対応づけを説明するために、振る舞いのモデルの一種であるステートマシン図を作成しています。
+ステートマシン図を使って振る舞いを設計する方法については、次のチュートリアルも参考にしてみてください。</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">ステートマシン図 &amp; 状態遷移表チュートリアル</dt>
+<dd>
+<p><code><a href="https://www.changevision.co/tutorial-statemachine-japanese.html" class="bare">https://www.changevision.co/tutorial-statemachine-japanese.html</a></code></p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="注記"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><a href="#add_stm_sample02">図 3.3</a> では、Sampleクラスの振舞いを表すステートマシン図とわかるようにと考えて、クラスに対してステートマシン図を割り当てました。
+この他、 astah* では、メソッドに対してステートマシン図を割り当てることもできます。
+任意のメソッドの処理を示すステートマシン図の割当てとしては、後者のほうが好ましいでしょう。
+ここでは、クラスの振舞いということを意識して、クラス図に割当ててみています。
+どちらの方法を使うにしても、クラスの振舞いを担当するメソッドを対応づけすることは必要になるでしょう。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ステートマシン図に状態を追加する"><a class="anchor" href="#_ステートマシン図に状態を追加する"></a>3.1.3 ステートマシン図に状態を追加する</h4>
+<div class="paragraph">
+<p>次に、追加したステートマシン図に、状態を追加します。</p>
+</div>
+<div class="olist arabic">
+<div class="title">ステートマシン図に状態を追加する</div>
+<ol class="arabic">
+<li>
+<p>パレットから「状態」を選択し、ステートマシン図に状態を追加する。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>追加した状態の状態名は「状態0」（数字は追加の都度変わる）となっている（ <a href="#add_stm_sample04">図 3.5</a> ）。</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="add_stm_sample04" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220213-093229.png" alt="GSW 20220213 093229" width="75%">
+</div>
+<div class="title">図 3.5 新しい状態を追加した</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>「状態0」を選択し、プロパティーの「ベース」タブの「名前」を編集して、状態の名前を「ST0」にする（ <a href="#add_stm_sample05">図 3.6</a> ）。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>状態「ST0」は、このサンプルの例示用に使う状態名の1つ。</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="add_stm_sample05" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220213-104448.png" alt="GSW 20220213 104448" width="75%">
+</div>
+<div class="title">図 3.6 新しい状態に状態名をつけた</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="3">
+<li>
+<p>このサンプルでは3つの状態を使いたいので、状態をもう2つ追加する（ <a href="#add_stm_sample06">図 3.7</a> ）。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>「ST1」、「ST2」を追加した。</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="add_stm_sample06" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220213-111820.png" alt="GSW 20220213 111820" width="75%">
+</div>
+<div class="title">図 3.7 新しい状態に状態名をつけた</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="3">
+<li>
+<p>開始疑似状態、終了疑似状態を追加した（ <a href="#add_stm_sample07">図 3.8</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="add_stm_sample07" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220213-112341.png" alt="GSW 20220213 112341" width="75%">
+</div>
+<div class="title">図 3.8 開始疑似状態、終了疑似状態を追加した</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ステートマシン図に状態遷移を追加する"><a class="anchor" href="#_ステートマシン図に状態遷移を追加する"></a>3.1.4 ステートマシン図に状態遷移を追加する</h4>
+<div class="paragraph">
+<p>状態が追加できたので、こんどは状態遷移を追加しましょう。
+ステートマシン図には、通常の状態のほかにいくつかの「疑似状態」が登場します。
+たとえば、「開始疑似状態」は、この図における最初の状態を示すのに使います。
+「終了疑似状態」は、その図における最後の状態（1つとは限りません）を示すのに使います。</p>
+</div>
+<div id="add_stm_trans00" class="olist arabic">
+<div class="title">状態遷移を追加する</div>
+<ol class="arabic">
+<li>
+<p>パレットから「遷移」を選択して、「開始疑似状態」の内部へマウスカーソルを移動し、青枠が表示されるのを待つ（ <a href="#add_stm_trans01">図 3.9</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="add_stm_trans01" class="imageblock">
+<div class="content">
+<img src="images/add_stm_transition_58.png" alt="add stm transition 58" width="75%">
+</div>
+<div class="title">図 3.9 開始疑似状態の内側で青枠を表示させる</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>青枠が表示されたらマウスカーソルをドラッグする（マウスのボタンを押したままマウスカーソルを移動する）。</p>
+</li>
+<li>
+<p>マウスカーソルを「ST0」へドラッグして青枠が表示されるのを待つ（ <a href="#add_stm_trans02">図 3.10</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="add_stm_trans02" class="imageblock">
+<div class="content">
+<img src="images/add_stm_transition_73.png" alt="add stm transition 73" width="75%">
+</div>
+<div class="title">図 3.10 「ST0」へマウスカーソルをドラッグして青枠が表示されるのを待つ</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="4">
+<li>
+<p>「ST0」でも青枠が表示されたらマウスのボタンを離すと状態遷移が引かれる（ <a href="#add_stm_trans03">図 3.11</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="add_stm_trans03" class="imageblock">
+<div class="content">
+<img src="images/add_stm_transition_81.png" alt="add stm transition 81" width="75%">
+</div>
+<div class="title">図 3.11 「ST0」でも青枠が表示されたらマウスのボタンを離すと状態遷移が引かれる</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="4">
+<li>
+<p>ほかの状態についても <a href="#add_stm_trans04">図 3.12</a> と同じように状態遷移を追加する。</p>
+</li>
+</ol>
+</div>
+<div id="add_stm_trans04" class="imageblock">
+<div class="content">
+<img src="images/add_stm_transition_215.png" alt="add stm transition 215" width="75%">
+</div>
+<div class="title">図 3.12 ほかの状態遷移も追加する</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_状態とイベントと状態遷移の関係"><a class="anchor" href="#_状態とイベントと状態遷移の関係"></a>3.1.5 状態とイベントと状態遷移の関係</h4>
+<div class="sect4">
+<h5 id="_状態とイベント"><a class="anchor" href="#_状態とイベント"></a>状態とイベント</h5>
+<div class="paragraph">
+<p>ステートマシン図において、状態は「イベント」の発生を待っているところです。
+多くの場合、イベントは、そのクラス自身の操作では処理を先に進められなくなるようなできごとです。
+たとえば、外部からの入力（操作待ちや受信待ちなど）や、一定の時間経過などがイベントの候補になります。</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_状態遷移"><a class="anchor" href="#_状態遷移"></a>状態遷移</h5>
+<div class="paragraph">
+<p>状態遷移は、ある状態において待っていたイベントが発生して、別の状態へ移ることを表しています。
+イベントには、イベントが発生したとき、実際に遷移するか判定する条件を追加できます。
+この条件のことを「ガード条件」と呼びます。
+ガード条件つきのイベントでは、イベントが発生したときにガード条件を評価し、条件が真なら状態遷移します。
+ガード条件が偽のとき、イベントは起きたことになります（消費されると呼びます）が、状態は遷移しません。</p>
+</div>
+<div class="paragraph">
+<p>そして、状態遷移には、イベントが発生したときに実行したい処理を追加できます。
+この処理のことを「アクション（またはエフェクト）」と呼びます。</p>
+</div>
+<div class="paragraph">
+<p>イベントが発生すると、ガード条件つきのイベントならさらにガード条件も真なら、状態遷移に伴うアクションが実行され、それから次の状態へ遷移します。</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ステートマシン図にイベントやアクションを追加する"><a class="anchor" href="#_ステートマシン図にイベントやアクションを追加する"></a>3.1.6 ステートマシン図にイベントやアクションを追加する</h4>
+<div class="paragraph">
+<p>まず、「ST0」から「ST1」への状態遷移を、イベントが「ev1」でガード条件は「gd（が真）」のとき、アクション「act1」を実行するよう編集してみましょう。</p>
+</div>
+<div id="add_evt_act00" class="olist arabic">
+<div class="title">状態遷移にイベントやアクションを追加する（１）</div>
+<ol class="arabic">
+<li>
+<p>「ST0」から「ST1」への状態遷移を選択し、この遷移のプロパティーを表示し、ベースタブを開く。</p>
+</li>
+<li>
+<p>プロパティーを編集する（ <a href="#add_evt_act01">図 3.13</a> ）。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>「トリガー」にイベント名を設定する。ここでは「ev1」というイベントを設定する。</p>
+</li>
+<li>
+<p>「ガード」にガード条件を設定する。ここでは「gd1（が真）」を設定しする。</p>
+</li>
+<li>
+<p>「アクション」にアクションを設定する。ここでは「act1」という処理があるとして、これを設定する。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>act1は、2つの引数（イベントとパラメーター）を持つメソッドと想定する。</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="add_evt_act01" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220215-071155.png" alt="GSW 20220215 071155" width="75%">
+</div>
+<div class="title">図 3.13 「ST0」から「ST1」への状態遷移のイベントとアクションを編集する</div>
+</div>
+<div class="paragraph">
+<p>次に、「ST1」からの「ST2」への遷移です。
+この遷移に割り当てるイベントは、「ev2」、アクションを「act2」とします。
+そして、このアクションの実行後、ガード条件「gd2」が真なら「ST2」へ、偽ならアクション「act3」を実行してから「ST1」へ遷移するように変更してみます。</p>
+</div>
+<div class="paragraph">
+<p>遷移先が2つあるなら、状態遷移を別々に引けばよさそうです。
+ところが、同じイベントを待ってる遷移先が2つ以上あると、どちらの状態へ遷移するのか決定できなくなります（あいまいな状態遷移と呼びます）。
+そこで、1つのイベントによる遷移先が状況によって変わる場合には「選択疑似状態」を使います。</p>
+</div>
+<div id="add_evt_act02" class="olist arabic">
+<div class="title">状態遷移にイベントやアクションを追加する（２）</div>
+<ol class="arabic">
+<li>
+<p>パレットから「選択疑似状態」を選択し、ステートマシン図に追加する（ <a href="#add_evt_act03">図 3.14</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="add_evt_act03" class="imageblock">
+<div class="content">
+<img src="images/add_stm_trans45.png" alt="add stm trans45" width="75%">
+</div>
+<div class="title">図 3.14 「選択疑似状態」をステートマシン図に追加する</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>「ST1」から「ST2」への状態遷移を選択し、「ST2」側のハンドル（丸印）をマウスでつまみ、「選択疑似状態」へつなぎ直す（ <a href="#add_evt_act04">図 3.15</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="add_evt_act04" class="imageblock">
+<div class="content">
+<img src="images/add_stm_trans120.png" alt="add stm trans120" width="75%">
+</div>
+<div class="title">図 3.15 既存の状態遷移を追加した「選択疑似状態」へつなぎ直す</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="3">
+<li>
+<p>「選択疑似状態」から「ST0」と「ST2」への状態遷移を追加する（ <a href="#add_evt_act05">図 3.16</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="add_evt_act05" class="imageblock">
+<div class="content">
+<img src="images/add_stm_trans218.png" alt="add stm trans218" width="75%">
+</div>
+<div class="title">図 3.16 「選択疑似状態」から「ST0」と「ST2」への状態遷移を追加する</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="4">
+<li>
+<p>それぞれの遷移のプロパティーを編集する（ <a href="#add_evt_act06">図 3.17</a> ）。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>トリガーに「ev2」、ガード条件はなし、アクションを「act2」に設定する。</p>
+</li>
+<li>
+<p>ガードにガード条件「!gd2（gd2ではない）」、アクションを「act3」に設定する。</p>
+</li>
+<li>
+<p>ガードにガード条件「gd2」に設定する。</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="add_evt_act06" class="imageblock">
+<div class="content">
+<img src="images/add_stm_trans589.png" alt="add stm trans589" width="75%">
+</div>
+<div class="title">図 3.17 状態遷移のイベントとアクションを編集する</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="5">
+<li>
+<p>同様にして、もう2つほど状態遷移を追加する（ <a href="#add_evt_act07">図 3.18</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="add_evt_act07" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220216-045358.png" alt="GSW 20220216 045358" width="75%">
+</div>
+<div class="title">図 3.18 さらに状態遷移とイベントとアクションを追加した</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ステートマシン図に対応するコードを作成する"><a class="anchor" href="#_ステートマシン図に対応するコードを作成する"></a>3.1.7 ステートマシン図に対応するコードを作成する</h4>
+<div class="paragraph">
+<p>ステートマシン図ができたので、この図に合うようなRubyのコードを作成すルールを考えましょう。</p>
+</div>
+<div class="sect4">
+<h5 id="_状態を保持する変数を追加する"><a class="anchor" href="#_状態を保持する変数を追加する"></a>状態を保持する変数を追加する</h5>
+<div class="paragraph">
+<p>まず、「Sample」クラスに状態を保持するインスタンス変数を追加します（ <a href="#ruby_sample02">リスト 3.2</a> ）。
+初期値は、最初の状態（ ST0 ）にします。</p>
+</div>
+<div id="ruby_sample02" class="listingblock">
+<div class="title">リスト 3.2 【Ruby】状態を保持するインスタンス変数を追加する</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="ruby">class Sample
+  def initialize
+    @state = :ST0 <i class="conum" data-value="1"></i><b>(1)</b>
+    @attr_a = true
+    @attr_b = true
+  end
+
+  # 略
+
+end</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>現在の状態を保持する変数を用意し、 ST0 で初期化する。「 :ST0 」はRubyのシンボルの表記法。シンボルは名前付きの数値定数。</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_状態遷移を担当するメソッドを作成する"><a class="anchor" href="#_状態遷移を担当するメソッドを作成する"></a>状態遷移を担当するメソッドを作成する</h5>
+<div class="paragraph">
+<p>ステートマシン図に書いた状態遷移を担当する操作「play」をplayメソッドとして作成します（ <a href="#ruby_sample03">リスト 3.3</a> ）。
+ルールの検討用なので、途中には処理の確認用の表示処理を書いておきます。</p>
+</div>
+<div id="ruby_sample03" class="listingblock">
+<div class="title">リスト 3.3 【Ruby】状態遷移を担当するメソッドを作成する</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="ruby">class Sample
+  def initialize
+    # 略
+  end
+
+  def play(evt, param)
+    puts "#{@state} -&gt;" <i class="conum" data-value="1"></i><b>(1)</b>
+    puts "  event:#{evt}, param: #{param}" <i class="conum" data-value="2"></i><b>(2)</b>
+    case @state <i class="conum" data-value="3"></i><b>(3)</b>
+    when :ST0
+      st0_proc(evt, param) <i class="conum" data-value="4"></i><b>(4)</b>
+    when :ST1
+      st1_proc(evt, param)
+    when :ST2
+      # none
+    end
+    puts "       -&gt; #{@state}" <i class="conum" data-value="5"></i><b>(5)</b>
+    puts 'finished.' if @state == :ST2 <i class="conum" data-value="6"></i><b>(6)</b>
+  end
+end</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>遷移前の状態を表示する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>イベントとパラメーターを表示する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>状態ごとの処理を case文を使って分岐する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>状態ごとの詳細な処理を担当するメソッドを呼び出す（ここでは st0_proc） 。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>遷移後の状態を表示する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>終了状態になったことを知らせる。</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_ガード条件の判定用メソッドを作成する"><a class="anchor" href="#_ガード条件の判定用メソッドを作成する"></a>ガード条件の判定用メソッドを作成する</h5>
+<div class="paragraph">
+<p>このサンプルのステートマシン図には、状態遷移のガード条件として「gd1」「gd2」が登場します。
+これらをrubyのメソッドとして作成します。
+rubyでは、真偽値を返すメソッドには「?」をつける習慣がありますので、これにしたがってメソッド名は「gd1?」「gd2?」とします。
+サンプルとして、属性の値を使った演算を割り当てました（ <a href="#ruby_sample04">リスト 3.4</a> ）。</p>
+</div>
+<div id="ruby_sample04" class="listingblock">
+<div class="title">リスト 3.4 【Ruby】ガード条件のメソッドを作成する</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="ruby">class Sample
+  def initialize
+    # 略
+  end
+
+  def play
+    # 略
+  end
+
+  def gd1? <i class="conum" data-value="1"></i><b>(1)</b>
+    @attr_a &amp;&amp; @attr_b <i class="conum" data-value="2"></i><b>(2)</b>
+  end
+
+  def gd2? <i class="conum" data-value="3"></i><b>(3)</b>
+    !@attr_a || @attr_b
+  end
+end</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>「gd1」用のメソッド。真偽値を返すメソッドに「?」をつけるRubyの習慣に倣った。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>属性値を使った条件式の例。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>「gd2」用のメソッド。</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_状態遷移を追加する１"><a class="anchor" href="#_状態遷移を追加する１"></a>状態遷移を追加する（１）</h5>
+<div class="paragraph">
+<p>状態ごとの処理を受け持つメソッドを作成します。
+メソッド名は、状態名を小文字して「_proc」をつけるというルールにします。
+したがって、状態名「ST0」の場合、メソッド名は「st0_proc」になります（ <a href="#ruby_sample05">リスト 3.5</a> ）。</p>
+</div>
+<div id="ruby_sample05" class="listingblock">
+<div class="title">リスト 3.5 【Ruby】「ST0」の状態遷移のメソッドを作成する</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="ruby">class Sample
+  def initialize
+    # 略
+  end
+
+  def play
+    # 略
+  end
+
+  def st0_proc(evt, param)
+    case evt <i class="conum" data-value="1"></i><b>(1)</b>
+    when :ev1 <i class="conum" data-value="2"></i><b>(2)</b>
+      if gd1? <i class="conum" data-value="3"></i><b>(3)</b>
+        puts "    gd1: #{gd1?}"
+        act1(evt, param) <i class="conum" data-value="4"></i><b>(4)</b>
+        @state = :ST1 <i class="conum" data-value="5"></i><b>(5)</b>
+      else <i class="conum" data-value="6"></i><b>(6)</b>
+        puts "    &lt;&lt;&lt; gd1: #{gd1?}, transition is ignored. &gt;&gt;&gt;"
+      end
+    when :ev3 <i class="conum" data-value="7"></i><b>(7)</b>
+      act3(evt, param)
+      @state = :ST2
+    end
+  end
+
+  # gd1?, gd2? が続く
+end</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>イベントで場合分けする。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>イベントが「ev1」の場合。イベントはRubyのシンボルを使って表す。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>ガード条件による判定。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>アクション「act1」の呼び出し。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>次の状態「ST1」への遷移。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>ガード条件が偽だったとき。イベントが無視されたことを表示する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>イベントが「ev3」の場合。</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>この部分のRubyのコードとステートマシン図の対応を図で表してみましょう（ <a href="#ruby_sample06">図 3.19</a> ）。</p>
+</div>
+<div id="ruby_sample06" class="imageblock">
+<div class="content">
+<img src="images/ruby_sample05.png" alt="ruby sample05" width="100%">
+</div>
+<div class="title">図 3.19 Rubyのコードとステートマシン図の対応関係（１）</div>
+</div>
+<div class="paragraph">
+<p>おおむねのことは <a href="#ruby_sample06">図 3.19</a> を読めばわかるでしょうが、対応関係を説明しておきます。</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">ガード条件のある状態遷移をRubyのコードで表すルール</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>遷移元の状態で待っているイベントごとに場合分けする。</p>
+</li>
+<li>
+<p>ガード条件なしのときは（アクションがあればそれを呼び出して）、次の状態へ遷移する。</p>
+</li>
+<li>
+<p>ガード条件があるときは、先にガード条件を評価して、真であればアクションを実行して次の状態へ遷移する。</p>
+</li>
+<li>
+<p>ガード条件が偽のときは、アクションは実行されず、状態も遷移しない。</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_状態遷移を追加する２"><a class="anchor" href="#_状態遷移を追加する２"></a>状態遷移を追加する（２）</h5>
+<div class="paragraph">
+<p>こんどは、「ST1」からの状態遷移に対するメソッド「st1_proc」です（ <a href="#ruby_sample07">リスト 3.6</a> ）。</p>
+</div>
+<div id="ruby_sample07" class="listingblock">
+<div class="title">リスト 3.6 【Ruby】「ST1」の状態遷移のメソッドを作成する</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="ruby">class Sample
+  def initialize
+    # 略
+  end
+
+  def play
+    # 略
+  end
+
+  def st0_proc(evt, param)
+    # 略
+  end
+
+  def st1_proc(evt, param)
+    case evt
+    when :ev2 <i class="conum" data-value="1"></i><b>(1)</b>
+      act2(evt, param) <i class="conum" data-value="2"></i><b>(2)</b>
+      puts "    gd2: #{gd2?}"
+      if gd2? <i class="conum" data-value="3"></i><b>(3)</b>
+        @state = :ST2 <i class="conum" data-value="4"></i><b>(4)</b>
+      else
+        act3(evt, param) <i class="conum" data-value="5"></i><b>(5)</b>
+        @state = :ST0 <i class="conum" data-value="6"></i><b>(6)</b>
+      end
+    when :ev3 <i class="conum" data-value="7"></i><b>(7)</b>
+      act3(evt, param)
+      @state = :ST0
+    end
+  end
+
+  # gd1?, gd2? が続く
+end</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>イベントが「ev2」の場合。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>アクション「act2」の呼び出し。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>選択疑似状態におけるガード条件による判定。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>次の状態「ST0」への遷移。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>選択疑似状態からの遷移におけるアクション「act3」の呼び出し。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>次の状態「ST2」への遷移。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>イベントが「ev3」の場合。</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>この部分のRubyのコードとステートマシン図の対応を図で表してみましょう（ <a href="#ruby_sample08">図 3.20</a> ）。</p>
+</div>
+<div id="ruby_sample08" class="imageblock">
+<div class="content">
+<img src="images/ruby_sample08.png" alt="ruby sample08" width="100%">
+</div>
+<div class="title">図 3.20 Rubyのコードとステートマシン図の対応関係（２）</div>
+</div>
+<div class="paragraph">
+<p>おおむねのことは <a href="#ruby_sample08">図 3.20</a> を読めばわかるでしょうが、対応関係を説明しておきます。</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">選択疑似状態がある状態遷移をRubyのコードで表すルール</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>選択疑似状態の前の状態遷移については、<a href="#ruby_sample06">図 3.19</a> のルールで賄う。</p>
+</li>
+<li>
+<p>その後で、選択疑似状態の後の状態遷移のガード条件を評価する。</p>
+</li>
+<li>
+<p>評価結果によって（アクションがあれば実行してから）、次の状態へ遷移する。</p>
+</li>
+<li>
+<p>選択疑似状態の後の状態遷移は、ガード条件による場合分けで漏れる場合がないように注意する。</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>このサンプルでは、アクション「act1」、「act2」、「act3」は、定めたルールを確認しやすいメソッドにしておきます（ <a href="#ruby_sample09">リスト 3.7</a> ）。
+これらのアクションと、先に挙げたガード条件をチェックするメソッドは、「Sample」クラス内部のメソッドだけが使います。そこで、Rubyのコードでもこれらのメソッドのスコープを「private」にしましょう。Rubyでは、「private」キーワードを追加してその後にメソッドを配置します。</p>
+</div>
+<div id="ruby_sample09" class="listingblock">
+<div class="title">リスト 3.7 【Ruby】「ST1」の状態遷移のメソッドを作成する</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="ruby">class Sample
+  # initialize、play、st0_proc、st1_proc の定義を省略
+
+  praivate <i class="conum" data-value="1"></i><b>(1)</b>
+
+  def act1(evt, prm)
+    puts "     act1: event:#{evt}, param: #{prm}"
+  end
+
+  def act2(evt, prm)
+    puts "     act2: event:#{evt}, param: #{prm}"
+  end
+
+  def act3(evt, prm)
+    puts "     act3: event:#{evt}, param: #{prm}"
+  end
+
+  def gd1? <i class="conum" data-value="2"></i><b>(2)</b>
+    @attr_a &amp;&amp; @attr_b
+  end
+
+  def gd2?
+    !@attr_a || @attr_b
+  end
+end</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>この宣言以降のメソッドは、可視性が「private」なメソッドになる。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>ガード条件の判定用メソッドも「private」なメソッドに含めた。</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>これで、ステートマシン図で表したクラスの振る舞いをRubyのコードに対応づけられました。</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_追加したアクションをクラス図に反映する"><a class="anchor" href="#_追加したアクションをクラス図に反映する"></a>3.1.8 追加したアクションをクラス図に反映する</h4>
+<div class="paragraph">
+<p>ステートマシン図を作成するときに追加したアクションは、このステートマシン図を割り当てているクラス（ここでは「Sample」クラス）の操作にしておきましょう。
+ここで、「Sample」クラスをテストするクラス「SampleTest」も追加しておきます。</p>
+</div>
+<div id="update_sample_class00" class="olist arabic">
+<div class="title">イベントやアクションをクラス図に反映する</div>
+<ol class="arabic">
+<li>
+<p>クラス図を開く。</p>
+</li>
+<li>
+<p>「Sample」クラスを選択し、プロパティーから「操作」タブを表示する。</p>
+</li>
+<li>
+<p>「＋」アイコンを使って操作「act1」を追加する。</p>
+</li>
+<li>
+<p>可視性を「private」に設定する。</p>
+</li>
+<li>
+<p>「act2」、「act3」についても同じように設定する（ <a href="#update_sample_class01">図 3.21</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="update_sample_class01" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220216-050914.png" alt="GSW 20220216 050914" width="75%">
+</div>
+<div class="title">図 3.21 「Sample」クラス内部で使う操作「act1、「act2」「act3」を追加する</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="6">
+<li>
+<p>ガード条件に使うメソッド「gd1?」「gd2?」も追加しておく。</p>
+</li>
+<li>
+<p>「SampleTest」クラスを追加する（ <a href="#update_sample_class02">図 3.22</a> ）。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>このテスト用クラスには、テストを実行する「run」メソッドを用意しておく。</p>
+</li>
+<li>
+<p>テスト用のメソッドをいくつか追加しておく。</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>「SampleTest」から「Sample」クラスへ関連を引き、関連端名を「samp01」、多重度を「1」としておく。</p>
+</li>
+</ol>
+</div>
+<div id="update_sample_class02" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220224-113632.png" alt="GSW 20220224 113632" width="75%">
+</div>
+<div class="title">図 3.22 「SampleTest」クラスと関連を追加する</div>
+</div>
+<div class="paragraph">
+<p>これで、クラス図とステートマシン図とRubyのコードの対応づけができました。
+実際の問題について、クラス図やステートマシン図を作成するときは、このようなルールを使う前提で作成します。
+そして、Rubyでコードを作成するときは、作成した図と対網づけのルールを使ってコードを作成します。</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">【参考】列挙型（enum）をクラス図に反映する方法について</div>
+<div class="paragraph">
+<p>Rubyにはenumのような列挙子を直接定義する方法がないので、このチュートリアルの簡単のために、状態を表す定数を定義するために「シンボル（:ST0など）」を使いました。</p>
+</div>
+<div class="paragraph">
+<p>astah* は、Java, C#、C++ については、enumを設定する方法を提供していますので、その方法で代用してもよいでしょう。</p>
+</div>
+<div class="paragraph">
+<p>詳しい設定方法については、次の記事を参考にしてみてください。</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Java、enumの設定</dt>
+<dd>
+<p><code><a href="http://astah-users.change-vision.com/ja/modules/xhnewbb/viewtopic.php?topic_id=1249" class="bare">http://astah-users.change-vision.com/ja/modules/xhnewbb/viewtopic.php?topic_id=1249</a></code></p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_変換ルールを使ったコードを確認する"><a class="anchor" href="#_変換ルールを使ったコードを確認する"></a>3.2 変換ルールを使ったコードを確認する</h3>
+<div class="paragraph">
+<p>検討用のクラス図とステートマシン図に対応づけたRubyのプログラムの動作を確認してみましょう。</p>
+</div>
+<div class="sect3">
+<h4 id="_検討用モデルに対応したrubyプログラムの全体"><a class="anchor" href="#_検討用モデルに対応したrubyプログラムの全体"></a>3.2.1 検討用モデルに対応したRubyプログラムの全体</h4>
+<div class="paragraph">
+<p>作成したプログラムの全体を <a href="#ruby_sample_code01">リスト 3.8</a>  に示します。
+このプログラムのコードには、「SampleTest」のインスタンスを作成して、テストを起動する処理や、テストメソッドの具体例が含まれています。
+テストクラスやテスト用メソッドの細かい説明は省きます。</p>
+</div>
+<div id="ruby_sample_code01" class="listingblock">
+<div class="title">リスト 3.8 【Ruby】stm_sample.rb</div>
+<div class="content">
+<pre class="prettyprint highlight linenums"><code data-lang="ruby"># frozen_string_literal: true <i class="conum" data-value="1"></i><b>(1)</b>
+
+# ステートマシン図とコードの対応づけルールの検討用クラス
+class Sample
+  attr_accessor :attr_a, :attr_b <i class="conum" data-value="2"></i><b>(2)</b>
+
+  def initialize
+    @state = :ST0
+    @attr_a = true
+    @attr_b = true
+  end
+
+  def st0_proc(evt, param)
+    case evt
+    when :ev1
+      if gd1? # guard
+        puts "    gd1: #{gd1?}"
+        act1(evt, param)
+        @state = :ST1
+      else
+        puts "    &lt;&lt;&lt; gd1: #{gd1?}, transition is ignored. &gt;&gt;&gt;"
+      end
+    when :ev3
+      act3(evt, param)
+      @state = :ST2
+    end
+  end
+
+  def st1_proc(evt, param)
+    case evt
+    when :ev2
+      act2(evt, param)
+      puts "    gd2: #{gd2?}"
+      if gd2? # guard on choice.
+        @state = :ST2
+      else
+        act3(evt, param)
+        @state = :ST0
+      end
+    when :ev3
+      act3(evt, param)
+      @state = :ST0
+    end
+  end
+
+  def play(evt, param)
+    puts "#{@state} -&gt;"
+    puts "  event:#{evt}, param: #{param}"
+    case @state
+    when :ST0
+      st0_proc(evt, param)
+    when :ST1
+      st1_proc(evt, param)
+    when :ST2
+      # none
+    end
+    puts "       -&gt; #{@state}"
+    puts 'finished.' if @state == :ST2
+  end
+
+  private
+
+  def act1(evt, prm)
+    puts "     act1: event:#{evt}, param: #{prm}"
+  end
+
+  def act2(evt, prm)
+    puts "     act2: event:#{evt}, param: #{prm}"
+  end
+
+  def act3(evt, prm)
+    puts "     act3: event:#{evt}, param: #{prm}"
+  end
+
+  def gd1?
+    @attr_a &amp;&amp; @attr_b
+  end
+
+  def gd2?
+    !@attr_a || @attr_b
+  end
+end
+
+# 検討用クラスのテストケースを提供するクラス
+class SampleTest <i class="conum" data-value="3"></i><b>(3)</b>
+  def test_base(events, data)
+    samp01 = Sample.new
+    samp01.attr_a = data[0]
+    samp01.attr_b = data[1]
+    events.each do |evt|
+      samp01.play(evt, Time.now.usec)
+    end
+    puts '================'
+  end
+
+  def test01
+    test_base(%i[ev1 ev2], [true, true])
+  end
+
+  def test02
+    test_base(%i[ev1 ev3], [false, false]) # :ev1 will be ignored.
+  end
+
+  def test03
+    test_base(%i[ev1 ev2 ev3], [true, false])
+  end
+
+  def run
+    test01
+    test02
+    test03
+  end
+end
+
+if $PROGRAM_NAME == __FILE__ <i class="conum" data-value="4"></i><b>(4)</b>
+  test = SampleTest.new
+  test.run
+end</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>文字列の破壊的変更の検出を指示するマジックコメント。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>簡便にテストするために、アクセサーを追加した（あくまでこのサンプルにおける便宜として）。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Sampleクラスのメソッドを呼び出すテストを定義したテスト用のクラスの定義。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>テスト用クラスを実行するコード。このブロックはファイル名と実行プログラム名が一致するときに有効になる（そのときだけ実行される）。</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_検討用モデルに対応したrubyプログラムを動かす"><a class="anchor" href="#_検討用モデルに対応したrubyプログラムを動かす"></a>3.2.2 検討用モデルに対応したRubyプログラムを動かす</h4>
+<div class="paragraph">
+<p>コマンドプロンプトを起動して（MacやLinuxならターミナルを起動して）、プログラムを実行してみます（ <a href="#ruby_sample_code02">リスト 3.9</a> ）。</p>
+</div>
+<div class="paragraph">
+<p>動作させると、状態遷移やイベントが表示されます。
+作成したモデル図を比較して期待した動作をしているか確認してみましょう。</p>
+</div>
+<div id="ruby_sample_code02" class="listingblock">
+<div class="title">リスト 3.9 【端末】stm_sample.rb を実行する</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="console">C:\Users\kuboaki&gt;cd Desktop\BowlingScore
+
+C:\Users\kuboaki\Desktop\BowlingScore&gt;ruby stm_sample.rb
+ST0 -&gt;
+  event:ev1, param: 676481
+    gd1: true
+     act1: event:ev1, param: 676481
+       -&gt; ST1
+ST1 -&gt;
+  event:ev2, param: 678623
+     act2: event:ev2, param: 678623
+    gd2: true
+       -&gt; ST2
+finished.
+================
+ST0 -&gt;
+  event:ev1, param: 680596
+    &lt;&lt;&lt; gd1: false, transition is ignored. &gt;&gt;&gt;
+       -&gt; ST0
+ST0 -&gt;
+  event:ev3, param: 681783
+     act3: event:ev3, param: 681783
+       -&gt; ST2
+finished.
+================
+ST0 -&gt;
+  event:ev1, param: 683477
+    &lt;&lt;&lt; gd1: false, transition is ignored. &gt;&gt;&gt;
+       -&gt; ST0
+ST0 -&gt;
+  event:ev2, param: 685784
+       -&gt; ST0
+ST0 -&gt;
+  event:ev3, param: 708214
+     act3: event:ev3, param: 708214
+       -&gt; ST2
+finished.
+================
+
+C:\Users\kuboaki\Desktop\BowlingScore&gt;</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_まとめ_2"><a class="anchor" href="#_まとめ_2"></a>3.3 まとめ</h3>
+<div class="paragraph">
+<p>クラス図とステートマシン図で動作を表現すれば、Rubyのコードに変換できることがわかりました。</p>
+</div>
+<div class="sect3">
+<h4 id="_構造のモデルを作成した手順_2"><a class="anchor" href="#_構造のモデルを作成した手順_2"></a>3.3.1 構造のモデルを作成した手順</h4>
+<div class="paragraph">
+<p>構造のモデルに登場する構成要素や要素間の関連を見つけ出し、スコアシートの構造を整理しました。</p>
+</div>
+<div id="step_for_structure_model02" class="sidebarblock">
+<div class="content">
+<div class="title">スコアシートの構造のモデルを作成した手順</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>スコアシートに関する構成要素の発見</p>
+<div class="ulist">
+<ul>
+<li>
+<p>具体的なスコアシートを観察して、そこにある要素を洗い出してオブジェクト図で表した。</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>スコアシートに関するクラス図の作成</p>
+<div class="ulist">
+<ul>
+<li>
+<p>オブジェクト図に登場したオブジェクトからクラスを、オブジェクト同士のリンクから関連を見出し、クラス図に表した。</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_構造のモデルだけではプログラムは作れない"><a class="anchor" href="#_構造のモデルだけではプログラムは作れない"></a>3.3.2 構造のモデルだけではプログラムは作れない</h4>
+<div class="paragraph">
+<p>構造のモデルを作ったことで、プログラムを構成する要素と、要素同士の関係（関連）を表せるようになりました。
+また、クラスのインスタンスをオブジェクト図に見合うように作成すれば、実際に観察したスコアシートと同じようなデータ構造を作成できることもわかりました。</p>
+</div>
+<div class="paragraph">
+<p>ところで、作りたかったのは、ボウリングのゲームスコアをつけるプログラムでした。
+つまり、プレーヤーがフレームごとに交代して投球し、そのたびにスコアを更新する処理です。
+ですが、これまでに作成した構造のモデルでは、ゲームの進行に応じてどんなことを処理するか表せていません。
+そのためには、処理の中身を表す「振る舞いのモデル」を作成する必要があります。
+次の章では、ステートマシン図を使って、フレームやスコアの振る舞いを表すモデルを作成します。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_behavior_design"><a class="anchor" href="#_behavior_design"></a>第4章 スコアやフレームの状態を調べる</h2>
+<div class="sectionbody">
+<div class="paragraph lead">
+<p>設計で作成するモデルと実装に使うプログラムの対応づけができたました。
+この対応づけを前提に、ボウリングスコアのモデルの作成を進めましょう。</p>
+</div>
+<div class="sect2">
+<h3 id="_フレームの状態について検討する"><a class="anchor" href="#_フレームの状態について検討する"></a>4.1 フレームの状態について検討する</h3>
+<div class="paragraph">
+<p><a href="#scoresheet01">図 2.1</a> を見ると、フレームの表示は、ゲームの進行状況によって変わっています。</p>
+</div>
+<div id="frama_differences" class="sidebarblock">
+<div class="content">
+<div class="title">ゲームの進行状況によってフレームの表示は異なる</div>
+<div class="ulist">
+<ul>
+<li>
+<p>まだプレーしていないフレーム</p>
+</li>
+<li>
+<p>1投目の投球を待っているフレーム（現在のプレーヤーの現在のフレームの1投目の前）</p>
+</li>
+<li>
+<p>2投目の投球を待っているフレーム（現在のプレーヤーの現在のフレームの2投目の前）</p>
+</li>
+<li>
+<p>2投目が投球されて獲得ピン数が確定したフレーム（1,2投目のピン数とトータルスコアが表示されている）</p>
+</li>
+<li>
+<p>ストライクのボーナスが確定しないフレーム（ストライクの記録だけでトータルスコアは表示されていない）</p>
+</li>
+<li>
+<p>スペアのボーナスが確定しないフレーム（1投目とスペアの記録だけでトータルスコアは表示されていない）</p>
+</li>
+<li>
+<p>スペアまたはストライクのボーナスが確定したフレーム（1,2投目のピン数とトータルスコアが表示されている）</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>それぞれについて、もう少し詳しく見てみましょう。</p>
+</div>
+<div class="sect3">
+<h4 id="_まだプレーしていないフレーム"><a class="anchor" href="#_まだプレーしていないフレーム"></a>4.1.1 まだプレーしていないフレーム</h4>
+<div class="paragraph">
+<p>まだプレーしてないフレームは、フレームの最初の状態です（ <a href="#reserved01">図 4.1</a> ）。
+このフレームは、ピン数の入力を待っていません。</p>
+</div>
+<div id="reserved01" class="imageblock">
+<div class="content">
+<img src="images/reserved.png" alt="reserved" width="75%">
+</div>
+<div class="title">図 4.1 まだプレーしていないフレーム</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_1投目の投球を待っているフレーム"><a class="anchor" href="#_1投目の投球を待っているフレーム"></a>4.1.2 1投目の投球を待っているフレーム</h4>
+<div class="paragraph">
+<p>現在プレー中のフレームで、まだ1投目が投球されていない状態のフレームです（ <a href="#before_1st01">図 4.2</a> ）。
+次にピン数を受け取ると、このフレームの1投目に記録されます。</p>
+</div>
+<div id="before_1st01" class="imageblock">
+<div class="content">
+<img src="images/before_1st.png" alt="before 1st" width="75%">
+</div>
+<div class="title">図 4.2 1投目の投球を待っているフレーム</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_2投目の投球を待っているフレーム"><a class="anchor" href="#_2投目の投球を待っているフレーム"></a>4.1.3 2投目の投球を待っているフレーム</h4>
+<div class="paragraph">
+<p>現在プレー中のフレームで、1投目がストライクでなかったときに2投目を待っている状態のフレームです（ <a href="#before_2nd01">図 4.3</a> ）。
+次にピン数を受け取ると、このフレームの2投目に記録されます。</p>
+</div>
+<div id="before_2nd01" class="imageblock">
+<div class="content">
+<img src="images/before_2nd.png" alt="before 2nd" width="75%">
+</div>
+<div class="title">図 4.3 2投目の投球を待っているフレーム</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_スペアのボーナスの確定待ちのフレーム"><a class="anchor" href="#_スペアのボーナスの確定待ちのフレーム"></a>4.1.4 スペアのボーナスの確定待ちのフレーム</h4>
+<div class="paragraph">
+<p>現在プレー中のフレームの前のフレームがスペアで、現在のフレームが1投目の投球を待っているとき、前のフレームはスペアボーナスの確定待ちの状態です（ <a href="#pending_spare01">図 4.4</a> ）。
+次にピン数を受け取ると、現在のフレームの1投目に記録されるとともに、前のフレームのスペアボーナスが確定します。</p>
+</div>
+<div id="pending_spare01" class="imageblock">
+<div class="content">
+<img src="images/pending_spare.png" alt="pending spare" width="75%">
+</div>
+<div class="title">図 4.4 スペアのボーナスの確定待ちのフレーム</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ストライクのボーナスの確定待ちのフレーム"><a class="anchor" href="#_ストライクのボーナスの確定待ちのフレーム"></a>4.1.5 ストライクのボーナスの確定待ちのフレーム</h4>
+<div class="paragraph">
+<p>ストライクボーナスの確定待ちには2通りの場合があります。</p>
+</div>
+<div class="paragraph">
+<p>1つ目は、現在プレー中のフレームの前のフレームがストライクで、現在のフレームが2投目の投球を待っているときです。
+このとき、前のフレームはストライクボーナスの確定待ちの状態です（ <a href="#pending_strike01">図 4.5</a> ）。
+次にピン数を受け取ると、現在のフレームの2投目に記録されるとともに、前のフレームのストライクボーナスが確定します。</p>
+</div>
+<div id="pending_strike01" class="imageblock">
+<div class="content">
+<img src="images/pending_strike.png" alt="pending strike" width="75%">
+</div>
+<div class="title">図 4.5 ストライクのボーナスの確定待ちのフレーム（次がストライクでない）</div>
+</div>
+<div class="paragraph">
+<p>2つ目は、現在プレー中のフレームが1投目の投球を待っていて、前のフレームと前の前のフレームがともにストライクであったとき（ダブルのとき）ときです。
+このとき、前の前のフレームはストライクボーナスの確定待ちの状態です（ <a href="#pending_double01">図 4.6</a> ）。
+次にピン数を受け取ると、現在のフレームの1投目に記録されるとともに、前の前のフレームのストライクボーナスが確定します。</p>
+</div>
+<div id="pending_double01" class="imageblock">
+<div class="content">
+<img src="images/pending_double.png" alt="pending double" width="75%">
+</div>
+<div class="title">図 4.6 ストライクのボーナスの確定待ちのフレーム（次がストライク）</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_獲得ピン数とボーナスが確定したフレーム"><a class="anchor" href="#_獲得ピン数とボーナスが確定したフレーム"></a>4.1.6 獲得ピン数とボーナスが確定したフレーム</h4>
+<div class="paragraph">
+<p>現在のフレームがスペアやストライクにならなかったとき、そのフレームはボーナスの確定待ちにならず、この段階でそのフレームのトータル（ボーナスなしの獲得ピン数）が確定します。</p>
+</div>
+<div class="paragraph">
+<p>スペアボーナスの確定待ち、またはストライクボーナスの確定待ちのフレームは、後のフレームの投球によってボーナスが確定すると、フレームのトータルが確定します。
+このとき、確定待ちのフレームでは、そのフレームの獲得ピン数と確定したボーナスの合計がそのフレームのトータルです。</p>
+</div>
+<div class="paragraph">
+<p>フレームのトータルが求められると、それ以前のフレームまでの「のべのトータル」にそのフレームのトータルを加算して、のべのトータルを更新します。そして、更新したのべのトータルがフレームの下部に記録されます（ <a href="#fixed01">図 4.7</a> ）。
+このとき、確定待ちになっていたフレームものべのトータルが更新され、その段階のゲームのトータルも更新されます。</p>
+</div>
+<div id="fixed01" class="imageblock">
+<div class="content">
+<img src="images/fixed01.png" alt="fixed01" width="75%">
+</div>
+<div class="title">図 4.7 2投目を投球して、ピン数が確定したフレーム（のべのトータルが求められている）</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_フレームの状態をステートマシン図で表す"><a class="anchor" href="#_フレームの状態をステートマシン図で表す"></a>4.2 フレームの状態をステートマシン図で表す</h3>
+<div class="paragraph">
+<p>フレームの状態を検討した結果、フレームはゲームの状況によって変わる複数の状態を持つことがわかりました。
+また、フレームが表示できる情報も、状態によって異なることがわかりました。
+このことを、モデル図を使って表してみましょう。
+状態とその推移（状態遷移と呼びます）を表すには、ステートマシン図を使います。</p>
+</div>
+<div class="sect3">
+<h4 id="_frameクラスにステートマシン図を追加する"><a class="anchor" href="#_frameクラスにステートマシン図を追加する"></a>4.2.1 「Frame」クラスにステートマシン図を追加する</h4>
+<div class="paragraph">
+<p>「Frame」クラスの状態を表す図を描きたいので、「Frame」クラスに図を追加しましょう。</p>
+</div>
+<div id="add_frame_stm00" class="olist arabic">
+<div class="title">「Frame」クラスにステートマシン図を追加する</div>
+<ol class="arabic">
+<li>
+<p>「Frame」クラスにステートマシン図を追加する</p>
+<div class="ulist">
+<ul>
+<li>
+<p>構造ツリーから「Frame」クラスを選択し、右クリックしてポップアップメニューを表示する（ <a href="#add_frame_stm01">図 4.8</a> ）。</p>
+</li>
+<li>
+<p>「図の追加＞ステートマシン図」でステートマシン図が追加される。</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="add_frame_stm01" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220207-154421.png" alt="GSW 20220207 154421" width="75%">
+</div>
+<div class="title">図 4.8 「Frame]クラスにステートマシン図を追加する</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>ステートマシン図に名前をつける</p>
+<div class="ulist">
+<ul>
+<li>
+<p>追加したステートマシン図のプロパティーの「ベース」を開く。</p>
+</li>
+<li>
+<p>名前を編集して「Frameクラスのステートマシン図」とする。</p>
+</li>
+<li>
+<p>ダイアグラムエディタのタイトルやタブにも反映される。</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_フレームのステートマシン図を作成する"><a class="anchor" href="#_フレームのステートマシン図を作成する"></a>4.2.2 フレームのステートマシン図を作成する</h4>
+<div class="paragraph">
+<p>ステートマシン図に、フレームの状態と状態遷移を追加しましょう。</p>
+</div>
+<div id="add_frame_state00" class="olist arabic">
+<div class="title">ステートマシン図に「Frame」クラスの状態遷移を作成する</div>
+<ol class="arabic">
+<li>
+<p>「Frame」クラスの最初の状態を作成する（ <a href="#frame_stm01">図 4.9</a> ）。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>パレットから「開始疑似状態」を選択し、ステートマシン図に追加する。</p>
+</li>
+<li>
+<p>パレットから「状態」を選択し、ステートマシン図に追加する。</p>
+</li>
+<li>
+<p>「まだプレーしていない」状態を「RESERVED」という名前にする。</p>
+</li>
+<li>
+<p>パレットから「遷移」を選択して、「開始疑似状態」から「RESERVED」へ遷移を引く。</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="frame_stm01" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220209-152917.png" alt="GSW 20220209 152917" width="100%">
+</div>
+<div class="title">図 4.9 「Frame」クラスのステートマシン図に最初の状態を追加する</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>最初の状態遷移とイベントを追加する（ <a href="#frame_stm02">図 4.10</a> ）。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>「1投目の投球を待っている」状態「BEFORE_1ST」を追加する。</p>
+</li>
+<li>
+<p>「RESERVED」から「BEFORE_1ST」へ状態遷移を引き、イベント「SETUP」を割り当てる。</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="frame_stm02" class="imageblock">
+<div class="content">
+<img src="images/frame_stm02.png" alt="frame stm02" width="100%">
+</div>
+<div class="title">図 4.10 「Frame」クラスのステートマシン図に1投目の前の状態遷移とイベントを追加する</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="3">
+<li>
+<p>1投目の後の状態遷移とイベントを追加する（ <a href="#frame_stm03">図 4.11</a> ）。1投目の後は、受け取ったピン数によって遷移先は2通りある（ストライクか否か）ので「選択疑似状態」を使って遷移先を分ける。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>「2投目の投球を待っている」状態を「BEFORE_2ND」として追加する。</p>
+</li>
+<li>
+<p>「スペアのボーナスの確定待ち」と「ストライクのボーナスの確定待ち」を「PENDING」として追加する。</p>
+</li>
+<li>
+<p>「選択疑似状態」を追加する。</p>
+</li>
+<li>
+<p>ピン数を受け取るイベント「PINS」（パラメーターとしてピン数 pins を持つ）を「BEFORE_1ST」から「選択疑似状態」への遷移に割り当てる。アクションとして、イベントで受け取ったピン数を1投目のピン数に保存する。</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>選択疑似状態からの遷移を追加する。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>1投目のピン数がストライクであれば「PENDING」へ遷移する。このとき2投目のピン数は「0」にする。</p>
+</li>
+<li>
+<p>1投目のピン数がストラクでなければ「BEFORE_2ND」へ遷移する。</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="frame_stm03" class="imageblock">
+<div class="content">
+<img src="images/frame_stm03.png" alt="frame stm03" width="100%">
+</div>
+<div class="title">図 4.11 「Frame」クラスのステートマシン図に1投目の後の状態遷移とイベントを追加する</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="5">
+<li>
+<p>2投目の後の状態遷移とイベントを追加する（ <a href="#frame_stm04">図 4.12</a> ）。2投目の後は、受け取ったピン数によって遷移先は2通りある（スペアか否か）ので「選択疑似状態」を使って遷移先を分ける。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>「獲得ピン数とボーナスが確定した」状態を表す「FIXED」として追加する。</p>
+</li>
+<li>
+<p>2投目の後の処理の選択のために「選択疑似状態」を追加する。</p>
+</li>
+<li>
+<p>「BEFORE_2ND」でイベント「PINS」を受け取ると、選択疑似状態へ遷移する。アクションとして、受け取ったピン数を2投目のピン数に保存する。</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>選択疑似状態からの遷移を追加する。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>2投目のピン数がスペアであれば「PENDING」へ遷移する。</p>
+</li>
+<li>
+<p>2投目のピン数がスペアでなければ「FIXED」へ遷移する。</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>「PENDING」からの遷移を追加する。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>「PENDING」中のフレームで、イベント「DETERMINE」を受け取ったらトータルが確定したとし、「FIXED」へ遷移する。</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="frame_stm04" class="imageblock">
+<div class="content">
+<img src="images/frame_stm04_proc_marked.png" alt="frame stm04 proc marked" width="100%">
+</div>
+<div class="title">図 4.12 「Frame」クラスのステートマシン図に2投目の後の状態遷移とイベントを追加する</div>
+</div>
+<div class="paragraph">
+<p>これで、フレームのステートマシン図が作成できました。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_フレームのクラス図を更新する"><a class="anchor" href="#_フレームのクラス図を更新する"></a>4.2.3 フレームのクラス図を更新する</h4>
+<div class="paragraph">
+<p>ステートマシン図で状態遷移のために追加したアクションやガード条件用の処理を「Frame」クラスのメソッドに追加しておきましょう（ <a href="#frame_stm05">図 4.13</a> ）。</p>
+</div>
+<div id="frame_stm05" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220224-154030.png" alt="GSW 20220224 154030" width="25%">
+</div>
+<div class="title">図 4.13 ステートマシン図に合わせて「Frame」クラスを更新する</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_フレームの処理をプログラムに変換する"><a class="anchor" href="#_フレームの処理をプログラムに変換する"></a>4.2.4 フレームの処理をプログラムに変換する</h4>
+<div class="paragraph">
+<p>フレームのクラスとステートマシン図が作成できたので、Rubyのプログラムに変換してみましょう。
+「<a href="#_model_to_code_design">第3章</a>」で決めたルールにしたがって、モデルからコードへ変換します。</p>
+</div>
+<div class="paragraph">
+<p>まず、プログラムの初期化とアクションの部分は、 <a href="#ruby_frame_code01">リスト 4.1</a> のようになるでしょう。</p>
+</div>
+<div id="ruby_frame_code01" class="listingblock">
+<div class="title">リスト 4.1 【Ruby】score.rb(1)</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="ruby"># frozen_string_literal: true
+
+require 'securerandom'
+
+# Frameは1フレーム分のピン数やボーナスを記録する
+class Frame
+  attr_reader :frame_no
+  attr_accessor :first, :second, :spare_bonus, :strike_bonus, :total, :state
+
+  def initialize(frame_no)
+    @frame_no = frame_no
+    @first = 0
+    @second = 0
+    @spare_bonus = 0
+    @strike_bonus = 0
+    @total = 0
+    @state = :RESERVED <i class="conum" data-value="1"></i><b>(1)</b>
+  end
+
+  def action(event, pins=0)
+    case @state <i class="conum" data-value="2"></i><b>(2)</b>
+    when :RESERVED
+      case event
+      when :SETUP <i class="conum" data-value="3"></i><b>(3)</b>
+        @state = :BEFORE_1ST
+      else
+        puts "invalid event: #{event} is ignored."
+      end
+    when :BEFORE_1ST
+      before_1st_porc(event, pins) <i class="conum" data-value="4"></i><b>(4)</b>
+    when :BEFORE_2ND
+      before_2nd_proc(event, pins) <i class="conum" data-value="5"></i><b>(5)</b>
+    when :PENDING
+      case event
+      when :DETERMINE <i class="conum" data-value="6"></i><b>(6)</b>
+        @state = :FIXED
+      end
+    when :FIXED
+      puts 'fixed.'
+    end
+  end
+end</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>フレームの初期状態は「RESERVED」とする。状態はRubyのシンボルを使って表現する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>状態に応じて処理を分ける。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>「RESERVED」状態では「SETUP」イベントを受け取り、「BEFORE_1ST」状態へ遷移する。他のイベントが来たら無視する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>「BEFORE_1ST」状態では「PINS」イベントを待つ。詳細な処理は「before_1st_porc」メソッドに記載する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>「BEFORE_2ND」状態では「PINS」イベントを待つ。詳細な処理は「before_2nd_porc」メソッドに記載する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>「PENDING」状態では「DETERMINE」イベントを受け取り、「FIXED」状態へ遷移する。</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>ガード条件やアクションのメソッドは、 <a href="#ruby_frame_code02">リスト 4.2</a> のようになるでしょう。</p>
+</div>
+<div id="ruby_frame_code02" class="listingblock">
+<div class="title">リスト 4.2 【Ruby】score.rb(2)</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="ruby"># frozen_string_literal: true
+
+require 'securerandom'
+
+# Frameは1フレーム分のピン数やボーナスを記録する
+class Frame
+  # initialize、actionの定義がここにある
+
+  def frame_score <i class="conum" data-value="1"></i><b>(1)</b>
+    @first + @second + @spare_bonus + @strike_bonus
+  end
+
+  def strike? <i class="conum" data-value="2"></i><b>(2)</b>
+    @first == 10
+  end
+
+  def spare?
+    @first &lt; 10 &amp;&amp; (@first + @second) == 10
+  end
+
+  def miss?
+    @first &lt; 10 &amp;&amp; @second.zero &amp;&amp; @state == :FIXED
+  end
+
+  def gutter?
+    @first.zero
+  end
+
+  def fixed? <i class="conum" data-value="3"></i><b>(3)</b>
+    @state == :FIXED
+  end
+
+  def to_s <i class="conum" data-value="4"></i><b>(4)</b>
+    total = if @state == :FIXED
+              @total
+            else
+              '   .'
+            end
+    format '|%2d|%3s|%3s|%5s|%11d|%11d|%12d|%11s|',
+           @frame_no, @first, @second, total, frame_score,
+           @spare_bonus, @strike_bonus, @state
+  end
+
+  private <i class="conum" data-value="5"></i><b>(5)</b>
+
+  def before_1st_porc(evt, pins) <i class="conum" data-value="6"></i><b>(6)</b>
+    case evt
+    when :PINS
+      puts "invalid pins: #{pins}" if pins.negative? || pins &gt; 10
+      @first = pins
+      @state = if strike?
+                 @second = 0
+                 :PENDING
+               else
+                 :BEFORE_2ND
+               end
+    else
+      puts "invalid event: #{evt} on #{@state}."
+    end
+  end
+
+  def before_2nd_proc(evt, pins) <i class="conum" data-value="7"></i><b>(7)</b>
+    case evt
+    when :PINS
+      puts "invalid pins: #{pins}" if pins.negative? || pins &gt; (10 - @first)
+      @second = pins
+      @state = if spare?
+                 :PENDING
+               else
+                 :FIXED
+               end
+    else
+      puts "invalid event: #{evt} on #{@state}."
+    end
+  end
+end</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>フレームのスコアを計算するメソッド</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>ストライクかどうか判定するガード条件用のメソッド。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>フレームのスコアが確定したか調べるメソッド。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>「Frame」クラスのインスタンスを文字列化するメソッド。呼び出し時点の「Frame」クラスが保持するインスタン変数の値を出力するのに使う。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>これ以降のメソッドはプライベート。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>「1投目の投球を待っている」状態を担当するメソッド。イベント「PINS」を受け取り、1投目のピン数に保存する。その後ストライクかどうか調べ、次の状態へ遷移する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>「2投目の投球を待っている」状態を担当するメソッド。イベント「PINS」を受け取り、2投目のピン数に保存する。その後スペアかどうか調べ、次の状態へ遷移する。</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_サービスフレームの扱いについて検討する"><a class="anchor" href="#_サービスフレームの扱いについて検討する"></a>4.3 サービスフレームの扱いについて検討する</h3>
+<div class="paragraph">
+<p>「クラッシックスコアリング」の場合、第10フレームが他のフレームとは異なっています。
+サービスフレームという考え方があり、ストライクやスペアの場合に追加で投球できます。</p>
+</div>
+<div class="paragraph">
+<p>このサービスフレームの扱い方にについて整理しておきましょう。</p>
+</div>
+<div class="sect3">
+<h4 id="_第10フレームがストライクもスペアもない場合"><a class="anchor" href="#_第10フレームがストライクもスペアもない場合"></a>4.3.1 第10フレームがストライクもスペアもない場合</h4>
+<div class="paragraph">
+<p>第10フレームがストライクでもスペアもない場合、サービスフレームは提供されません。
+第9フレームまでの通常のフレームと同様、1投目と2投目を記録するだけです（ <a href="#ten_no_service">図 4.14</a>  ）。</p>
+</div>
+<div id="ten_no_service" class="imageblock">
+<div class="content">
+<img src="images/ten_no_service_combo.png" alt="ten no service combo" width="75%">
+</div>
+<div class="title">図 4.14 第10フレームがストライクもスペアもない場合</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_第10フレームがスペアの場合"><a class="anchor" href="#_第10フレームがスペアの場合"></a>4.3.2 第10フレームがスペアの場合</h4>
+<div class="paragraph">
+<p>第10フレームの2投目でスペアになった場合、1投目と2投目を通常のフレームと同様に記録したのち、もう1投追加されます。
+これを、第10フレームに加えて、第11フレームの1投目が追加されたとみなします。
+つまり、ゲームスコアのデータを「 <a href="#ten_spare_service">図 4.15</a> 」のように構成します。</p>
+</div>
+<div id="ten_spare_service" class="imageblock">
+<div class="content">
+<img src="images/ten_spare_combo.png" alt="ten spare combo" width="75%">
+</div>
+<div class="title">図 4.15 第10フレームがスペアの場合（第11フレームの2投目はない）</div>
+</div>
+<div class="paragraph">
+<p>スコアをこのように構成しておくと、第10フレームの場合も、通常フレームの組み合わせによってボーナスが計算できます。
+ゲーム終了時の第10フレームのスコア（ピン数に以後の投球によるボーナスを加えたスコア）を取得すると、それがゲームのスコアです。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_第10フレームの1投目がストライクの場合"><a class="anchor" href="#_第10フレームの1投目がストライクの場合"></a>4.3.3 第10フレームの1投目がストライクの場合</h4>
+<div class="paragraph">
+<p>第10フレームの1投目がストライクの場合、第10フレームをストライクとした上で、もう2投追加されます。
+これを、第10フレームに加えて、第11フレームの1投目と2投目が追加されたとみなします。
+つまり、ゲームスコアのデータを「 <a href="#ten_one_strike_service">図 4.16</a> 」のように構成します。
+だたし、第11フレームの1投目がストライクの場合は、同じ2投追加でも次の「2投目もストライクの場合」の考え方を使います。</p>
+</div>
+<div id="ten_one_strike_service" class="imageblock">
+<div class="content">
+<img src="images/ten_one_strike_combo.png" alt="ten one strike combo" width="75%">
+</div>
+<div class="title">図 4.16 第10フレームの1投目がストライクの場合</div>
+</div>
+<div class="paragraph">
+<p>スコアをこのように構成しておくと、第10フレームの場合も、通常フレームの組み合わせによってボーナスが計算できます。
+ゲーム終了時の10フレームのスコア（ピン数に以後の投球によるボーナスを加えたスコア）を取得すると、それがゲームのスコアです。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_第10フレームの2投目もストライクの場合"><a class="anchor" href="#_第10フレームの2投目もストライクの場合"></a>4.3.4 第10フレームの2投目もストライクの場合</h4>
+<div class="paragraph">
+<p>第10フレームの2投目もストライクの場合、第10フレーム、第11フレームをストライクとした上で、もう1投追加されます。
+これを、第10フレーム、第11フレームに加えて、第12フレーム目の1投目が追加されたとみなします。
+つまり、ゲームスコアのデータを「 <a href="#ten_two_strike_service">図 4.17</a> 」のように構成します。
+このように構成すれば、通常のフレームでダブルをとったときの計算方法（ストライクが続いたときはさらに次のフレームの1投目が2投目として加算される）のままで第10フレームのボーナスが計算できます。</p>
+</div>
+<div id="ten_two_strike_service" class="imageblock">
+<div class="content">
+<img src="images/ten_two_strike_combo.png" alt="ten two strike combo" width="75%">
+</div>
+<div class="title">図 4.17 第10フレームの2投目もストライクの場合</div>
+</div>
+<div class="paragraph">
+<p>スコアをこのように構成しておくと、第10フレームの場合も、通常フレームの組み合わせによってボーナスが計算できます。
+ゲーム終了時の10フレームのスコア（ピン数に以後の投球によるボーナスを加えたスコア）を取得すると、それがゲームのスコアです。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_スコアの状態をステートマシン図で表す"><a class="anchor" href="#_スコアの状態をステートマシン図で表す"></a>4.4 スコアの状態をステートマシン図で表す</h3>
+<div class="paragraph">
+<p>サービスフレームの扱い方を検討した結果、工夫すれば通常のフレームと同じように扱えることがわかりました。
+それでは、フレームの集まりであるスコアについて、どのような処理をすればよいのか検討しましょう。</p>
+</div>
+<div class="sect3">
+<h4 id="_scoreクラスにステートマシン図を追加する"><a class="anchor" href="#_scoreクラスにステートマシン図を追加する"></a>4.4.1 「Score」クラスにステートマシン図を追加する</h4>
+<div class="paragraph">
+<p>「Frame」クラスにステートマシン図を追加したのと同じ手順で、「Score」クラスにステートマシン図を追加します（ <a href="#add_score_stm00">図 4.18</a> ）。</p>
+</div>
+<div id="add_score_stm00" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220224-143517.png" alt="GSW 20220224 143517" width="75%">
+</div>
+<div class="title">図 4.18 「Score」クラスにステートマシン図を追加する</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_スコアのステートマシン図を作成する"><a class="anchor" href="#_スコアのステートマシン図を作成する"></a>4.4.2 スコアのステートマシン図を作成する</h4>
+<div class="paragraph">
+<p>ステートマシン図に、検討した結果を使って、スコアの状態と状態遷移を追加しましょう。</p>
+</div>
+<div id="add_score_state00" class="olist arabic">
+<div class="title">ステートマシン図に「Score」クラスの状態遷移を作成する</div>
+<ol class="arabic">
+<li>
+<p>「Score」クラスの状態を追加する（ <a href="#add_score_stm01">図 4.19</a> ）。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>パレットから「開始疑似状態」をステートマシン図に追加する。</p>
+</li>
+<li>
+<p>パレットから「状態」を選択し、ステートマシン図に追加する。</p>
+</li>
+<li>
+<p>「1投目待ち」の状態として状態名を「WAIT_FOR_1ST」に設定する。</p>
+</li>
+<li>
+<p>「2投目待ち」の状態として状態名を「WAIT_FOR_2ND」に設定する。</p>
+</li>
+<li>
+<p>「ゲームの終了」の状態として状態名を「FINISHED」に設定する。</p>
+</li>
+<li>
+<p>パレットから「終了疑似状態」をステートマシン図に追加する。</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="add_score_stm01" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220224-145100.png" alt="GSW 20220224 145100" width="75%">
+</div>
+<div class="title">図 4.19 ステートマシン図に「Score」クラスの状態を追加する</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>「Score」クラスのイベントとアクションを作成する（ <a href="#add_score_stm02">図 4.20</a> ）。</p>
+</li>
+<li>
+<p>「WAIT_FOR_1ST」からの遷移には、ストライクの場合、ストライクでない場合、ゲームが終了の場合があるので、「選択疑似状態」を追加する。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>「WAIT_FOR_1ST」から「選択疑似状態」への遷移では、ピン数を受け取るのを待っている。受け取ったときには、現在にフレームへピン数のイベントを送る。その後、1投目の後のスペアとストライクのボーナスを計算し、のべのトータルを更新する。</p>
+</li>
+<li>
+<p>「選択疑似状態」から「WAIT_FOR_1ST」への遷移のガード条件は「ストライクである」こと。このときはアクションとして「次のフレームへ進む」。</p>
+</li>
+<li>
+<p>「選択疑似状態」から「WAIT_FOR_2ND」への遷移のガード条件は「ストライクでない（かつゲーム終了ではない）」こと。</p>
+</li>
+<li>
+<p>「選択疑似状態」から「FINISHED」への遷移のガード条件は「ゲーム終了である」であること。</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>「WAIT_FOR_2ND」からの遷移には、ゲーム終了の場合とそうでない場合があるので、「選択疑似状態」を追加する。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>「WAIT_FOR_1ST」から「選択疑似状態」への遷移では、ピン数を受け取るのを待っている。受け取ったときには、現在にフレームへピン数のイベントを送る。そして、2投目の後のスペアとストライクのボーナスを計算し、のべのトータルを更新する。</p>
+</li>
+<li>
+<p>「選択疑似状態」から「WAIT_FOR_1ST」への遷移のガード条件は「ゲーム終了ではない」こと。このときはアクションとして「次のフレームへ進む」。</p>
+</li>
+<li>
+<p>「選択疑似状態」から「FINISHED」への遷移のガード条件は「ゲーム終了である」であること。ゲーム終了は、10フレーム目の状態が「FIXED」になったことで判定できる（そのようなメソッドを用意する）。</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="add_score_stm02" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220224-152010.png" alt="GSW 20220224 152010" width="100%">
+</div>
+<div class="title">図 4.20 ステートマシン図に「Score」クラスのイベントとアクションを追加する</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_クラス図に検討結果を反映する"><a class="anchor" href="#_クラス図に検討結果を反映する"></a>4.4.3 クラス図に検討結果を反映する</h4>
+<div class="paragraph">
+<p>第10フレームの場合にもサービスフレームのために追加のフレームを用意することで、通常フレームと同じようにピン数やボーナスを扱えるようになりました。</p>
+</div>
+<div class="paragraph">
+<p>クラス図にこの結果を反映しましょう。</p>
+</div>
+<div id="update_class_for_score_frame00" class="olist arabic">
+<div class="title">ステートマシン図に合わせてクラス図を更新する（ <a href="#update_class_for_score_frame01">図 4.21</a> ）</div>
+<ol class="arabic">
+<li>
+<p>「Frame」クラス側の関連端の多重度を「10」から「12」に変更する。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>これは、通常のフレームを追加する方法でサービスフレームを処理するための追加。</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>関連にノートをつけて説明をつけておく。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>パレットからノートを選択し、クラス図に追加する。</p>
+</li>
+<li>
+<p>ノートに「Frame側の多重度は、サービスフレーム用に必要なフレーム分だけ追加してある」という説明を追加する。</p>
+</li>
+<li>
+<p>ノートから関連の線に向かってアンカーを引く。</p>
+</li>
+<li>
+<p>パレットからノートのアンカーを選択し、ノートにマウスカーソルを移動して青枠が表示されるのを待つ。</p>
+</li>
+<li>
+<p>マウスのボタンを押したまま、マウスカーソルをドラッグし、関連の線に近づけ青枠が表示されるのを待つ。</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>「Score」クラスにステートマシン図で作成したメソッドを追加しておく。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>「次のフレームへ進む」メソッド「go_next_frame」を追加する。</p>
+</li>
+<li>
+<p>「ゲーム終了か判定する」メソッド「finished?」を追加する。</p>
+</li>
+<li>
+<p>「1投目の後のスペアのボーナスを計算する」メソッド「calc_spare_bonus_after_1st」を追加する。</p>
+</li>
+<li>
+<p>「1投目の後のストライクのボーナスを計算する」メソッド「calc_strike_bonus_after_1st」を追加する。</p>
+</li>
+<li>
+<p>「2投目の後のストライクのボーナスを計算する」メソッド「calc_strike_bonus_after_2st」を追加する。</p>
+</li>
+<li>
+<p>「のべのトータルを更新する」メソッド「update_total」を追加する。</p>
+</li>
+<li>
+<p>スコアを記録するメソッド（ステートマシン図の処理を担当する）メソッド「scoring」を追加する。</p>
+</li>
+<li>
+<p>ステートマシン図の状態ごとの処理を担当するメソッド「wait_for_1st_proc」と「wait_for_2nd_proc」を追加する。</p>
+</li>
+<li>
+<p>スコアの記録を文字列化するメソッド「to_s」を追加する。</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>関連を追加する</p>
+<div class="ulist">
+<ul>
+<li>
+<p>「Score」クラスから「Frame」クラスへ、「現在のフレーム」を指す関連「current」を追加する。</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="update_class_for_score_frame01" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220224-154728.png" alt="GSW 20220224 154728" width="100%">
+</div>
+<div class="title">図 4.21 ステートマシン図に合わせてクラス図を更新する</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="ヒント"></i>
+</td>
+<td class="content">
+ノート内の文章を編集するときは、ノートを選択した状態でプロパティーを使って編集すると、改行が入力しやすくなります。
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_スコアの処理をプログラムに変換する"><a class="anchor" href="#_スコアの処理をプログラムに変換する"></a>4.4.4 スコアの処理をプログラムに変換する</h4>
+<div class="paragraph">
+<p>スコアのクラスとステートマシン図が作成できたので、Rubyのプログラムに変換してみましょう。
+変換したプログラムの初期化やユーティリティメソッドの部分は、 <a href="#ruby_score_code01">リスト 4.3</a> のようになるでしょう。</p>
+</div>
+<div id="ruby_score_code01" class="listingblock">
+<div class="title">リスト 4.3 【Ruby】score.rb(3)</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="ruby"># frozen_string_literal: true
+
+require 'securerandom' <i class="conum" data-value="1"></i><b>(1)</b>
+
+# Frameクラスの定義がここにある
+
+# スコアは各人の10フレーム分のスコアを記録する
+class Score <i class="conum" data-value="2"></i><b>(2)</b>
+  attr_accessor :id, :player, :fno, :frames, :state
+
+  def initialize(name)
+    @id = SecureRandom.urlsafe_base64(8) <i class="conum" data-value="3"></i><b>(3)</b>
+    @player = name
+    @fno = 1
+    @frames = []
+    (-1..13).each do |fno| # (-1, 0) are dummy frame <i class="conum" data-value="4"></i><b>(4)</b>
+      @frames.append Frame.new(fno)
+    end
+    @state = :WAIT_FOR_1ST <i class="conum" data-value="5"></i><b>(5)</b>
+    @frames[fno2idx(@fno)].action(:SETUP) <i class="conum" data-value="6"></i><b>(6)</b>
+  end
+
+  def fno2idx(fno) <i class="conum" data-value="7"></i><b>(7)</b>
+    fno + 1 # frame number 1 =&gt; array index 3 (0 origin).
+  end
+
+  def frame(fno)
+    @frames[fno2idx(fno)] # return index on @frams at frame number.
+  end
+
+  def go_next_frame <i class="conum" data-value="8"></i><b>(8)</b>
+    @fno += 1
+    @frames[fno2idx(fno)].action(:SETUP)
+  end
+
+  def current <i class="conum" data-value="9"></i><b>(9)</b>
+    frame(@fno)
+  end
+end</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>安全なIDを生成するためのライブラリをインポートした。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>「Score」クラスの定義のはじまり。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>スコアのインスタンスにIDをつけておく。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>「Frame」のインスタンスの作成。クラス図では、「Score」から「Frame」へのコンポジションとして表されている部分。設計上は12個だが、サービスフレームで「次」を参照する場面、第1フレームで「前のフレーム」「前の前のフレーム」を参照する場面で参照するダミーのフレームを追加している。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>スコアの最初の状態を「WAIT_FOR_1ST」にする。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>第1フレームへ「SETUP」イベントを送る。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>フレーム番号とフレームの配列のインデックスを対応づけるメソッド（ダミーのフレームを第1フレームの前に追加したためのオフセット）。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>現在のフレームを「次のフレームへ進める」メソッド。このメソッドでは、次のフレームに「SETUP」イベントを送る。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>「現在のフレーム」を参照するためのメソッド。クラス図では関連端名が「current」の「Frame」クラスへの関連で表されている。</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>ボーナス計算やトータル計算のメソッドは <a href="#ruby_score_code02">リスト 4.4</a> のようになるでしょう。</p>
+</div>
+<div id="ruby_score_code02" class="listingblock">
+<div class="title">リスト 4.4 【Ruby】score.rb(4)</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="ruby"># Frameクラスの定義やそれ以前のコードがここにある
+
+# スコアは各人の10フレーム分のスコアを記録する
+class Score
+  # アクセサーの定義がここにある
+  # initialize、fno2idx、frame、go_next_frame、currentメソッドの定義がここにある
+
+  def prev <i class="conum" data-value="1"></i><b>(1)</b>
+    frame(@fno - 1)
+  end
+
+  def pprev <i class="conum" data-value="2"></i><b>(2)</b>
+    frame(@fno - 2)
+  end
+
+  def calc_spare_bonus_after_1st <i class="conum" data-value="3"></i><b>(3)</b>
+    return unless prev.spare?
+
+    prev.spare_bonus = current.first
+    prev.action(:DETERMINE)
+  end
+
+  def calc_strike_bonus_after_1st <i class="conum" data-value="4"></i><b>(4)</b>
+    return unless prev.strike? &amp;&amp; pprev.strike?
+
+    pprev.strike_bonus = prev.first + current.first
+    pprev.action(:DETERMINE)
+  end
+
+  def calc_strike_bonus_after_2nd <i class="conum" data-value="5"></i><b>(5)</b>
+    return unless prev.strike?
+
+    prev.strike_bonus = current.first + current.second
+    prev.action(:DETERMINE)
+  end
+
+  def update_total <i class="conum" data-value="6"></i><b>(6)</b>
+    @frames.each_cons(2) do |prev, cur|
+      cur.total = prev.total + cur.frame_score
+    end
+  end
+
+  def finished? <i class="conum" data-value="7"></i><b>(7)</b>
+    frame(10).fixed?
+  end
+end</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>ボーナス計算で使う、「前のフレーム」を得るメソッド。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>ボーナス計算で使う、「前の前のフレーム」を得るメソッド。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>1投目の後のスペアボーナスを計算するメソッド。前のフレームのスコアが確定するので、前のフレームへ「DETERMINE」イベントを送る。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>1投目の後のストライクボーナスを計算するメソッド。前の前のフレームからストライクが続いていた場合、ここでスコアが確定するので、前の前のフレームへ「DETERMINE」イベントを送る。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>2投目の後のストライクボーナスを計算するメソッド。前のフレームのスコアが確定するので、前のフレームへ「DETERMINE」イベントを送る。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>「のべのトータル」を更新するメソッド。each_consは、配列から指定した数ずつ要素を取り出すメソッド。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>「ゲーム終了」の判定用のメソッド。サービスフレームの検討結果から、第10フレームが「FIXED」になれば、そのゲームは終了とみなせる。</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>そして、ステートマシン図で表した、実際にゲームの進行に合わせてスコアを記録する処理をするメソッドは <a href="#ruby_score_code03">リスト 4.5</a> のようになるでしょう。</p>
+</div>
+<div id="ruby_score_code03" class="listingblock">
+<div class="title">リスト 4.5 【Ruby】score.rb(5)</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="ruby"># Frameクラスの定義やそれ以前のコードがここにある
+
+# スコアは各人の10フレーム分のスコアを記録する
+class Score
+  # アクセサーの定義がここにある
+  # initializeからfinished?までのメソッドの定義がここにある
+
+  def wait_for_1st_proc(pins) <i class="conum" data-value="1"></i><b>(1)</b>
+    current.action(:PINS, pins) <i class="conum" data-value="2"></i><b>(2)</b>
+    calc_spare_bonus_after_1st
+    calc_strike_bonus_after_1st
+    update_total
+    if finished? <i class="conum" data-value="3"></i><b>(3)</b>
+      @state = :FINISHED
+    elsif current.strike? <i class="conum" data-value="4"></i><b>(4)</b>
+      @state = :WAIT_FOR_1ST
+      go_next_frame
+    else <i class="conum" data-value="5"></i><b>(5)</b>
+      @state = :WAIT_FOR_2ND
+    end
+  end
+
+  def wait_for_2nd_proc(pins) <i class="conum" data-value="6"></i><b>(6)</b>
+    current.action(:PINS, pins) <i class="conum" data-value="7"></i><b>(7)</b>
+    calc_strike_bonus_after_2nd
+    update_total
+    if finished? <i class="conum" data-value="8"></i><b>(8)</b>
+      @state = :FINISHED
+    else <i class="conum" data-value="9"></i><b>(9)</b>
+      @state = :WAIT_FOR_1ST
+      go_next_frame
+    end
+  end
+
+  def scoring(pins) <i class="conum" data-value="10"></i><b>(10)</b>
+    case @state
+    when :WAIT_FOR_1ST
+      wait_for_1st_proc(pins)
+    when :WAIT_FOR_2ND
+      wait_for_2nd_proc(pins)
+    when :FINISHED
+      puts 'finished'
+    end
+  end
+
+  def to_s <i class="conum" data-value="11"></i><b>(11)</b>
+    "Player:#{@player}, Score(id: #{@id}), Frame:#{@fno},
+|No|1st|2nd|Total|Frame Score|Spare Bonus|Strike Bonus|Frame State|
+#{@frames.join("\n")}"
+  end
+end</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>「WAIT_FOR_1ST」状態のときの状態遷移のメソッド。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>現在のフレームについて、ピン数を更新し、ボーナスを計算し、のべのトータルを更新する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>「選択疑似状態」での遷移先の分岐処理。「ゲーム終了」の場合は「FINISHED」へ遷移する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>「ストライクだった」の場合は、次のフレームへ進んで「WAIT_FOR_1ST」へ遷移する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>それ以外のときは2投目を待つので、「WAIT_FOR_2ND」へ遷移する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>「WAIT_FOR_2ND」状態のときの状態遷移のメソッド。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>現在のフレームについて、ピン数を更新し、ボーナスを計算し、のべのトータルを更新する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>「選択疑似状態」での遷移先の分岐処理。「ゲーム終了」の場合は「FINISHED」へ遷移する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>それ以外のときは、次のフレームへ進んで「WAIT_FOR_1ST」へ遷移する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="10"></i><b>10</b></td>
+<td>スコアを記録するステートマシン図の振る舞いを担当するメソッド。状態に応じてそれぞれの状態用のメソッドを呼び出す。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="11"></i><b>11</b></td>
+<td>「スコア」クラスのインスタンスの内容（内包するフレームも含む）を文字列化するメソッド。</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>これで、フレームとスコアを、それぞれのステートマシン図で表した振る舞いに合わせて動作するプログラムに変換できました。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ゲームの進行について検討する"><a class="anchor" href="#_ゲームの進行について検討する"></a>4.5 ゲームの進行について検討する</h3>
+<div class="paragraph">
+<p>残るは、複数名のスコアのセットで構成される「Game」と、複数の「Game」を記録する「ScoreSheet」クラスです。</p>
+</div>
+<div class="sect3">
+<h4 id="_ヨーロピアン方式とアメリカン方式"><a class="anchor" href="#_ヨーロピアン方式とアメリカン方式"></a>4.5.1 ヨーロピアン方式とアメリカン方式</h4>
+<div class="paragraph">
+<p>ボウリングを複数名で楽しむとき、みなさんはたいてい、1組のチームで1つのレーンを使って、1フレームごとにプレーヤーが交代しながらプレイします。
+このようなゲームの方式は、「ヨーロピアン方式」と呼ばれています。</p>
+</div>
+<div class="paragraph">
+<p>別の方式として、ボールラック（ボールが返ってくるラック）を挟んだ2つのレーンを、1フレーム交代で使ってプレーする方式があります。
+このようなゲームの方式は「アメリカン方式」と呼ばれています。</p>
+</div>
+<div class="paragraph">
+<p>このチュートリアルでは、ヨーロピアン方式を使うことにします。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_gameクラスの処理"><a class="anchor" href="#_gameクラスの処理"></a>4.5.2 Gameクラスの処理</h4>
+<div class="paragraph">
+<p>ほとんどのみなさんがボウリングをやるときにゲームを進行する手順は、「ヨーロピアン方式」と呼ばれています。
+「ヨーロピアン方式」による進行を想定して、「Game」クラスはどのような手順で動作させるべきか整理しましょう。</p>
+</div>
+<div id="game_steps00" class="sidebarblock">
+<div class="content">
+<div class="title">ボウリングのゲームを進める手順（ヨーロピアン方式）</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>スコアシートに参加するプレーヤー名を書く（エントリーする）。</p>
+</li>
+<li>
+<p>書いたプレーヤーの順に1フレーム分プレーする（各自のターン）。</p>
+</li>
+<li>
+<p>次のプレーヤと交代する（次のターンへ進む）。</p>
+</li>
+<li>
+<p>全員がゲーム終了するまで手順を繰り返す。</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>この方式に合わせてスコアを記録する処理をする「Game」クラスは、 <a href="#ruby_game_code01">リスト 4.6</a> のようになるでしょう。</p>
+</div>
+<div id="ruby_game_code01" class="listingblock">
+<div class="title">リスト 4.6 【Ruby】score.rb(6)</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="ruby"># FrameクラスとScoreクラスの定義やそれ以前のコードがここにある
+
+# Gameクラスは複数名の1ゲーム分のスコアのセットを構成する
+class Game
+  attr_reader :id, :turn, :scores
+
+  def initialize
+    @id = SecureRandom.urlsafe_base64(8) <i class="conum" data-value="1"></i><b>(1)</b>
+    @turn = 0
+    @scores = []
+  end
+
+  def entry(name = 'unknown') <i class="conum" data-value="2"></i><b>(2)</b>
+    @scores.append(Score.new(name))
+  end
+
+  def turn_player_name <i class="conum" data-value="3"></i><b>(3)</b>
+    @scores[@turn].player
+  end
+
+  def go_next_turn <i class="conum" data-value="4"></i><b>(4)</b>
+    @turn = (@turn + 1) % @scores.size
+  end
+
+  def playing(score_index, pins) <i class="conum" data-value="5"></i><b>(5)</b>
+    @scores[score_index].scoring(pins)
+    if @scores[score_index].fno &gt; 10 <i class="conum" data-value="6"></i><b>(6)</b>
+      go_next_turn if @scores[score_index].finished?
+    elsif @scores[score_index].current.state == :BEFORE_1ST <i class="conum" data-value="7"></i><b>(7)</b>
+      go_next_turn
+    end
+  end
+
+  def finished? <i class="conum" data-value="8"></i><b>(8)</b>
+    @scores.reject(&amp;:finished?) == []
+  end
+
+  def to_s <i class="conum" data-value="9"></i><b>(9)</b>
+    "Game(id:#{@id}),\n#{@scores.join("\n")}"
+  end
+end</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>ゲームごとにユニークなIDをつけておく。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>ゲームに参加するプレーヤーを登録するメソッド。そのプレーヤーの今回のゲーム分のスコアも用意する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>現在プレー中のプレーヤー名を取得するメソッド。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>次のプレーヤーに交代するメソッド。登録したプレーヤーの順に進み、最後まで来たら最初のプレーヤーへ戻る。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>ゲームを実行するメソッド。現在のプレーヤーのスコアクラスのscoring メソッドを呼び出して1フレーム分のプレーを記録する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>サービスフレームでは、2フレーム以上プレーする場合があるので、そのときは交代しない。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>現在のプレーヤーの現在の状態が「BEFORE_1ST」なら、次のフレームの投球待ちになっているので、プレーヤーを交代する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>すべてのプレーヤーがゲーム終了かどうか調べるメソッド。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>ゲームの状況を文字列化するメソッド。</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>クラス図にもこの結果を反映しておきましょう（ <a href="#update_class_for_game_score00">図 4.22</a> ）。
+現在のプレーヤーは、関連端名が「turn」の関連によって参照しているScoreを使っています。</p>
+</div>
+<div id="update_class_for_game_score00" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220224-172836.png" alt="GSW 20220224 172836" width="100%">
+</div>
+<div class="title">図 4.22 「Game」クラスを更新したクラス図</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_scoresheetクラスの処理"><a class="anchor" href="#_scoresheetクラスの処理"></a>4.5.3 ScoreSheetクラスの処理</h4>
+<div class="paragraph">
+<p>「Game」クラスが作成できたので、スコアシートを扱う「ScoreSheet」クラスも作成できそうですね。
+新しいスコアシートを作成して、そこに必要な数のゲームを追加すれば済みそうです。</p>
+</div>
+<div class="paragraph">
+<p>この方式に合わせてスコアを記録する処理をする「Game」クラスは、 <a href="#ruby_scoresheet_code01">リスト 4.7</a> のようになるでしょう。</p>
+</div>
+<div id="ruby_scoresheet_code01" class="listingblock">
+<div class="title">リスト 4.7 【Ruby】score.rb(7)</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="ruby"># FrameクラスとScoreクラスとGameクラスの定義やそれ以前のコードがここにある
+
+# ScoreSheetは、複数名の複数回のGameを記録する
+class ScoreSheet
+  attr_accessor :id, :time, :games
+
+  def initialize(date) <i class="conum" data-value="1"></i><b>(1)</b>
+    @id = SecureRandom.urlsafe_base64(8) <i class="conum" data-value="2"></i><b>(2)</b>
+    @play_date = date
+    @games = []
+  end
+
+  def add_game(games = 1) <i class="conum" data-value="3"></i><b>(3)</b>
+    games.times do
+      @games.append(Game.new)
+    end
+  end
+
+  def to_s <i class="conum" data-value="4"></i><b>(4)</b>
+    "Score Sheet Date: #{@time}(id:#{@id})"
+  end
+end</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>スコアシートを作成するときは、作成時の日時を控えておく。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>スコアシートごとにユニークなIDをつけておく。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>希望する数のゲームをシートに追加するメソッド。引数がないときは1組だけ追加する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>スコアシートの状況を文字列化するメソッド。</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>クラス図にもこの結果を反映しておきましょう（ <a href="#update_class_for_scoresheet00">図 4.23</a> ）。
+現在のプレーヤーは、関連端名が「turn」の関連によって参照しているScoreを使っています。</p>
+</div>
+<div id="update_class_for_scoresheet00" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220224-174042.png" alt="GSW 20220224 174042" width="100%">
+</div>
+<div class="title">図 4.23 「ScoreSheet」クラスを更新したクラス図</div>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_まとめ_3"><a class="anchor" href="#_まとめ_3"></a>4.6 まとめ</h3>
+<div class="paragraph">
+<p>ボウリングのゲームスコアを記録するスコアシートの振る舞いを検討しました。</p>
+</div>
+<div class="sect3">
+<h4 id="_振る舞いのモデルを作成した手順"><a class="anchor" href="#_振る舞いのモデルを作成した手順"></a>4.6.1 振る舞いのモデルを作成した手順</h4>
+<div class="paragraph">
+<p>振る舞いのモデルに登場する構成要素（状態、イベント、アクション）を洗い出し、ゲームの手順を整理しました。</p>
+</div>
+<div id="step_for_behavier_model" class="sidebarblock">
+<div class="content">
+<div class="title">スコアシートの振る舞いのモデルを作成した手順</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>スコアに関する状態の発見</p>
+<div class="ulist">
+<ul>
+<li>
+<p>スコアが記録されるときのフレームの変化を観察して、フレームにどのような状態があるか洗い出した。</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>スコアに関するステートマシン図の作成</p>
+<div class="ulist">
+<ul>
+<li>
+<p>洗い出したフレームの状態に、関連するイベントやアクションを考えてステートマシン図に表した。</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>フレームスコアに関する状態の発見</p>
+<div class="ulist">
+<ul>
+<li>
+<p>ゲームを進めるときのスコアの変化を観察して、スコアにどのような状態があるか洗い出した。</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>フレームに関するステートマシン図の作成</p>
+<div class="ulist">
+<ul>
+<li>
+<p>サービスフレームの動作を観察して、通常のフレームを追加してスコアを記録する方法を発見した。</p>
+</li>
+<li>
+<p>洗い出したスコアの状態に関連するイベントやアクションを考えてステートマシン図に表した。</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_モデルとコードの対応づけは振る舞い設計の前に"><a class="anchor" href="#_モデルとコードの対応づけは振る舞い設計の前に"></a>4.6.2 モデルとコードの対応づけは振る舞い設計の前に</h4>
+<div class="paragraph">
+<p>ステートマシン図を使うことで、フレームやスコアの動作を表せました。
+そして、あらかじめモデルとコードを対応づけておけば、それを前提として（モデルやコードの構成方式として）振る舞いの設計に活かせます。</p>
+</div>
+<div class="paragraph">
+<p>モデルとコードが対応づけられていれば、Rubyのプログラムはステートマシン図から変換するように作成できます。
+つまり、解決すべき課題があったとき、その課題を構造のモデルと振る舞いのモデルで表すことができれば、そのモデルなりのプログラムが作成できるわけです。
+一方、このような方法で作成したプログラムが期待した動作をしない場合には、モデルが誤っているか、対応づけのルールに不備があるということです。</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">【参考】モデル変換とモデル駆動開発（MDD）</div>
+<div class="paragraph">
+<p>ここで示したようなモデルとコードの対応づけのほかに、モデルから別のモデルへ、あるいはコードから別のコードへといった対応づけも考えられます。
+モデルからコードを生成する方法には、このチュートリアルのように図の要素とコードの要素を対応させるルールを決めて手で変換する方法以外にもあります。
+例えば、コード片のテンプレート（スニペットなどと呼ばれます）にモデルのデータベースへの問い合わせを埋め込んだスクリプトを使って生成する方法はよく使われています</p>
+</div>
+<div class="paragraph">
+<p>これらは、ソフトウエア設計における「モデル変換」と呼ばれています（コードも一種のモデル表現とみなせます）。
+そして、モデル変換を用いて開発プロセスにおける各工程間をモデルで接続して開発する方法のことを「モデル駆動開発（MDD: Model Driven Development）」と呼びます。</p>
+</div>
+<div class="paragraph">
+<p>モデル駆動開発を紹介している記事として次の記事があります。</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">モデル駆動開発におけるモデル変換の役割</dt>
+<dd>
+<p><code><a href="https://codezine.jp/article/detail/10597" class="bare">https://codezine.jp/article/detail/10597</a></code></p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>この記事では、モデル変換の繰り返しによる開発方法であることや、その実施例を紹介しています。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_program_test"><a class="anchor" href="#_program_test"></a>第5章 できあがったプログラムを試す</h2>
+<div class="sectionbody">
+<div class="paragraph lead">
+<p>対応づけルールを使って、モデルから変換して作成したプログラムができあがりました。
+できあがったプログラムを確認し、実際に動かしてみましょう。</p>
+</div>
+<div class="sect2">
+<h3 id="_プログラムを完成させる"><a class="anchor" href="#_プログラムを完成させる"></a>5.1 プログラムを完成させる</h3>
+<div class="paragraph">
+<p>まず、プログラムをテストできるよう、完成させましょう。</p>
+</div>
+<div class="sect3">
+<h4 id="_作成したプログラムを確認する"><a class="anchor" href="#_作成したプログラムを確認する"></a>5.1.1 作成したプログラムを確認する</h4>
+<div class="paragraph">
+<p>作成したプログラムの全体を <a href="#ruby_all_code01">リスト 5.1</a> に示します。
+みなさんも作成したプログラムの全体を確認しましょう。</p>
+</div>
+<div id="ruby_all_code01" class="listingblock">
+<div class="title">リスト 5.1 【Ruby】score.rb</div>
+<div class="content">
+<pre class="prettyprint highlight linenums:2"><code data-lang="ruby"># frozen_string_literal: true
+
+require 'securerandom'
+
+# Frameは1フレーム分のピン数やボーナスを記録する
+class Frame
+  attr_reader :frame_no
+  attr_accessor :first, :second, :spare_bonus, :strike_bonus, :total, :state
+
+  def initialize(frame_no)
+    @frame_no = frame_no
+    @first = 0
+    @second = 0
+    @spare_bonus = 0
+    @strike_bonus = 0
+    @total = 0
+    @state = :RESERVED
+  end
+
+  def action(event, pins=0)
+    case @state
+    when :RESERVED
+      case event
+      when :SETUP
+        @state = :BEFORE_1ST
+      else
+        puts "invalid event: #{event} is ignored."
+      end
+    when :BEFORE_1ST
+      before_1st_porc(event, pins)
+    when :BEFORE_2ND
+      before_2nd_proc(event, pins)
+    when :PENDING
+      case event
+      when :DETERMINE
+        @state = :FIXED
+      end
+    when :FIXED
+      puts 'fixed.'
+    end
+  end
+
+  def frame_score
+    @first + @second + @spare_bonus + @strike_bonus
+  end
+
+  def strike?
+    @first == 10
+  end
+
+  def spare?
+    @first &lt; 10 &amp;&amp; (@first + @second) == 10
+  end
+
+  def miss?
+    @first &lt; 10 &amp;&amp; @second.zero &amp;&amp; @state == :FIXED
+  end
+
+  def gutter?
+    @first.zero
+  end
+
+  def fixed?
+    @state == :FIXED
+  end
+
+  def to_s
+    total = if @state == :FIXED
+              @total
+            else
+              '   .'
+            end
+    format '|%2d|%3s|%3s|%5s|%11d|%11d|%12d|%11s|',
+           @frame_no, @first, @second, total, frame_score,
+           @spare_bonus, @strike_bonus, @state
+  end
+
+  private
+
+  def before_1st_porc(evt, pins)
+    case evt
+    when :PINS
+      puts "invalid pins: #{pins}" if pins.negative? || pins &gt; 10
+      @first = pins
+      @state = if strike?
+                 @second = 0
+                 :PENDING
+               else
+                 :BEFORE_2ND
+               end
+    else
+      puts "invalid event: #{evt} on #{@state}."
+    end
+  end
+
+  def before_2nd_proc(evt, pins)
+    case evt
+    when :PINS
+      puts "invalid pins: #{pins}" if pins.negative? || pins &gt; (10 - @first)
+      @second = pins
+      @state = if spare?
+                 :PENDING
+               else
+                 :FIXED
+               end
+    else
+      puts "invalid event: #{evt} on #{@state}."
+    end
+  end
+end
+
+# スコアは各人の10フレーム分のスコアを記録する
+class Score
+  attr_accessor :id, :player, :fno, :frames, :state
+
+  def initialize(name)
+    @id = SecureRandom.urlsafe_base64(8)
+    @player = name
+    @fno = 1
+    @frames = []
+    (-1..13).each do |fno| # (-1, 0) are dummy frame
+      @frames.append Frame.new(fno)
+    end
+    @state = :WAIT_FOR_1ST
+    @frames[fno2idx(@fno)].action(:SETUP)
+  end
+
+  def fno2idx(fno)
+    fno + 1 # frame number 1 =&gt; array index 3 (0 origin).
+  end
+
+  def frame(fno)
+    @frames[fno2idx(fno)] # return index on @frams at frame number.
+  end
+
+  def go_next_frame
+    @fno += 1
+    @frames[fno2idx(fno)].action(:SETUP)
+  end
+
+  def current
+    frame(@fno)
+  end
+
+  def prev
+    frame(@fno - 1)
+  end
+
+  def pprev
+    frame(@fno - 2)
+  end
+
+  def calc_spare_bonus_after_1st
+    return unless prev.spare?
+
+    prev.spare_bonus = current.first
+    prev.action(:DETERMINE)
+  end
+
+  def calc_strike_bonus_after_1st
+    return unless prev.strike? &amp;&amp; pprev.strike?
+
+    pprev.strike_bonus = prev.first + current.first
+    pprev.action(:DETERMINE)
+  end
+
+  def calc_strike_bonus_after_2nd
+    return unless prev.strike?
+
+    prev.strike_bonus = current.first + current.second
+    prev.action(:DETERMINE)
+  end
+
+  def update_total
+    @frames.each_cons(2) do |prev, cur|
+      cur.total = prev.total + cur.frame_score
+    end
+  end
+
+  def finished?
+    frame(10).fixed?
+  end
+
+  def wait_for_1st_proc(pins)
+    current.action(:PINS, pins)
+    calc_spare_bonus_after_1st
+    calc_strike_bonus_after_1st
+    update_total
+    if finished?
+      @state = :FINISHED
+    elsif current.strike?
+      @state = :WAIT_FOR_1ST
+      go_next_frame
+    else
+      @state = :WAIT_FOR_2ND
+    end
+  end
+
+  def wait_for_2nd_proc(pins)
+    current.action(:PINS, pins)
+    calc_strike_bonus_after_2nd
+    update_total
+    if finished?
+      @state = :FINISHED
+    else
+      @state = :WAIT_FOR_1ST
+      go_next_frame
+    end
+  end
+
+  def scoring(pins)
+    case @state
+    when :WAIT_FOR_1ST
+      wait_for_1st_proc(pins)
+    when :WAIT_FOR_2ND
+      wait_for_2nd_proc(pins)
+    when :FINISHED
+      puts 'finished'
+    end
+  end
+
+  def to_s
+    "Player:#{@player}, Score(id: #{@id}), Frame:#{@fno},
+|No|1st|2nd|Total|Frame Score|Spare Bonus|Strike Bonus|Frame State|
+#{@frames.join("\n")}"
+  end
+end
+
+# Gameクラスは複数名の1ゲーム分のスコアのセットを構成する
+class Game
+  attr_reader :id, :turn, :scores
+
+  def initialize
+    @id = SecureRandom.urlsafe_base64(8)
+    @turn = 0
+    @scores = []
+  end
+
+  def entry(name = 'unknown')
+    @scores.append(Score.new(name))
+  end
+
+  def turn_player_name
+    @scores[@turn].player
+  end
+
+  def go_next_turn
+    @turn = (@turn + 1) % @scores.size
+  end
+
+  def playing(score_index, pins)
+    @scores[score_index].scoring(pins)
+    if @scores[score_index].fno &gt; 10
+      go_next_turn if @scores[score_index].finished?
+    elsif @scores[score_index].current.state == :BEFORE_1ST
+      go_next_turn
+    end
+  end
+
+  def finished?
+    @scores.reject(&amp;:finished?) == []
+  end
+
+  def to_s
+    "Game(id:#{@id}),\n#{@scores.join("\n")}"
+  end
+end
+
+# ScoreSheetは、複数名の複数回のGameを記録する
+class ScoreSheet
+  attr_accessor :id, :time, :games
+
+  def initialize(date)
+    @id = SecureRandom.urlsafe_base64(8)
+    @play_date = date
+    @games = []
+  end
+
+  def add_game(games = 1)
+    games.times do
+      @games.append(Game.new)
+    end
+  end
+
+  def to_s
+    "Score Sheet Date: #{@play_date}(id:#{@id})"
+  end
+end</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect3">
+<h4 id="_テスト用のプログラムを追加する"><a class="anchor" href="#_テスト用のプログラムを追加する"></a>5.1.2 テスト用のプログラムを追加する</h4>
+<div class="paragraph">
+<p>作成したプログラムの末尾に、テストするためのプログラムを追加します（ <a href="#ruby_all_code02">リスト 5.2</a> ）。
+実際にピン数を与えてスコアを作成しているのは「 <code>game.playing</code> 」の呼び出しです。
+このテストコードでは、ピン数のデータは、1ゲーム分のピン数をまとめています。
+しかし、スコアシートのプログラム本体はピン数を受け取るたびに動作するように作られているので、ピン数を1投球ずつ与える方法でも動かせます。</p>
+</div>
+<div id="ruby_all_code02" class="listingblock">
+<div class="title">リスト 5.2 【Ruby】score.rb（ファイル末尾に追加したテストコード部分）</div>
+<div class="content">
+<pre class="prettyprint highlight linenums:292"><code data-lang="ruby">if $PROGRAM_NAME == __FILE__ <i class="conum" data-value="1"></i><b>(1)</b>
+  sheet = ScoreSheet.new(Time.now) <i class="conum" data-value="2"></i><b>(2)</b>
+  sheet.add_game <i class="conum" data-value="3"></i><b>(3)</b>
+  game = sheet.games.last <i class="conum" data-value="4"></i><b>(4)</b>
+  game.entry('くぼあき') <i class="conum" data-value="5"></i><b>(5)</b>
+  game.entry('うえはら')
+  puts sheet <i class="conum" data-value="6"></i><b>(6)</b>
+
+  game_records = [ <i class="conum" data-value="7"></i><b>(7)</b>
+    # [6, 3, 9, 0, 0, 3, 8, 2, 7, 3, 10, 9, 1, 8, 0, 10, 10, 6, 4],
+    # [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 5, 3],
+    [7, 0, 5, 5, 10, 10, 5, 4, 10, 7, 3, 5, 4, 7, 3, 7, 3, 4],
+    [6, 3, 9, 0, 0, 3, 8, 2, 7, 3, 10, 9, 1, 8, 0, 10, 6, 3]
+  ]
+
+  until game.finished? <i class="conum" data-value="8"></i><b>(8)</b>
+    puts '----------------------------------------'
+    puts "turn: #{game.turn_player_name}"
+    score_index = game.turn <i class="conum" data-value="9"></i><b>(9)</b>
+    pins = game_records[score_index].shift <i class="conum" data-value="10"></i><b>(10)</b>
+    puts "input pins: #{pins}"
+    game.playing(score_index, pins) <i class="conum" data-value="11"></i><b>(11)</b>
+    puts game.to_s <i class="conum" data-value="12"></i><b>(12)</b>
+    gets <i class="conum" data-value="13"></i><b>(13)</b>
+  end
+
+  puts "Game(id:#{game.id}) is finished."
+end</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>実行時プログラム名とファイル名が同じとき（このファイル自身から実行したとき）に実行する部分のはじまり。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>新しいスコアシートを作成する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>作成したスコアシートにゲームを追加する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>追加したゲームを選ぶ（ここでは最後のゲームを選ぶ方法をとった）。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>ゲームへプレーヤーがエントリーする。このプレーヤーのこのゲーム用のスコアが用意される。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>スコアシートの作成日付とIDの表示。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>テスト用データ。1行が1人の1ゲーム分のピン数のデータ。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>ゲームの終了まで繰り返し。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>turnは、そのゲーム内の何番目のプレーヤーか（ゲーム中の何番目のスコアか）を表している。このテストコードでは2人がエントリしているので、0→1→0→1 と繰り返す。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="10"></i><b>10</b></td>
+<td>現在のturnのプレーヤーのピン数のテストデータを先頭から1つずつ取り出す。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="11"></i><b>11</b></td>
+<td>現在のturnのプレーヤーのスコアにピン数を渡して、スコアへ反映する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="12"></i><b>12</b></td>
+<td>現在のゲームの全体像を取得して表示する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="13"></i><b>13</b></td>
+<td>ここで空の改行キーを入力してテストを進める。テストを1回ずつ止めて実行できる。この入力待ちをやめれば一括して実行できる。</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_プログラムをテストする"><a class="anchor" href="#_プログラムをテストする"></a>5.2 プログラムをテストする</h3>
+<div class="paragraph">
+<p>テスト用のプログラムも作成できたので、実行してみましょう。</p>
+</div>
+<div class="paragraph">
+<p>コマンドプロンプトを起動して（MacやLinuxならターミナルを起動して）、プログラムを実行します（ <a href="#ruby_all_code03">リスト 5.3</a> ）。</p>
+</div>
+<div class="paragraph">
+<p>出力フォーマットは、左から「フレーム番号」「1投目のピン数」「2投目のピン数」「のべのトータル」「フレームのトータル」「スペアボーナス」「ストライクボーナス」「フレームの状態」です。</p>
+</div>
+<div class="paragraph">
+<p>フレームの状態の変化を追ってみて、フレームのステートマシン図と対応していることを確認してみましょう。</p>
+</div>
+<div id="ruby_all_code03" class="listingblock">
+<div class="title">リスト 5.3 【端末】score.rb を実行する</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="console">C:\Users\kuboaki&gt;cd Desktop\BowlingScore
+
+C:\Users\kuboaki\Desktop\BowlingScore&gt;ruby score.rb
+Score Sheet Date: 2022-02-26 02:08:21 +0900(id:0GG70gNRWtk) <i class="conum" data-value="1"></i><b>(1)</b>
+----------------------------------------
+turn: くぼあき <i class="conum" data-value="2"></i><b>(2)</b>
+input pins: 7 <i class="conum" data-value="3"></i><b>(3)</b>
+Game(id:zwBxlorJlog), <i class="conum" data-value="4"></i><b>(4)</b>
+Player:くぼあき, Score(id: q5rZ-vnFM1o), Frame:1, <i class="conum" data-value="5"></i><b>(5)</b>
+|No|1st|2nd|Total|Frame Score|Spare Bonus|Strike Bonus|Frame State|
+|-1|  0|  0|    .|          0|          0|           0|   RESERVED| <i class="conum" data-value="6"></i><b>(6)</b>
+| 0|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 1|  7|  0|    .|          7|          0|           0| BEFORE_2ND| <i class="conum" data-value="7"></i><b>(7)</b>
+| 2|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 3|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 4|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 5|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|   RESERVED|
+|10|  0|  0|    .|          0|          0|           0|   RESERVED|
+|11|  0|  0|    .|          0|          0|           0|   RESERVED|
+|12|  0|  0|    .|          0|          0|           0|   RESERVED|
+|13|  0|  0|    .|          0|          0|           0|   RESERVED|
+Player:うえはら, Score(id: plq9pFD6nSA), Frame:1,
+|No|1st|2nd|Total|Frame Score|Spare Bonus|Strike Bonus|Frame State|
+|-1|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 1|  0|  0|    .|          0|          0|           0| BEFORE_1ST|
+| 2|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 3|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 4|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 5|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|   RESERVED|
+|10|  0|  0|    .|          0|          0|           0|   RESERVED|
+|11|  0|  0|    .|          0|          0|           0|   RESERVED|
+|12|  0|  0|    .|          0|          0|           0|   RESERVED|
+|13|  0|  0|    .|          0|          0|           0|   RESERVED|
+
+(略）
+
+----------------------------------------
+turn: うえはら
+input pins: 3
+Game(id:zwBxlorJlog),
+Player:くぼあき, Score(id: q5rZ-vnFM1o), Frame:11,
+|No|1st|2nd|Total|Frame Score|Spare Bonus|Strike Bonus|Frame State|
+|-1|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|      FIXED|
+| 2|  5|  5|   27|         20|         10|           0|      FIXED|
+| 3| 10|  0|   52|         25|          0|          15|      FIXED|
+| 4| 10|  0|   71|         19|          0|           9|      FIXED|
+| 5|  5|  4|   80|          9|          0|           0|      FIXED|
+| 6| 10|  0|  100|         20|          0|          10|      FIXED|
+| 7|  7|  3|  115|         15|          5|           0|      FIXED|
+| 8|  5|  4|  124|          9|          0|           0|      FIXED|
+| 9|  7|  3|  141|         17|          7|           0|      FIXED|
+|10|  7|  3|  155|         14|          4|           0|      FIXED|
+|11|  4|  0|    .|          4|          0|           0| BEFORE_2ND| <i class="conum" data-value="8"></i><b>(8)</b>
+|12|  0|  0|    .|          0|          0|           0|   RESERVED|
+|13|  0|  0|    .|          0|          0|           0|   RESERVED|
+Player:うえはら, Score(id: plq9pFD6nSA), Frame:10,
+|No|1st|2nd|Total|Frame Score|Spare Bonus|Strike Bonus|Frame State|
+|-1|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|      FIXED|
+| 2|  9|  0|   18|          9|          0|           0|      FIXED|
+| 3|  0|  3|   21|          3|          0|           0|      FIXED|
+| 4|  8|  2|   38|         17|          7|           0|      FIXED|
+| 5|  7|  3|   58|         20|         10|           0|      FIXED|
+| 6| 10|  0|   78|         20|          0|          10|      FIXED|
+| 7|  9|  1|   96|         18|          8|           0|      FIXED|
+| 8|  8|  0|  104|          8|          0|           0|      FIXED|
+| 9| 10|  0|  123|         19|          0|           9|      FIXED|
+|10|  6|  3|  132|          9|          0|           0|      FIXED|
+|11|  0|  0|    .|          0|          0|           0|   RESERVED|
+|12|  0|  0|    .|          0|          0|           0|   RESERVED|
+|13|  0|  0|    .|          0|          0|           0|   RESERVED|
+
+Game(id:zwBxlorJlog) is finished.
+C:\Users\kuboaki\Desktop\BowlingScore&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>スコアシートの作成日付とIDの表示。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>どのプレーヤーのターンなのかを表示した。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>プログラムが受け取ったピン数。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>現在のゲームのID。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>プレーヤーとそのプレーヤーのスコアのID、現在のフレーム番号。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>前の前のフレームを無条件に扱うためのダミーフレーム。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>1投目が終わったので、フレームは2投目の投球前の状態。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>ここは2投目の投球前の状態だが、第10フレームの状態が「FIXED」なのでゲームは終了。</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>動作を確認できるよう、テストプログラムを実行した様子を収めた動画を用意しました。
+このテキストと一緒に配布している資料として <code>videos</code> フォルダに次のファイルを置いてあります。</p>
+</div>
+<div class="ulist">
+<div class="title">実行の様子を収めたビデオ（ <code>videos</code> フォルダにあります）</div>
+<ul>
+<li>
+<p><code>score_rb_demo_win.mp4</code></p>
+</li>
+<li>
+<p><code>score_rb_demo_mac.mov</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_まとめ_4"><a class="anchor" href="#_まとめ_4"></a>5.3 まとめ</h3>
+<div class="paragraph">
+<p>作成したプログラムを、テストコードを使って動かしてみました。
+テストした結果、作成したプログラムが、モデル（クラス図やステートマシン図）に従って動作していることを確認できました。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_summary"><a class="anchor" href="#_summary"></a>第6章 まとめ</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>このチュートリアルでは、ボーリングスコアのモデルを作ることを通して、ソフトウェアの開発にモデルを使うことについて学びました。また、UMLが、そのようなときに役立つ記法であることも実感できたのではないでしょうか。
+ソフトウェアの開発にモデルを活用するときは、記法やツールも欠かせません。このチュートリアルでは、モデル図を描くのに astah* を使いました。ですが、このチュートリアルをやったみなさんは、記法やツールがあればモデルが作れるわけではないことに気づいたのではないでしょうか。</p>
+</div>
+<div class="paragraph">
+<p>まず、このチュートリアルでは、ボーリングスコアの構造のモデルや振る舞いのモデルをいきなり作るのではなく、実際のスコアシートを観察してオブジェクト図を作るところから始めました。
+ボーリングスコアのような自明なよく知られた問題であれば、このような手間をかけなくてもモデルを作成できる人もいるでしょう。
+しかし、システム開発案件の多くは、どのように対処すればよいのかわかっていない問題を抱えています（だからこそ、そこが開発案件になるわけですよね）。
+このチュートリアルでは、そのようなときに問題を表すモデルを作るのと同じように、ボーリングスコアの記録に関わる領域をモデルで表すところから始めました。</p>
+</div>
+<div class="paragraph">
+<p>みなさんのなかには、UMLの考え方や記法に慣れていないだけで、モデル化して考えることには慣れている人もいるでしょう。そのような人は、こんどは自分たちがすでにモデル化している図や文書を、UMLを使って表してみるとよいでしょう。</p>
+</div>
+<div class="paragraph">
+<p>あるいは、すでに作りたいもの（あるいは解決したい課題）はわかってきているものの、それがどのような課題でどのように解決すればよいのかといったことを、うまく表せずに困っている人もいるでしょう。そのような人は、みなさんの課題（を含む現状）をモデル図で表してみるとよいでしょう。これを「As Isのモデル」と呼びます。そして、浮き彫りになった問題を、そのモデルを出発点として解消したモデルを作ります。これを「To Beのモデル」と呼びます。課題を解決したシステムは、To Be のモデルを元に設計、実装します。このような方法で、問題解決にモデルを活用してみることにチャレンジしてみてください。</p>
+</div>
+<div class="paragraph">
+<p>みなさんがこれまで以上にモデルを活用できるようになることを期待しています。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_other_diagrams"><a class="anchor" href="#_other_diagrams"></a>第7章 他の図、他の機能など</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>この演習で作成したのは、クラス図（オブジェクト図も含む）とステートマシン図でした。
+UMLには他にも多くの図の記法が提供されています。
+ほかによく使われる図としては、ユースケース図、シーケンス図、アクティビティ図があります。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_appendix-01"><a class="anchor" href="#_appendix-01"></a>付録 A: モデルやプログラムの作成例</h2>
+<div class="sectionbody">
+<div class="ulist">
+<div class="title">ボウリングのゲームスコアのモデル図（ <code>models</code> フォルダにあります）</div>
+<ul>
+<li>
+<p><code>bowling_score.asta</code></p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<div class="title">Rubyで実装したプログラム（ <code>codes</code> フォルダにあります）</div>
+<ul>
+<li>
+<p><code>score.rb</code></p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<div class="title">実行している様子の動画（ <code>videos</code> フォルダにあります）</div>
+<ul>
+<li>
+<p><code>score_rb_demo_win.mp4</code></p>
+</li>
+<li>
+<p><code>score_rb_demo_mac.mov</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_bibliography"><a class="anchor" href="#_bibliography"></a>参考文献</h2>
+<div class="sectionbody">
+<div class="ulist bibliography">
+<ul class="bibliography">
+<li>
+<p><a id="UMLSPEC"></a>[UMLSPEC] OMG 統一モデリング言語（UNIFIED MODELING LANGUAGE）.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.omg.org/spec/UML/" class="bare">https://www.omg.org/spec/UML/</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a id="robustness01"></a>[robustness01] ワークブック形式で学ぶUMLオブジェクトモデリング.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>ローゼンバーグ, スコット. ソフトバンク. 2002.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a id="robustness02"></a>[robustness02] ユースケース駆動開発実践ガイド.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>ローゼンバーグ, ステファン. 翔泳社. 2007.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a id="rulebook"></a>[rulebook] ボーリング競技規則.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://jbc-iwate.com/service/message/201012101.pdf" class="bare">https://jbc-iwate.com/service/message/201012101.pdf</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+<hr>
+<div class="paragraph">
+<p>「モデルを使ってソフトウェアを開発しよう: UML初学者向けチュートリアル」</p>
+</div>
+<div class="paragraph">
+<p>発行日 : 2025-03-25<br>
+バージョン : html_0781<br>
+作成者 : 株式会社チェンジビジョン<br>
+本書の内容に関する質問等がありましたら、作成者までお知らせください。</p>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+バージョン html_0781<br>
+最終更新 2023-06-09 17:35:10 +0900
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/run_prettify.min.js"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>

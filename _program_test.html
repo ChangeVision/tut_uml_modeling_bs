@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.23">
+<meta name="description" content="この文書は、モデリングツールにastah*を使って、ソフトウェアの開発にUMLを使う方法について学ぶチュートリアルです。">
+<meta name="author" content="株式会社チェンジビジョン">
+<title>モデルを使ってソフトウェアを開発しよう: UML初学者向けチュートリアル</title>
+<link rel="stylesheet" href="css/mystyle.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
+<style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
+                       font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
+             .nav-footer{text-align: center; margin-top: auto;}
+             .nav-footer > p > a {white-space: nowrap;}</style>
+</head>
+<body id="_program_test" class="book toc2 toc-left">
+<div id="header">
+<h1>モデルを使ってソフトウェアを開発しよう: UML初学者向けチュートリアル</h1>
+<div class="details">
+<span id="author" class="author">株式会社チェンジビジョン</span><br>
+<span id="revnumber">バージョン html_0780,</span>
+<span id="revdate">2025-03-25</span>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">目次</div>
+<p><span class="toc-root"><a href="tut_uml_modeling_bs.html">モデルを使ってソフトウェアを開発しよう: UML初学者向けチュートリアル</a></span></p><ul class="sectlevel1">
+<li><a href="_preface.html">はじめに</a>
+</li>
+<li><a href="_copyright.html">注意事項</a>
+</li>
+<li><a href="_preparation.html">1 準備</a>
+</li>
+<li><a href="_structure_design.html">2 スコアシートの構造を調べる</a>
+</li>
+<li><a href="_model_to_code_design.html">3 モデルとコードの対応づけ</a>
+</li>
+<li><a href="_behavior_design.html">4 スコアやフレームの状態を調べる</a>
+</li>
+<li><a href="_program_test.html"><span class="toc-current">5 できあがったプログラムを試す</span></a>
+<ul class="sectlevel2">
+<li><a href="_program_test.html#_プログラムを完成させる">5.1 プログラムを完成させる</a>
+</li>
+<li><a href="_program_test.html#_プログラムをテストする">5.2 プログラムをテストする</a>
+</li>
+<li><a href="_program_test.html#_まとめ_4">5.3 まとめ</a>
+</li>
+</ul>
+</li>
+<li><a href="_summary.html">6 まとめ</a>
+</li>
+<li><a href="_other_diagrams.html">7 他の図、他の機能など</a>
+</li>
+<li><a href="_appendix-01.html">付録 A: モデルやプログラムの作成例</a>
+</li>
+<li><a href="_bibliography.html">参考文献</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_program_test"><a class="anchor" href="#_program_test"></a>第5章 できあがったプログラムを試す</h2>
+<div class="sectionbody">
+<div class="paragraph lead">
+<p>対応づけルールを使って、モデルから変換して作成したプログラムができあがりました。
+できあがったプログラムを確認し、実際に動かしてみましょう。</p>
+</div>
+<div class="sect2">
+<h3 id="_プログラムを完成させる"><a class="anchor" href="#_プログラムを完成させる"></a>5.1 プログラムを完成させる</h3>
+<div class="paragraph">
+<p>まず、プログラムをテストできるよう、完成させましょう。</p>
+</div>
+<div class="sect3">
+<h4 id="_作成したプログラムを確認する"><a class="anchor" href="#_作成したプログラムを確認する"></a>5.1.1 作成したプログラムを確認する</h4>
+<div class="paragraph">
+<p>作成したプログラムの全体を <a href="_program_test.html#ruby_all_code01">リスト 5.1</a> に示します。
+みなさんも作成したプログラムの全体を確認しましょう。</p>
+</div>
+<div id="ruby_all_code01" class="listingblock">
+<div class="title">リスト 5.1 【Ruby】score.rb</div>
+<div class="content">
+<pre class="prettyprint highlight linenums:2"><code data-lang="ruby"># frozen_string_literal: true
+
+require 'securerandom'
+
+# Frameは1フレーム分のピン数やボーナスを記録する
+class Frame
+  attr_reader :frame_no
+  attr_accessor :first, :second, :spare_bonus, :strike_bonus, :total, :state
+
+  def initialize(frame_no)
+    @frame_no = frame_no
+    @first = 0
+    @second = 0
+    @spare_bonus = 0
+    @strike_bonus = 0
+    @total = 0
+    @state = :RESERVED
+  end
+
+  def action(event, pins=0)
+    case @state
+    when :RESERVED
+      case event
+      when :SETUP
+        @state = :BEFORE_1ST
+      else
+        puts "invalid event: #{event} is ignored."
+      end
+    when :BEFORE_1ST
+      before_1st_porc(event, pins)
+    when :BEFORE_2ND
+      before_2nd_proc(event, pins)
+    when :PENDING
+      case event
+      when :DETERMINE
+        @state = :FIXED
+      end
+    when :FIXED
+      puts 'fixed.'
+    end
+  end
+
+  def frame_score
+    @first + @second + @spare_bonus + @strike_bonus
+  end
+
+  def strike?
+    @first == 10
+  end
+
+  def spare?
+    @first &lt; 10 &amp;&amp; (@first + @second) == 10
+  end
+
+  def miss?
+    @first &lt; 10 &amp;&amp; @second.zero &amp;&amp; @state == :FIXED
+  end
+
+  def gutter?
+    @first.zero
+  end
+
+  def fixed?
+    @state == :FIXED
+  end
+
+  def to_s
+    total = if @state == :FIXED
+              @total
+            else
+              '   .'
+            end
+    format '|%2d|%3s|%3s|%5s|%11d|%11d|%12d|%11s|',
+           @frame_no, @first, @second, total, frame_score,
+           @spare_bonus, @strike_bonus, @state
+  end
+
+  private
+
+  def before_1st_porc(evt, pins)
+    case evt
+    when :PINS
+      puts "invalid pins: #{pins}" if pins.negative? || pins &gt; 10
+      @first = pins
+      @state = if strike?
+                 @second = 0
+                 :PENDING
+               else
+                 :BEFORE_2ND
+               end
+    else
+      puts "invalid event: #{evt} on #{@state}."
+    end
+  end
+
+  def before_2nd_proc(evt, pins)
+    case evt
+    when :PINS
+      puts "invalid pins: #{pins}" if pins.negative? || pins &gt; (10 - @first)
+      @second = pins
+      @state = if spare?
+                 :PENDING
+               else
+                 :FIXED
+               end
+    else
+      puts "invalid event: #{evt} on #{@state}."
+    end
+  end
+end
+
+# スコアは各人の10フレーム分のスコアを記録する
+class Score
+  attr_accessor :id, :player, :fno, :frames, :state
+
+  def initialize(name)
+    @id = SecureRandom.urlsafe_base64(8)
+    @player = name
+    @fno = 1
+    @frames = []
+    (-1..13).each do |fno| # (-1, 0) are dummy frame
+      @frames.append Frame.new(fno)
+    end
+    @state = :WAIT_FOR_1ST
+    @frames[fno2idx(@fno)].action(:SETUP)
+  end
+
+  def fno2idx(fno)
+    fno + 1 # frame number 1 =&gt; array index 3 (0 origin).
+  end
+
+  def frame(fno)
+    @frames[fno2idx(fno)] # return index on @frams at frame number.
+  end
+
+  def go_next_frame
+    @fno += 1
+    @frames[fno2idx(fno)].action(:SETUP)
+  end
+
+  def current
+    frame(@fno)
+  end
+
+  def prev
+    frame(@fno - 1)
+  end
+
+  def pprev
+    frame(@fno - 2)
+  end
+
+  def calc_spare_bonus_after_1st
+    return unless prev.spare?
+
+    prev.spare_bonus = current.first
+    prev.action(:DETERMINE)
+  end
+
+  def calc_strike_bonus_after_1st
+    return unless prev.strike? &amp;&amp; pprev.strike?
+
+    pprev.strike_bonus = prev.first + current.first
+    pprev.action(:DETERMINE)
+  end
+
+  def calc_strike_bonus_after_2nd
+    return unless prev.strike?
+
+    prev.strike_bonus = current.first + current.second
+    prev.action(:DETERMINE)
+  end
+
+  def update_total
+    @frames.each_cons(2) do |prev, cur|
+      cur.total = prev.total + cur.frame_score
+    end
+  end
+
+  def finished?
+    frame(10).fixed?
+  end
+
+  def wait_for_1st_proc(pins)
+    current.action(:PINS, pins)
+    calc_spare_bonus_after_1st
+    calc_strike_bonus_after_1st
+    update_total
+    if finished?
+      @state = :FINISHED
+    elsif current.strike?
+      @state = :WAIT_FOR_1ST
+      go_next_frame
+    else
+      @state = :WAIT_FOR_2ND
+    end
+  end
+
+  def wait_for_2nd_proc(pins)
+    current.action(:PINS, pins)
+    calc_strike_bonus_after_2nd
+    update_total
+    if finished?
+      @state = :FINISHED
+    else
+      @state = :WAIT_FOR_1ST
+      go_next_frame
+    end
+  end
+
+  def scoring(pins)
+    case @state
+    when :WAIT_FOR_1ST
+      wait_for_1st_proc(pins)
+    when :WAIT_FOR_2ND
+      wait_for_2nd_proc(pins)
+    when :FINISHED
+      puts 'finished'
+    end
+  end
+
+  def to_s
+    "Player:#{@player}, Score(id: #{@id}), Frame:#{@fno},
+|No|1st|2nd|Total|Frame Score|Spare Bonus|Strike Bonus|Frame State|
+#{@frames.join("\n")}"
+  end
+end
+
+# Gameクラスは複数名の1ゲーム分のスコアのセットを構成する
+class Game
+  attr_reader :id, :turn, :scores
+
+  def initialize
+    @id = SecureRandom.urlsafe_base64(8)
+    @turn = 0
+    @scores = []
+  end
+
+  def entry(name = 'unknown')
+    @scores.append(Score.new(name))
+  end
+
+  def turn_player_name
+    @scores[@turn].player
+  end
+
+  def go_next_turn
+    @turn = (@turn + 1) % @scores.size
+  end
+
+  def playing(score_index, pins)
+    @scores[score_index].scoring(pins)
+    if @scores[score_index].fno &gt; 10
+      go_next_turn if @scores[score_index].finished?
+    elsif @scores[score_index].current.state == :BEFORE_1ST
+      go_next_turn
+    end
+  end
+
+  def finished?
+    @scores.reject(&amp;:finished?) == []
+  end
+
+  def to_s
+    "Game(id:#{@id}),\n#{@scores.join("\n")}"
+  end
+end
+
+# ScoreSheetは、複数名の複数回のGameを記録する
+class ScoreSheet
+  attr_accessor :id, :time, :games
+
+  def initialize(date)
+    @id = SecureRandom.urlsafe_base64(8)
+    @play_date = date
+    @games = []
+  end
+
+  def add_game(games = 1)
+    games.times do
+      @games.append(Game.new)
+    end
+  end
+
+  def to_s
+    "Score Sheet Date: #{@play_date}(id:#{@id})"
+  end
+end</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect3">
+<h4 id="_テスト用のプログラムを追加する"><a class="anchor" href="#_テスト用のプログラムを追加する"></a>5.1.2 テスト用のプログラムを追加する</h4>
+<div class="paragraph">
+<p>作成したプログラムの末尾に、テストするためのプログラムを追加します（ <a href="_program_test.html#ruby_all_code02">リスト 5.2</a> ）。
+実際にピン数を与えてスコアを作成しているのは「 <code>game.playing</code> 」の呼び出しです。
+このテストコードでは、ピン数のデータは、1ゲーム分のピン数をまとめています。
+しかし、スコアシートのプログラム本体はピン数を受け取るたびに動作するように作られているので、ピン数を1投球ずつ与える方法でも動かせます。</p>
+</div>
+<div id="ruby_all_code02" class="listingblock">
+<div class="title">リスト 5.2 【Ruby】score.rb（ファイル末尾に追加したテストコード部分）</div>
+<div class="content">
+<pre class="prettyprint highlight linenums:292"><code data-lang="ruby">if $PROGRAM_NAME == __FILE__ <i class="conum" data-value="1"></i><b>(1)</b>
+  sheet = ScoreSheet.new(Time.now) <i class="conum" data-value="2"></i><b>(2)</b>
+  sheet.add_game <i class="conum" data-value="3"></i><b>(3)</b>
+  game = sheet.games.last <i class="conum" data-value="4"></i><b>(4)</b>
+  game.entry('くぼあき') <i class="conum" data-value="5"></i><b>(5)</b>
+  game.entry('うえはら')
+  puts sheet <i class="conum" data-value="6"></i><b>(6)</b>
+
+  game_records = [ <i class="conum" data-value="7"></i><b>(7)</b>
+    # [6, 3, 9, 0, 0, 3, 8, 2, 7, 3, 10, 9, 1, 8, 0, 10, 10, 6, 4],
+    # [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 5, 3],
+    [7, 0, 5, 5, 10, 10, 5, 4, 10, 7, 3, 5, 4, 7, 3, 7, 3, 4],
+    [6, 3, 9, 0, 0, 3, 8, 2, 7, 3, 10, 9, 1, 8, 0, 10, 6, 3]
+  ]
+
+  until game.finished? <i class="conum" data-value="8"></i><b>(8)</b>
+    puts '----------------------------------------'
+    puts "turn: #{game.turn_player_name}"
+    score_index = game.turn <i class="conum" data-value="9"></i><b>(9)</b>
+    pins = game_records[score_index].shift <i class="conum" data-value="10"></i><b>(10)</b>
+    puts "input pins: #{pins}"
+    game.playing(score_index, pins) <i class="conum" data-value="11"></i><b>(11)</b>
+    puts game.to_s <i class="conum" data-value="12"></i><b>(12)</b>
+    gets <i class="conum" data-value="13"></i><b>(13)</b>
+  end
+
+  puts "Game(id:#{game.id}) is finished."
+end</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>実行時プログラム名とファイル名が同じとき（このファイル自身から実行したとき）に実行する部分のはじまり。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>新しいスコアシートを作成する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>作成したスコアシートにゲームを追加する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>追加したゲームを選ぶ（ここでは最後のゲームを選ぶ方法をとった）。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>ゲームへプレーヤーがエントリーする。このプレーヤーのこのゲーム用のスコアが用意される。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>スコアシートの作成日付とIDの表示。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>テスト用データ。1行が1人の1ゲーム分のピン数のデータ。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>ゲームの終了まで繰り返し。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>turnは、そのゲーム内の何番目のプレーヤーか（ゲーム中の何番目のスコアか）を表している。このテストコードでは2人がエントリしているので、0→1→0→1 と繰り返す。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="10"></i><b>10</b></td>
+<td>現在のturnのプレーヤーのピン数のテストデータを先頭から1つずつ取り出す。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="11"></i><b>11</b></td>
+<td>現在のturnのプレーヤーのスコアにピン数を渡して、スコアへ反映する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="12"></i><b>12</b></td>
+<td>現在のゲームの全体像を取得して表示する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="13"></i><b>13</b></td>
+<td>ここで空の改行キーを入力してテストを進める。テストを1回ずつ止めて実行できる。この入力待ちをやめれば一括して実行できる。</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_プログラムをテストする"><a class="anchor" href="#_プログラムをテストする"></a>5.2 プログラムをテストする</h3>
+<div class="paragraph">
+<p>テスト用のプログラムも作成できたので、実行してみましょう。</p>
+</div>
+<div class="paragraph">
+<p>コマンドプロンプトを起動して（MacやLinuxならターミナルを起動して）、プログラムを実行します（ <a href="_program_test.html#ruby_all_code03">リスト 5.3</a> ）。</p>
+</div>
+<div class="paragraph">
+<p>出力フォーマットは、左から「フレーム番号」「1投目のピン数」「2投目のピン数」「のべのトータル」「フレームのトータル」「スペアボーナス」「ストライクボーナス」「フレームの状態」です。</p>
+</div>
+<div class="paragraph">
+<p>フレームの状態の変化を追ってみて、フレームのステートマシン図と対応していることを確認してみましょう。</p>
+</div>
+<div id="ruby_all_code03" class="listingblock">
+<div class="title">リスト 5.3 【端末】score.rb を実行する</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="console">C:\Users\kuboaki&gt;cd Desktop\BowlingScore
+
+C:\Users\kuboaki\Desktop\BowlingScore&gt;ruby score.rb
+Score Sheet Date: 2022-02-26 02:08:21 +0900(id:0GG70gNRWtk) <i class="conum" data-value="1"></i><b>(1)</b>
+----------------------------------------
+turn: くぼあき <i class="conum" data-value="2"></i><b>(2)</b>
+input pins: 7 <i class="conum" data-value="3"></i><b>(3)</b>
+Game(id:zwBxlorJlog), <i class="conum" data-value="4"></i><b>(4)</b>
+Player:くぼあき, Score(id: q5rZ-vnFM1o), Frame:1, <i class="conum" data-value="5"></i><b>(5)</b>
+|No|1st|2nd|Total|Frame Score|Spare Bonus|Strike Bonus|Frame State|
+|-1|  0|  0|    .|          0|          0|           0|   RESERVED| <i class="conum" data-value="6"></i><b>(6)</b>
+| 0|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 1|  7|  0|    .|          7|          0|           0| BEFORE_2ND| <i class="conum" data-value="7"></i><b>(7)</b>
+| 2|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 3|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 4|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 5|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|   RESERVED|
+|10|  0|  0|    .|          0|          0|           0|   RESERVED|
+|11|  0|  0|    .|          0|          0|           0|   RESERVED|
+|12|  0|  0|    .|          0|          0|           0|   RESERVED|
+|13|  0|  0|    .|          0|          0|           0|   RESERVED|
+Player:うえはら, Score(id: plq9pFD6nSA), Frame:1,
+|No|1st|2nd|Total|Frame Score|Spare Bonus|Strike Bonus|Frame State|
+|-1|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 1|  0|  0|    .|          0|          0|           0| BEFORE_1ST|
+| 2|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 3|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 4|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 5|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 6|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 7|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 8|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 9|  0|  0|    .|          0|          0|           0|   RESERVED|
+|10|  0|  0|    .|          0|          0|           0|   RESERVED|
+|11|  0|  0|    .|          0|          0|           0|   RESERVED|
+|12|  0|  0|    .|          0|          0|           0|   RESERVED|
+|13|  0|  0|    .|          0|          0|           0|   RESERVED|
+
+(略）
+
+----------------------------------------
+turn: うえはら
+input pins: 3
+Game(id:zwBxlorJlog),
+Player:くぼあき, Score(id: q5rZ-vnFM1o), Frame:11,
+|No|1st|2nd|Total|Frame Score|Spare Bonus|Strike Bonus|Frame State|
+|-1|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|      FIXED|
+| 2|  5|  5|   27|         20|         10|           0|      FIXED|
+| 3| 10|  0|   52|         25|          0|          15|      FIXED|
+| 4| 10|  0|   71|         19|          0|           9|      FIXED|
+| 5|  5|  4|   80|          9|          0|           0|      FIXED|
+| 6| 10|  0|  100|         20|          0|          10|      FIXED|
+| 7|  7|  3|  115|         15|          5|           0|      FIXED|
+| 8|  5|  4|  124|          9|          0|           0|      FIXED|
+| 9|  7|  3|  141|         17|          7|           0|      FIXED|
+|10|  7|  3|  155|         14|          4|           0|      FIXED|
+|11|  4|  0|    .|          4|          0|           0| BEFORE_2ND| <i class="conum" data-value="8"></i><b>(8)</b>
+|12|  0|  0|    .|          0|          0|           0|   RESERVED|
+|13|  0|  0|    .|          0|          0|           0|   RESERVED|
+Player:うえはら, Score(id: plq9pFD6nSA), Frame:10,
+|No|1st|2nd|Total|Frame Score|Spare Bonus|Strike Bonus|Frame State|
+|-1|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 1|  6|  3|    9|          9|          0|           0|      FIXED|
+| 2|  9|  0|   18|          9|          0|           0|      FIXED|
+| 3|  0|  3|   21|          3|          0|           0|      FIXED|
+| 4|  8|  2|   38|         17|          7|           0|      FIXED|
+| 5|  7|  3|   58|         20|         10|           0|      FIXED|
+| 6| 10|  0|   78|         20|          0|          10|      FIXED|
+| 7|  9|  1|   96|         18|          8|           0|      FIXED|
+| 8|  8|  0|  104|          8|          0|           0|      FIXED|
+| 9| 10|  0|  123|         19|          0|           9|      FIXED|
+|10|  6|  3|  132|          9|          0|           0|      FIXED|
+|11|  0|  0|    .|          0|          0|           0|   RESERVED|
+|12|  0|  0|    .|          0|          0|           0|   RESERVED|
+|13|  0|  0|    .|          0|          0|           0|   RESERVED|
+
+Game(id:zwBxlorJlog) is finished.
+C:\Users\kuboaki\Desktop\BowlingScore&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>スコアシートの作成日付とIDの表示。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>どのプレーヤーのターンなのかを表示した。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>プログラムが受け取ったピン数。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>現在のゲームのID。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>プレーヤーとそのプレーヤーのスコアのID、現在のフレーム番号。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>前の前のフレームを無条件に扱うためのダミーフレーム。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>1投目が終わったので、フレームは2投目の投球前の状態。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>ここは2投目の投球前の状態だが、第10フレームの状態が「FIXED」なのでゲームは終了。</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>動作を確認できるよう、テストプログラムを実行した様子を収めた動画を用意しました。
+このテキストと一緒に配布している資料として <code>videos</code> フォルダに次のファイルを置いてあります。</p>
+</div>
+<div class="ulist">
+<div class="title">実行の様子を収めたビデオ（ <code>videos</code> フォルダにあります）</div>
+<ul>
+<li>
+<p><code>score_rb_demo_win.mp4</code></p>
+</li>
+<li>
+<p><code>score_rb_demo_mac.mov</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_まとめ_4"><a class="anchor" href="#_まとめ_4"></a>5.3 まとめ</h3>
+<div class="paragraph">
+<p>作成したプログラムを、テストコードを使って動かしてみました。
+テストした結果、作成したプログラムが、モデル（クラス図やステートマシン図）に従って動作していることを確認できました。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph nav-footer">
+<p>← Previous: <a href="_behavior_design.html">第4章</a> | ↑ Up: <a href="tut_uml_modeling_bs.html">モデルを使ってソフトウェアを開発しよう: UML初学者向けチュートリアル</a> | Next: <a href="_summary.html">第6章</a> →</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+バージョン html_0780<br>
+最終更新 2023-06-09 17:35:10 +0900
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/run_prettify.min.js"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>

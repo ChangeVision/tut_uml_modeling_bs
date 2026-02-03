@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.23">
+<meta name="description" content="この文書は、モデリングツールにastah*を使って、ソフトウェアの開発にUMLを使う方法について学ぶチュートリアルです。">
+<meta name="author" content="株式会社チェンジビジョン">
+<title>モデルを使ってソフトウェアを開発しよう: UML初学者向けチュートリアル</title>
+<link rel="stylesheet" href="css/mystyle.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
+<style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
+                       font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
+             .nav-footer{text-align: center; margin-top: auto;}
+             .nav-footer > p > a {white-space: nowrap;}</style>
+</head>
+<body id="_model_to_code_design" class="book toc2 toc-left">
+<div id="header">
+<h1>モデルを使ってソフトウェアを開発しよう: UML初学者向けチュートリアル</h1>
+<div class="details">
+<span id="author" class="author">株式会社チェンジビジョン</span><br>
+<span id="revnumber">バージョン html_0780,</span>
+<span id="revdate">2025-03-25</span>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">目次</div>
+<p><span class="toc-root"><a href="tut_uml_modeling_bs.html">モデルを使ってソフトウェアを開発しよう: UML初学者向けチュートリアル</a></span></p><ul class="sectlevel1">
+<li><a href="_preface.html">はじめに</a>
+</li>
+<li><a href="_copyright.html">注意事項</a>
+</li>
+<li><a href="_preparation.html">1 準備</a>
+</li>
+<li><a href="_structure_design.html">2 スコアシートの構造を調べる</a>
+</li>
+<li><a href="_model_to_code_design.html"><span class="toc-current">3 モデルとコードの対応づけ</span></a>
+<ul class="sectlevel2">
+<li><a href="_model_to_code_design.html#_対応づけ検討用モデルの作成">3.1 対応づけ検討用モデルの作成</a>
+</li>
+<li><a href="_model_to_code_design.html#_変換ルールを使ったコードを確認する">3.2 変換ルールを使ったコードを確認する</a>
+</li>
+<li><a href="_model_to_code_design.html#_まとめ_2">3.3 まとめ</a>
+</li>
+</ul>
+</li>
+<li><a href="_behavior_design.html">4 スコアやフレームの状態を調べる</a>
+</li>
+<li><a href="_program_test.html">5 できあがったプログラムを試す</a>
+</li>
+<li><a href="_summary.html">6 まとめ</a>
+</li>
+<li><a href="_other_diagrams.html">7 他の図、他の機能など</a>
+</li>
+<li><a href="_appendix-01.html">付録 A: モデルやプログラムの作成例</a>
+</li>
+<li><a href="_bibliography.html">参考文献</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_model_to_code_design"><a class="anchor" href="#_model_to_code_design"></a>第3章 モデルとコードの対応づけ</h2>
+<div class="sectionbody">
+<div class="paragraph lead">
+<p>プログラムがどのように動作するのか検討するときには、振る舞いのモデルを使います。
+振る舞いのモデルを作成する前に、構造のモデルと振る舞いのモデルがどのようなコードとして実現されるのかについて、このチュートリアルで用いる方式を決めておきましょう。
+このことを「モデルとコードの対応づけ」と呼ぶことにします。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="ヒント"></i>
+</td>
+<td class="content">
+このような対応づけを「モデル変換ルール」と呼ぶこともあります。また、開発プロセスのなかでこの対応づけを検討する工程を「方式設計」と呼ぶ人もいます。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>モデルとコードの対応づけを決めてそれを前提にして設計する（モデルを作る）ことは、実装に依存する情報と依存しない情報の分離を促します。
+また、このような考え方は、実装に依存しないモデルを作る上でとても重要で、実務的なモデルを作成する際にも大いに役立ちます。</p>
+</div>
+<div class="sect2">
+<h3 id="_対応づけ検討用モデルの作成"><a class="anchor" href="#_対応づけ検討用モデルの作成"></a>3.1 対応づけ検討用モデルの作成</h3>
+<div class="paragraph">
+<p>このチュートリアルでは実装にRubyを使うことにしました。
+サンプルモデルとサンプルモデルに対応するRubyプログラムを作ってみることで、対応づけの方式の基本的な考え方を決めておこうというわけです。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="注記"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>この章で検討したいことは、ボウリングのスコアに関するモデルの問題領域とは直接の関係はありません。
+こういった別の領域の問題を、これまで検討していたボウリングのスコアに関する問題領域と、ここで検討したいことが混在してしまい、說明も受け取り手も混乱してしまうでしょう。
+そんなわけで、別の問題として分けて検討するために、この章を用意してあります。</p>
+</div>
+<div class="paragraph">
+<p>もし、この章の役割がピンとこない、実装についての議論にはあまり関心がないのであれば、最初はこの章を読み飛ばしてみてもかまいません。
+しかし、後の章へ進むと、実装する人がモデルを使う際には、モデルとコードを対応づける必要があり、ここで実装方式を決めておかなければ、実装者がそのことについて考える必要がある（特定の実装者に依存しないよう設計しておくべきことを実装する各人に委ねてしまっている）ことに気づくでしょう。
+そのときは、この章に戻って、どうして実装方式の設計が必要なのか考えてもらえたらと思います。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_対応づけ検討用プロジェクトを用意する"><a class="anchor" href="#_対応づけ検討用プロジェクトを用意する"></a>3.1.1 対応づけ検討用プロジェクトを用意する</h4>
+<div class="paragraph">
+<p>「モデルとコードの対応づけ」の検討用に astah* で別のプロジェクトを作成しましょう。</p>
+</div>
+<div class="sect4">
+<h5 id="_対応づけ検討用プロジェクトを作成する"><a class="anchor" href="#_対応づけ検討用プロジェクトを作成する"></a>対応づけ検討用プロジェクトを作成する</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>astah* で新規プロジェクトを作成する。</p>
+</li>
+<li>
+<p>作成したプロジェクトをいったん保存する。</p>
+</li>
+<li>
+<p>モデルファイルの名前は「stm_sample.asta」とする。</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="add_stm_sample_class_diag"><a class="anchor" href="#add_stm_sample_class_diag"></a>検討用プロジェクトにクラス図を追加する</h5>
+<div class="paragraph">
+<p>プロジェクトが保存できたら、プロジェクトにクラス図を追加しましょう。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>構造ツリーで、プロジェクト名をクリックしてポップアップメニューを開く。</p>
+</li>
+<li>
+<p>「図の追加＞クラス図」でクラス図を追加する。</p>
+</li>
+<li>
+<p>プロパティーから、クラス図の名前を「クラス図」に変更する。</p>
+</li>
+</ul>
+</div>
+<div id="add_stm_sample00" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220213-005309.png" alt="GSW 20220213 005309" width="50%">
+</div>
+<div class="title">図 3.1 対応づけの説明に使うプロジェクトにクラス図を追加した</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="add_sample_class00"><a class="anchor" href="#add_sample_class00"></a>クラス図に「Sample」クラスを追加する</h5>
+<div class="paragraph">
+<p>対応づけの説明用に、簡単なクラス「Sample」の定義から始めましょう。
+このクラスは、操作「Play」と属性「attr_a」「attr_b」を持つクラスとします。
+これをUMLのクラスとして表してみましょう。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>パレットからクラスを選択し、クラス図に追加する。</p>
+</li>
+<li>
+<p>クラス名を「Sample」にする（ <a href="_model_to_code_design.html#sample_class01">図 3.2</a> ）。</p>
+</li>
+<li>
+<p>クラスに操作「play」を追加する。</p>
+</li>
+<li>
+<p>クラスに属性「attr_a」「attr_b」を追加する。</p>
+</li>
+</ul>
+</div>
+<div id="sample_class01" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220212-220754.png" alt="GSW 20220212 220754" width="75%">
+</div>
+<div class="title">図 3.2 クラス図に「Sample」クラスを追加した</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_sampleクラスの最初のサンプルコード"><a class="anchor" href="#_sampleクラスの最初のサンプルコード"></a>Sampleクラスの最初のサンプルコード</h5>
+<div class="paragraph">
+<p>対応づけルールの1つ目として、 <a href="_model_to_code_design.html#sample_class01">図 3.2</a> を表したRubyのコードは <a href="_model_to_code_design.html#ruby_sample01">リスト 3.1</a> のように書きたいと決めることにします。</p>
+</div>
+<div id="ruby_sample01" class="listingblock">
+<div class="title">リスト 3.1 【Ruby】「Sample」クラスを表すRubyのコード</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="ruby">class Sample <i class="conum" data-value="1"></i><b>(1)</b>
+  def initialize <i class="conum" data-value="2"></i><b>(2)</b>
+    @attr_a = true <i class="conum" data-value="3"></i><b>(3)</b>
+    @attr_b = true <i class="conum" data-value="3"></i><b>(3)</b>
+  end
+
+  def play <i class="conum" data-value="4"></i><b>(4)</b>
+  end
+end</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>クラス「Sample」の定義の始まり</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>初期化メソッド（コンストラクタにあたるメソッド）</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>このクラスのインスタンス変数</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>メソッド「Play」の定義の始まり</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_クラスにステートマシン図を追加する"><a class="anchor" href="#_クラスにステートマシン図を追加する"></a>3.1.2 クラスにステートマシン図を追加する</h4>
+<div class="paragraph">
+<p>このサンプルにおいては、いま追加した操作「play」が、「Sample」クラスの振る舞いを提供しているとします。
+しかし、クラス図に描いた「Sample」クラスに操作「play」を追加しただけでは、その処理内容はわかりません。
+どこかに「play」の処理内容を表した図が必要です。</p>
+</div>
+<div class="paragraph">
+<p>そこで、「Sample」クラスに対して、操作「play」の振る舞いを表すステートマシン図を追加します。
+ここで、図を追加する対象を「Sample」クラスにしているのは、このステートマシン図が「Sample」クラスの振る舞いのモデル図であるとわかるようにするためです。</p>
+</div>
+<div class="sect4">
+<h5 id="add_stm_sample01"><a class="anchor" href="#add_stm_sample01"></a>クラスにステートマシン図を追加する</h5>
+<div class="paragraph">
+<p>「Sample」クラスにステートマシン図を追加します。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>構造ツリーから「Sample」クラスを選択する。</p>
+</li>
+<li>
+<p>右クリックしてポップアップメニューを表示する（ <a href="_model_to_code_design.html#add_stm_sample02">図 3.3</a> ）。</p>
+</li>
+<li>
+<p>「図の追加＞ステートマシン図」を選択すると、ステートマシン図が追加される。</p>
+</li>
+</ul>
+</div>
+<div id="add_stm_sample02" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220213-020944.png" alt="GSW 20220213 020944" width="75%">
+</div>
+<div class="title">図 3.3 「Sample」クラスにステートマシン図を追加する</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>プロパティーから図の名前を編集し、「Sampleのplayのステートマシン図」とする（ <a href="_model_to_code_design.html#add_stm_sample03">図 3.4</a> ）。</p>
+</li>
+<li>
+<p>ダイアグラムエディタのタイトルやタブにも図の名前が反映される。</p>
+</li>
+</ul>
+</div>
+<div id="add_stm_sample03" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220213-013034.png" alt="GSW 20220213 013034" width="75%">
+</div>
+<div class="title">図 3.4 追加したステートマシン図に名前をつける</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">【参考】ステートマシン図を学ぶチュートリアル</div>
+<div class="paragraph">
+<p>ここでは、モデルとコードの対応づけを説明するために、振る舞いのモデルの一種であるステートマシン図を作成しています。
+ステートマシン図を使って振る舞いを設計する方法については、次のチュートリアルも参考にしてみてください。</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">ステートマシン図 &amp; 状態遷移表チュートリアル</dt>
+<dd>
+<p><code><a href="https://www.changevision.co/tutorial-statemachine-japanese.html" class="bare">https://www.changevision.co/tutorial-statemachine-japanese.html</a></code></p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="注記"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><a href="_model_to_code_design.html#add_stm_sample02">図 3.3</a> では、Sampleクラスの振舞いを表すステートマシン図とわかるようにと考えて、クラスに対してステートマシン図を割り当てました。
+この他、 astah* では、メソッドに対してステートマシン図を割り当てることもできます。
+任意のメソッドの処理を示すステートマシン図の割当てとしては、後者のほうが好ましいでしょう。
+ここでは、クラスの振舞いということを意識して、クラス図に割当ててみています。
+どちらの方法を使うにしても、クラスの振舞いを担当するメソッドを対応づけすることは必要になるでしょう。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ステートマシン図に状態を追加する"><a class="anchor" href="#_ステートマシン図に状態を追加する"></a>3.1.3 ステートマシン図に状態を追加する</h4>
+<div class="paragraph">
+<p>次に、追加したステートマシン図に、状態を追加します。</p>
+</div>
+<div class="olist arabic">
+<div class="title">ステートマシン図に状態を追加する</div>
+<ol class="arabic">
+<li>
+<p>パレットから「状態」を選択し、ステートマシン図に状態を追加する。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>追加した状態の状態名は「状態0」（数字は追加の都度変わる）となっている（ <a href="_model_to_code_design.html#add_stm_sample04">図 3.5</a> ）。</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="add_stm_sample04" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220213-093229.png" alt="GSW 20220213 093229" width="75%">
+</div>
+<div class="title">図 3.5 新しい状態を追加した</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>「状態0」を選択し、プロパティーの「ベース」タブの「名前」を編集して、状態の名前を「ST0」にする（ <a href="_model_to_code_design.html#add_stm_sample05">図 3.6</a> ）。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>状態「ST0」は、このサンプルの例示用に使う状態名の1つ。</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="add_stm_sample05" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220213-104448.png" alt="GSW 20220213 104448" width="75%">
+</div>
+<div class="title">図 3.6 新しい状態に状態名をつけた</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="3">
+<li>
+<p>このサンプルでは3つの状態を使いたいので、状態をもう2つ追加する（ <a href="_model_to_code_design.html#add_stm_sample06">図 3.7</a> ）。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>「ST1」、「ST2」を追加した。</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="add_stm_sample06" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220213-111820.png" alt="GSW 20220213 111820" width="75%">
+</div>
+<div class="title">図 3.7 新しい状態に状態名をつけた</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="3">
+<li>
+<p>開始疑似状態、終了疑似状態を追加した（ <a href="_model_to_code_design.html#add_stm_sample07">図 3.8</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="add_stm_sample07" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220213-112341.png" alt="GSW 20220213 112341" width="75%">
+</div>
+<div class="title">図 3.8 開始疑似状態、終了疑似状態を追加した</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ステートマシン図に状態遷移を追加する"><a class="anchor" href="#_ステートマシン図に状態遷移を追加する"></a>3.1.4 ステートマシン図に状態遷移を追加する</h4>
+<div class="paragraph">
+<p>状態が追加できたので、こんどは状態遷移を追加しましょう。
+ステートマシン図には、通常の状態のほかにいくつかの「疑似状態」が登場します。
+たとえば、「開始疑似状態」は、この図における最初の状態を示すのに使います。
+「終了疑似状態」は、その図における最後の状態（1つとは限りません）を示すのに使います。</p>
+</div>
+<div id="add_stm_trans00" class="olist arabic">
+<div class="title">状態遷移を追加する</div>
+<ol class="arabic">
+<li>
+<p>パレットから「遷移」を選択して、「開始疑似状態」の内部へマウスカーソルを移動し、青枠が表示されるのを待つ（ <a href="_model_to_code_design.html#add_stm_trans01">図 3.9</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="add_stm_trans01" class="imageblock">
+<div class="content">
+<img src="images/add_stm_transition_58.png" alt="add stm transition 58" width="75%">
+</div>
+<div class="title">図 3.9 開始疑似状態の内側で青枠を表示させる</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>青枠が表示されたらマウスカーソルをドラッグする（マウスのボタンを押したままマウスカーソルを移動する）。</p>
+</li>
+<li>
+<p>マウスカーソルを「ST0」へドラッグして青枠が表示されるのを待つ（ <a href="_model_to_code_design.html#add_stm_trans02">図 3.10</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="add_stm_trans02" class="imageblock">
+<div class="content">
+<img src="images/add_stm_transition_73.png" alt="add stm transition 73" width="75%">
+</div>
+<div class="title">図 3.10 「ST0」へマウスカーソルをドラッグして青枠が表示されるのを待つ</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="4">
+<li>
+<p>「ST0」でも青枠が表示されたらマウスのボタンを離すと状態遷移が引かれる（ <a href="_model_to_code_design.html#add_stm_trans03">図 3.11</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="add_stm_trans03" class="imageblock">
+<div class="content">
+<img src="images/add_stm_transition_81.png" alt="add stm transition 81" width="75%">
+</div>
+<div class="title">図 3.11 「ST0」でも青枠が表示されたらマウスのボタンを離すと状態遷移が引かれる</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="4">
+<li>
+<p>ほかの状態についても <a href="_model_to_code_design.html#add_stm_trans04">図 3.12</a> と同じように状態遷移を追加する。</p>
+</li>
+</ol>
+</div>
+<div id="add_stm_trans04" class="imageblock">
+<div class="content">
+<img src="images/add_stm_transition_215.png" alt="add stm transition 215" width="75%">
+</div>
+<div class="title">図 3.12 ほかの状態遷移も追加する</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_状態とイベントと状態遷移の関係"><a class="anchor" href="#_状態とイベントと状態遷移の関係"></a>3.1.5 状態とイベントと状態遷移の関係</h4>
+<div class="sect4">
+<h5 id="_状態とイベント"><a class="anchor" href="#_状態とイベント"></a>状態とイベント</h5>
+<div class="paragraph">
+<p>ステートマシン図において、状態は「イベント」の発生を待っているところです。
+多くの場合、イベントは、そのクラス自身の操作では処理を先に進められなくなるようなできごとです。
+たとえば、外部からの入力（操作待ちや受信待ちなど）や、一定の時間経過などがイベントの候補になります。</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_状態遷移"><a class="anchor" href="#_状態遷移"></a>状態遷移</h5>
+<div class="paragraph">
+<p>状態遷移は、ある状態において待っていたイベントが発生して、別の状態へ移ることを表しています。
+イベントには、イベントが発生したとき、実際に遷移するか判定する条件を追加できます。
+この条件のことを「ガード条件」と呼びます。
+ガード条件つきのイベントでは、イベントが発生したときにガード条件を評価し、条件が真なら状態遷移します。
+ガード条件が偽のとき、イベントは起きたことになります（消費されると呼びます）が、状態は遷移しません。</p>
+</div>
+<div class="paragraph">
+<p>そして、状態遷移には、イベントが発生したときに実行したい処理を追加できます。
+この処理のことを「アクション（またはエフェクト）」と呼びます。</p>
+</div>
+<div class="paragraph">
+<p>イベントが発生すると、ガード条件つきのイベントならさらにガード条件も真なら、状態遷移に伴うアクションが実行され、それから次の状態へ遷移します。</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ステートマシン図にイベントやアクションを追加する"><a class="anchor" href="#_ステートマシン図にイベントやアクションを追加する"></a>3.1.6 ステートマシン図にイベントやアクションを追加する</h4>
+<div class="paragraph">
+<p>まず、「ST0」から「ST1」への状態遷移を、イベントが「ev1」でガード条件は「gd（が真）」のとき、アクション「act1」を実行するよう編集してみましょう。</p>
+</div>
+<div id="add_evt_act00" class="olist arabic">
+<div class="title">状態遷移にイベントやアクションを追加する（１）</div>
+<ol class="arabic">
+<li>
+<p>「ST0」から「ST1」への状態遷移を選択し、この遷移のプロパティーを表示し、ベースタブを開く。</p>
+</li>
+<li>
+<p>プロパティーを編集する（ <a href="_model_to_code_design.html#add_evt_act01">図 3.13</a> ）。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>「トリガー」にイベント名を設定する。ここでは「ev1」というイベントを設定する。</p>
+</li>
+<li>
+<p>「ガード」にガード条件を設定する。ここでは「gd1（が真）」を設定しする。</p>
+</li>
+<li>
+<p>「アクション」にアクションを設定する。ここでは「act1」という処理があるとして、これを設定する。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>act1は、2つの引数（イベントとパラメーター）を持つメソッドと想定する。</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="add_evt_act01" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220215-071155.png" alt="GSW 20220215 071155" width="75%">
+</div>
+<div class="title">図 3.13 「ST0」から「ST1」への状態遷移のイベントとアクションを編集する</div>
+</div>
+<div class="paragraph">
+<p>次に、「ST1」からの「ST2」への遷移です。
+この遷移に割り当てるイベントは、「ev2」、アクションを「act2」とします。
+そして、このアクションの実行後、ガード条件「gd2」が真なら「ST2」へ、偽ならアクション「act3」を実行してから「ST1」へ遷移するように変更してみます。</p>
+</div>
+<div class="paragraph">
+<p>遷移先が2つあるなら、状態遷移を別々に引けばよさそうです。
+ところが、同じイベントを待ってる遷移先が2つ以上あると、どちらの状態へ遷移するのか決定できなくなります（あいまいな状態遷移と呼びます）。
+そこで、1つのイベントによる遷移先が状況によって変わる場合には「選択疑似状態」を使います。</p>
+</div>
+<div id="add_evt_act02" class="olist arabic">
+<div class="title">状態遷移にイベントやアクションを追加する（２）</div>
+<ol class="arabic">
+<li>
+<p>パレットから「選択疑似状態」を選択し、ステートマシン図に追加する（ <a href="_model_to_code_design.html#add_evt_act03">図 3.14</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="add_evt_act03" class="imageblock">
+<div class="content">
+<img src="images/add_stm_trans45.png" alt="add stm trans45" width="75%">
+</div>
+<div class="title">図 3.14 「選択疑似状態」をステートマシン図に追加する</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>「ST1」から「ST2」への状態遷移を選択し、「ST2」側のハンドル（丸印）をマウスでつまみ、「選択疑似状態」へつなぎ直す（ <a href="_model_to_code_design.html#add_evt_act04">図 3.15</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="add_evt_act04" class="imageblock">
+<div class="content">
+<img src="images/add_stm_trans120.png" alt="add stm trans120" width="75%">
+</div>
+<div class="title">図 3.15 既存の状態遷移を追加した「選択疑似状態」へつなぎ直す</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="3">
+<li>
+<p>「選択疑似状態」から「ST0」と「ST2」への状態遷移を追加する（ <a href="_model_to_code_design.html#add_evt_act05">図 3.16</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="add_evt_act05" class="imageblock">
+<div class="content">
+<img src="images/add_stm_trans218.png" alt="add stm trans218" width="75%">
+</div>
+<div class="title">図 3.16 「選択疑似状態」から「ST0」と「ST2」への状態遷移を追加する</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="4">
+<li>
+<p>それぞれの遷移のプロパティーを編集する（ <a href="_model_to_code_design.html#add_evt_act06">図 3.17</a> ）。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>トリガーに「ev2」、ガード条件はなし、アクションを「act2」に設定する。</p>
+</li>
+<li>
+<p>ガードにガード条件「!gd2（gd2ではない）」、アクションを「act3」に設定する。</p>
+</li>
+<li>
+<p>ガードにガード条件「gd2」に設定する。</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="add_evt_act06" class="imageblock">
+<div class="content">
+<img src="images/add_stm_trans589.png" alt="add stm trans589" width="75%">
+</div>
+<div class="title">図 3.17 状態遷移のイベントとアクションを編集する</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="5">
+<li>
+<p>同様にして、もう2つほど状態遷移を追加する（ <a href="_model_to_code_design.html#add_evt_act07">図 3.18</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="add_evt_act07" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220216-045358.png" alt="GSW 20220216 045358" width="75%">
+</div>
+<div class="title">図 3.18 さらに状態遷移とイベントとアクションを追加した</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ステートマシン図に対応するコードを作成する"><a class="anchor" href="#_ステートマシン図に対応するコードを作成する"></a>3.1.7 ステートマシン図に対応するコードを作成する</h4>
+<div class="paragraph">
+<p>ステートマシン図ができたので、この図に合うようなRubyのコードを作成すルールを考えましょう。</p>
+</div>
+<div class="sect4">
+<h5 id="_状態を保持する変数を追加する"><a class="anchor" href="#_状態を保持する変数を追加する"></a>状態を保持する変数を追加する</h5>
+<div class="paragraph">
+<p>まず、「Sample」クラスに状態を保持するインスタンス変数を追加します（ <a href="_model_to_code_design.html#ruby_sample02">リスト 3.2</a> ）。
+初期値は、最初の状態（ ST0 ）にします。</p>
+</div>
+<div id="ruby_sample02" class="listingblock">
+<div class="title">リスト 3.2 【Ruby】状態を保持するインスタンス変数を追加する</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="ruby">class Sample
+  def initialize
+    @state = :ST0 <i class="conum" data-value="1"></i><b>(1)</b>
+    @attr_a = true
+    @attr_b = true
+  end
+
+  # 略
+
+end</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>現在の状態を保持する変数を用意し、 ST0 で初期化する。「 :ST0 」はRubyのシンボルの表記法。シンボルは名前付きの数値定数。</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_状態遷移を担当するメソッドを作成する"><a class="anchor" href="#_状態遷移を担当するメソッドを作成する"></a>状態遷移を担当するメソッドを作成する</h5>
+<div class="paragraph">
+<p>ステートマシン図に書いた状態遷移を担当する操作「play」をplayメソッドとして作成します（ <a href="_model_to_code_design.html#ruby_sample03">リスト 3.3</a> ）。
+ルールの検討用なので、途中には処理の確認用の表示処理を書いておきます。</p>
+</div>
+<div id="ruby_sample03" class="listingblock">
+<div class="title">リスト 3.3 【Ruby】状態遷移を担当するメソッドを作成する</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="ruby">class Sample
+  def initialize
+    # 略
+  end
+
+  def play(evt, param)
+    puts "#{@state} -&gt;" <i class="conum" data-value="1"></i><b>(1)</b>
+    puts "  event:#{evt}, param: #{param}" <i class="conum" data-value="2"></i><b>(2)</b>
+    case @state <i class="conum" data-value="3"></i><b>(3)</b>
+    when :ST0
+      st0_proc(evt, param) <i class="conum" data-value="4"></i><b>(4)</b>
+    when :ST1
+      st1_proc(evt, param)
+    when :ST2
+      # none
+    end
+    puts "       -&gt; #{@state}" <i class="conum" data-value="5"></i><b>(5)</b>
+    puts 'finished.' if @state == :ST2 <i class="conum" data-value="6"></i><b>(6)</b>
+  end
+end</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>遷移前の状態を表示する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>イベントとパラメーターを表示する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>状態ごとの処理を case文を使って分岐する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>状態ごとの詳細な処理を担当するメソッドを呼び出す（ここでは st0_proc） 。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>遷移後の状態を表示する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>終了状態になったことを知らせる。</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_ガード条件の判定用メソッドを作成する"><a class="anchor" href="#_ガード条件の判定用メソッドを作成する"></a>ガード条件の判定用メソッドを作成する</h5>
+<div class="paragraph">
+<p>このサンプルのステートマシン図には、状態遷移のガード条件として「gd1」「gd2」が登場します。
+これらをrubyのメソッドとして作成します。
+rubyでは、真偽値を返すメソッドには「?」をつける習慣がありますので、これにしたがってメソッド名は「gd1?」「gd2?」とします。
+サンプルとして、属性の値を使った演算を割り当てました（ <a href="_model_to_code_design.html#ruby_sample04">リスト 3.4</a> ）。</p>
+</div>
+<div id="ruby_sample04" class="listingblock">
+<div class="title">リスト 3.4 【Ruby】ガード条件のメソッドを作成する</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="ruby">class Sample
+  def initialize
+    # 略
+  end
+
+  def play
+    # 略
+  end
+
+  def gd1? <i class="conum" data-value="1"></i><b>(1)</b>
+    @attr_a &amp;&amp; @attr_b <i class="conum" data-value="2"></i><b>(2)</b>
+  end
+
+  def gd2? <i class="conum" data-value="3"></i><b>(3)</b>
+    !@attr_a || @attr_b
+  end
+end</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>「gd1」用のメソッド。真偽値を返すメソッドに「?」をつけるRubyの習慣に倣った。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>属性値を使った条件式の例。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>「gd2」用のメソッド。</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_状態遷移を追加する１"><a class="anchor" href="#_状態遷移を追加する１"></a>状態遷移を追加する（１）</h5>
+<div class="paragraph">
+<p>状態ごとの処理を受け持つメソッドを作成します。
+メソッド名は、状態名を小文字して「_proc」をつけるというルールにします。
+したがって、状態名「ST0」の場合、メソッド名は「st0_proc」になります（ <a href="_model_to_code_design.html#ruby_sample05">リスト 3.5</a> ）。</p>
+</div>
+<div id="ruby_sample05" class="listingblock">
+<div class="title">リスト 3.5 【Ruby】「ST0」の状態遷移のメソッドを作成する</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="ruby">class Sample
+  def initialize
+    # 略
+  end
+
+  def play
+    # 略
+  end
+
+  def st0_proc(evt, param)
+    case evt <i class="conum" data-value="1"></i><b>(1)</b>
+    when :ev1 <i class="conum" data-value="2"></i><b>(2)</b>
+      if gd1? <i class="conum" data-value="3"></i><b>(3)</b>
+        puts "    gd1: #{gd1?}"
+        act1(evt, param) <i class="conum" data-value="4"></i><b>(4)</b>
+        @state = :ST1 <i class="conum" data-value="5"></i><b>(5)</b>
+      else <i class="conum" data-value="6"></i><b>(6)</b>
+        puts "    &lt;&lt;&lt; gd1: #{gd1?}, transition is ignored. &gt;&gt;&gt;"
+      end
+    when :ev3 <i class="conum" data-value="7"></i><b>(7)</b>
+      act3(evt, param)
+      @state = :ST2
+    end
+  end
+
+  # gd1?, gd2? が続く
+end</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>イベントで場合分けする。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>イベントが「ev1」の場合。イベントはRubyのシンボルを使って表す。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>ガード条件による判定。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>アクション「act1」の呼び出し。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>次の状態「ST1」への遷移。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>ガード条件が偽だったとき。イベントが無視されたことを表示する。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>イベントが「ev3」の場合。</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>この部分のRubyのコードとステートマシン図の対応を図で表してみましょう（ <a href="_model_to_code_design.html#ruby_sample06">図 3.19</a> ）。</p>
+</div>
+<div id="ruby_sample06" class="imageblock">
+<div class="content">
+<img src="images/ruby_sample05.png" alt="ruby sample05" width="100%">
+</div>
+<div class="title">図 3.19 Rubyのコードとステートマシン図の対応関係（１）</div>
+</div>
+<div class="paragraph">
+<p>おおむねのことは <a href="_model_to_code_design.html#ruby_sample06">図 3.19</a> を読めばわかるでしょうが、対応関係を説明しておきます。</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">ガード条件のある状態遷移をRubyのコードで表すルール</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>遷移元の状態で待っているイベントごとに場合分けする。</p>
+</li>
+<li>
+<p>ガード条件なしのときは（アクションがあればそれを呼び出して）、次の状態へ遷移する。</p>
+</li>
+<li>
+<p>ガード条件があるときは、先にガード条件を評価して、真であればアクションを実行して次の状態へ遷移する。</p>
+</li>
+<li>
+<p>ガード条件が偽のときは、アクションは実行されず、状態も遷移しない。</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_状態遷移を追加する２"><a class="anchor" href="#_状態遷移を追加する２"></a>状態遷移を追加する（２）</h5>
+<div class="paragraph">
+<p>こんどは、「ST1」からの状態遷移に対するメソッド「st1_proc」です（ <a href="_model_to_code_design.html#ruby_sample07">リスト 3.6</a> ）。</p>
+</div>
+<div id="ruby_sample07" class="listingblock">
+<div class="title">リスト 3.6 【Ruby】「ST1」の状態遷移のメソッドを作成する</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="ruby">class Sample
+  def initialize
+    # 略
+  end
+
+  def play
+    # 略
+  end
+
+  def st0_proc(evt, param)
+    # 略
+  end
+
+  def st1_proc(evt, param)
+    case evt
+    when :ev2 <i class="conum" data-value="1"></i><b>(1)</b>
+      act2(evt, param) <i class="conum" data-value="2"></i><b>(2)</b>
+      puts "    gd2: #{gd2?}"
+      if gd2? <i class="conum" data-value="3"></i><b>(3)</b>
+        @state = :ST2 <i class="conum" data-value="4"></i><b>(4)</b>
+      else
+        act3(evt, param) <i class="conum" data-value="5"></i><b>(5)</b>
+        @state = :ST0 <i class="conum" data-value="6"></i><b>(6)</b>
+      end
+    when :ev3 <i class="conum" data-value="7"></i><b>(7)</b>
+      act3(evt, param)
+      @state = :ST0
+    end
+  end
+
+  # gd1?, gd2? が続く
+end</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>イベントが「ev2」の場合。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>アクション「act2」の呼び出し。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>選択疑似状態におけるガード条件による判定。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>次の状態「ST0」への遷移。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>選択疑似状態からの遷移におけるアクション「act3」の呼び出し。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>次の状態「ST2」への遷移。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>イベントが「ev3」の場合。</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>この部分のRubyのコードとステートマシン図の対応を図で表してみましょう（ <a href="_model_to_code_design.html#ruby_sample08">図 3.20</a> ）。</p>
+</div>
+<div id="ruby_sample08" class="imageblock">
+<div class="content">
+<img src="images/ruby_sample08.png" alt="ruby sample08" width="100%">
+</div>
+<div class="title">図 3.20 Rubyのコードとステートマシン図の対応関係（２）</div>
+</div>
+<div class="paragraph">
+<p>おおむねのことは <a href="_model_to_code_design.html#ruby_sample08">図 3.20</a> を読めばわかるでしょうが、対応関係を説明しておきます。</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">選択疑似状態がある状態遷移をRubyのコードで表すルール</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>選択疑似状態の前の状態遷移については、<a href="_model_to_code_design.html#ruby_sample06">図 3.19</a> のルールで賄う。</p>
+</li>
+<li>
+<p>その後で、選択疑似状態の後の状態遷移のガード条件を評価する。</p>
+</li>
+<li>
+<p>評価結果によって（アクションがあれば実行してから）、次の状態へ遷移する。</p>
+</li>
+<li>
+<p>選択疑似状態の後の状態遷移は、ガード条件による場合分けで漏れる場合がないように注意する。</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>このサンプルでは、アクション「act1」、「act2」、「act3」は、定めたルールを確認しやすいメソッドにしておきます（ <a href="_model_to_code_design.html#ruby_sample09">リスト 3.7</a> ）。
+これらのアクションと、先に挙げたガード条件をチェックするメソッドは、「Sample」クラス内部のメソッドだけが使います。そこで、Rubyのコードでもこれらのメソッドのスコープを「private」にしましょう。Rubyでは、「private」キーワードを追加してその後にメソッドを配置します。</p>
+</div>
+<div id="ruby_sample09" class="listingblock">
+<div class="title">リスト 3.7 【Ruby】「ST1」の状態遷移のメソッドを作成する</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="ruby">class Sample
+  # initialize、play、st0_proc、st1_proc の定義を省略
+
+  praivate <i class="conum" data-value="1"></i><b>(1)</b>
+
+  def act1(evt, prm)
+    puts "     act1: event:#{evt}, param: #{prm}"
+  end
+
+  def act2(evt, prm)
+    puts "     act2: event:#{evt}, param: #{prm}"
+  end
+
+  def act3(evt, prm)
+    puts "     act3: event:#{evt}, param: #{prm}"
+  end
+
+  def gd1? <i class="conum" data-value="2"></i><b>(2)</b>
+    @attr_a &amp;&amp; @attr_b
+  end
+
+  def gd2?
+    !@attr_a || @attr_b
+  end
+end</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>この宣言以降のメソッドは、可視性が「private」なメソッドになる。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>ガード条件の判定用メソッドも「private」なメソッドに含めた。</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>これで、ステートマシン図で表したクラスの振る舞いをRubyのコードに対応づけられました。</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_追加したアクションをクラス図に反映する"><a class="anchor" href="#_追加したアクションをクラス図に反映する"></a>3.1.8 追加したアクションをクラス図に反映する</h4>
+<div class="paragraph">
+<p>ステートマシン図を作成するときに追加したアクションは、このステートマシン図を割り当てているクラス（ここでは「Sample」クラス）の操作にしておきましょう。
+ここで、「Sample」クラスをテストするクラス「SampleTest」も追加しておきます。</p>
+</div>
+<div id="update_sample_class00" class="olist arabic">
+<div class="title">イベントやアクションをクラス図に反映する</div>
+<ol class="arabic">
+<li>
+<p>クラス図を開く。</p>
+</li>
+<li>
+<p>「Sample」クラスを選択し、プロパティーから「操作」タブを表示する。</p>
+</li>
+<li>
+<p>「＋」アイコンを使って操作「act1」を追加する。</p>
+</li>
+<li>
+<p>可視性を「private」に設定する。</p>
+</li>
+<li>
+<p>「act2」、「act3」についても同じように設定する（ <a href="_model_to_code_design.html#update_sample_class01">図 3.21</a> ）。</p>
+</li>
+</ol>
+</div>
+<div id="update_sample_class01" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220216-050914.png" alt="GSW 20220216 050914" width="75%">
+</div>
+<div class="title">図 3.21 「Sample」クラス内部で使う操作「act1、「act2」「act3」を追加する</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="6">
+<li>
+<p>ガード条件に使うメソッド「gd1?」「gd2?」も追加しておく。</p>
+</li>
+<li>
+<p>「SampleTest」クラスを追加する（ <a href="_model_to_code_design.html#update_sample_class02">図 3.22</a> ）。</p>
+<div class="ulist">
+<ul>
+<li>
+<p>このテスト用クラスには、テストを実行する「run」メソッドを用意しておく。</p>
+</li>
+<li>
+<p>テスト用のメソッドをいくつか追加しておく。</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>「SampleTest」から「Sample」クラスへ関連を引き、関連端名を「samp01」、多重度を「1」としておく。</p>
+</li>
+</ol>
+</div>
+<div id="update_sample_class02" class="imageblock">
+<div class="content">
+<img src="images/GSW-20220224-113632.png" alt="GSW 20220224 113632" width="75%">
+</div>
+<div class="title">図 3.22 「SampleTest」クラスと関連を追加する</div>
+</div>
+<div class="paragraph">
+<p>これで、クラス図とステートマシン図とRubyのコードの対応づけができました。
+実際の問題について、クラス図やステートマシン図を作成するときは、このようなルールを使う前提で作成します。
+そして、Rubyでコードを作成するときは、作成した図と対網づけのルールを使ってコードを作成します。</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">【参考】列挙型（enum）をクラス図に反映する方法について</div>
+<div class="paragraph">
+<p>Rubyにはenumのような列挙子を直接定義する方法がないので、このチュートリアルの簡単のために、状態を表す定数を定義するために「シンボル（:ST0など）」を使いました。</p>
+</div>
+<div class="paragraph">
+<p>astah* は、Java, C#、C++ については、enumを設定する方法を提供していますので、その方法で代用してもよいでしょう。</p>
+</div>
+<div class="paragraph">
+<p>詳しい設定方法については、次の記事を参考にしてみてください。</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Java、enumの設定</dt>
+<dd>
+<p><code><a href="http://astah-users.change-vision.com/ja/modules/xhnewbb/viewtopic.php?topic_id=1249" class="bare">http://astah-users.change-vision.com/ja/modules/xhnewbb/viewtopic.php?topic_id=1249</a></code></p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_変換ルールを使ったコードを確認する"><a class="anchor" href="#_変換ルールを使ったコードを確認する"></a>3.2 変換ルールを使ったコードを確認する</h3>
+<div class="paragraph">
+<p>検討用のクラス図とステートマシン図に対応づけたRubyのプログラムの動作を確認してみましょう。</p>
+</div>
+<div class="sect3">
+<h4 id="_検討用モデルに対応したrubyプログラムの全体"><a class="anchor" href="#_検討用モデルに対応したrubyプログラムの全体"></a>3.2.1 検討用モデルに対応したRubyプログラムの全体</h4>
+<div class="paragraph">
+<p>作成したプログラムの全体を <a href="_model_to_code_design.html#ruby_sample_code01">リスト 3.8</a>  に示します。
+このプログラムのコードには、「SampleTest」のインスタンスを作成して、テストを起動する処理や、テストメソッドの具体例が含まれています。
+テストクラスやテスト用メソッドの細かい説明は省きます。</p>
+</div>
+<div id="ruby_sample_code01" class="listingblock">
+<div class="title">リスト 3.8 【Ruby】stm_sample.rb</div>
+<div class="content">
+<pre class="prettyprint highlight linenums"><code data-lang="ruby"># frozen_string_literal: true <i class="conum" data-value="1"></i><b>(1)</b>
+
+# ステートマシン図とコードの対応づけルールの検討用クラス
+class Sample
+  attr_accessor :attr_a, :attr_b <i class="conum" data-value="2"></i><b>(2)</b>
+
+  def initialize
+    @state = :ST0
+    @attr_a = true
+    @attr_b = true
+  end
+
+  def st0_proc(evt, param)
+    case evt
+    when :ev1
+      if gd1? # guard
+        puts "    gd1: #{gd1?}"
+        act1(evt, param)
+        @state = :ST1
+      else
+        puts "    &lt;&lt;&lt; gd1: #{gd1?}, transition is ignored. &gt;&gt;&gt;"
+      end
+    when :ev3
+      act3(evt, param)
+      @state = :ST2
+    end
+  end
+
+  def st1_proc(evt, param)
+    case evt
+    when :ev2
+      act2(evt, param)
+      puts "    gd2: #{gd2?}"
+      if gd2? # guard on choice.
+        @state = :ST2
+      else
+        act3(evt, param)
+        @state = :ST0
+      end
+    when :ev3
+      act3(evt, param)
+      @state = :ST0
+    end
+  end
+
+  def play(evt, param)
+    puts "#{@state} -&gt;"
+    puts "  event:#{evt}, param: #{param}"
+    case @state
+    when :ST0
+      st0_proc(evt, param)
+    when :ST1
+      st1_proc(evt, param)
+    when :ST2
+      # none
+    end
+    puts "       -&gt; #{@state}"
+    puts 'finished.' if @state == :ST2
+  end
+
+  private
+
+  def act1(evt, prm)
+    puts "     act1: event:#{evt}, param: #{prm}"
+  end
+
+  def act2(evt, prm)
+    puts "     act2: event:#{evt}, param: #{prm}"
+  end
+
+  def act3(evt, prm)
+    puts "     act3: event:#{evt}, param: #{prm}"
+  end
+
+  def gd1?
+    @attr_a &amp;&amp; @attr_b
+  end
+
+  def gd2?
+    !@attr_a || @attr_b
+  end
+end
+
+# 検討用クラスのテストケースを提供するクラス
+class SampleTest <i class="conum" data-value="3"></i><b>(3)</b>
+  def test_base(events, data)
+    samp01 = Sample.new
+    samp01.attr_a = data[0]
+    samp01.attr_b = data[1]
+    events.each do |evt|
+      samp01.play(evt, Time.now.usec)
+    end
+    puts '================'
+  end
+
+  def test01
+    test_base(%i[ev1 ev2], [true, true])
+  end
+
+  def test02
+    test_base(%i[ev1 ev3], [false, false]) # :ev1 will be ignored.
+  end
+
+  def test03
+    test_base(%i[ev1 ev2 ev3], [true, false])
+  end
+
+  def run
+    test01
+    test02
+    test03
+  end
+end
+
+if $PROGRAM_NAME == __FILE__ <i class="conum" data-value="4"></i><b>(4)</b>
+  test = SampleTest.new
+  test.run
+end</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>文字列の破壊的変更の検出を指示するマジックコメント。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>簡便にテストするために、アクセサーを追加した（あくまでこのサンプルにおける便宜として）。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Sampleクラスのメソッドを呼び出すテストを定義したテスト用のクラスの定義。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>テスト用クラスを実行するコード。このブロックはファイル名と実行プログラム名が一致するときに有効になる（そのときだけ実行される）。</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_検討用モデルに対応したrubyプログラムを動かす"><a class="anchor" href="#_検討用モデルに対応したrubyプログラムを動かす"></a>3.2.2 検討用モデルに対応したRubyプログラムを動かす</h4>
+<div class="paragraph">
+<p>コマンドプロンプトを起動して（MacやLinuxならターミナルを起動して）、プログラムを実行してみます（ <a href="_model_to_code_design.html#ruby_sample_code02">リスト 3.9</a> ）。</p>
+</div>
+<div class="paragraph">
+<p>動作させると、状態遷移やイベントが表示されます。
+作成したモデル図を比較して期待した動作をしているか確認してみましょう。</p>
+</div>
+<div id="ruby_sample_code02" class="listingblock">
+<div class="title">リスト 3.9 【端末】stm_sample.rb を実行する</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="console">C:\Users\kuboaki&gt;cd Desktop\BowlingScore
+
+C:\Users\kuboaki\Desktop\BowlingScore&gt;ruby stm_sample.rb
+ST0 -&gt;
+  event:ev1, param: 676481
+    gd1: true
+     act1: event:ev1, param: 676481
+       -&gt; ST1
+ST1 -&gt;
+  event:ev2, param: 678623
+     act2: event:ev2, param: 678623
+    gd2: true
+       -&gt; ST2
+finished.
+================
+ST0 -&gt;
+  event:ev1, param: 680596
+    &lt;&lt;&lt; gd1: false, transition is ignored. &gt;&gt;&gt;
+       -&gt; ST0
+ST0 -&gt;
+  event:ev3, param: 681783
+     act3: event:ev3, param: 681783
+       -&gt; ST2
+finished.
+================
+ST0 -&gt;
+  event:ev1, param: 683477
+    &lt;&lt;&lt; gd1: false, transition is ignored. &gt;&gt;&gt;
+       -&gt; ST0
+ST0 -&gt;
+  event:ev2, param: 685784
+       -&gt; ST0
+ST0 -&gt;
+  event:ev3, param: 708214
+     act3: event:ev3, param: 708214
+       -&gt; ST2
+finished.
+================
+
+C:\Users\kuboaki\Desktop\BowlingScore&gt;</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_まとめ_2"><a class="anchor" href="#_まとめ_2"></a>3.3 まとめ</h3>
+<div class="paragraph">
+<p>クラス図とステートマシン図で動作を表現すれば、Rubyのコードに変換できることがわかりました。</p>
+</div>
+<div class="sect3">
+<h4 id="_構造のモデルを作成した手順_2"><a class="anchor" href="#_構造のモデルを作成した手順_2"></a>3.3.1 構造のモデルを作成した手順</h4>
+<div class="paragraph">
+<p>構造のモデルに登場する構成要素や要素間の関連を見つけ出し、スコアシートの構造を整理しました。</p>
+</div>
+<div id="step_for_structure_model02" class="sidebarblock">
+<div class="content">
+<div class="title">スコアシートの構造のモデルを作成した手順</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>スコアシートに関する構成要素の発見</p>
+<div class="ulist">
+<ul>
+<li>
+<p>具体的なスコアシートを観察して、そこにある要素を洗い出してオブジェクト図で表した。</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>スコアシートに関するクラス図の作成</p>
+<div class="ulist">
+<ul>
+<li>
+<p>オブジェクト図に登場したオブジェクトからクラスを、オブジェクト同士のリンクから関連を見出し、クラス図に表した。</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_構造のモデルだけではプログラムは作れない"><a class="anchor" href="#_構造のモデルだけではプログラムは作れない"></a>3.3.2 構造のモデルだけではプログラムは作れない</h4>
+<div class="paragraph">
+<p>構造のモデルを作ったことで、プログラムを構成する要素と、要素同士の関係（関連）を表せるようになりました。
+また、クラスのインスタンスをオブジェクト図に見合うように作成すれば、実際に観察したスコアシートと同じようなデータ構造を作成できることもわかりました。</p>
+</div>
+<div class="paragraph">
+<p>ところで、作りたかったのは、ボウリングのゲームスコアをつけるプログラムでした。
+つまり、プレーヤーがフレームごとに交代して投球し、そのたびにスコアを更新する処理です。
+ですが、これまでに作成した構造のモデルでは、ゲームの進行に応じてどんなことを処理するか表せていません。
+そのためには、処理の中身を表す「振る舞いのモデル」を作成する必要があります。
+次の章では、ステートマシン図を使って、フレームやスコアの振る舞いを表すモデルを作成します。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph nav-footer">
+<p>← Previous: <a href="_structure_design.html">第2章</a> | ↑ Up: <a href="tut_uml_modeling_bs.html">モデルを使ってソフトウェアを開発しよう: UML初学者向けチュートリアル</a> | Next: <a href="_behavior_design.html">第4章</a> →</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+バージョン html_0780<br>
+最終更新 2023-06-09 17:35:10 +0900
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/run_prettify.min.js"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>

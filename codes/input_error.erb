@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="scoresheet.css">
+  <title>ボウリングスコア</title>
+</head>
+
+<body>
+<h1>ボウリングスコア</h1>
+
+<hr>
+<% game_score = @game.game_score %>
+<% if game_score.current.nil? %>
+  <% current_frame_no = 1 %>
+<% else %>
+  <% current_frame_no = game_score.current.frame_no %>
+<% end %>
+
+<h2 class="alert">入力ピン数が不正です</h2>
+<!-- <p id="links"><a href="update_score">スコアの入力に戻る</a>｜
+<a href="index.html">メニュー画面に戻る</a></p> -->
+<p id="msg">入力可能なピン数：0 から <%= 10 - game_score.current.first %></p>
+
+<hr>
+<% unless game_score.finished?() %>
+  <form method="post" action="update_score" name="pins_input_form">
+    <input autofocus type="number" name="pins" size="4" min="0" max="10" step="1" value="0" />
+    <button class="exec_btn" size="12" type="submit">スコアを更新する</button>
+  </form>
+  <hr>
+<% end %>
+
+<p>frame no: <%= current_frame_no %><br />
+  state: <%= game_score.state %><br />
+  dump: <%= @game.report().gsub("\n", '<br />') %>
+</p>
+</body>
+</html>
