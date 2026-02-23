@@ -63,7 +63,7 @@ endif::[]
 // user defined.
 :astah: astah*
 :uml: UML
-:ruby-version: 2.7.2
+:ruby-version: 3.4.4
 
 // 部、章の体裁を変更 lib/heading-treeprocessor.rb を使う
 :part-label: 第%s部
