@@ -203,7 +203,7 @@ image::GSW-20220224-154030.png[{quarter-width}]
 
 
 [[ruby_frame_code01]]
-.【Ruby】score.rb（1）
+.【Ruby】`score.rb`（1）
 [source,ruby]
 ----
 # frozen_string_literal: true
@@ -260,9 +260,7 @@ end
 
 
 [[ruby_frame_code02]]
-.【Ruby】score.rb（2）
-//[example]
-//--
+.【Ruby】`score.rb`（2）
 [source,ruby]
 ----
 # frozen_string_literal: true
@@ -349,8 +347,6 @@ end
 <5> これ以降のメソッドはプライベート。
 <6> 「1投目の投球を待っている」状態を担当するメソッド。イベント「PINS」を受け取り、1投目のピン数に保存する。その後ストライクかどうか調べ、次の状態へ遷移する。
 <7> 「2投目の投球を待っている」状態を担当するメソッド。イベント「PINS」を受け取り、2投目のピン数に保存する。その後スペアかどうか調べ、次の状態へ遷移する。
-//--
-
 
 === サービスフレームの扱いについて検討する
 
@@ -506,7 +502,7 @@ TIP: ノート内の文章を編集するときは、ノートを選択した状
 
 
 [[ruby_score_code01]]
-.【Ruby】score.rb（3）
+.【Ruby】`score.rb`（3）
 [source,ruby]
 ----
 # frozen_string_literal: true
@@ -562,7 +558,7 @@ end
 ボーナス計算やトータル計算のメソッドは <<ruby_score_code02>> のようになるでしょう。
 
 [[ruby_score_code02]]
-.【Ruby】score.rb（4）
+.【Ruby】`score.rb`（4）
 [source,ruby]
 ----
 # Frameクラスの定義やそれ以前のコードがここにある
@@ -623,7 +619,7 @@ end
 そして、ステートマシン図で表した、実際にゲームの進行に合わせてスコアを記録する処理をするメソッドは <<ruby_score_code03>> のようになるでしょう。
 
 [[ruby_score_code03]]
-.【Ruby】score.rb（5）
+.【Ruby】`score.rb`（5）
 [source,ruby]
 ----
 # Frameクラスの定義やそれ以前のコードがここにある
@@ -727,9 +723,7 @@ end
 
 
 [[ruby_game_code01]]
-.【Ruby】score.rb(6)
-//[example]
-//--
+.【Ruby】`score.rb`（6）
 [source,ruby]
 ----
 # FrameクラスとScoreクラスの定義やそれ以前のコードがここにある
@@ -783,7 +777,6 @@ end
 <7> 現在のプレーヤーの現在の状態が「BEFORE_1ST」なら、次のフレームの投球待ちになっているので、プレーヤーを交代する。
 <8> すべてのプレーヤーがゲーム終了かどうか調べるメソッド。
 <9> ゲームの状況を文字列化するメソッド。
-//--
 
 クラス図にもこの結果を反映しておきましょう（ <<update_class_for_game_score00>> ）。
 現在のプレーヤーは、関連端名が「turn」の関連によって参照しているScoreを使っています。
@@ -801,9 +794,7 @@ image::GSW-20220224-172836.png[{full-width}]
 
 
 [[ruby_scoresheet_code01]]
-.【Ruby】score.rb(7)
-//[example]
-//--
+.【Ruby】`score.rb`（7）
 [source,ruby]
 ----
 # FrameクラスとScoreクラスとGameクラスの定義やそれ以前のコードがここにある

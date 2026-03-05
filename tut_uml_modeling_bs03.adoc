@@ -723,7 +723,7 @@ Java、enumの設定:: `http://astah-users.change-vision.com/ja/modules/xhnewbb/
 テストクラスやテスト用メソッドの細かい説明は省きます。
 
 [[ruby_sample_code01]]
-.【Ruby】stm_sample.rb
+.【Ruby】`stm_sample.rb`
 [source,ruby,linenums]
 ----
 include::{sourcesdir}/stm_sample.rb[]
@@ -742,7 +742,7 @@ include::{sourcesdir}/stm_sample.rb[]
 
 
 [[ruby_sample_code02]]
-.【端末】stm_sample.rb を実行する
+.【端末】`stm_sample.rb` を実行する
 [source,console]
 ----
 C:\Users\kuboaki>cd Desktop\BowlingScore

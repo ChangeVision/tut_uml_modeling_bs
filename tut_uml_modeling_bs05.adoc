@@ -26,14 +26,11 @@ endif::[]
 
 
 [[ruby_all_code01]]
-.【Ruby】score.rb
-//[example]
-//--
+.【Ruby】`score.rb`
 [source,ruby,linenums,start={score_main_start}]
 ----
 include::{sourcesdir}/score.rb[tag=main]
 ----
-//--
 
 <<<<
 
@@ -47,10 +44,7 @@ include::{sourcesdir}/score.rb[tag=main]
 // このファイルのコードのタグの行番号をRakefile内のメソッドで求めているのに注意すること。
 
 [[ruby_all_code02]]
-.【Ruby】score.rb（ファイル末尾に追加したテストコード部分）
-//[example]
-//--
-// [source,ruby,linenums]
+.【Ruby】`score.rb`（ファイル末尾に追加したテストコード部分）
 [source,ruby,linenums,start={score_test_start}]
 ----
 include::{sourcesdir}/score.rb[tag=test]
@@ -68,8 +62,6 @@ include::{sourcesdir}/score.rb[tag=test]
 <11> 現在のturnのプレーヤーのスコアにピン数を渡して、スコアへ反映する。
 <12> 現在のゲームの全体像を取得して表示する。
 <13> ここで空の改行キーを入力してテストを進める。テストを1回ずつ止めて実行できる。この入力待ちをやめれば一括して実行できる。
-//--
-
 
 === プログラムをテストする
 
@@ -84,7 +76,7 @@ include::{sourcesdir}/score.rb[tag=test]
 
 
 [[ruby_all_code03]]
-.【端末】score.rb を実行する
+.【端末】`score.rb` を実行する
 [source,console]
 ----
 C:\Users\kuboaki>cd Desktop\BowlingScore
