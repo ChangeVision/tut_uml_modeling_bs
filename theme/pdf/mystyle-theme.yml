@@ -101,17 +101,24 @@ block:
   margin_top: 12
   margin_bottom: 12
 
+verse:
+  font_size: $base_font_size_small
+  font_family: GenShinGothic-P
+  border-color: 89C9DB
+  cite:
+    font-color: 44646D
+
 heading:
   align: left
   font_color: 2D466B
   font_family: GenShinGothic-P
-  font_style: bold
+  font_style: normal
   chapter-break-before: always # auto
   # h1 is used for part titles (book doctype only)
   h1:
     font_size: floor($base_font_size * 3.0)
     font_color: 466B2D # 1872CC # 5D91DE # 2D466B
-    font_style: bold_italic
+    # font_style: bold_italic
   h2:
     font_size: floor($base_font_size * 2.2)
     font_color: 6B522D  # 125699 # 4D78B8 # 2D466B
@@ -263,24 +270,36 @@ table:
   border_color: e0dccd
   border_width: $base_border_width
   cell_padding: 5
+
 toc:
   indent: 15  # $horizontal_rhythm * 1.6
   line_height: 1.5 # 1.7
   margin_top: 10pt
-  # h1 is used for part titles (book doctype only)
-  h1_font_family: GenShinGothic-P
-  h1_font_size: floor($base_font_size * 1.8)
-  h1_font_color: $heading_h1_font_color
-  h2_font_style: bold
-  h2_font_family: GenShinGothic-P-L
-  h2_font_size: floor($base_font_size * 1.4)
-  # h2_font_size: floor($base_font_size * 1.6)
-  h2_font_color: $heading_h2_font_color
-  h2_font_style: bold
-  h3_font_family: $base_font_family
-  h3_font_size: $base_font_size   # ceil($base_font_size * 0.8)
-  # h3_font_size: floor($base_font_size * 1.2)
-  h3_font_color: $heading_h3_font_color
+  h1:
+    # h1 is used for part titles (book doctype only)
+    font_family: GenShinGothic-P
+    font_size: floor($base_font_size * 1.8)
+    font_color: $heading_h1_font_color
+  h2:
+    font_family: GenShinGothic-P-L
+    font_style: bold
+    font_size: floor($base_font_size * 1.4)
+    font_color: $heading_h2_font_color
+  h3:
+    font_family: $base_font_family
+    font_size: $base_font_size   # ceil($base_font_size * 0.8)
+    font_color: $heading_h3_font_color
+  h4:
+    font-family: $base-font-family
+    font-size: $base_font_size
+    font-color: $heading-h4-font-color
+
+footnotes:
+  font-size: $base-font-size-small
+
+# $base-line-height-lengthはこのテーマでの計算値がextendsしたテーマに継承さてしまうようだ。
+# つまり継承先でのbase-line-height-lengthの値は、ベースのテーマと異なり、
+# extendsしたテーマのbase-font-sizeとbase-line-heightを使って計算してもらえないようだ。
 header:
   font_size: $base_font_size_small
   font_family: GenShinGothic-P-L

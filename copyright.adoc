@@ -12,7 +12,7 @@
 
 image::by-nc-nd.png[{oneinch},link="https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode.ja"]
 
-本文書ならびに関連する成果物は、クリエイティブ・コモンズ ＜表示—非営利—改変禁止 4.0＞ ライセンスに則り提供します。
+本文書ならびに関連する成果物は、下記のクリエイティブ・コモンズ ライセンスに則り提供します。
 
 クリエイティブ・コモンズ＜表示—非営利—改変禁止 4.0ライセンス＞:: https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode.ja
 

@@ -149,8 +149,8 @@ def make_rule_for_each_adoc
 
     # 依存ファイルのリストを作成
     make_depends(adoc, IMAGES_DIR, SOURCE_DIR, '.', deps, {})
-    depends_for_html = deps.dup.push("#{CSS_DIR}/#{CSS_FILE}", LIB_EXT, LIB_EXT2)
-    depends_for_pdf  = deps.push("#{THEME_DIR}/#{THEME_FILE}", LIB_EXT, LIB_EXT2, LIB_EXT3)
+    depends_for_html = deps.dup.push("./#{CSS_DIR}/#{CSS_FILE}", LIB_EXT, LIB_EXT2)
+    depends_for_pdf  = deps.push("./#{THEME_DIR}/#{THEME_FILE}", LIB_EXT, LIB_EXT2, LIB_EXT3)
 
     desc "Build #{html_full}"
     file 'html_full' => depends_for_html do
