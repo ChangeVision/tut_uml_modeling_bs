@@ -377,7 +377,7 @@ image::class01.png[{half-width}]
 image::class02.png[{three-quarters-width}]
 
 
-==== クラス間の関連を追加する（１）
+==== クラス間の関連を追加する（1）
 
 前に作成したオブジェクト図（  <<score_sample02>>  ）を参照して、記載されているリンクを関連として追加します。
 まず、「 GameScore 」クラスから「 Frame 」クラスへ向かって連を引きましょう。
@@ -416,7 +416,7 @@ image::class05.png[{three-quarters-width}]
 image::class06.png[{quarter-width}]
 
 
-==== クラス間の関連を追加する（２）
+==== クラス間の関連を追加する（2）
 
 次に、フレーム同士の間に引かれていた「next」「prev」というリンクを関連として引きましょう。
 もとのリンクは「 Frame 」クラスのインスタンスから、同じ「 Frame 」クラスのインスタンスへと引かれていました。
