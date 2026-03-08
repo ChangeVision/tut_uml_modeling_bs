@@ -165,8 +165,59 @@ if $PROGRAM_NAME == __FILE__
 
   puts state.transit_to(:ST4)
   puts state.transit_to(:ST1)
-  puts '- - - -'
+  puts'- - - -'
 
   test = SampleTest.new
   test.run
+
+require 'golem'
+
+class GolemSample
+  include Golem
+
+  attr_accessor :state
+
+  def initialize(name)
+    @name = name
+  end
+
+  def to_s
+    @name
+  end
+
+  def gd1?
+    true
+  end
+
+  def act1
+    puts "triggered #{aasm.current_event}"
+  end
+
+  define_statamachine do
+    inisital_state :ST0
+    state :ST0 do
+      on :ev1 do
+        transition to: :ST1, if: :gd1? do
+          action { act1 }
+        end
+      end
+    end
+    state :ST1 do
+      on :ev2 do
+        transition to: :ST0, unless: :gd2? do
+        end
+        transition to: :ST2, if: :gd2? do
+        end
+      end
+    end
+    state :ST2 do
+    end
+  end
+end
+as = GolemSample.new
+p as.sleep?
+p as.may_sence?
+p as.sence { p 42}
+p as.sleep?
+p as.sence?
 end
