@@ -17,7 +17,7 @@ class HtmlZipper
     @javascripts = []
     @htmls = []
     @base_dir = '.'
-    @codes = %w[score.rb stm_sample.rb] # 要なコードファイルを特定するキーが見当たらないので手で追加
+    @codes = []
     @all_entries = []
   end
 
@@ -28,6 +28,9 @@ class HtmlZipper
       flines = IO.readlines(html)
       flines.each do |line|
         case line
+        when /<code>(.+\.rb)/
+          code = $1
+          @codes.push("codes/#{code}")
         when %r{(images/.+\.(png|svg|jpg|jpeg))}
           @images.push($1)
         when %r{.*/(.+\.css)}
@@ -51,7 +54,7 @@ class HtmlZipper
     @videos.uniq!
     @javascripts.uniq!
     @htmls.uniq!
-    # @codes.uniq!
+    @codes.uniq!
   end
 
   def find_contents_location(files)
