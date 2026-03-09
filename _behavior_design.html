@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.23">
+<meta name="generator" content="Asciidoctor 2.0.26">
 <meta name="description" content="この文書は、モデリングツールにastah*を使って、ソフトウェアの開発にUMLを使う方法について学ぶチュートリアルです。">
 <meta name="author" content="株式会社チェンジビジョン">
 <title>モデルを使ってソフトウェアを開発しよう: UML初学者向けチュートリアル</title>
@@ -21,8 +21,8 @@
 <h1>モデルを使ってソフトウェアを開発しよう: UML初学者向けチュートリアル</h1>
 <div class="details">
 <span id="author" class="author">株式会社チェンジビジョン</span><br>
-<span id="revnumber">バージョン html_0780,</span>
-<span id="revdate">2025-03-25</span>
+<span id="revnumber">バージョン html_0782,</span>
+<span id="revdate">2026-03-09</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">目次</div>
@@ -446,7 +446,7 @@
 <p>まず、プログラムの初期化とアクションの部分は、 <a href="_behavior_design.html#ruby_frame_code01">リスト 4.1</a> のようになるでしょう。</p>
 </div>
 <div id="ruby_frame_code01" class="listingblock">
-<div class="title">リスト 4.1 【Ruby】score.rb(1)</div>
+<div class="title">リスト 4.1 【Ruby】<code>score.rb</code>（1）</div>
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="ruby"># frozen_string_literal: true
 
@@ -524,7 +524,7 @@ end</code></pre>
 <p>ガード条件やアクションのメソッドは、 <a href="_behavior_design.html#ruby_frame_code02">リスト 4.2</a> のようになるでしょう。</p>
 </div>
 <div id="ruby_frame_code02" class="listingblock">
-<div class="title">リスト 4.2 【Ruby】score.rb(2)</div>
+<div class="title">リスト 4.2 【Ruby】<code>score.rb</code>（2）</div>
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="ruby"># frozen_string_literal: true
 
@@ -940,7 +940,7 @@ end</code></pre>
 変換したプログラムの初期化やユーティリティメソッドの部分は、 <a href="_behavior_design.html#ruby_score_code01">リスト 4.3</a> のようになるでしょう。</p>
 </div>
 <div id="ruby_score_code01" class="listingblock">
-<div class="title">リスト 4.3 【Ruby】score.rb(3)</div>
+<div class="title">リスト 4.3 【Ruby】<code>score.rb</code>（3）</div>
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="ruby"># frozen_string_literal: true
 
@@ -1027,7 +1027,7 @@ end</code></pre>
 <p>ボーナス計算やトータル計算のメソッドは <a href="_behavior_design.html#ruby_score_code02">リスト 4.4</a> のようになるでしょう。</p>
 </div>
 <div id="ruby_score_code02" class="listingblock">
-<div class="title">リスト 4.4 【Ruby】score.rb(4)</div>
+<div class="title">リスト 4.4 【Ruby】<code>score.rb</code>（4）</div>
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="ruby"># Frameクラスの定義やそれ以前のコードがここにある
 
@@ -1113,7 +1113,7 @@ end</code></pre>
 <p>そして、ステートマシン図で表した、実際にゲームの進行に合わせてスコアを記録する処理をするメソッドは <a href="_behavior_design.html#ruby_score_code03">リスト 4.5</a> のようになるでしょう。</p>
 </div>
 <div id="ruby_score_code03" class="listingblock">
-<div class="title">リスト 4.5 【Ruby】score.rb(5)</div>
+<div class="title">リスト 4.5 【Ruby】<code>score.rb</code>（5）</div>
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="ruby"># Frameクラスの定義やそれ以前のコードがここにある
 
@@ -1271,7 +1271,7 @@ end</code></pre>
 <p>この方式に合わせてスコアを記録する処理をする「Game」クラスは、 <a href="_behavior_design.html#ruby_game_code01">リスト 4.6</a> のようになるでしょう。</p>
 </div>
 <div id="ruby_game_code01" class="listingblock">
-<div class="title">リスト 4.6 【Ruby】score.rb(6)</div>
+<div class="title">リスト 4.6 【Ruby】<code>score.rb</code>（6）</div>
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="ruby"># FrameクラスとScoreクラスの定義やそれ以前のコードがここにある
 
@@ -1377,7 +1377,7 @@ end</code></pre>
 <p>この方式に合わせてスコアを記録する処理をする「Game」クラスは、 <a href="_behavior_design.html#ruby_scoresheet_code01">リスト 4.7</a> のようになるでしょう。</p>
 </div>
 <div id="ruby_scoresheet_code01" class="listingblock">
-<div class="title">リスト 4.7 【Ruby】score.rb(7)</div>
+<div class="title">リスト 4.7 【Ruby】<code>score.rb</code>（7）</div>
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="ruby"># FrameクラスとScoreクラスとGameクラスの定義やそれ以前のコードがここにある
 
@@ -1548,7 +1548,7 @@ end</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-バージョン html_0780<br>
+バージョン html_0782<br>
 最終更新 2023-06-09 17:35:10 +0900
 </div>
 </div>
@@ -1576,6 +1576,6 @@ MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
   })
 })
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>
