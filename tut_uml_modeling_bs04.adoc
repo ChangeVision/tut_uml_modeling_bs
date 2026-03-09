@@ -414,7 +414,7 @@ image::ten_two_strike_combo.png[{three-quarters-width}]
 それでは、フレームの集まりであるスコアについて、どのような処理をすればよいのか検討しましょう。
 
 
-==== 「Score」クラスにステートマシン図を追加する
+==== Scoreクラスにステートマシン図を追加する
 
 「Frame」クラスにステートマシン図を追加したのと同じ手順で、「Score」クラスにステートマシン図を追加します（ <<add_score_stm00>> ）。
 
@@ -790,7 +790,7 @@ image::GSW-20220224-172836.png[{full-width}]
 「Game」クラスが作成できたので、スコアシートを扱う「ScoreSheet」クラスも作成できそうですね。
 新しいスコアシートを作成して、そこに必要な数のゲームを追加すれば済みそうです。
 
-この方式に合わせてスコアを記録する処理をする「Game」クラスは、 <<ruby_scoresheet_code01>> のようになるでしょう。
+この方式に合わせてスコアを記録する処理をする「ScoreSheet」クラスは、 <<ruby_scoresheet_code01>> のようになるでしょう。
 
 
 [[ruby_scoresheet_code01]]
