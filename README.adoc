@@ -8,7 +8,7 @@
 
 PDF版やHTML版（HTMLと付随の画像等をまとめたもの）は、リリースページから取得できます。
 
-* https://github.com/ChangeVision/tutorial-bowling-score-modeling/releases[リリースページ]
+* https://github.com/ChangeVision/tutorial-bowling-score-modeling_bs/releases[リリースページ]
 
 tut_uml_modeling_bs.pdf:: 電子ブックの体裁のPDF版です。
 tut_uml_modeling_bs.zip:: ブラウザで閲覧するHTML版です。Zipファイルを展開すると、`tut_uml_modeling_bs_html` フォルダにファイルが展開されます。ウェブブラウザから `tut_uml_modeling_bs_full.html` か `tut_uml_modeling_bs.html` を参照します。前者は全体を1つのページとしてまとめた形式、後者は章ごとに別ページに分割した形式です。
