@@ -77,5 +77,9 @@ endif::[]
 :autoxref-imagecaption: 図 %d.%d
 :autoxref-listingcaption: リスト %d.%d
 :autoxref-tablecaption: 表 %d.%d
-
 :example-caption: 例
+
+:multipage-nav-previous-label: 前
+:multipage-nav-up-label: 上
+:multipage-nav-home-label: 先頭
+:multipage-nav-next-label: 次

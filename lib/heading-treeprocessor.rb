@@ -101,6 +101,7 @@ class Section
       label_name = "#{sectname}-label"
       label_format = (document.attr label_name)
       if label_format != nil and label_format.include?("%s")
+        # warn %(#{sprintf( label_format, sectnum_org_str.to_i)}).lstrip
         %(#{sprintf( label_format, sectnum_org_str.to_i)}).lstrip
       else
         sectnum_org_str
