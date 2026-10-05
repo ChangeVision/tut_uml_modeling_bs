@@ -250,10 +250,11 @@ class Game
   end
 
   def playing(score_index, pins)
-    @scores[score_index].scoring(pins)
-    if @scores[score_index].fno > 10
-      go_next_turn if @scores[score_index].finished?
-    elsif @scores[score_index].current.state == :BEFORE_1ST
+    score = @scores[score_index]
+    score.scoring(pins)
+    if score.finished?
+      go_next_turn
+    elsif score.fno <= 10 && score.current.state == :BEFORE_1ST
       go_next_turn
     end
   end
@@ -269,7 +270,7 @@ end
 
 # ScoreSheetは、複数名の複数回のGameを記録する
 class ScoreSheet
-  attr_accessor :id, :time, :games
+  attr_accessor :id, :play_date, :games
 
   def initialize(date)
     @id = SecureRandom.urlsafe_base64(8)
@@ -298,10 +299,10 @@ if $PROGRAM_NAME == __FILE__ # <1>
   puts sheet # <6>
 
   game_records = [ # <7>
-    [6, 3, 9, 0, 0, 3, 8, 2, 7, 3, 10, 9, 1, 8, 0, 10, 10, 6, 4],
-    [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
-    # [7, 0, 5, 5, 10, 10, 5, 4, 10, 7, 3, 5, 4, 7, 3, 7, 3, 4],
-    # [6, 3, 9, 0, 0, 3, 8, 2, 7, 3, 10, 9, 1, 8, 0, 10, 6, 3]
+    # [6, 3, 9, 0, 0, 3, 8, 2, 7, 3, 10, 9, 1, 8, 0, 10, 10, 6, 4],
+    # [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
+    [6, 3, 9, 0, 0, 3, 8, 2, 7, 3, 10, 9, 1, 8, 0, 10, 6, 3],
+    [7, 0, 5, 5, 10, 10, 5, 4, 10, 7, 3, 5, 4, 7, 3, 7, 3, 4]
   ]
 
   until game.finished? # <8>

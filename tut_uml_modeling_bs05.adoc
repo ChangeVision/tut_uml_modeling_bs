@@ -85,13 +85,13 @@ C:\Users\kuboaki\Desktop\BowlingScore>ruby score.rb
 Score Sheet Date: 2022-02-26 02:08:21 +0900(id:0GG70gNRWtk) # <1>
 ----------------------------------------
 turn: くぼあき # <2>
-input pins: 7 # <3>
+input pins: 6 # <3>
 Game(id:zwBxlorJlog), # <4>
 Player:くぼあき, Score(id: q5rZ-vnFM1o), Frame:1, # <5>
 |No|1st|2nd|Total|Frame Score|Spare Bonus|Strike Bonus|Frame State|
 |-1|  0|  0|    .|          0|          0|           0|   RESERVED| # <6>
 | 0|  0|  0|    .|          0|          0|           0|   RESERVED|
-| 1|  7|  0|    .|          7|          0|           0| BEFORE_2ND| # <7>
+| 1|  6|  0|    .|          6|          0|           0| BEFORE_2ND| # <7>
 | 2|  0|  0|    .|          0|          0|           0|   RESERVED|
 | 3|  0|  0|    .|          0|          0|           0|   RESERVED|
 | 4|  0|  0|    .|          0|          0|           0|   RESERVED|
@@ -126,26 +126,9 @@ Player:うえはら, Score(id: plq9pFD6nSA), Frame:1,
 
 ----------------------------------------
 turn: うえはら
-input pins: 3
+input pins: 4
 Game(id:zwBxlorJlog),
-Player:くぼあき, Score(id: q5rZ-vnFM1o), Frame:11,
-|No|1st|2nd|Total|Frame Score|Spare Bonus|Strike Bonus|Frame State|
-|-1|  0|  0|    .|          0|          0|           0|   RESERVED|
-| 0|  0|  0|    .|          0|          0|           0|   RESERVED|
-| 1|  7|  0|    7|          7|          0|           0|      FIXED|
-| 2|  5|  5|   27|         20|         10|           0|      FIXED|
-| 3| 10|  0|   52|         25|          0|          15|      FIXED|
-| 4| 10|  0|   71|         19|          0|           9|      FIXED|
-| 5|  5|  4|   80|          9|          0|           0|      FIXED|
-| 6| 10|  0|  100|         20|          0|          10|      FIXED|
-| 7|  7|  3|  115|         15|          5|           0|      FIXED|
-| 8|  5|  4|  124|          9|          0|           0|      FIXED|
-| 9|  7|  3|  141|         17|          7|           0|      FIXED|
-|10|  7|  3|  155|         14|          4|           0|      FIXED|
-|11|  4|  0|    .|          4|          0|           0| BEFORE_2ND| # <8>
-|12|  0|  0|    .|          0|          0|           0|   RESERVED|
-|13|  0|  0|    .|          0|          0|           0|   RESERVED|
-Player:うえはら, Score(id: plq9pFD6nSA), Frame:10,
+Player:くぼあき, Score(id: q5rZ-vnFM1o), Frame:10,
 |No|1st|2nd|Total|Frame Score|Spare Bonus|Strike Bonus|Frame State|
 |-1|  0|  0|    .|          0|          0|           0|   RESERVED|
 | 0|  0|  0|    .|          0|          0|           0|   RESERVED|
@@ -160,6 +143,23 @@ Player:うえはら, Score(id: plq9pFD6nSA), Frame:10,
 | 9| 10|  0|  123|         19|          0|           9|      FIXED|
 |10|  6|  3|  132|          9|          0|           0|      FIXED|
 |11|  0|  0|    .|          0|          0|           0|   RESERVED|
+|12|  0|  0|    .|          0|          0|           0|   RESERVED|
+|13|  0|  0|    .|          0|          0|           0|   RESERVED|
+Player:うえはら, Score(id: plq9pFD6nSA), Frame:11,
+|No|1st|2nd|Total|Frame Score|Spare Bonus|Strike Bonus|Frame State|
+|-1|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|      FIXED|
+| 2|  5|  5|   27|         20|         10|           0|      FIXED|
+| 3| 10|  0|   52|         25|          0|          15|      FIXED|
+| 4| 10|  0|   71|         19|          0|           9|      FIXED|
+| 5|  5|  4|   80|          9|          0|           0|      FIXED|
+| 6| 10|  0|  100|         20|          0|          10|      FIXED|
+| 7|  7|  3|  115|         15|          5|           0|      FIXED|
+| 8|  5|  4|  124|          9|          0|           0|      FIXED|
+| 9|  7|  3|  141|         17|          7|           0|      FIXED|
+|10|  7|  3|  155|         14|          4|           0|      FIXED|
+|11|  4|  0|    .|          4|          0|           0| BEFORE_2ND| # <8>
 |12|  0|  0|    .|          0|          0|           0|   RESERVED|
 |13|  0|  0|    .|          0|          0|           0|   RESERVED|
 

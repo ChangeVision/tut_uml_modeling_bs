@@ -715,7 +715,7 @@ end
 --
 . スコアシートに参加するプレーヤー名を書く（エントリーする）。
 . 書いたプレーヤーの順に1フレーム分プレーする（各自のターン）。
-. 次のプレーヤと交代する（次のターンへ進む）。
+. 次のプレーヤと交代する（次のターンへ進む）。ただし、第10フレームのサービスフレームは同じプレーヤーが続けて投げる。また、ゲームを終了したプレーヤーも交代する。
 . 全員がゲーム終了するまで手順を繰り返す。
 --
 
@@ -751,10 +751,11 @@ class Game
   end
 
   def playing(score_index, pins) # <5>
-    @scores[score_index].scoring(pins)
-    if @scores[score_index].fno > 10 # <6>
-      go_next_turn if @scores[score_index].finished?
-    elsif @scores[score_index].current.state == :BEFORE_1ST # <7>
+    score = @scores[score_index]
+    score.scoring(pins)
+    if score.finished? # <6>
+      go_next_turn
+    elsif score.fno <= 10 && score.current.state == :BEFORE_1ST # <7>
       go_next_turn
     end
   end
@@ -773,8 +774,8 @@ end
 <3> 現在プレー中のプレーヤー名を取得するメソッド。
 <4> 次のプレーヤーに交代するメソッド。登録したプレーヤーの順に進み、最後まで来たら最初のプレーヤーへ戻る。
 <5> ゲームを実行するメソッド。現在のプレーヤーのスコアクラスのscoring メソッドを呼び出して1フレーム分のプレーを記録する。
-<6> サービスフレームでは、2フレーム以上プレーする場合があるので、そのときは交代しない。
-<7> 現在のプレーヤーの現在の状態が「BEFORE_1ST」なら、次のフレームの投球待ちになっているので、プレーヤーを交代する。
+<6> 現在のプレーヤーのスコアが終了した（「FINISHED」になった）ら、次のプレーヤーに交代する。第10フレームでストライクもスペアもとれなかった場合や、サービスフレームを投げ終えた場合がこれに当たる。
+<7> 第1〜10フレームで、現在のフレームの状態が「BEFORE_1ST」なら、前のフレームのプレーを終えて次のフレームの投球待ちになっているので、プレーヤーを交代する。サービスフレーム（第11・12フレーム）へ進んだときは、同じプレーヤーが続けて投げるので交代しない。
 <8> すべてのプレーヤーがゲーム終了かどうか調べるメソッド。
 <9> ゲームの状況を文字列化するメソッド。
 
@@ -801,7 +802,7 @@ image::GSW-20220224-172836.png[{full-width}]
 
 # ScoreSheetは、複数名の複数回のGameを記録する
 class ScoreSheet
-  attr_accessor :id, :time, :games
+  attr_accessor :id, :play_date, :games
 
   def initialize(date) # <1>
     @id = SecureRandom.urlsafe_base64(8) # <2>
@@ -816,7 +817,7 @@ class ScoreSheet
   end
 
   def to_s # <4>
-    "Score Sheet Date: #{@time}(id:#{@id})"
+    "Score Sheet Date: #{@play_date}(id:#{@id})"
   end
 end
 ----
