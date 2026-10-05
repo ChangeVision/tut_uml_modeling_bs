@@ -21,8 +21,8 @@
 <h1>モデルを使ってソフトウェアを開発しよう: UML初学者向けチュートリアル</h1>
 <div class="details">
 <span id="author" class="author">株式会社チェンジビジョン</span><br>
-<span id="revnumber">バージョン html_0798,</span>
-<span id="revdate">2026-04-21</span>
+<span id="revnumber">バージョン html_0800,</span>
+<span id="revdate">2026-10-06</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">目次</div>
@@ -333,10 +333,11 @@ class Game
   end
 
   def playing(score_index, pins)
-    @scores[score_index].scoring(pins)
-    if @scores[score_index].fno &gt; 10
-      go_next_turn if @scores[score_index].finished?
-    elsif @scores[score_index].current.state == :BEFORE_1ST
+    score = @scores[score_index]
+    score.scoring(pins)
+    if score.finished?
+      go_next_turn
+    elsif score.fno &lt;= 10 &amp;&amp; score.current.state == :BEFORE_1ST
       go_next_turn
     end
   end
@@ -352,7 +353,7 @@ end
 
 # ScoreSheetは、複数名の複数回のGameを記録する
 class ScoreSheet
-  attr_accessor :id, :time, :games
+  attr_accessor :id, :play_date, :games
 
   def initialize(date)
     @id = SecureRandom.urlsafe_base64(8)
@@ -385,7 +386,7 @@ end</code></pre>
 <div id="ruby_all_code02" class="listingblock">
 <div class="title">リスト 5.2 【Ruby】<code>score.rb</code>（ファイル末尾に追加したテストコード部分）</div>
 <div class="content">
-<pre class="prettyprint highlight linenums:292"><code data-lang="ruby">if $PROGRAM_NAME == __FILE__ <i class="conum" data-value="1"></i><b>(1)</b>
+<pre class="prettyprint highlight linenums:293"><code data-lang="ruby">if $PROGRAM_NAME == __FILE__ <i class="conum" data-value="1"></i><b>(1)</b>
   sheet = ScoreSheet.new(Time.now) <i class="conum" data-value="2"></i><b>(2)</b>
   sheet.add_game <i class="conum" data-value="3"></i><b>(3)</b>
   game = sheet.games.last <i class="conum" data-value="4"></i><b>(4)</b>
@@ -394,10 +395,10 @@ end</code></pre>
   puts sheet <i class="conum" data-value="6"></i><b>(6)</b>
 
   game_records = [ <i class="conum" data-value="7"></i><b>(7)</b>
-    [6, 3, 9, 0, 0, 3, 8, 2, 7, 3, 10, 9, 1, 8, 0, 10, 10, 6, 4],
-    [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
-    # [7, 0, 5, 5, 10, 10, 5, 4, 10, 7, 3, 5, 4, 7, 3, 7, 3, 4],
-    # [6, 3, 9, 0, 0, 3, 8, 2, 7, 3, 10, 9, 1, 8, 0, 10, 6, 3]
+    # [6, 3, 9, 0, 0, 3, 8, 2, 7, 3, 10, 9, 1, 8, 0, 10, 10, 6, 4],
+    # [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
+    [6, 3, 9, 0, 0, 3, 8, 2, 7, 3, 10, 9, 1, 8, 0, 10, 6, 3],
+    [7, 0, 5, 5, 10, 10, 5, 4, 10, 7, 3, 5, 4, 7, 3, 7, 3, 4]
   ]
 
   until game.finished? <i class="conum" data-value="8"></i><b>(8)</b>
@@ -496,13 +497,13 @@ C:\Users\kuboaki\Desktop\BowlingScore&gt;ruby score.rb
 Score Sheet Date: 2022-02-26 02:08:21 +0900(id:0GG70gNRWtk) <i class="conum" data-value="1"></i><b>(1)</b>
 ----------------------------------------
 turn: くぼあき <i class="conum" data-value="2"></i><b>(2)</b>
-input pins: 7 <i class="conum" data-value="3"></i><b>(3)</b>
+input pins: 6 <i class="conum" data-value="3"></i><b>(3)</b>
 Game(id:zwBxlorJlog), <i class="conum" data-value="4"></i><b>(4)</b>
 Player:くぼあき, Score(id: q5rZ-vnFM1o), Frame:1, <i class="conum" data-value="5"></i><b>(5)</b>
 |No|1st|2nd|Total|Frame Score|Spare Bonus|Strike Bonus|Frame State|
 |-1|  0|  0|    .|          0|          0|           0|   RESERVED| <i class="conum" data-value="6"></i><b>(6)</b>
 | 0|  0|  0|    .|          0|          0|           0|   RESERVED|
-| 1|  7|  0|    .|          7|          0|           0| BEFORE_2ND| <i class="conum" data-value="7"></i><b>(7)</b>
+| 1|  6|  0|    .|          6|          0|           0| BEFORE_2ND| <i class="conum" data-value="7"></i><b>(7)</b>
 | 2|  0|  0|    .|          0|          0|           0|   RESERVED|
 | 3|  0|  0|    .|          0|          0|           0|   RESERVED|
 | 4|  0|  0|    .|          0|          0|           0|   RESERVED|
@@ -537,26 +538,9 @@ Player:うえはら, Score(id: plq9pFD6nSA), Frame:1,
 
 ----------------------------------------
 turn: うえはら
-input pins: 3
+input pins: 4
 Game(id:zwBxlorJlog),
-Player:くぼあき, Score(id: q5rZ-vnFM1o), Frame:11,
-|No|1st|2nd|Total|Frame Score|Spare Bonus|Strike Bonus|Frame State|
-|-1|  0|  0|    .|          0|          0|           0|   RESERVED|
-| 0|  0|  0|    .|          0|          0|           0|   RESERVED|
-| 1|  7|  0|    7|          7|          0|           0|      FIXED|
-| 2|  5|  5|   27|         20|         10|           0|      FIXED|
-| 3| 10|  0|   52|         25|          0|          15|      FIXED|
-| 4| 10|  0|   71|         19|          0|           9|      FIXED|
-| 5|  5|  4|   80|          9|          0|           0|      FIXED|
-| 6| 10|  0|  100|         20|          0|          10|      FIXED|
-| 7|  7|  3|  115|         15|          5|           0|      FIXED|
-| 8|  5|  4|  124|          9|          0|           0|      FIXED|
-| 9|  7|  3|  141|         17|          7|           0|      FIXED|
-|10|  7|  3|  155|         14|          4|           0|      FIXED|
-|11|  4|  0|    .|          4|          0|           0| BEFORE_2ND| <i class="conum" data-value="8"></i><b>(8)</b>
-|12|  0|  0|    .|          0|          0|           0|   RESERVED|
-|13|  0|  0|    .|          0|          0|           0|   RESERVED|
-Player:うえはら, Score(id: plq9pFD6nSA), Frame:10,
+Player:くぼあき, Score(id: q5rZ-vnFM1o), Frame:10,
 |No|1st|2nd|Total|Frame Score|Spare Bonus|Strike Bonus|Frame State|
 |-1|  0|  0|    .|          0|          0|           0|   RESERVED|
 | 0|  0|  0|    .|          0|          0|           0|   RESERVED|
@@ -571,6 +555,23 @@ Player:うえはら, Score(id: plq9pFD6nSA), Frame:10,
 | 9| 10|  0|  123|         19|          0|           9|      FIXED|
 |10|  6|  3|  132|          9|          0|           0|      FIXED|
 |11|  0|  0|    .|          0|          0|           0|   RESERVED|
+|12|  0|  0|    .|          0|          0|           0|   RESERVED|
+|13|  0|  0|    .|          0|          0|           0|   RESERVED|
+Player:うえはら, Score(id: plq9pFD6nSA), Frame:11,
+|No|1st|2nd|Total|Frame Score|Spare Bonus|Strike Bonus|Frame State|
+|-1|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 0|  0|  0|    .|          0|          0|           0|   RESERVED|
+| 1|  7|  0|    7|          7|          0|           0|      FIXED|
+| 2|  5|  5|   27|         20|         10|           0|      FIXED|
+| 3| 10|  0|   52|         25|          0|          15|      FIXED|
+| 4| 10|  0|   71|         19|          0|           9|      FIXED|
+| 5|  5|  4|   80|          9|          0|           0|      FIXED|
+| 6| 10|  0|  100|         20|          0|          10|      FIXED|
+| 7|  7|  3|  115|         15|          5|           0|      FIXED|
+| 8|  5|  4|  124|          9|          0|           0|      FIXED|
+| 9|  7|  3|  141|         17|          7|           0|      FIXED|
+|10|  7|  3|  155|         14|          4|           0|      FIXED|
+|11|  4|  0|    .|          4|          0|           0| BEFORE_2ND| <i class="conum" data-value="8"></i><b>(8)</b>
 |12|  0|  0|    .|          0|          0|           0|   RESERVED|
 |13|  0|  0|    .|          0|          0|           0|   RESERVED|
 
@@ -645,7 +646,7 @@ C:\Users\kuboaki\Desktop\BowlingScore&gt;</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-バージョン html_0798<br>
+バージョン html_0800<br>
 最終更新 2023-06-09 17:35:10 +0900
 </div>
 </div>
